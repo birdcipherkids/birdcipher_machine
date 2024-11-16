@@ -782,6 +782,10 @@ hr.configure(style = "BW.TLabel")
 hr.pack(fill = 'both', expand = True)
 notebk.add(hr, text = " Login")
 
+passcheck = ttk.Frame(notebk, width = 1050, height = 540)
+passcheck.pack(fill = 'both', expand = True)
+notebk.add(passcheck, text = '   Password Checking')
+
 fr0 = ttk.Frame(notebk, width = 1050, height = 540)
 fr0.pack(fill = 'both', expand = True)
 notebk.add(fr0, text = '   Cybersecurity and social engineering')
@@ -851,7 +855,7 @@ close_machine_from_login = tk.Button(hr, text = '  Close the BirdCipher Machine 
 close_machine_from_login.config(fg = '#7e086c', font = ('Comic Sans MS', 14))
 close_machine_from_login.place(x = 700, y = 460)
 
-bc_logo_login = tk.Label(hr, image = bc_logo_loginImage)
+bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login_user())
 bc_logo_login.config(bg = '#260223')
 bc_logo_login.place(x = 420, y = 30)
 
