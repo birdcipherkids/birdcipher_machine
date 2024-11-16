@@ -859,6 +859,14 @@ bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login
 bc_logo_login.config(bg = '#260223')
 bc_logo_login.place(x = 420, y = 30)
 
+# ----------------------------------------------------
+
+password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
+
+password_checking_button = tk.Button(passcheck, image = password_checking_logo)
+password_checking_button.config(bg = '#260223')
+password_checking_button.place(x = 610, y = 20)
+
 
 cipher_text = tk.Text(fr, font = ("Comic Sans MS", 9))
 #cipher_text.place(x = 30, y = 30)
