@@ -888,6 +888,11 @@ def check_password():
 		result_check.config(fg = '#7ed2ef')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#7ed2ef', width = 5, height = 1, font = ('Comic Sans MS', 45))
+
+
+def passchecking_explanation():
+
+	playsound('passcheck_explant.mp3')
 	
 
 password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
@@ -902,7 +907,7 @@ password_checking_button.place(x = 610, y = 20)
 hibp_logo = tk.Label(passcheck, image = hibp1_logo)
 hibp_logo.place(x = 610, y = 400)
 
-hibp_info = tk.Button(passcheck, image = hibp_info_logo)
+hibp_info = tk.Button(passcheck, image = hibp_info_logo, command = lambda:passchecking_explanation())
 hibp_info.config(bg = '#067297')
 hibp_info.place(x = 920, y = 401)
 
