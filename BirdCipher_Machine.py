@@ -864,6 +864,7 @@ bc_logo_login.place(x = 420, y = 30)
 password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
 hibp1_logo = tk.PhotoImage(file = 'hibp1.png')
 hibp_info_logo = tk.PhotoImage(file = 'Password Check Info-logo-white1.png')
+password_user_entry = tk.StringVar()
 
 password_checking_button = tk.Button(passcheck, image = password_checking_logo)
 password_checking_button.config(bg = '#067297')
@@ -875,6 +876,18 @@ hibp_logo.place(x = 610, y = 400)
 hibp_info = tk.Button(passcheck, image = hibp_info_logo)
 hibp_info.config(bg = '#067297')
 hibp_info.place(x = 920, y = 401)
+
+enter_password_label = tk.Label(passcheck, text = 'Enter your password')
+enter_password_label.config(fg = '#067297', font = ('Comic Sans MS', 14))
+enter_password_label.place(x = 20, y = 20)
+
+enter_password_entry = tk.Entry(passcheck, textvariable = password_user_entry, font = ('Comic Sans MS', 14), justify = 'center')
+enter_password_entry.config(bg = '#050005', fg = '#7ed2ef', width = 25)
+enter_password_entry.place(x = 20, y = 60)
+
+
+
+# ------------------------------------------------------
 
 
 cipher_text = tk.Text(fr, font = ("Comic Sans MS", 9))
