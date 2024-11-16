@@ -862,10 +862,14 @@ bc_logo_login.place(x = 420, y = 30)
 # ----------------------------------------------------
 
 password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
+hibp1_logo = tk.PhotoImage(file = 'hibp1.png')
 
 password_checking_button = tk.Button(passcheck, image = password_checking_logo)
 password_checking_button.config(bg = '#260223')
 password_checking_button.place(x = 610, y = 20)
+
+hibp_logo = tk.Label(passcheck, image = hibp1_logo)
+hibp_logo.place(x = 610, y = 400)
 
 
 cipher_text = tk.Text(fr, font = ("Comic Sans MS", 9))
