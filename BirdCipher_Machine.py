@@ -8,6 +8,8 @@ from cryptography.fernet import Fernet
 import pyperclip as clipboard
 import psycopg2
 import os
+import pyhibp
+from pyhibp import pwnedpasswords as pw
 
 from imagenes_ing_social import *
 from tests_ing_social import *
@@ -861,12 +863,31 @@ bc_logo_login.place(x = 420, y = 30)
 
 # ----------------------------------------------------
 
+
+def check_password():
+
+	# Required: A descriptive user agent must be set describing the application consuming
+	#   the HIBP API
+	pyhibp.set_user_agent(ua="Awesome application/0.0.1 (An awesome description)")
+
+	# Check a password to see if it has been disclosed in a public breach corpus
+	resp = pw.is_password_breached(password = password_user_entry.get())
+
+	if resp:
+
+		result_check.insert(tk.END, 'Password breached! \n\nThis password was used the \nfollowing time(s) before:')
+
+	elif resp == False:
+
+		result_check.insert(tk.END, 'Secure password!')
+	
+	
 password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
 hibp1_logo = tk.PhotoImage(file = 'hibp1.png')
 hibp_info_logo = tk.PhotoImage(file = 'Password Check Info-logo-white1.png')
 password_user_entry = tk.StringVar()
 
-password_checking_button = tk.Button(passcheck, image = password_checking_logo)
+password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:check_password())
 password_checking_button.config(bg = '#067297')
 password_checking_button.place(x = 610, y = 20)
 
@@ -879,11 +900,19 @@ hibp_info.place(x = 920, y = 401)
 
 enter_password_label = tk.Label(passcheck, text = 'Enter your password')
 enter_password_label.config(fg = '#067297', font = ('Comic Sans MS', 14))
-enter_password_label.place(x = 20, y = 20)
+enter_password_label.place(x = 40, y = 30)
 
 enter_password_entry = tk.Entry(passcheck, textvariable = password_user_entry, font = ('Comic Sans MS', 14), justify = 'center')
 enter_password_entry.config(bg = '#050005', fg = '#7ed2ef', width = 25)
-enter_password_entry.place(x = 20, y = 60)
+enter_password_entry.place(x = 40, y = 70)
+
+result_check_label = tk.Label(passcheck, text = 'Results report', font = ('Comic Sans MS', 14))
+result_check_label.config(fg = '#067297')
+result_check_label.place(x = 40, y = 130)
+
+result_check = tk.Text(passcheck, font = ('Comic Sans MS', 14))
+result_check.config(bg = '#050005', fg = '#7ed2ef', width = 22, height = 8, padx = 20)
+result_check.place(x = 40, y = 170)
 
 
 
