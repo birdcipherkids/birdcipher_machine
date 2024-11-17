@@ -50,6 +50,8 @@ def login_user():
 
 		miCursor1.execute(sql2, sql2_data)
 		hash256_passw_label.config(text = hash2)
+		playsound('CorrectoLogin.mp3')
+		playsound('CorrectLogin.mp3')
 
 	miConexion1.commit()
 	miConexion1.close()
@@ -558,6 +560,7 @@ def closeMachine():
 	chances_decrypt = 0
 	target_person = ''
 	target_person_decrypt = ''
+	playsound('Bye.mp3')
 	decrypt.destroy()
 
 
@@ -892,6 +895,7 @@ def check_password():
 
 def passchecking_explanation():
 
+	playsound('explicacion_passwordHIBP.mp3')
 	playsound('passcheck_explant.mp3')
 	
 
@@ -929,7 +933,7 @@ result_check.place(x = 40, y = 170)
 
 time_breached = tk.Label(passcheck, text = '', font = ('Comic Sans MS', 30), justify = 'center')
 time_breached.config(bg = '#050005', fg = '#7ed2ef', width = 7, height = 3)
-time_breached.place(x = 400, y = 200)
+time_breached.place(x = 400, y = 260)
 
 
 
