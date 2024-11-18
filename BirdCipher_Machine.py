@@ -14,6 +14,7 @@ from pyhibp import pwnedpasswords as pw
 from imagenes_ing_social import *
 from tests_ing_social import *
 from hash import *
+from ReverseCipher import *
 
 
 points = 0
@@ -975,6 +976,15 @@ padlock.place(x = 387, y = 25)
 
 # ------------------------------------------------------
 
+
+def reverse_adjust():
+
+	translat = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
+	ciphertext.delete(1.0, tk.END)
+	ciphertext.insert(tk.END, translat)
+	
+
+
 titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
 titleBirdCipherMachine.config(fg = "#7e086c")
 titleBirdCipherMachine.place(x = 70, y = 14)
@@ -1031,7 +1041,7 @@ imagen_caesar_cipher_lab.place(x = 30, y = 300)
 
 
 
-buttonReverse = tk.Button(fr, image = imageReverse, command = lambda:pointsAudio())
+buttonReverse = tk.Button(fr, image = imageReverse, command = lambda:reverse_adjust())
 buttonReverse.place(x = 195, y = 300)
 
 buttonCaesar = tk.Button(fr, image = imageCaesar, command = lambda:coinsAudio())
