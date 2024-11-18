@@ -880,18 +880,24 @@ def check_password():
 	if resp:
 
 		result_check.delete(1.0, tk.END)
-		result_check.insert(tk.END, 'Password breached! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends you to change or \nimprove your password')
+		result_check.insert(tk.END, 'Password breached! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you change \nor improve your password')
 		result_check.config(fg = '#ef1d13')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#ef1d13', font = ('Comic Sans MS', 30))
+		playsound('ContrasenaInsegura.mp3')
+		time.sleep(2)
+		playsound('ImprovePass.mp3')
 
 	elif resp == False:
 
 		result_check.delete(1.0, tk.END)
-		result_check.insert(tk.END, 'Secure password! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you can use \nyour password comfortably')
+		result_check.insert(tk.END, 'Secure password! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you can use \nyour password safely')
 		result_check.config(fg = '#7ed2ef')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#7ed2ef', width = 5, height = 1, font = ('Comic Sans MS', 45))
+		playsound('ContrasenaSegura.mp3')
+		time.sleep(2)
+		playsound('SafePass.mp3')
 
 
 def passchecking_explanation():
@@ -933,12 +939,16 @@ result_check = tk.Text(passcheck, font = ('Comic Sans MS', 14))
 result_check.config(bg = '#050005', fg = '#7ed2ef', width = 23, height = 10, padx = 15)
 result_check.place(x = 40, y = 170)
 
+times_label = tk.Label(passcheck, text = 'Times used before: ', font = ('Comic Sans MS', 14))
+times_label.config(fg = '#067297')
+times_label.place(x = 400, y = 220)
+
 time_breached = tk.Label(passcheck, text = '', font = ('Comic Sans MS', 30), justify = 'center')
 time_breached.config(bg = '#050005', fg = '#7ed2ef', width = 7, height = 3)
 time_breached.place(x = 400, y = 260)
 
 padlock = tk.Label(passcheck, image = padlock_image)
-padlock.place(x = 387, y = 35)
+padlock.place(x = 387, y = 25)
 
 
 
