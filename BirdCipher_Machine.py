@@ -50,8 +50,20 @@ def login_user():
 
 		miCursor1.execute(sql2, sql2_data)
 		hash256_passw_label.config(text = hash2)
+		playsound('NuevoUsuarioCreado.mp3')
+		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+
+	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
+
+		hash256_passw_label.config(text = dlt1[0][2])
 		playsound('CorrectoLogin.mp3')
-		playsound('CorrectLogin.mp3')
+		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+
+	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
+
+		playsound('ContrasenaIncorrectaVI.mp3')
 
 	miConexion1.commit()
 	miConexion1.close()
@@ -1045,7 +1057,7 @@ labelLives = tk.Label(fr, text = lives, font = ("Comic Sans MS", 13), justify = 
 labelLives.config(bg = "#050005", fg = "#7e086c")
 labelLives.place(x = 617, y = 410)
 
-labelQuestionKey = tk.Label(fr, text = "Enter the secret key", font = ("Comic Sans MS", 13))
+labelQuestionKey = tk.Label(fr, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey.config(fg = "#7e086c")
 labelQuestionKey.place(x = 805, y = 60)
 
