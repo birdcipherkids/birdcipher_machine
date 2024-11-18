@@ -954,12 +954,31 @@ padlock.place(x = 387, y = 25)
 
 # ------------------------------------------------------
 
+titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
+titleBirdCipherMachine.config(fg = "#7e086c")
+titleBirdCipherMachine.place(x = 70, y = 14)
 
-cipher_text = tk.Text(fr, font = ("Comic Sans MS", 9))
+plaintext = tk.Text(fr, font = ("Comic Sans MS", 11))
 #cipher_text.place(x = 30, y = 30)
 #cipher_text.pack(pady = 30)
-cipher_text.config(bg = '#050005', fg = '#FFFFFF', height = 12, padx = 30)
-cipher_text.place(x = 60, y = 60)
+plaintext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx = 30)
+plaintext.place(x = 60, y = 60)
+
+scrollPlaintext = tk.Scrollbar(fr, command = plaintext.yview)
+scrollPlaintext.place(x = 683, y = 60)
+
+titleBirdCipherMachine2 = tk.Label(fr, text = 'Your encrypted message (ciphertext) is: ', font = ("Comic Sans MS", 12))
+titleBirdCipherMachine2.config(fg = "#7e086c")
+titleBirdCipherMachine2.place(x = 70, y = 154)
+
+ciphertext = tk.Text(fr, font = ("Comic Sans MS", 11))
+#cipher_text.place(x = 30, y = 30)
+#cipher_text.pack(pady = 30)
+ciphertext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx = 30)
+ciphertext.place(x = 60, y = 190)
+
+scrollCiphertext = tk.Scrollbar(fr, command = ciphertext.yview)
+scrollCiphertext.place(x = 683, y = 190)
 
 nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic Sans MS", 13), justify = "center")
 #nicknameCuad.config(bg="black", fg="green")
@@ -989,9 +1008,7 @@ imagen_caesar_cipher_lab = tk.Label(fr, image = imagen_caesar_cipher)
 #imagen_caesar_cipher_lab.config(bg = '#FFFFFF')
 imagen_caesar_cipher_lab.place(x = 30, y = 300)
 
-titleBirdCipherMachine = tk.Label(fr, text = "BirdCipher message about", font = ("Comic Sans MS", 12))
-titleBirdCipherMachine.config(fg = "#7e086c")
-titleBirdCipherMachine.place(x = 70, y = 8)
+
 
 buttonReverse = tk.Button(fr, image = imageReverse, command = lambda:pointsAudio())
 buttonReverse.place(x = 195, y = 300)
