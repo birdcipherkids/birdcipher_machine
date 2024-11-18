@@ -51,15 +51,24 @@ def login_user():
 		miCursor1.execute(sql2, sql2_data)
 		hash256_passw_label.config(text = hash2)
 		playsound('NuevoUsuarioCreado.mp3')
+		playsound('NewUserCreated.mp3')
 		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
 
 	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
 
 		hash256_passw_label.config(text = dlt1[0][2])
 		playsound('CorrectoLogin.mp3')
+		playsound('UtilFuncionesBC.mp3')
+		playsound('CorrectLogin.mp3')
+		time.sleep(2)
+		playsound('UseMachine.mp3')
 		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
 
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
@@ -1340,13 +1349,13 @@ ramsonBird_message = tk.Text(fr0a, font = ("Comic Sans MS", 10), width = 72, hei
 ramsonBird_message.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 ramsonBird_message.place(x = 60, y = 40)
 
-labelPlayerBCM3 = tk.Label(fr0a, text = "Welcome,", font = ("Comic Sans MS", 11))
-labelPlayerBCM3.config(fg = "#7e086c", bg = "#050005")
-labelPlayerBCM3.place(x = 830, y = 20)
+labelPlayerBCM4 = tk.Label(fr0a, text = "Welcome,", font = ("Comic Sans MS", 11))
+labelPlayerBCM4.config(fg = "#7e086c", bg = "#050005")
+labelPlayerBCM4.place(x = 830, y = 20)
 
-labelQuestionKey3 = tk.Label(fr0a, text = "Enter your password", font = ("Comic Sans MS", 13))
-labelQuestionKey3.config(fg = "#7e086c")
-labelQuestionKey3.place(x = 805, y = 60)
+labelQuestionKey4 = tk.Label(fr0a, text = "Enter your password", font = ("Comic Sans MS", 13))
+labelQuestionKey4.config(fg = "#7e086c")
+labelQuestionKey4.place(x = 805, y = 60)
 
 ramsonBird_password = tk.Entry(fr0a, textvariable=password_for_ramson, font = ("Comic Sans MS", 13), justify = "center")
 ramsonBird_password.config(bg = '#050005', fg = '#7e086c')
