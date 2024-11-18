@@ -560,6 +560,7 @@ def closeMachine():
 	chances_decrypt = 0
 	target_person = ''
 	target_person_decrypt = ''
+	playsound('HastaLuego.mp3')
 	playsound('Bye.mp3')
 	decrypt.destroy()
 
@@ -902,6 +903,7 @@ def passchecking_explanation():
 password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
 hibp1_logo = tk.PhotoImage(file = 'hibp1.png')
 hibp_info_logo = tk.PhotoImage(file = 'Password Check Info-logo-white1.png')
+padlock_image = tk.PhotoImage(file = 'Candado4a.png')
 password_user_entry = tk.StringVar()
 
 password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:check_password())
@@ -934,6 +936,9 @@ result_check.place(x = 40, y = 170)
 time_breached = tk.Label(passcheck, text = '', font = ('Comic Sans MS', 30), justify = 'center')
 time_breached.config(bg = '#050005', fg = '#7ed2ef', width = 7, height = 3)
 time_breached.place(x = 400, y = 260)
+
+padlock = tk.Label(passcheck, image = padlock_image)
+padlock.place(x = 387, y = 35)
 
 
 
