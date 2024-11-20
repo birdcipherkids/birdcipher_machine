@@ -461,45 +461,45 @@ def bc_decription_machine():
 	miConexion3.close()
 
 
-def comd_decrypt():
+# def comd_decrypt():
 
-		global key
-		global keys
-		global message
-		global chances_decrypt
-		global match
-		global coins
+# 		global key
+# 		global keys
+# 		global message
+# 		global chances_decrypt
+# 		global match
+# 		global coins
 
-		message = secret_messages[index]
-		key = player_answer_decrypt.get()
+# 		message = secret_messages[index]
+# 		key = player_answer_decrypt.get()
 		
 
-		if chances_decrypt <= 3 and key == keys[index]:
+# 		if chances_decrypt <= 3 and key == keys[index]:
 
-			playsound('C:/BirdCipher/Audios/VoiceAudios/CorrectKey.mp3')
-			time.sleep(2)
-			cipher_text.config(text = getTranslatedMessage(message, key), font = ("Comic Sans MS", 9))
-			cipher_text.config(bg = '#050005', fg = '#7e086c')
-			coins = coins + 1
-			playsound("rightDecrypt.mp3")
-			playsound("GoldCoin.mp3")
-			updatePlayer_coins()
-			labelCoins.config(text = coins)
-			match = True
-			decrypt_button.config(state = 'disabled')
+# 			playsound('C:/BirdCipher/Audios/VoiceAudios/CorrectKey.mp3')
+# 			time.sleep(2)
+# 			cipher_text.config(text = getTranslatedMessage(message, key), font = ("Comic Sans MS", 9))
+# 			cipher_text.config(bg = '#050005', fg = '#7e086c')
+# 			coins = coins + 1
+# 			playsound("rightDecrypt.mp3")
+# 			playsound("GoldCoin.mp3")
+# 			updatePlayer_coins()
+# 			labelCoins.config(text = coins)
+# 			match = True
+# 			decrypt_button.config(state = 'disabled')
 			
 
-		elif chances_decrypt <= 3 and key!= keys[index]:
+# 		elif chances_decrypt <= 3 and key!= keys[index]:
 
-			playsound('C:/BirdCipher/Audios/VoiceAudios/WrongKey.mp3')
-			cipher_text.config(text = getTranslatedMessage(message, key), font = ("Comic Sans MS", 9))
-			cipher_text.config(bg = '#050005', fg = '#FFFFFF')
-			chances_decrypt = chances_decrypt + 1
+# 			playsound('C:/BirdCipher/Audios/VoiceAudios/WrongKey.mp3')
+# 			cipher_text.config(text = getTranslatedMessage(message, key), font = ("Comic Sans MS", 9))
+# 			cipher_text.config(bg = '#050005', fg = '#FFFFFF')
+# 			chances_decrypt = chances_decrypt + 1
 
-		elif chances_decrypt > 3:
+# 		elif chances_decrypt > 3:
 
-			decrypt_button.config(state = 'disabled')
-			playsound('C:/BirdCipher/Audios/VoiceAudios/chances_decrypt.mp3')
+# 			decrypt_button.config(state = 'disabled')
+# 			playsound('C:/BirdCipher/Audios/VoiceAudios/chances_decrypt.mp3')
 
 
 def fernet_key_gen():
@@ -978,15 +978,63 @@ padlock.place(x = 387, y = 25)
 # ------------------------------------------------------
 
 
+mode_classic = ''
+translate = ''
+
+keyCaesarAnswer = tk.IntVar()
+keyLinearTranspostAnswer = tk.IntVar()
+keyInverseTranspostAnswer = tk.IntVar()
+
 def reverse_adjust():
 
 	translat = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
 	ciphertext.delete(1.0, tk.END)
 	ciphertext.insert(tk.END, translat)
 
-keyCaesarAnswer = tk.IntVar()
-keyLinearTranspostAnswer = tk.IntVar()
-keyInverseTranspostAnswer = tk.IntVar()
+def enc_classic():
+
+	global mode_classic
+
+	mode_classic = 'e'
+
+
+def dec_classic():
+
+	global mode_classic
+
+	mode_classic = 'd'
+
+
+def caesarApply():
+
+	global mode_classic
+	global translate
+
+	if mode_classic == 'e':
+
+		message_apply = plaintext.get('1.0', 'end-1c')
+
+	elif mode_classic == 'd':
+
+		message_apply = ciphertext.get('1.0', 'end-1c')
+
+	keyApply = keyCaesarAnswer.get()
+
+	translate = getTranslatedMessage(mode_classic, message_apply, keyCaesarAnswer.get())
+
+	# ciphertext.delete(1.0, tk.END)
+	# ciphertext.insert(tk.END, translate)
+
+	if mode_classic == 'e':
+
+		ciphertext.delete(1.0, tk.END)
+		ciphertext.insert(tk.END, translate)
+
+	elif mode_classic == 'd':
+
+		plaintext.delete(1.0, tk.END)
+		plaintext.insert(tk.END, translate)
+
 
 titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
 titleBirdCipherMachine.config(fg = "#7e086c")
@@ -1021,13 +1069,13 @@ nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic S
 nicknameCuad.config(bg = '#050005', fg = '#7e086c')
 nicknameCuad.place(x = 790, y = 100)
 	
-decrypt_button = tk.Button(fr, image = decrypt_buttonImg, font = ("Comic Sans MS", 8), command = lambda:comd_decrypt())
-decrypt_button.config(fg = '#1af017')
-decrypt_button.place(x = 800, y = 150)
+encrypt_button_classic = tk.Button(fr, image = decrypt_buttonImg, command = lambda:enc_classic())
+encrypt_button_classic.config(fg = '#1af017')
+encrypt_button_classic.place(x = 800, y = 150)
 	
-decrypt_listen = tk.Button(fr, image = listen_buttonImg, font = ("Comic Sans MS", 8), command = lambda:listen_decrypt_text())
-decrypt_listen.config(fg = '#1af017')
-decrypt_listen.place(x = 900, y = 150)
+decrypt_button_classic = tk.Button(fr, image = listen_buttonImg, command = lambda:dec_classic())
+decrypt_button_classic.config(fg = '#1af017')
+decrypt_button_classic.place(x = 900, y = 150)
 	
 imagen_caesar_cipher = tk.PhotoImage(file = 'Imagen_caesar.png')
 imageCaesar = tk.PhotoImage(file = "Caesar Cipher-logo1.png")
@@ -1042,12 +1090,10 @@ imagen_caesar_cipher_lab = tk.Label(fr, image = imagen_caesar_cipher)
 #imagen_caesar_cipher_lab.config(bg = '#FFFFFF')
 imagen_caesar_cipher_lab.place(x = 30, y = 300)
 
-
-
 buttonReverse = tk.Button(fr, image = imageReverse, command = lambda:reverse_adjust())
 buttonReverse.place(x = 195, y = 300)
 
-buttonCaesar = tk.Button(fr, image = imageCaesar, command = lambda:coinsAudio())
+buttonCaesar = tk.Button(fr, image = imageCaesar, command = lambda:caesarApply())
 buttonCaesar.place(x = 300, y = 300)
 
 buttonLinearTransposition = tk.Button(fr, image = imageLinearTransposition, command = lambda:feathersAudio())

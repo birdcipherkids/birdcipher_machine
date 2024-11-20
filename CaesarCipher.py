@@ -3,43 +3,44 @@
 
 def getTranslatedMessage(modeCaesar, message, keyCaesar):
 
+	translated = ''
+
 	if modeCaesar == 'd':
 
 		keyCaesar = -keyCaesar
-		translated = ''
+		
+	for symbol in message:
 
-		for symbol in message:
+		if symbol.isalpha():
 
-			if symbol.isalpha():
+			num = ord(symbol)
+			num = num + keyCaesar
 
-				num = ord(symbol)
-				num = num + keyCaesar
+			if symbol.isupper():
 
-				if symbol.isupper():
+				if num > ord('Z'):
 
-					if num > ord('Z'):
+					num = num - 26
 
-						num = num - 26
+				elif num < ord('A'):
 
-					elif num < ord('A'):
+					num = num + 26
 
-						num = num + 26
+			elif symbol.islower():
 
-				elif symbol.islower():
+				if num > ord('z'):
 
-					if num > ord('z'):
+					num = num - 26
 
-						num = num - 26
+				elif num < ord('a'):
 
-					elif num < ord('a'):
+					num = num + 26
 
-						num = num + 26
+			translated = translated + chr(num)
 
-				translated = translated + chr(num)
+		else:
 
-			else:
-
-				translated = translated + symbol
+			translated = translated + symbol
 
 	return translated
 
