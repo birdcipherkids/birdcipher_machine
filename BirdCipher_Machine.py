@@ -15,6 +15,7 @@ from imagenes_ing_social import *
 from tests_ing_social import *
 from hash import *
 from ReverseCipher import *
+from CaesarCipher import *
 
 
 points = 0
@@ -982,8 +983,10 @@ def reverse_adjust():
 	translat = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
 	ciphertext.delete(1.0, tk.END)
 	ciphertext.insert(tk.END, translat)
-	
 
+keyCaesarAnswer = tk.IntVar()
+keyLinearTranspostAnswer = tk.IntVar()
+keyInverseTranspostAnswer = tk.IntVar()
 
 titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
 titleBirdCipherMachine.config(fg = "#7e086c")
@@ -1056,25 +1059,17 @@ buttonInverseTransposition.place(x= 530, y = 300)
 # buttonLives = tk.Button(fr, image = imageLives, command = lambda:livesAudio())
 # buttonLives.place(x = 615, y = 300)
 
-labelPoints = tk.Label(fr, text = points, font = ("Comic Sans MS", 13), justify = "center", width = 6)
-labelPoints.config(bg = "#050005", fg = "#7e086c")
-labelPoints.place(x = 212, y = 410)
+keyCaesar = tk.Entry(fr, textvariable = keyCaesarAnswer, font = ("Comic Sans MS", 13), justify = "center", width = 8)
+keyCaesar.config(bg = "#050005", fg = '#f90417')
+keyCaesar.place(x = 300, y = 400)
 
-labelCoins = tk.Label(fr, text = coins, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-labelCoins.config(bg = "#050005", fg = "#7e086c")
-labelCoins.place(x = 300, y = 410)
+keyLinearTransposition = tk.Entry(fr, textvariable = keyLinearTranspostAnswer, font = ("Comic Sans MS", 13), justify = "center", width = 11)
+keyLinearTransposition.config(bg = "#050005", fg = "#a8f6a4")
+keyLinearTransposition.place(x = 400, y = 400)
 
-labelFeathers = tk.Label(fr, text = feathers, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-labelFeathers.config(bg = "#050005", fg = "#7e086c")
-labelFeathers.place(x = 400, y = 410)
-
-labelDiamonds = tk.Label(fr, text = diamonds, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-labelDiamonds.config(bg = "#050005", fg = "#7e086c")
-labelDiamonds.place(x = 500, y = 410)
-
-labelLives = tk.Label(fr, text = lives, font = ("Comic Sans MS", 13), justify = "center", width = 7)
-labelLives.config(bg = "#050005", fg = "#7e086c")
-labelLives.place(x = 617, y = 410)
+keyInverseTransposition = tk.Entry(fr, textvariable = keyInverseTranspostAnswer, font = ("Comic Sans MS", 13), justify = "center", width = 13)
+keyInverseTransposition.config(bg = "#050005", fg = "#a4f6f0")
+keyInverseTransposition.place(x = 530, y = 400)
 
 labelQuestionKey = tk.Label(fr, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey.config(fg = "#7e086c")
