@@ -16,6 +16,8 @@ from tests_ing_social import *
 from hash import *
 from ReverseCipher import *
 from CaesarCipher import *
+from TranspositionEncrypt import *
+
 
 
 points = 0
@@ -981,10 +983,14 @@ padlock.place(x = 387, y = 25)
 mode_classic = ''
 translate = ''
 keyApply = 0
+keyApply_transLinear = 0
+translate_tl = ''
 
 keyCaesarAnswer = tk.IntVar()
 keyLinearTranspostAnswer = tk.IntVar()
 keyInverseTranspostAnswer = tk.IntVar()
+
+
 
 def reverse_adjust():
 
@@ -1052,6 +1058,42 @@ def caesarApply():
 			playsound('Hello.mp3')
 
 
+def TranspositionApply():
+
+	global mode_classic
+	#global translate
+	global keyApply_transLinear
+		
+
+	if mode_classic == 'e':
+
+		message_apply_tl = plaintext.get('1.0', 'end-1c')
+		print(len(message_apply_tl))
+
+	elif mode_classic == 'd':
+
+		message_apply_tl = ciphertext.get('1.0', 'end-1c')
+
+	elif mode_classic == '':
+
+		playsound('Hello.mp3')
+
+	if mode_classic == 'e':
+
+		keyApply_transLinear = keyLinearTranspostAnswer.get()
+
+		if keyApply_transLinear != 0:
+
+			translate_tl = encryptMessageTransLinear(keyApply_transLinear, message_apply_tl)
+
+			ciphertext.delete(1.0, tk.END)
+			ciphertext.insert(tk.END, translate_tl)
+
+
+
+
+
+
 titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
 titleBirdCipherMachine.config(fg = "#7e086c")
 titleBirdCipherMachine.place(x = 70, y = 3)
@@ -1112,7 +1154,7 @@ buttonReverse.place(x = 195, y = 260)
 buttonCaesar = tk.Button(fr, image = imageCaesar, command = lambda:caesarApply())
 buttonCaesar.place(x = 300, y = 260)
 
-buttonLinearTransposition = tk.Button(fr, image = imageLinearTransposition, command = lambda:feathersAudio())
+buttonLinearTransposition = tk.Button(fr, image = imageLinearTransposition, command = lambda:TranspositionApply())
 buttonLinearTransposition.place(x = 400, y = 260)
 
 buttonInverseTransposition = tk.Button(fr, image = imageInverseTransposition, command = lambda:diamondsAudio())
