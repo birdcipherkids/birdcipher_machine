@@ -756,7 +756,7 @@ def receiver_ramson_actv():
 decrypt = tk.Tk()
 
 decrypt.title("BirdCipher Cryptographic Machine")
-decrypt.geometry('1050x540')
+decrypt.geometry('1050x550')
 decrypt.resizable(0, 0)
 
 username_dbc = tk.StringVar()
@@ -980,6 +980,7 @@ padlock.place(x = 387, y = 25)
 
 mode_classic = ''
 translate = ''
+keyApply = 0
 
 keyCaesarAnswer = tk.IntVar()
 keyLinearTranspostAnswer = tk.IntVar()
@@ -1009,6 +1010,7 @@ def caesarApply():
 
 	global mode_classic
 	global translate
+	global keyApply
 
 	if mode_classic == 'e':
 
@@ -1018,49 +1020,63 @@ def caesarApply():
 
 		message_apply = ciphertext.get('1.0', 'end-1c')
 
-	keyApply = keyCaesarAnswer.get()
+	elif mode_classic == '':
 
-	translate = getTranslatedMessage(mode_classic, message_apply, keyCaesarAnswer.get())
+		playsound('Hello.mp3')
 
-	# ciphertext.delete(1.0, tk.END)
-	# ciphertext.insert(tk.END, translate)
 
-	if mode_classic == 'e':
+	if mode_classic != '':
 
-		ciphertext.delete(1.0, tk.END)
-		ciphertext.insert(tk.END, translate)
+		keyApply = keyCaesarAnswer.get()
 
-	elif mode_classic == 'd':
+		if keyApply != 0:
 
-		plaintext.delete(1.0, tk.END)
-		plaintext.insert(tk.END, translate)
+			translate = getTranslatedMessage(mode_classic, message_apply, keyCaesarAnswer.get())
+
+			# ciphertext.delete(1.0, tk.END)
+			# ciphertext.insert(tk.END, translate)
+
+			if mode_classic == 'e':
+
+				ciphertext.delete(1.0, tk.END)
+				ciphertext.insert(tk.END, translate)
+
+			elif mode_classic == 'd':
+
+				plaintext.delete(1.0, tk.END)
+				plaintext.insert(tk.END, translate)
+
+
+		elif keyApply == 0:
+
+			playsound('Hello.mp3')
 
 
 titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
 titleBirdCipherMachine.config(fg = "#7e086c")
-titleBirdCipherMachine.place(x = 70, y = 14)
+titleBirdCipherMachine.place(x = 70, y = 3)
 
 plaintext = tk.Text(fr, font = ("Comic Sans MS", 11))
 #cipher_text.place(x = 30, y = 30)
 #cipher_text.pack(pady = 30)
 plaintext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx = 30)
-plaintext.place(x = 60, y = 60)
+plaintext.place(x = 60, y = 30)
 
 scrollPlaintext = tk.Scrollbar(fr, command = plaintext.yview)
-scrollPlaintext.place(x = 683, y = 60)
+scrollPlaintext.place(x = 683, y = 30)
 
 titleBirdCipherMachine2 = tk.Label(fr, text = 'Your encrypted message (ciphertext) is: ', font = ("Comic Sans MS", 12))
 titleBirdCipherMachine2.config(fg = "#7e086c")
-titleBirdCipherMachine2.place(x = 70, y = 154)
+titleBirdCipherMachine2.place(x = 70, y = 124)
 
 ciphertext = tk.Text(fr, font = ("Comic Sans MS", 11))
 #cipher_text.place(x = 30, y = 30)
 #cipher_text.pack(pady = 30)
 ciphertext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx = 30)
-ciphertext.place(x = 60, y = 190)
+ciphertext.place(x = 60, y = 160)
 
 scrollCiphertext = tk.Scrollbar(fr, command = ciphertext.yview)
-scrollCiphertext.place(x = 683, y = 190)
+scrollCiphertext.place(x = 683, y = 160)
 
 nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic Sans MS", 13), justify = "center")
 #nicknameCuad.config(bg="black", fg="green")
@@ -1088,34 +1104,34 @@ ramson_image = tk.PhotoImage(file = 'RamsonBird_MachineImage.png')
 
 imagen_caesar_cipher_lab = tk.Label(fr, image = imagen_caesar_cipher)
 #imagen_caesar_cipher_lab.config(bg = '#FFFFFF')
-imagen_caesar_cipher_lab.place(x = 30, y = 300)
+imagen_caesar_cipher_lab.place(x = 30, y = 265)
 
 buttonReverse = tk.Button(fr, image = imageReverse, command = lambda:reverse_adjust())
-buttonReverse.place(x = 195, y = 300)
+buttonReverse.place(x = 195, y = 260)
 
 buttonCaesar = tk.Button(fr, image = imageCaesar, command = lambda:caesarApply())
-buttonCaesar.place(x = 300, y = 300)
+buttonCaesar.place(x = 300, y = 260)
 
 buttonLinearTransposition = tk.Button(fr, image = imageLinearTransposition, command = lambda:feathersAudio())
-buttonLinearTransposition.place(x = 400, y = 300)
+buttonLinearTransposition.place(x = 400, y = 260)
 
 buttonInverseTransposition = tk.Button(fr, image = imageInverseTransposition, command = lambda:diamondsAudio())
-buttonInverseTransposition.place(x= 530, y = 300)
+buttonInverseTransposition.place(x= 530, y = 260)
 
 # buttonLives = tk.Button(fr, image = imageLives, command = lambda:livesAudio())
 # buttonLives.place(x = 615, y = 300)
 
 keyCaesar = tk.Entry(fr, textvariable = keyCaesarAnswer, font = ("Comic Sans MS", 13), justify = "center", width = 8)
 keyCaesar.config(bg = "#050005", fg = '#f90417')
-keyCaesar.place(x = 300, y = 400)
+keyCaesar.place(x = 300, y = 360)
 
 keyLinearTransposition = tk.Entry(fr, textvariable = keyLinearTranspostAnswer, font = ("Comic Sans MS", 13), justify = "center", width = 11)
 keyLinearTransposition.config(bg = "#050005", fg = "#a8f6a4")
-keyLinearTransposition.place(x = 400, y = 400)
+keyLinearTransposition.place(x = 400, y = 360)
 
 keyInverseTransposition = tk.Entry(fr, textvariable = keyInverseTranspostAnswer, font = ("Comic Sans MS", 13), justify = "center", width = 13)
 keyInverseTransposition.config(bg = "#050005", fg = "#a4f6f0")
-keyInverseTransposition.place(x = 530, y = 400)
+keyInverseTransposition.place(x = 530, y = 360)
 
 labelQuestionKey = tk.Label(fr, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey.config(fg = "#7e086c")
@@ -1126,10 +1142,10 @@ labelPlayerBCM.config(fg = "#7e086c", bg = "#050005")
 labelPlayerBCM.place(x = 830, y = 20)
 
 imageCryptographicMachine = tk.Label(fr, image = cryptoMachineImage)
-imageCryptographicMachine.place(x = 750, y = 260)
+imageCryptographicMachine.place(x = 730, y = 230)
 
 closeMachineButton = tk.Button(fr, text = "Close the BirdCipher Cryptographic Machine", font = ("Comic Sans MS", 12), command = lambda:closeMachine())
-closeMachineButton.place(x = 250, y = 460)
+closeMachineButton.place(x = 700, y = 460)
 closeMachineButton.config(fg = "#7e086c")
 
 
