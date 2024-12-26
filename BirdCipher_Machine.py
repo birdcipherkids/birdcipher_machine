@@ -806,6 +806,7 @@ bringRamsonKey_de = tk.PhotoImage(file = 'Bring RamsonBird key.png')
 encryptFilesImage = tk.PhotoImage(file = 'Decrypt files.png')
 decryptFilesImage = tk.PhotoImage(file = 'Encrypt files.png')
 bc_logo_loginImage = tk.PhotoImage(file = 'BirdCipher Machine-logoLogin-white1.png')
+hashingImage = tk.PhotoImage(file = 'Hashing-logo-white1.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -818,6 +819,10 @@ notebk.add(hr, text = " Login")
 passcheck = ttk.Frame(notebk, width = 1050, height = 540)
 passcheck.pack(fill = 'both', expand = True)
 notebk.add(passcheck, text = '   Password Checking')
+
+hashing = ttk.Frame(notebk, width = 1050, height = 540)
+hashing.pack(fill = 'both', expand = True)
+notebk.add(hashing, text = '   Hashing')
 
 fr0 = ttk.Frame(notebk, width = 1050, height = 540)
 fr0.pack(fill = 'both', expand = True)
@@ -980,6 +985,30 @@ padlock.place(x = 387, y = 25)
 
 
 # ------------------------------------------------------
+
+hashing_logo = tk.Label(hashing, image = hashingImage)
+hashing_logo.config(bg = '#330237')
+hashing_logo.place(x = 20, y = 20)
+
+labelPlayerLoginHashing = tk.Label(hashing, text = "Welcome, ", font = ("Comic Sans MS", 11))
+labelPlayerLoginHashing.config(fg = "#eba5f1", bg = "#050005")
+labelPlayerLoginHashing.place(x = 830, y = 20)
+
+labelTextHashing = tk.Label(hashing, text = 'Enter the text to hash:', font = ("Comic Sans MS", 14))
+labelTextHashing.config(fg = '#7a0684')
+labelTextHashing.place(x = 600, y = 95)
+
+textToHashing = tk.Text(hashing, font = ('Comic Sans MS', 14))
+textToHashing.config(bg = '#050005', fg = '#eba5f1', width = 25, height = 5, padx = 30)
+textToHashing.place(x = 590, y = 130)
+
+
+
+
+
+
+
+# --------------------------------------------------------
 
 
 mode_classic = ''
