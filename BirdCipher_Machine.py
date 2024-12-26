@@ -105,8 +105,8 @@ def bring_key_ramson():
 	h = hashlib.new(algoritmo, wdatos)
 	hash2 = HASH.generaHash(h)
 
-	miConexion13 = psycopg2.connect(host = 'baak8kinqrfryal5bhvp-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'urnsamk6lldavmbxb6ev', dbname = 'baak8kinqrfryal5bhvp', password = 'nMjCFD00O0DJOmYjbjbZ8sCDdI8wxw')
+	miConexion13 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
 		
 	miCursor13 = miConexion13.cursor()
 
@@ -171,8 +171,8 @@ def encrypt_files_ramson_funct():
 	h = hashlib.new(algoritmo, wdatos)
 	hash2 = HASH.generaHash(h)
 
-	miConexion12 = psycopg2.connect(host = 'baak8kinqrfryal5bhvp-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'urnsamk6lldavmbxb6ev', dbname = 'baak8kinqrfryal5bhvp', password = 'nMjCFD00O0DJOmYjbjbZ8sCDdI8wxw')
+	miConexion12 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
 	
 	miCursor12 = miConexion12.cursor()
 
@@ -257,8 +257,8 @@ def decrypt_files_ramson_funct():
 	h = hashlib.new(algoritmo, wdatos)
 	hash2 = HASH.generaHash(h)
 
-	miConexion122 = psycopg2.connect(host = 'baak8kinqrfryal5bhvp-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'urnsamk6lldavmbxb6ev', dbname = 'baak8kinqrfryal5bhvp', password = 'nMjCFD00O0DJOmYjbjbZ8sCDdI8wxw')
+	miConexion122 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
 		
 	miCursor122 = miConexion122.cursor()
 
@@ -306,8 +306,8 @@ def send_message():
 	h = hashlib.new(algoritmo, bdatos)
 	hash2 = HASH.generaHash(h)
 
-	miConexion2 = psycopg2.connect(host = 'baak8kinqrfryal5bhvp-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'urnsamk6lldavmbxb6ev', dbname = 'baak8kinqrfryal5bhvp', password = 'nMjCFD00O0DJOmYjbjbZ8sCDdI8wxw')
+	miConexion2 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
 		
 	miCursor2 = miConexion2.cursor()
 
@@ -389,8 +389,8 @@ def displayCiphertext():
 	g = hashlib.new(algoritmo, cdatos)
 	hash3 = HASH.generaHash(g)
 
-	miConexion3 = psycopg2.connect(host = 'baak8kinqrfryal5bhvp-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'urnsamk6lldavmbxb6ev', dbname = 'baak8kinqrfryal5bhvp', password = 'nMjCFD00O0DJOmYjbjbZ8sCDdI8wxw')
+	miConexion3 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
 		
 	miCursor3 = miConexion3.cursor()
 
@@ -441,8 +441,8 @@ def bc_decription_machine():
 	global nickname_db
 	global target_person_decrypt
 
-	miConexion3 = psycopg2.connect(host = 'baak8kinqrfryal5bhvp-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'urnsamk6lldavmbxb6ev', dbname = 'baak8kinqrfryal5bhvp', password = 'nMjCFD00O0DJOmYjbjbZ8sCDdI8wxw')
+	miConexion3 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
 
 	miCursor3 = miConexion3.cursor()
 
@@ -1282,7 +1282,6 @@ cipher_text2 = tk.Text(fr2, font = ("Comic Sans MS", 10), width = 73)
 cipher_text2.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 cipher_text2.place(x = 60, y = 40, height = 70)
 scrollVetrn.config(command = cipher_text2.yview)
-
 
 
 
