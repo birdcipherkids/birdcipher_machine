@@ -1274,12 +1274,17 @@ person3_image = tk.PhotoImage(file = 'Person3.png')
 person4_image = tk.PhotoImage(file = 'Person4.png')
 receiver_ramson_image = tk.PhotoImage(file = 'Receiver.png')
 
-cipher_text2 = tk.Text(fr2, font = ("Comic Sans MS", 10), width = 80)
+scrollVetrn = ttk.Scrollbar(fr2, orient = tk.VERTICAL)
+#cipher_text2['yscrollcommand'] = scrollVetrn.set()
+scrollVetrn.place(x = 710, y = 40, height = 70)
+
+cipher_text2 = tk.Text(fr2, font = ("Comic Sans MS", 10), width = 73)
 cipher_text2.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 cipher_text2.place(x = 60, y = 40, height = 70)
+scrollVetrn.config(command = cipher_text2.yview)
 
-scrollVetrn = tk.Scrollbar(fr2, command = cipher_text2.yview)
-scrollVetrn.place(x = 710, y = 40)
+
+
 
 key_fernet_label = tk.Label(fr2, text = "Key for Fernet algorithm")
 key_fernet_label.config(font = ("Comic Sans MS", 12), fg = "#7e086c")
@@ -1293,8 +1298,8 @@ encrypted_label = tk.Label(fr2, text = "Your encrypted message is: ")
 encrypted_label.config(font = ("Comic Sans MS", 12), fg = "#7e086c")
 encrypted_label.place(x = 65, y = 180)
 	
-cipher_text2_encrp = tk.Text(fr2, font = ("Comic Sans MS", 7), width = 105)
-cipher_text2_encrp.config(bg = '#050005', fg = '#FFFFFF', padx = 8)
+cipher_text2_encrp = tk.Text(fr2, font = ("Comic Sans MS", 10), width = 73)
+cipher_text2_encrp.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 cipher_text2_encrp.place(x = 60, y = 210, height = 80)
 
 scrollVetrn2 = tk.Scrollbar(fr2, command = cipher_text2_encrp.yview)
