@@ -588,6 +588,7 @@ def closeMachine():
 	target_person_decrypt = ''
 	playsound('HastaLuego.mp3')
 	playsound('Bye.mp3')
+	time.sleep(2)
 	decrypt.destroy()
 
 
@@ -796,8 +797,8 @@ person2c_activated = False
 person3c_activated = False
 person4c_activated = False
 
-decrypt_buttonImg = tk.PhotoImage(file = "Decrypt Message-logo1.png")
-listen_buttonImg = tk.PhotoImage(file = "Listen to the message-logo1.png")
+encrypt_buttonImg = tk.PhotoImage(file = "Encrypt-logo1.png")
+decrypt_buttonImg = tk.PhotoImage(file = "Decrypt-logo1.png")
 directory_browser = tk.PhotoImage(file = 'Browse directories.png')
 ramson_instructions = tk.PhotoImage(file = 'Instructions.png')
 generateRamsonKey_de = tk.PhotoImage(file = 'Generate RamsonBird Key.png')
@@ -825,7 +826,7 @@ notebk.add(fr0, text = '   Cybersecurity and social engineering')
 fr = ttk.Frame(notebk, width = 1050, height=540)
 fr.configure(style = "BW.TLabel")
 fr.pack(fill = 'both', expand = True)
-notebk.add(fr, text = "      BirdCipher Decrypt Machine")
+notebk.add(fr, text = "      Classic Cryptography")
 
 fr2 = ttk.Frame(notebk, width = 1150, height = 540)
 fr2.pack(fill = 'both', expand = True)
@@ -1114,27 +1115,25 @@ titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Pla
 titleBirdCipherMachine.config(fg = "#7e086c")
 titleBirdCipherMachine.place(x = 70, y = 3)
 
+scrollPlaintext = ttk.Scrollbar(fr, orient = tk.VERTICAL)
+scrollPlaintext.place(x = 683, y = 30, height = 85)
+
 plaintext = tk.Text(fr, font = ("Comic Sans MS", 11))
-#cipher_text.place(x = 30, y = 30)
-#cipher_text.pack(pady = 30)
 plaintext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx = 30)
 plaintext.place(x = 60, y = 30)
-
-scrollPlaintext = tk.Scrollbar(fr, command = plaintext.yview)
-scrollPlaintext.place(x = 683, y = 30)
+scrollPlaintext.config(command = plaintext.yview)
 
 titleBirdCipherMachine2 = tk.Label(fr, text = 'Your encrypted message (ciphertext) is: ', font = ("Comic Sans MS", 12))
 titleBirdCipherMachine2.config(fg = "#7e086c")
 titleBirdCipherMachine2.place(x = 70, y = 124)
 
+scrollCiphertext = tk.Scrollbar(fr, orient = tk.VERTICAL)
+scrollCiphertext.place(x = 683, y = 160, height = 75)
+
 ciphertext = tk.Text(fr, font = ("Comic Sans MS", 11))
-#cipher_text.place(x = 30, y = 30)
-#cipher_text.pack(pady = 30)
 ciphertext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx = 30)
 ciphertext.place(x = 60, y = 160)
-
-scrollCiphertext = tk.Scrollbar(fr, command = ciphertext.yview)
-scrollCiphertext.place(x = 683, y = 160)
+scrollCiphertext.config(command = ciphertext.yview)
 
 nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic Sans MS", 13), justify = "center")
 #nicknameCuad.config(bg="black", fg="green")
@@ -1143,11 +1142,11 @@ nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic S
 nicknameCuad.config(bg = '#050005', fg = '#7e086c')
 nicknameCuad.place(x = 790, y = 90)
 	
-encrypt_button_classic = tk.Button(fr, image = decrypt_buttonImg, command = lambda:enc_classic())
+encrypt_button_classic = tk.Button(fr, image = encrypt_buttonImg, command = lambda:enc_classic())
 encrypt_button_classic.config(fg = '#1af017')
 encrypt_button_classic.place(x = 800, y = 140)
 	
-decrypt_button_classic = tk.Button(fr, image = listen_buttonImg, command = lambda:dec_classic())
+decrypt_button_classic = tk.Button(fr, image = decrypt_buttonImg, command = lambda:dec_classic())
 decrypt_button_classic.config(fg = '#1af017')
 decrypt_button_classic.place(x = 900, y = 140)
 	
@@ -1387,11 +1386,11 @@ nicknameCuad3 = tk.Entry(fr3, textvariable=password_for_decrypt, font = ("Comic 
 nicknameCuad3.config(bg = '#050005', fg = '#7e086c')
 nicknameCuad3.place(x = 790, y = 100)
 
-decrypt_button3 = tk.Button(fr3, image = decrypt_buttonImg, font = ("Comic Sans MS", 8), command = lambda:displayCiphertext())
+decrypt_button3 = tk.Button(fr3, image = encrypt_buttonImg, font = ("Comic Sans MS", 8), command = lambda:displayCiphertext())
 decrypt_button3.config(fg = '#1af017')
 decrypt_button3.place(x = 800, y = 150)
 	
-decrypt_listen3 = tk.Button(fr3, image = listen_buttonImg, font = ("Comic Sans MS", 8), command = lambda:listen_decrypt_text())
+decrypt_listen3 = tk.Button(fr3, image = decrypt_buttonImg, font = ("Comic Sans MS", 8), command = lambda:listen_decrypt_text())
 decrypt_listen3.config(fg = '#1af017')
 decrypt_listen3.place(x = 900, y = 150)
 
