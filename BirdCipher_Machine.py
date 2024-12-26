@@ -5,7 +5,7 @@ import time
 from playsound import playsound
 import hashlib
 from cryptography.fernet import Fernet
-import pyperclip as clipboard
+import pyperclip
 import psycopg2
 import os
 import pyhibp
@@ -17,6 +17,7 @@ from hash import *
 from ReverseCipher import *
 from CaesarCipher import *
 from TranspositionEncrypt import *
+from TranspositionDecrypt import *
 
 
 
@@ -985,6 +986,7 @@ translate = ''
 keyApply = 0
 keyApply_transLinear = 0
 translate_tl = ''
+translation = ''
 
 keyCaesarAnswer = tk.IntVar()
 keyLinearTranspostAnswer = tk.IntVar()
@@ -994,9 +996,11 @@ keyInverseTranspostAnswer = tk.IntVar()
 
 def reverse_adjust():
 
-	translat = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
+	global translation
+
+	translation = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
 	ciphertext.delete(1.0, tk.END)
-	ciphertext.insert(tk.END, translat)
+	ciphertext.insert(tk.END, translation)
 
 def enc_classic():
 
@@ -1015,7 +1019,7 @@ def dec_classic():
 def caesarApply():
 
 	global mode_classic
-	global translate
+	global translation
 	global keyApply
 
 	if mode_classic == 'e':
@@ -1037,7 +1041,7 @@ def caesarApply():
 
 		if keyApply != 0:
 
-			translate = getTranslatedMessage(mode_classic, message_apply, keyCaesarAnswer.get())
+			translation = getTranslatedMessage(mode_classic, message_apply, keyCaesarAnswer.get())
 
 			# ciphertext.delete(1.0, tk.END)
 			# ciphertext.insert(tk.END, translate)
@@ -1045,12 +1049,12 @@ def caesarApply():
 			if mode_classic == 'e':
 
 				ciphertext.delete(1.0, tk.END)
-				ciphertext.insert(tk.END, translate)
+				ciphertext.insert(tk.END, translation)
 
 			elif mode_classic == 'd':
 
 				plaintext.delete(1.0, tk.END)
-				plaintext.insert(tk.END, translate)
+				plaintext.insert(tk.END, translation)
 
 
 		elif keyApply == 0:
@@ -1061,7 +1065,7 @@ def caesarApply():
 def TranspositionApply():
 
 	global mode_classic
-	#global translate
+	global translation
 	global keyApply_transLinear
 		
 
@@ -1084,12 +1088,24 @@ def TranspositionApply():
 
 		if keyApply_transLinear != 0:
 
-			translate_tl = encryptMessageTransLinear(keyApply_transLinear, message_apply_tl)
+			translation = encryptMessageTransLinear(keyApply_transLinear, message_apply_tl)
 
 			ciphertext.delete(1.0, tk.END)
-			ciphertext.insert(tk.END, translate_tl)
+			ciphertext.insert(tk.END, translation)
 
+	if mode_classic == 'd':
 
+		keyApply_transLinear = keyLinearTranspostAnswer.get()
+
+		if keyApply_transLinear != 0:
+
+			translation = decryptMessages(keyApply_transLinear, message_apply_tl)
+			plaintext.delete(1.0, tk.END)
+			plaintext.insert(tk.END, translation)
+
+def copyText():
+
+	pyperclip.copy(translation)
 
 
 
@@ -1125,15 +1141,15 @@ nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic S
 #nicknameCuad.place(x=50, y=55)
 #nicknameCuad.pack(padx = 30, pady = 30)
 nicknameCuad.config(bg = '#050005', fg = '#7e086c')
-nicknameCuad.place(x = 790, y = 100)
+nicknameCuad.place(x = 790, y = 90)
 	
 encrypt_button_classic = tk.Button(fr, image = decrypt_buttonImg, command = lambda:enc_classic())
 encrypt_button_classic.config(fg = '#1af017')
-encrypt_button_classic.place(x = 800, y = 150)
+encrypt_button_classic.place(x = 800, y = 140)
 	
 decrypt_button_classic = tk.Button(fr, image = listen_buttonImg, command = lambda:dec_classic())
 decrypt_button_classic.config(fg = '#1af017')
-decrypt_button_classic.place(x = 900, y = 150)
+decrypt_button_classic.place(x = 900, y = 140)
 	
 imagen_caesar_cipher = tk.PhotoImage(file = 'Imagen_caesar.png')
 imageCaesar = tk.PhotoImage(file = "Caesar Cipher-logo1.png")
@@ -1177,17 +1193,17 @@ keyInverseTransposition.place(x = 530, y = 360)
 
 labelQuestionKey = tk.Label(fr, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey.config(fg = "#7e086c")
-labelQuestionKey.place(x = 805, y = 60)
+labelQuestionKey.place(x = 805, y = 50)
 
 labelPlayerBCM = tk.Label(fr, text = "Welcome, ", font = ("Comic Sans MS", 11))
 labelPlayerBCM.config(fg = "#7e086c", bg = "#050005")
-labelPlayerBCM.place(x = 830, y = 20)
+labelPlayerBCM.place(x = 830, y = 10)
 
-imageCryptographicMachine = tk.Label(fr, image = cryptoMachineImage)
+imageCryptographicMachine = tk.Button(fr, image = cryptoMachineImage, command = lambda:copyText())
 imageCryptographicMachine.place(x = 730, y = 230)
 
 closeMachineButton = tk.Button(fr, text = "Close the BirdCipher Cryptographic Machine", font = ("Comic Sans MS", 12), command = lambda:closeMachine())
-closeMachineButton.place(x = 700, y = 460)
+closeMachineButton.place(x = 700, y = 475)
 closeMachineButton.config(fg = "#7e086c")
 
 
