@@ -1002,6 +1002,10 @@ textToHashing = tk.Text(hashing, font = ('Comic Sans MS', 14))
 textToHashing.config(bg = '#050005', fg = '#eba5f1', width = 25, height = 5, padx = 30)
 textToHashing.place(x = 590, y = 130)
 
+labelHashEntry = tk.Label(hashing, text = 'The hash of your message/file is:', font = ("Comic Sans MS", 14))
+labelHashEntry.config(fg = '#7a0684')
+labelHashEntry.place(x = 590, y = 420)
+
 
 
 
