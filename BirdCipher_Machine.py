@@ -48,8 +48,8 @@ def login_user():
 	sql1 = 'select * from users where username = (%s)'
 	sql1_data = (username_dbc.get(), )
 
-	sql2 = 'insert into users(username, password, position, points, coins, feathers, diamonds) values(%s,%s,%s,%s,%s,%s,%s)'
-	sql2_data = (username_dbc.get(), hash2, position_dbc.get(), 0, 0, 0, 0)
+	sql2 = 'insert into users(username, password, position, points, coins, feathers, emeralds, diamonds) values(%s,%s,%s,%s,%s,%s,%s,%s)'
+	sql2_data = (username_dbc.get(), hash2, position_dbc.get(), 0, 0, 0, 0, 0)
 
 	miCursor1.execute(sql1, sql1_data)
 	dlt1 = miCursor1.fetchall()
@@ -58,8 +58,8 @@ def login_user():
 
 		miCursor1.execute(sql2, sql2_data)
 		hash256_passw_label.config(text = hash2)
-		playsound('NuevoUsuarioCreado.mp3')
-		playsound('NewUserCreated.mp3')
+		#playsound('NuevoUsuarioCreado.mp3')
+		#playsound('NewUserCreated.mp3')
 		time.sleep(2)
 		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
@@ -69,15 +69,16 @@ def login_user():
 	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
 
 		hash256_passw_label.config(text = dlt1[0][2])
-		playsound('CorrectoLogin.mp3')
-		playsound('UtilFuncionesBC.mp3')
-		playsound('CorrectLogin.mp3')
+		#playsound('CorrectoLogin.mp3')
+		#playsound('UtilFuncionesBC.mp3')
+		#playsound('CorrectLogin.mp3')
 		time.sleep(2)
-		playsound('UseMachine.mp3')
-		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+		#playsound('UseMachine.mp3')
+		labelPlayerBCM.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
+		labelPlayerBCM2.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
+		labelPlayerBCM3.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
+		labelPlayerBCM4.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
+		labelPlayerLoginHashing.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
 
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
@@ -1307,8 +1308,8 @@ labelQuestionKey.config(fg = "#7e086c")
 labelQuestionKey.place(x = 805, y = 50)
 
 labelPlayerBCM = tk.Label(fr, text = "Welcome, ", font = ("Comic Sans MS", 11))
-labelPlayerBCM.config(fg = "#7e086c", bg = "#050005")
-labelPlayerBCM.place(x = 830, y = 10)
+labelPlayerBCM.config(fg = "#eba5f1", bg = "#050005")
+labelPlayerBCM.place(x = 780, y = 10)
 
 imageCryptographicMachine = tk.Button(fr, image = cryptoMachineImage, command = lambda:copyText())
 imageCryptographicMachine.place(x = 730, y = 230)
@@ -1474,8 +1475,8 @@ labelQuestionKey2.config(fg = "#7e086c")
 labelQuestionKey2.place(x = 805, y = 60)
 
 labelPlayerBCM2 = tk.Label(fr2, text = "Welcome", font = ("Comic Sans MS", 11))
-labelPlayerBCM2.config(fg = "#7e086c", bg = "#050005")
-labelPlayerBCM2.place(x = 830, y = 20)
+labelPlayerBCM2.config(fg = "#eba5f1", bg = "#050005")
+labelPlayerBCM2.place(x = 780, y = 20)
 
 imageCryptographicMachine2 = tk.Button(fr2, image = encryption_machine_logo, command = lambda:send_message())
 imageCryptographicMachine2.place(x = 760, y = 290)
@@ -1573,8 +1574,8 @@ labelQuestionKey3.config(fg = "#7e086c")
 labelQuestionKey3.place(x = 805, y = 60)
 
 labelPlayerBCM3 = tk.Label(fr3, text = "Welcome, ", font = ("Comic Sans MS", 11))
-labelPlayerBCM3.config(fg = "#7e086c", bg = "#050005")
-labelPlayerBCM3.place(x = 830, y = 20)
+labelPlayerBCM3.config(fg = "#eba5f1", bg = "#050005")
+labelPlayerBCM3.place(x = 780, y = 20)
 
 imageCryptographicMachine3 = tk.Button(fr3, image = cryptoMachineImage, command = lambda:bc_decription_machine())
 imageCryptographicMachine3.place(x = 730, y = 260)
@@ -1590,8 +1591,8 @@ ramsonBird_message.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 ramsonBird_message.place(x = 60, y = 40)
 
 labelPlayerBCM4 = tk.Label(fr0a, text = "Welcome,", font = ("Comic Sans MS", 11))
-labelPlayerBCM4.config(fg = "#7e086c", bg = "#050005")
-labelPlayerBCM4.place(x = 830, y = 20)
+labelPlayerBCM4.config(fg = "#eba5f1", bg = "#050005")
+labelPlayerBCM4.place(x = 780, y = 20)
 
 labelQuestionKey4 = tk.Label(fr0a, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey4.config(fg = "#7e086c")
