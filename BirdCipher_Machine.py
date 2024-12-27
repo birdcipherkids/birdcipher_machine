@@ -60,6 +60,7 @@ def login_user():
 		hash256_passw_label.config(text = hash2)
 		playsound('NuevoUsuarioCreado.mp3')
 		playsound('NewUserCreated.mp3')
+		time.sleep(2)
 		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
