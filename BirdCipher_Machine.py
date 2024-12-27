@@ -15,6 +15,7 @@ from imagenes_ing_social import *
 from tests_ing_social import *
 from hash import *
 from hash_hashing import *
+from hash_file import *
 from ReverseCipher import *
 from CaesarCipher import *
 from TranspositionEncrypt import *
@@ -28,6 +29,7 @@ feathers = 0
 diamonds = 0
 lives = 5
 counter_social_eng = -1
+directoryHash = ''
 
 
 # ------------------------------------ Functions -------------------------------------------------
@@ -90,6 +92,13 @@ def selectDirectory():
 
 	directory = filedialog.askdirectory(title = 'Open directory')
 	ramsonDirectoryUrl.config(text = directory)
+
+def selectDirectoryHash():
+
+	global directoryHash
+
+	directoryHash = filedialog.askopenfilename(title = 'Open file to hash')
+	archiveURLShow.config(text = archive_url.set(directoryHash))
 
 def generate_key_ramson():
 
@@ -1000,9 +1009,10 @@ def hashingExecution():
 		hash200 = HASH.generaHash(hd)
 		labelHashResult.config(text = hash200)
 
+	elif archive_url_funct != '':
 
-
-
+		hashForFile = hash_file_birdcipher(archive_url_funct, algorithm_hashing[hashOption.get()])
+		labelHashResult.config(text = hashForFile)
 
 
 
@@ -1035,16 +1045,16 @@ labelHashResult = tk.Label(hashing, font = ('Comic Sans MS', 9), width = 130)
 labelHashResult.config(bg = '#050005', fg = '#f7a6f1')
 labelHashResult.place(x = 40, y = 480)
 
-logoBrowseDirectoriesHash = tk.Button(hashing, image = directory_browser)
-logoBrowseDirectoriesHash.place(x = 900, y = 280)
+logoBrowseDirectoriesHash = tk.Button(hashing, image = directory_browser, command = lambda:selectDirectoryHash())
+logoBrowseDirectoriesHash.place(x = 925, y = 365)
 
 labelArchive = tk.Label(hashing, text = 'The URL of your file is:', font = ("Comic Sans MS", 14))
 labelArchive.config(fg = '#7a0684')
-labelArchive.place(x = 540, y = 380)
+labelArchive.place(x = 540, y = 360)
 
-archiveURLShow = tk.Entry(hashing, textvariable = archive_url, font = ('Comic Sans MS', 9), width = 62)
-archiveURLShow.config(bg = '#050005', fg = '#f7a6f1')
-archiveURLShow.place(x = 530, y = 420)
+archiveURLShow = tk.Entry(hashing, textvariable = archive_url, font = ('Comic Sans MS', 7), width = 62)
+archiveURLShow.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+archiveURLShow.place(x = 530, y = 400)
 
 rad_button_md5 = tk.Radiobutton(hashing, text = 'md5', variable = hashOption, value = 0)
 rad_button_md5.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
