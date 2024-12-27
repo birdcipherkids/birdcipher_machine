@@ -14,6 +14,7 @@ from pyhibp import pwnedpasswords as pw
 from imagenes_ing_social import *
 from tests_ing_social import *
 from hash import *
+from hash_hashing import *
 from ReverseCipher import *
 from CaesarCipher import *
 from TranspositionEncrypt import *
@@ -986,84 +987,96 @@ padlock.place(x = 387, y = 25)
 
 # ------------------------------------------------------
 
-hashOption = tk.IntVar()
+def hashingExecution():
 
-hashing_logo = tk.Button(hashing, image = hashingImage)
+	global algorithm_hashing
+
+	archive_url_funct = archive_url.get()
+
+	if archive_url_funct == '':
+
+		wbdatos = bytes(textToHashing.get('1.0', 'end-1c'), 'utf-8')
+		hd = hashlib.new(algorithm_hashing[hashOption.get()], wbdatos)
+		hash200 = HASH.generaHash(hd)
+		labelHashResult.config(text = hash200)
+
+
+
+
+
+
+
+hashOption = tk.IntVar()
+archive_url = tk.StringVar()
+algorithm_hashing = ['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'shake_128', 'shake_256']
+
+
+hashing_logo = tk.Button(hashing, image = hashingImage, command = lambda:hashingExecution())
 hashing_logo.config(bg = '#330237')
-hashing_logo.place(x = 20, y = 20)
+hashing_logo.place(x = 40, y = 15)
 
 labelPlayerLoginHashing = tk.Label(hashing, text = "Welcome, ", font = ("Comic Sans MS", 11))
 labelPlayerLoginHashing.config(fg = "#eba5f1", bg = "#050005")
-labelPlayerLoginHashing.place(x = 600, y = 20)
+labelPlayerLoginHashing.place(x = 540, y = 20)
 
 labelTextHashing = tk.Label(hashing, text = 'Enter the text to hash:', font = ("Comic Sans MS", 14))
 labelTextHashing.config(fg = '#7a0684')
-labelTextHashing.place(x = 590, y = 55)
+labelTextHashing.place(x = 540, y = 55)
 
 textToHashing = tk.Text(hashing, font = ('Comic Sans MS', 14))
-textToHashing.config(bg = '#050005', fg = '#eba5f1', width = 31, height = 5, padx = 30)
-textToHashing.place(x = 580, y = 90)
+textToHashing.config(bg = '#050005', fg = '#eba5f1', width = 34, height = 5, padx = 30)
+textToHashing.place(x = 530, y = 90)
 
 labelHashEntry = tk.Label(hashing, text = 'The hash of your message/file is:', font = ("Comic Sans MS", 14))
 labelHashEntry.config(fg = '#7a0684')
-labelHashEntry.place(x = 580, y = 420)
+labelHashEntry.place(x = 40, y = 440)
 
-labelHashResult = tk.Label(hashing, font = ('Comic Sans MS', 8), width = 62)
+labelHashResult = tk.Label(hashing, font = ('Comic Sans MS', 9), width = 130)
 labelHashResult.config(bg = '#050005', fg = '#f7a6f1')
-labelHashResult.place(x = 560, y = 460)
+labelHashResult.place(x = 40, y = 480)
 
 logoBrowseDirectoriesHash = tk.Button(hashing, image = directory_browser)
-logoBrowseDirectoriesHash.place(x = 920, y = 240)
+logoBrowseDirectoriesHash.place(x = 900, y = 280)
 
 labelArchive = tk.Label(hashing, text = 'The URL of your file is:', font = ("Comic Sans MS", 14))
 labelArchive.config(fg = '#7a0684')
-labelArchive.place(x = 580, y = 340)
+labelArchive.place(x = 540, y = 380)
 
-archiveURLShow = tk.Label(hashing, font = ('Comic Sans MS', 9), width = 62)
+archiveURLShow = tk.Entry(hashing, textvariable = archive_url, font = ('Comic Sans MS', 9), width = 62)
 archiveURLShow.config(bg = '#050005', fg = '#f7a6f1')
-archiveURLShow.place(x = 570, y = 380)
+archiveURLShow.place(x = 530, y = 420)
 
 rad_button_md5 = tk.Radiobutton(hashing, text = 'md5', variable = hashOption, value = 0)
 rad_button_md5.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_md5.place(x = 570, y = 250)
+rad_button_md5.place(x = 540, y = 250)
 
 rad_button_sha1 = tk.Radiobutton(hashing, text = 'sha1', variable = hashOption, value = 1)
 rad_button_sha1.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha1.place(x = 640, y = 250)
+rad_button_sha1.place(x = 610, y = 250)
 
 rad_button_sha224 = tk.Radiobutton(hashing, text = 'sha224', variable = hashOption, value = 2)
 rad_button_sha224.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha224.place(x = 710, y = 250)
+rad_button_sha224.place(x = 680, y = 250)
 
 rad_button_sha256 = tk.Radiobutton(hashing, text = 'sha256', variable = hashOption, value = 3)
 rad_button_sha256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha256.place(x = 800, y = 250)
+rad_button_sha256.place(x = 770, y = 250)
 
 rad_button_sha384 = tk.Radiobutton(hashing, text = 'sha384', variable = hashOption, value = 4)
 rad_button_sha384.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha384.place(x = 570, y = 300)
+rad_button_sha384.place(x = 540, y = 300)
 
 rad_button_sha512 = tk.Radiobutton(hashing, text = 'sha512', variable = hashOption, value = 5)
 rad_button_sha512.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha512.place(x = 650, y = 300)
+rad_button_sha512.place(x = 620, y = 300)
 
 rad_button_shake_128 = tk.Radiobutton(hashing, text = 'shake_128', variable = hashOption, value = 6)
 rad_button_shake_128.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_shake_128.place(x = 720, y = 300)
+rad_button_shake_128.place(x = 690, y = 300)
 
 rad_button_shake_256 = tk.Radiobutton(hashing, text = 'shake_256', variable = hashOption, value = 7)
 rad_button_shake_256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_shake_256.place(x = 810, y = 300)
-
-# rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
-# rad_button1.place(x = 550, y = 40)
-# rad_button1.config(font = ('Comic Sans MS', 9), justify = 'left')
-
-
-
-
-
-
+rad_button_shake_256.place(x = 780, y = 300)
 
 
 
