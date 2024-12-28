@@ -20,6 +20,7 @@ from ReverseCipher import *
 from CaesarCipher import *
 from TranspositionEncrypt import *
 from TranspositionDecrypt import *
+from TranspositionColumnarEncrypt import *
 
 
 
@@ -1217,11 +1218,42 @@ def TranspositionApply():
 			plaintext.delete(1.0, tk.END)
 			plaintext.insert(tk.END, translation)
 
+
+def TranspositionInverseApply():
+
+	global mode_classic
+	global translation
+	global keyApply_transLinear
+		
+
+	if mode_classic == 'e':
+
+		message_apply_tl = plaintext.get('1.0', 'end-1c')
+		print(len(message_apply_tl))
+
+	elif mode_classic == 'd':
+
+		message_apply_tl = ciphertext.get('1.0', 'end-1c')
+
+	elif mode_classic == '':
+
+		playsound('Hello.mp3')
+
+	if mode_classic == 'e':
+
+		keyApply_transInverse = keyInverseTranspostAnswer.get()
+
+		if keyApply_transInverse != '':
+
+			translation = TranspositionColumnarInverse(keyApply_transInverse, message_apply_tl)
+			ciphertext.delete(1.0, tk.END)
+			ciphertext.insert(tk.END, translation)
+
+
+
 def copyText():
 
 	pyperclip.copy(translation)
-
-
 
 
 titleBirdCipherMachine = tk.Label(fr, text = "Enter your message to encrypt (Plaintext)", font = ("Comic Sans MS", 12))
@@ -1285,7 +1317,7 @@ buttonCaesar.place(x = 300, y = 260)
 buttonLinearTransposition = tk.Button(fr, image = imageLinearTransposition, command = lambda:TranspositionApply())
 buttonLinearTransposition.place(x = 400, y = 260)
 
-buttonInverseTransposition = tk.Button(fr, image = imageInverseTransposition, command = lambda:diamondsAudio())
+buttonInverseTransposition = tk.Button(fr, image = imageInverseTransposition, command = lambda:TranspositionInverseApply())
 buttonInverseTransposition.place(x= 530, y = 260)
 
 # buttonLives = tk.Button(fr, image = imageLives, command = lambda:livesAudio())
