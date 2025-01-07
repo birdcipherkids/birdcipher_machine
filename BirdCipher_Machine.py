@@ -1436,7 +1436,7 @@ person1_image = tk.PhotoImage(file = 'Person1.png')
 person2_image = tk.PhotoImage(file = 'Person2.png')
 person3_image = tk.PhotoImage(file = 'Person3.png')
 person4_image = tk.PhotoImage(file = 'Person4.png')
-receiver_ramson_image = tk.PhotoImage(file = 'Receiver.png')
+receiver_ramson_image = tk.PhotoImage(file = 'PersonRansom-logo1.png')
 
 scrollVetrn = ttk.Scrollbar(fr2, orient = tk.VERTICAL)
 #cipher_text2['yscrollcommand'] = scrollVetrn.set()
@@ -1687,7 +1687,7 @@ ramsonDirectoryUrl.config(bg = '#050005', fg = '#FFFFFF')
 ramsonDirectoryUrl.place(x = 60, y = 210, height = 30)
 
 buttonReceiver = tk.Button(fr0a, image = receiver_ramson_image, command = lambda:receiver_ramson_actv())
-buttonReceiver.place(x = 570, y = 280)
+buttonReceiver.place(x = 577, y = 280)
 
 entry_receiver_ramson = tk.Entry(fr0a, textvariable = receiver_var, font = ("Comic Sans MS", 13), justify = "center", width = 13)
 entry_receiver_ramson.config(bg = "#050005", fg = "#7e086c")
