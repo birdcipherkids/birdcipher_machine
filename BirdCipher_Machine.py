@@ -84,7 +84,6 @@ def login_user():
 		#print(username_db)
 		playsound('bambu_click.mp3')
 		playsound('CorrectoLogin.mp3')
-		playsound('UtilFuncionesBC.mp3')
 		playsound('CorrectLogin.mp3')
 		time.sleep(2)
 		#playsound('UseMachine.mp3')
@@ -935,7 +934,7 @@ hash256passw_copy_btt.place(x = 480, y = 475)
 
 close_machine_from_login = tk.Button(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
 close_machine_from_login.config(fg = '#7e086c', font = ('Comic Sans MS', 14))
-close_machine_from_login.place(x = 700, y = 460)
+close_machine_from_login.place(x = 700, y = 470)
 
 bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login_user())
 bc_logo_login.config(bg = '#260223')
