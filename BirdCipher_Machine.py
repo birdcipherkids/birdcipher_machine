@@ -38,6 +38,8 @@ key_ramson = ''
 
 # ------------------------------------ Functions -------------------------------------------------
 
+## ---------------------------------- Login tab --------------------------------------------------
+
 def login_user():
 
 	global username_db
@@ -99,6 +101,21 @@ def login_user():
 
 	miConexion1.commit()
 	miConexion1.close()
+
+
+def copyHashLogin():
+
+	wdatos = bytes(password_dbc.get(), 'utf-8')
+	h = hashlib.new(algoritmo, wdatos)
+	hash2 = HASH.generaHash(h)
+
+	playsound('bambu_click.mp3')
+	playsound('HashCopiadoLogin.mp3')
+	playsound('HashCopiedLogin.mp3')
+	pyperclip.copy(hash2)
+
+
+# -------------------------------------------------------------------------------------------------------------
 
 
 
@@ -928,7 +945,7 @@ hash256_passw_label = tk.Label(hr, font = ('Comic Sans MS', 8), width = 62)
 hash256_passw_label.config(bg = '#050005', fg = '#f7a6f1')
 hash256_passw_label.place(x = 20, y = 480)
 
-hash256passw_copy_btt = tk.Button(hr, text = 'Copy hash to clipboard')
+hash256passw_copy_btt = tk.Button(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
 hash256passw_copy_btt.config(fg = '#7e086c', font = ('Comic Sans MS', 9))
 hash256passw_copy_btt.place(x = 480, y = 475)
 
