@@ -63,6 +63,7 @@ def login_user():
 	if len(dlt1) == 0:
 
 		miCursor1.execute(sql2, sql2_data)
+		miCursor1.execute(sql1, sql1_data)
 		dlt2 = miCursor1.fetchall()
 		hash256_passw_label.config(text = hash2)
 		username_db = dlt2[0][1]
@@ -140,12 +141,12 @@ def bring_key_ramson():
 	miCursor13.execute(sql_verf_hash_ramson, sql_verf_hash_data_ramson)
 	dlt453 = miCursor13.fetchall()
 
-	if dlt453[0][5] >= 1 and hash2 == dlt453[0][3]:
+	if dlt453[0][5] >= 0 and hash2 == dlt453[0][2]:
 
 		if target_receiver_ramson != '':
 
 			sql_bring_key_ramson = 'select * from ramson_bird where (client = (%s) and server = (%s) and packet = (%s))'
-			sql_bring_key_data_ramson = (username_db, target_receiver_ramson, packet.get())
+			sql_bring_key_data_ramson = (target_receiver_ramson, username_db, packet.get())
 			miCursor13.execute(sql_bring_key_ramson, sql_bring_key_data_ramson)
 			dlt456 = miCursor13.fetchall()
 			key_ramson = dlt456[0][4]
@@ -294,12 +295,12 @@ def decrypt_files_ramson_funct():
 		
 	miCursor122 = miConexion122.cursor()
 
-	sql_verf_hash_ramson = 'select * from Players where nickname = (%s)'
-	sql_verf_hash_data_ramson = (nickname_db,)
+	sql_verf_hash_ramson = 'select * from users where username = (%s)'
+	sql_verf_hash_data_ramson = (username_db,)
 	miCursor122.execute(sql_verf_hash_ramson, sql_verf_hash_data_ramson)
 	dlt909 = miCursor122.fetchall()
 
-	if dlt909[0][5] >= 1 and hash2 == dlt909[0][3]:
+	if dlt909[0][5] >= 0 and hash2 == dlt909[0][2]:
 
 		if target_receiver_ramson != '':
 
