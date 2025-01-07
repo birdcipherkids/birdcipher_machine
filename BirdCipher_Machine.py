@@ -30,12 +30,17 @@ feathers = 0
 diamonds = 0
 lives = 5
 counter_social_eng = -1
+directory = ''
 directoryHash = ''
+username_db = ''
+key_ramson = ''
 
 
 # ------------------------------------ Functions -------------------------------------------------
 
 def login_user():
+
+	global username_db
 
 	wdatos = bytes(password_dbc.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -58,7 +63,10 @@ def login_user():
 	if len(dlt1) == 0:
 
 		miCursor1.execute(sql2, sql2_data)
+		dlt2 = miCursor1.fetchall()
 		hash256_passw_label.config(text = hash2)
+		username_db = dlt2[0][1]
+		#print(username_db)
 		#playsound('NuevoUsuarioCreado.mp3')
 		#playsound('NewUserCreated.mp3')
 		time.sleep(2)
@@ -70,6 +78,8 @@ def login_user():
 	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
 
 		hash256_passw_label.config(text = dlt1[0][2])
+		username_db = dlt1[0][1]
+		#print(username_db)
 		#playsound('CorrectoLogin.mp3')
 		#playsound('UtilFuncionesBC.mp3')
 		#playsound('CorrectLogin.mp3')
@@ -87,6 +97,8 @@ def login_user():
 
 	miConexion1.commit()
 	miConexion1.close()
+
+
 
 
 def selectDirectory():
@@ -123,8 +135,8 @@ def bring_key_ramson():
 		
 	miCursor13 = miConexion13.cursor()
 
-	sql_verf_hash_ramson = 'select * from Players where nickname = (%s)'
-	sql_verf_hash_data_ramson = (nickname_db,)
+	sql_verf_hash_ramson = 'select * from users where username = (%s)'
+	sql_verf_hash_data_ramson = (username_db,)
 	miCursor13.execute(sql_verf_hash_ramson, sql_verf_hash_data_ramson)
 	dlt453 = miCursor13.fetchall()
 
@@ -133,7 +145,7 @@ def bring_key_ramson():
 		if target_receiver_ramson != '':
 
 			sql_bring_key_ramson = 'select * from ramson_bird where (client = (%s) and server = (%s) and packet = (%s))'
-			sql_bring_key_data_ramson = (nickname_db, target_receiver_ramson, packet.get())
+			sql_bring_key_data_ramson = (username_db, target_receiver_ramson, packet.get())
 			miCursor13.execute(sql_bring_key_ramson, sql_bring_key_data_ramson)
 			dlt456 = miCursor13.fetchall()
 			key_ramson = dlt456[0][4]
@@ -179,6 +191,9 @@ def execution_decrypt_files(items, key):
 
 def encrypt_files_ramson_funct():
 
+	global directory
+	global username_db
+
 
 	wdatos = bytes(password_for_ramson.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -189,27 +204,31 @@ def encrypt_files_ramson_funct():
 	
 	miCursor12 = miConexion12.cursor()
 
-	sql_verf_hash_ramson = 'select * from Players where nickname = (%s)'
-	sql_verf_hash_data_ramson = (nickname_db,)
+	sql_verf_hash_ramson = 'select * from users where username = (%s)'
+	sql_verf_hash_data_ramson = (username_db,)
 	miCursor12.execute(sql_verf_hash_ramson, sql_verf_hash_data_ramson)
 	dlt5 = miCursor12.fetchall()
 
-	if dlt5[0][5] >= 1 and hash2 == dlt5[0][3]:
+	if dlt5[0][5] >= 0 and hash2 == dlt5[0][2]:
+
+		print(dlt5[0][2])
+		print(dlt5[0][5])
 
 		if target_receiver_ramson != '':
 
 			sql_ramson_verf = 'select * from ramson_bird where (client = (%s) and server = (%s) and packet = (%s))'
-			sql_ramson_verf_data = (nickname_db, target_receiver_ramson, packet.get())
+			sql_ramson_verf_data = (username_db, target_receiver_ramson, packet.get())
 			miCursor12.execute(sql_ramson_verf, sql_ramson_verf_data)
 			df20 = miCursor12.fetchall()
 			df12_test = True
+			print('Ok')
 
 			if len(df20) == 0 and df12_test == True:
 
 				if directory != '' and ramsonBird_message.get("1.0", "end-1c") != '' and packet.get() != 0:
 
 					sql1234 = 'insert into ramson_bird(client, password, server, key_c, description, packet) values(%s,%s,%s,%s,%s,%s)'
-					datos_sql1234 = (nickname_db, hash2, target_receiver_ramson, key_ramson.decode(), ramsonBird_message.get('1.0', 'end-1c'), packet.get())
+					datos_sql1234 = (username_db, hash2, target_receiver_ramson, key_ramson.decode(), ramsonBird_message.get('1.0', 'end-1c'), packet.get())
 					miCursor12.execute(sql1234, datos_sql1234)
 					archivos = directory
 					items = os.listdir(archivos)
@@ -217,7 +236,7 @@ def encrypt_files_ramson_funct():
 					execution_encrypt_files(archivos2, key_ramson)
 					print(key_ramson)
 
-					playsound('bambu_click.mp3')
+					#playsound('bambu_click.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
@@ -229,7 +248,7 @@ def encrypt_files_ramson_funct():
 				if directory != '' and ramsonBird_message.get("1.0", "end-1c") != '' and packet.get() != 0:
 
 					sql1235 = 'update ramson_bird set (client, password, server, key_c, description, packet) = (%s,%s,%s,%s,%s,%s) where (client = (%s) and server = (%s) and packet = (%s))'
-					datos_sql1235 = (nickname_db, hash2, target_receiver_ramson, key_ramson.decode(), ramsonBird_message.get('1.0', 'end-1c'), packet.get(), nickname_db, target_receiver_ramson, packet.get())
+					datos_sql1235 = (username_db, hash2, target_receiver_ramson, key_ramson.decode(), ramsonBird_message.get('1.0', 'end-1c'), packet.get(), nickname_db, target_receiver_ramson, packet.get())
 					miCursor12.execute(sql1235, datos_sql1235)
 					archivos = directory
 					items = os.listdir(archivos)
@@ -250,13 +269,13 @@ def encrypt_files_ramson_funct():
 			df12_test = False
 
 
-	if dlt5[0][5] >= 1 and hash2 != dlt5[0][3]:
+	# if dlt5[0][5] >= 1 and hash2 != dlt5[0][3]:
 
-		playsound('WrongPass.mp3')
+	# 	playsound('WrongPass.mp3')
 
-	elif dlt5[0][5] < 1:
+	# elif dlt5[0][5] < 1:
 
-		playsound('AuthorizationSendMssg.mp3')
+	# 	playsound('AuthorizationSendMssg.mp3')
 
 
 
@@ -285,7 +304,7 @@ def decrypt_files_ramson_funct():
 		if target_receiver_ramson != '':
 
 			sql_ramson_verf = 'select * from ramson_bird where (client = (%s) and server = (%s) and packet = (%s))'
-			sql_ramson_verf_data = (target_receiver_ramson, nickname_db, packet.get())
+			sql_ramson_verf_data = (target_receiver_ramson, username_db, packet.get())
 			miCursor122.execute(sql_ramson_verf, sql_ramson_verf_data)
 			df202 = miCursor122.fetchall()
 			df12_test = True
@@ -759,7 +778,7 @@ def receiver_ramson_actv():
 	if receiver_var.get() != '':
 
 		target_receiver_ramson = receiver_var.get()
-		playsound('bambu_click.mp3')
+		#playsound('bambu_click.mp3')
 
 	elif receiver_var.get() == '':
 
