@@ -862,6 +862,10 @@ notebk.add(hashing, text = '   Hashing')
 fr0 = ttk.Frame(notebk, width = 1050, height = 540)
 fr0.pack(fill = 'both', expand = True)
 notebk.add(fr0, text = '   Cybersecurity and social engineering')
+
+virusTotal = ttk.Frame(notebk, width = 1050, height = 540)
+virusTotal.pack(fill = 'both', expand = True)
+notebk.add(virusTotal, text = '   Virus Total')
 		
 fr = ttk.Frame(notebk, width = 1050, height=540)
 fr.configure(style = "BW.TLabel")
@@ -879,6 +883,11 @@ notebk.add(fr3, text = "   Decryption Machine")
 fr0a = ttk.Frame(notebk, width = 1050, height = 540)
 fr0a.pack(fill = 'both', expand = True)
 notebk.add(fr0a, text = '   RamsonBird Machine')
+
+
+
+
+# ---------------------------------------------------------------
 
 login_label = tk.Label(hr, text = 'Log in the BirdCipher Machine!!', font = ("Comic Sans MS", 14))
 login_label.config(fg = "#7e086c")
