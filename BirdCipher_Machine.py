@@ -68,8 +68,9 @@ def login_user():
 		hash256_passw_label.config(text = hash2)
 		username_db = dlt2[0][1]
 		#print(username_db)
-		#playsound('NuevoUsuarioCreado.mp3')
-		#playsound('NewUserCreated.mp3')
+		playsound('bambu_click.mp3')
+		playsound('NuevoUsuarioCreado.mp3')
+		playsound('NewUserCreated.mp3')
 		time.sleep(2)
 		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
@@ -81,9 +82,10 @@ def login_user():
 		hash256_passw_label.config(text = dlt1[0][2])
 		username_db = dlt1[0][1]
 		#print(username_db)
-		#playsound('CorrectoLogin.mp3')
-		#playsound('UtilFuncionesBC.mp3')
-		#playsound('CorrectLogin.mp3')
+		playsound('bambu_click.mp3')
+		playsound('CorrectoLogin.mp3')
+		playsound('UtilFuncionesBC.mp3')
+		playsound('CorrectLogin.mp3')
 		time.sleep(2)
 		#playsound('UseMachine.mp3')
 		labelPlayerBCM.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
@@ -249,7 +251,7 @@ def encrypt_files_ramson_funct():
 				if directory != '' and ramsonBird_message.get("1.0", "end-1c") != '' and packet.get() != 0:
 
 					sql1235 = 'update ramson_bird set (client, password, server, key_c, description, packet) = (%s,%s,%s,%s,%s,%s) where (client = (%s) and server = (%s) and packet = (%s))'
-					datos_sql1235 = (username_db, hash2, target_receiver_ramson, key_ramson.decode(), ramsonBird_message.get('1.0', 'end-1c'), packet.get(), nickname_db, target_receiver_ramson, packet.get())
+					datos_sql1235 = (username_db, hash2, target_receiver_ramson, key_ramson.decode(), ramsonBird_message.get('1.0', 'end-1c'), packet.get(), username_db, target_receiver_ramson, packet.get())
 					miCursor12.execute(sql1235, datos_sql1235)
 					archivos = directory
 					items = os.listdir(archivos)
