@@ -1108,6 +1108,10 @@ time_breached.place(x = 400, y = 260)
 padlock = tk.Label(passcheck, image = padlock_image)
 padlock.place(x = 387, y = 25)
 
+closeBCM_checkpass = tk.Button(passcheck, text = 'Close the BirdCipher Cryptographic Machine', command = lambda:closeMachine())
+closeBCM_checkpass.config(fg = '#067297', font = ('Comic Sans MS', 14))
+closeBCM_checkpass.place(x = 100, y = 460)
+
 # --------------------------------------------------------------------------------------------------------------------------
 
 
