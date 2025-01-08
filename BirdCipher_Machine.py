@@ -1030,6 +1030,58 @@ closeBCM_awareness.place(x = 950 , y = 430)
 ### ----------------------------------------- Checking password section ----------------------------------------------------
 
 
+def evaluate_password():
+
+	specials = "!#$%&()*+,-./:;<=>?@[\\]^_`{|}~¡"
+	mayusculas = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
+	minusculas = 'abcdefghijklmnñopqrstuvwxyz'
+	numeros = '1234567890'
+
+	password_to_evaluate = password_user_entry.get()
+	evaluation = [False, False, False, False]
+	evaluation_audios_es = ['caracter_especial.mp3', 'letra_mayuscula.mp3', 'letra_minuscula.mp3', 'numero_contrasena.mp3']
+
+	for i in password_to_evaluate:
+
+		if i in specials:
+
+			evaluation[0] = True
+		
+		if i in mayusculas:
+
+			evaluation[1] = True
+
+		if i in minusculas:
+
+			evaluation[2] = True
+
+		if i in numeros:
+
+			evaluation[3] = True
+
+
+	count_lack = 4
+	x = 0
+
+	while x < 4:
+
+		if evaluation[x] == False:
+
+			playsound(evaluation_audios_es[x])
+
+		else:
+
+			count_lack = count_lack - 1
+
+		x = x + 1
+
+	if count_lack == 0:
+
+		playsound('buen_trabajo.mp3')
+		time.sleep(2)
+
+
+
 def check_password():
 
 	# Required: A descriptive user agent must be set describing the application consuming
@@ -1049,6 +1101,7 @@ def check_password():
 		playsound('ContrasenaInsegura.mp3')
 		time.sleep(2)
 		playsound('ImprovePass.mp3')
+		time.sleep(4)
 
 	elif resp == False:
 
@@ -1074,7 +1127,7 @@ hibp_info_logo = tk.PhotoImage(file = 'Password Check Info-logo-white1.png')
 padlock_image = tk.PhotoImage(file = 'Candado4a.png')
 password_user_entry = tk.StringVar()
 
-password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:check_password())
+password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:[check_password(), evaluate_password()])
 password_checking_button.config(bg = '#067297')
 password_checking_button.place(x = 610, y = 20)
 
