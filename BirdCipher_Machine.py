@@ -36,9 +36,9 @@ username_db = ''
 key_ramson = ''
 
 
-# ------------------------------------ Functions -------------------------------------------------
+# ----------------------------------------------- Functions -------------------------------------------------------------------
 
-## ---------------------------------- Login tab --------------------------------------------------
+## ---------------------------------------------- Login tab -------------------------------------------------------------------
 
 def login_user():
 
@@ -804,7 +804,11 @@ def receiver_ramson_actv():
 		playsound('bambu_click.mp3')
 
 
-# ------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------------
+
+## ------------------------------------------------ Graphical Interface -----------------------------------------------------
+
+### ----------------------------------------------------- Basic -------------------------------------------------------------
 
 
 
@@ -903,7 +907,7 @@ notebk.add(fr0a, text = '   RamsonBird Machine')
 
 
 
-# ---------------------------------------------------------------
+### -------------------------------------------- Login Section ---------------------------------------------------------------
 
 login_label = tk.Label(hr, text = 'Log in the BirdCipher Machine!!', font = ("Comic Sans MS", 14))
 login_label.config(fg = "#7e086c")
@@ -957,7 +961,69 @@ bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login
 bc_logo_login.config(bg = '#260223')
 bc_logo_login.place(x = 420, y = 30)
 
-# ----------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------------------------
+
+
+### --------------------------------------------- Cybersecurity awareness section -------------------------------------------
+
+
+def play_social_eng_audio():
+
+	playsound(social_eng_audio[index_social_eng_choose])
+
+def send_answer_social_eng():
+
+	global feathers
+
+	if varOption.get() == correct_answers_social_eng[index_social_eng_choose]:
+
+		playsound('wonFeather.mp3')
+		feathers = feathers + 1
+		updatePlayer_feathers()
+		labelFeathers.config(text = feathers)
+		answer_button_social_eng.config(state = 'disabled')
+
+	elif varOption.get() != correct_answers_social_eng[index_social_eng_choose]:
+
+		playsound('lostFeather.mp3')
+		answer_button_social_eng.config(state = 'disabled')
+
+
+counter_social_eng = counter_social_eng + 1
+index_social_eng = list(range(44))
+index_social_eng_choose = index_social_eng[counter_social_eng]
+img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choose])
+varOption = tk.IntVar()
+
+img_social_eng_label = tk.Button(fr0, image = img_social_eng, command = lambda:play_social_eng_audio())
+img_social_eng_label.place(x = 30, y = 30)
+img_social_eng_label.config(bg = '#20011c')
+
+rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
+rad_button1.place(x = 550, y = 40)
+rad_button1.config(font = ('Comic Sans MS', 9), justify = 'left')
+
+rad_button2 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][1], variable = varOption, value = 1)
+rad_button2.place(x = 550, y = 80)
+rad_button2.config(font = ('Comic Sans MS', 9), justify = 'left')
+
+rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
+rad_button3.place(x = 550, y = 120)
+rad_button3.config(font = ('Comic Sans MS', 9), justify = 'left')
+
+rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
+rad_button4.place(x = 550, y = 160)
+rad_button4.config(font = ('Comic Sans MS', 9), justify = 'left')
+
+answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
+answer_button_social_eng.place(x = 600, y = 200)
+answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
+	
+
+# --------------------------------------------------------------------------------------------------------------------------
+
+
+### ----------------------------------------- Checking password section ----------------------------------------------------
 
 
 def check_password():
@@ -1042,9 +1108,10 @@ time_breached.place(x = 400, y = 260)
 padlock = tk.Label(passcheck, image = padlock_image)
 padlock.place(x = 387, y = 25)
 
+# --------------------------------------------------------------------------------------------------------------------------
 
 
-# ------------------------------------------------------
+### ------------------------------------------------- Hashing section ------------------------------------------------------
 
 def hashingExecution():
 
@@ -1138,9 +1205,11 @@ rad_button_shake_256 = tk.Radiobutton(hashing, text = 'shake_256', variable = ha
 rad_button_shake_256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
 rad_button_shake_256.place(x = 780, y = 300)
 
+# -------------------------------------------------------------------------------------------------------------------------
 
 
-# --------------------------------------------------------
+
+### ---------------------------------------------- Classic cryptography section -------------------------------------------- 
 
 
 mode_classic = ''
@@ -1398,62 +1467,11 @@ closeMachineButton.place(x = 700, y = 475)
 closeMachineButton.config(fg = "#7e086c")
 
 
-# ---------------
-
-def play_social_eng_audio():
-
-	playsound(social_eng_audio[index_social_eng_choose])
-
-def send_answer_social_eng():
-
-	global feathers
-
-	if varOption.get() == correct_answers_social_eng[index_social_eng_choose]:
-
-		playsound('wonFeather.mp3')
-		feathers = feathers + 1
-		updatePlayer_feathers()
-		labelFeathers.config(text = feathers)
-		answer_button_social_eng.config(state = 'disabled')
-
-	elif varOption.get() != correct_answers_social_eng[index_social_eng_choose]:
-
-		playsound('lostFeather.mp3')
-		answer_button_social_eng.config(state = 'disabled')
+# ----------------------------------------------------------------------------------------------------------------------------
 
 
-counter_social_eng = counter_social_eng + 1
-index_social_eng = list(range(44))
-index_social_eng_choose = index_social_eng[counter_social_eng]
-img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choose])
-varOption = tk.IntVar()
 
-img_social_eng_label = tk.Button(fr0, image = img_social_eng, command = lambda:play_social_eng_audio())
-img_social_eng_label.place(x = 30, y = 30)
-img_social_eng_label.config(bg = '#20011c')
-
-rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
-rad_button1.place(x = 550, y = 40)
-rad_button1.config(font = ('Comic Sans MS', 9), justify = 'left')
-
-rad_button2 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][1], variable = varOption, value = 1)
-rad_button2.place(x = 550, y = 80)
-rad_button2.config(font = ('Comic Sans MS', 9), justify = 'left')
-
-rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
-rad_button3.place(x = 550, y = 120)
-rad_button3.config(font = ('Comic Sans MS', 9), justify = 'left')
-
-rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
-rad_button4.place(x = 550, y = 160)
-rad_button4.config(font = ('Comic Sans MS', 9), justify = 'left')
-
-answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
-answer_button_social_eng.place(x = 600, y = 200)
-answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
-	
-
-# ---------------
+### ------------------------------------------------ Message encryption section -----------------------------------------------
 
 	
 encryption_machine_logo = tk.PhotoImage(file = "Send Encrypted Message-logo.png")
@@ -1473,8 +1491,6 @@ cipher_text2 = tk.Text(fr2, font = ("Comic Sans MS", 10), width = 73)
 cipher_text2.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 cipher_text2.place(x = 60, y = 40, height = 70)
 scrollVetrn.config(command = cipher_text2.yview)
-
-
 
 key_fernet_label = tk.Label(fr2, text = "Key for Fernet algorithm")
 key_fernet_label.config(font = ("Comic Sans MS", 12), fg = "#7e086c")
@@ -1565,7 +1581,11 @@ closeMachineButton2 = tk.Button(fr2, text = "Close the BirdCipher Cryptographic 
 closeMachineButton2.place(x = 250, y = 460)
 closeMachineButton2.config(fg = "#7e086c")
 
-# --------------
+# ---------------------------------------------------------------------------------------------------------------------------
+
+
+### ------------------------------------------- Message decryption section --------------------------------------------------
+
 
 cipher_text3 = tk.Text(fr3, font = ("Comic Sans MS", 10), width = 72, height = 4)
 cipher_text3.config(bg = '#050005', fg = '#FFFFFF', padx = 8)
@@ -1663,7 +1683,12 @@ closeMachineButton3 = tk.Button(fr3, text = "Close the BirdCipher Cryptographic 
 closeMachineButton3.place(x = 250, y = 460)
 closeMachineButton3.config(fg = "#7e086c")
 
-# ---------------------------
+# ---------------------------------------------------------------------------------------------------------------------------
+
+
+
+### ----------------------------------------------- RamsonBird Section -------------------------------------------------------
+
 
 ramsonBird_message = tk.Text(fr0a, font = ("Comic Sans MS", 10), width = 72, height = 4)
 ramsonBird_message.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
@@ -1746,4 +1771,7 @@ decryptFilesButton.place(x = 830, y = 380)
 #decrypt.protocol("WM_DELETE_WINDOW", lambda: None)
 
 decrypt.mainloop()
+
+
+#### ---------------------------------------------- The End -------------------------------------------------------------------
 
