@@ -862,6 +862,7 @@ encryptFilesImage = tk.PhotoImage(file = 'Decrypt files.png')
 decryptFilesImage = tk.PhotoImage(file = 'Encrypt files.png')
 bc_logo_loginImage = tk.PhotoImage(file = 'BirdCipher Machine-logoLogin-white1.png')
 hashingImage = tk.PhotoImage(file = 'Hashing-logo-white1.png')
+closeLog = tk.PhotoImage(file = 'CloseLog1.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1018,6 +1019,9 @@ rad_button4.config(font = ('Comic Sans MS', 9), justify = 'left')
 answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
 answer_button_social_eng.place(x = 600, y = 200)
 answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
+
+closeBCM_awareness = tk.Button(fr0, image = closeLog, command = lambda:closeMachine())
+closeBCM_awareness.place(x = 950 , y = 430)
 	
 
 # --------------------------------------------------------------------------------------------------------------------------
