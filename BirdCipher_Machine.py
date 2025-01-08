@@ -1132,11 +1132,13 @@ def hashingExecution():
 		wbdatos = bytes(textToHashing.get('1.0', 'end-1c'), 'utf-8')
 		hd = hashlib.new(algorithm_hashing[hashOption.get()], wbdatos)
 		hash200 = HASH.generaHash(hd)
+		playsound('bambu_click.mp3')
 		labelHashResult.config(text = hash200)
 
 	elif archive_url_funct != '':
 
 		hashForFile = hash_file_birdcipher(archive_url_funct, algorithm_hashing[hashOption.get()])
+		playsound('bambu_click.mp3')
 		labelHashResult.config(text = hashForFile)
 
 
@@ -1156,11 +1158,11 @@ labelPlayerLoginHashing.place(x = 540, y = 20)
 
 labelTextHashing = tk.Label(hashing, text = 'Enter the text to hash:', font = ("Comic Sans MS", 14))
 labelTextHashing.config(fg = '#7a0684')
-labelTextHashing.place(x = 540, y = 55)
+labelTextHashing.place(x = 540, y = 85)
 
 textToHashing = tk.Text(hashing, font = ('Comic Sans MS', 14))
 textToHashing.config(bg = '#050005', fg = '#eba5f1', width = 34, height = 5, padx = 30)
-textToHashing.place(x = 530, y = 90)
+textToHashing.place(x = 530, y = 120)
 
 labelHashEntry = tk.Label(hashing, text = 'The hash of your message/file is:', font = ("Comic Sans MS", 14))
 labelHashEntry.config(fg = '#7a0684')
@@ -1183,35 +1185,38 @@ archiveURLShow.place(x = 530, y = 400)
 
 rad_button_md5 = tk.Radiobutton(hashing, text = 'md5', variable = hashOption, value = 0)
 rad_button_md5.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_md5.place(x = 540, y = 250)
+rad_button_md5.place(x = 540, y = 270)
 
 rad_button_sha1 = tk.Radiobutton(hashing, text = 'sha1', variable = hashOption, value = 1)
 rad_button_sha1.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha1.place(x = 610, y = 250)
+rad_button_sha1.place(x = 610, y = 270)
 
 rad_button_sha224 = tk.Radiobutton(hashing, text = 'sha224', variable = hashOption, value = 2)
 rad_button_sha224.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha224.place(x = 680, y = 250)
+rad_button_sha224.place(x = 680, y = 270)
 
 rad_button_sha256 = tk.Radiobutton(hashing, text = 'sha256', variable = hashOption, value = 3)
 rad_button_sha256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha256.place(x = 770, y = 250)
+rad_button_sha256.place(x = 770, y = 270)
 
 rad_button_sha384 = tk.Radiobutton(hashing, text = 'sha384', variable = hashOption, value = 4)
 rad_button_sha384.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha384.place(x = 540, y = 300)
+rad_button_sha384.place(x = 540, y = 320)
 
 rad_button_sha512 = tk.Radiobutton(hashing, text = 'sha512', variable = hashOption, value = 5)
 rad_button_sha512.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha512.place(x = 620, y = 300)
+rad_button_sha512.place(x = 620, y = 320)
 
 rad_button_shake_128 = tk.Radiobutton(hashing, text = 'shake_128', variable = hashOption, value = 6)
 rad_button_shake_128.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_shake_128.place(x = 690, y = 300)
+rad_button_shake_128.place(x = 690, y = 320)
 
 rad_button_shake_256 = tk.Radiobutton(hashing, text = 'shake_256', variable = hashOption, value = 7)
 rad_button_shake_256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_shake_256.place(x = 780, y = 300)
+rad_button_shake_256.place(x = 780, y = 320)
+
+closeBCM_hashing = tk.Button(hashing, image = closeLog, command = lambda:closeMachine())
+closeBCM_hashing.place(x = 950 , y = 10)
 
 # -------------------------------------------------------------------------------------------------------------------------
 
