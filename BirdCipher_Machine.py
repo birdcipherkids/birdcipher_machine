@@ -1113,6 +1113,7 @@ def check_password():
 		playsound('ContrasenaSegura.mp3')
 		time.sleep(2)
 		playsound('SafePass.mp3')
+		time.sleep(4)
 
 
 def passchecking_explanation():
