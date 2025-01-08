@@ -867,6 +867,10 @@ hr.configure(style = "BW.TLabel")
 hr.pack(fill = 'both', expand = True)
 notebk.add(hr, text = " Login")
 
+fr0 = ttk.Frame(notebk, width = 1050, height = 540)
+fr0.pack(fill = 'both', expand = True)
+notebk.add(fr0, text = '   Cybersecurity awareness')
+
 passcheck = ttk.Frame(notebk, width = 1050, height = 540)
 passcheck.pack(fill = 'both', expand = True)
 notebk.add(passcheck, text = '   Password Checking')
@@ -874,10 +878,6 @@ notebk.add(passcheck, text = '   Password Checking')
 hashing = ttk.Frame(notebk, width = 1050, height = 540)
 hashing.pack(fill = 'both', expand = True)
 notebk.add(hashing, text = '   Hashing')
-
-fr0 = ttk.Frame(notebk, width = 1050, height = 540)
-fr0.pack(fill = 'both', expand = True)
-notebk.add(fr0, text = '   Cybersecurity and social engineering')
 
 virusTotal = ttk.Frame(notebk, width = 1050, height = 540)
 virusTotal.pack(fill = 'both', expand = True)
