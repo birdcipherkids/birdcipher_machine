@@ -375,7 +375,7 @@ def decrypt_files_ramson_funct():
 
 def send_message():
 
-	global nickname_db
+	global username_db
 	global key_encryption
 	global token
 	global target_person
@@ -456,7 +456,7 @@ def send_message():
 	
 def displayCiphertext():
 
-	global nickname_db
+	global username_db
 	global key_encryption
 	global token
 	global target_person_decrypt
@@ -473,7 +473,7 @@ def displayCiphertext():
 		
 	miCursor3 = miConexion3.cursor()
 
-	sql33 = 'select * from users where nickname = (%s)'
+	sql33 = 'select * from users where username = (%s)'
 	datasql33 = (username_db,)
 
 	sql330 = 'select * from encryptedMessages where server = (%s) and username = (%s)'
@@ -482,7 +482,7 @@ def displayCiphertext():
 	miCursor3.execute(sql33, datasql33)
 	dlt6 = miCursor3.fetchall()
 
-	if hash3 == dlt6[0][3]:
+	if hash3 == dlt6[0][2]:
 
 		if target_person_decrypt != '':
 
@@ -496,13 +496,14 @@ def displayCiphertext():
 
 		if len(dlt7) > 0:
 
-			message_sent_decrypt = dlt7[0][5]
-			key_sent_decrypt = dlt7[0][4]
+			message_sent_decrypt = dlt7[0][4]
+			key_sent_decrypt = dlt7[0][5]
 
-			cipher_text3.insert(tk.END, dlt7[0][5])
+			cipher_text3.insert(tk.END, dlt7[0][4])
 			cipher_text3.config(font = ("Comic Sans MS", 10))
 				
-			key_fernet_text2.config(text = dlt7[0][4], justify = 'center', wraplength = 700, font = ('Comic Sans MS', 10))
+			key_fernet_text2.config(text = dlt7[0][5], justify = 'center', wraplength = 700, font = ('Comic Sans MS', 10))
+			playsound('bambu_click.mp3')
 
 	elif hash3 != dlt6[0][3]:
 
@@ -531,13 +532,14 @@ def bc_decription_machine():
 	miCursor3.execute(sql555, datasql555)
 	dlt555 = miCursor3.fetchall()
 
-	a = dlt555[0][5].encode()
-	b = dlt555[0][4].encode()
+	a = dlt555[0][4].encode()
+	b = dlt555[0][5].encode()
 	k = Fernet(b)
 	token2 = k.decrypt(a)
 	token2 = token2.decode()
 	cipher_text2_encrp2.insert(tk.END, token2)
 	cipher_text2_encrp2.config(font = ("Comic Sans MS", 10))
+	playsound('bambu_click.mp3')
 
 	miConexion3.commit()
 	miConexion3.close()
@@ -716,8 +718,8 @@ def person1c_actv():
 		person3c_activated = False
 		person4c_activated = False
 		target_person_decrypt = person1c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('bambu_click.mp3')
+		#playsound('activatedPersonB.mp3')
 
 	elif person1c_var.get() == '':
 
