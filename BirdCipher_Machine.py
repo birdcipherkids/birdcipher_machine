@@ -122,14 +122,13 @@ def copyHashLogin():
 # -------------------------------------------------------------------------------------------------------------
 
 
-
-
 def selectDirectory():
 
 	global directory
 
 	directory = filedialog.askdirectory(title = 'Open directory')
 	ramsonDirectoryUrl.config(text = directory)
+	playsound('DirectorioDefinido.mp3')
 
 def selectDirectoryHash():
 
@@ -260,7 +259,7 @@ def encrypt_files_ramson_funct():
 					execution_encrypt_files(archivos2, key_ramson)
 					print(key_ramson)
 
-					#playsound('bambu_click.mp3')
+					playsound('bambu_click.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
