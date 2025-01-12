@@ -996,57 +996,63 @@ closeBCM_awareness.place(x = 950 , y = 430)
 
 def evaluate_password():
 
-	specials = "!#$%&()*+,-./:;<=>?@[\\]^_`{|}~¡"
-	mayusculas = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
-	minusculas = 'abcdefghijklmnñopqrstuvwxyz'
-	numeros = '1234567890'
+	global login_check
 
-	password_to_evaluate = password_user_entry.get()
-	evaluation = [False, False, False, False]
-	evaluation_audios_es = ['caracter_especial.mp3', 'letra_mayuscula.mp3', 'letra_minuscula.mp3', 'numero_contrasena.mp3']
+	if login_check == True:
 
-	for i in password_to_evaluate:
+		specials = "!#$%&()*+,-./:;<=>?@[\\]^_`{|}~¡"
+		mayusculas = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
+		minusculas = 'abcdefghijklmnñopqrstuvwxyz'
+		numeros = '1234567890'
 
-		if i in specials:
+		password_to_evaluate = password_user_entry.get()
+		evaluation = [False, False, False, False]
+		evaluation_audios_es = ['caracter_especial.mp3', 'letra_mayuscula.mp3', 'letra_minuscula.mp3', 'numero_contrasena.mp3']
 
-			evaluation[0] = True
+		for i in password_to_evaluate:
+
+			if i in specials:
+
+				evaluation[0] = True
 		
-		if i in mayusculas:
+			if i in mayusculas:
 
-			evaluation[1] = True
+				evaluation[1] = True
 
-		if i in minusculas:
+			if i in minusculas:
 
-			evaluation[2] = True
+				evaluation[2] = True
 
-		if i in numeros:
+			if i in numeros:
 
-			evaluation[3] = True
+				evaluation[3] = True
 
 
-	count_lack = 4
-	x = 0
+		count_lack = 4
+		x = 0
 
-	while x < 4:
+		while x < 4:
 
-		if evaluation[x] == False:
+			if evaluation[x] == False:
 
-			playsound(evaluation_audios_es[x])
+				playsound(evaluation_audios_es[x])
 
-		else:
+			else:
 
-			count_lack = count_lack - 1
+				count_lack = count_lack - 1
 
-		x = x + 1
+			x = x + 1
 
-	if count_lack == 0:
+		if count_lack == 0:
 
-		playsound('buen_trabajo.mp3')
-		time.sleep(2)
+			playsound('buen_trabajo.mp3')
+			time.sleep(2)
 
 
 
 def check_password():
+
+	global login_check
 
 	# Required: A descriptive user agent must be set describing the application consuming
 	#   the HIBP API
@@ -1055,7 +1061,7 @@ def check_password():
 	# Check a password to see if it has been disclosed in a public breach corpus
 	resp = pw.is_password_breached(password = password_user_entry.get())
 
-	if resp:
+	if resp and login_check == True:
 
 		result_check.delete(1.0, tk.END)
 		result_check.insert(tk.END, 'Password breached! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you change \nor improve your password')
@@ -1067,7 +1073,7 @@ def check_password():
 		playsound('ImprovePass.mp3')
 		time.sleep(4)
 
-	elif resp == False:
+	elif resp == False and login_check == True:
 
 		result_check.delete(1.0, tk.END)
 		result_check.insert(tk.END, 'Secure password! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you can use \nyour password safely')
@@ -1078,6 +1084,10 @@ def check_password():
 		time.sleep(2)
 		playsound('SafePass.mp3')
 		time.sleep(4)
+
+	elif login_check == False:
+
+		playsound('IniciarSesionUtilizarFuncion.mp3')
 
 
 def passchecking_explanation():
