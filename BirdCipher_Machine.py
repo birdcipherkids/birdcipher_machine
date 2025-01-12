@@ -34,6 +34,7 @@ directory = ''
 directoryHash = ''
 username_db = ''
 key_ramson = ''
+login_check = False
 
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
@@ -43,6 +44,7 @@ key_ramson = ''
 def login_user():
 
 	global username_db
+	global login_check
 
 	wdatos = bytes(password_dbc.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -69,6 +71,7 @@ def login_user():
 		dlt2 = miCursor1.fetchall()
 		hash256_passw_label.config(text = hash2)
 		username_db = dlt2[0][1]
+		login_check = True
 		#print(username_db)
 		playsound('bambu_click.mp3')
 		playsound('NuevoUsuarioCreado.mp3')
@@ -83,6 +86,7 @@ def login_user():
 
 		hash256_passw_label.config(text = dlt1[0][2])
 		username_db = dlt1[0][1]
+		login_check = True
 		#print(username_db)
 		playsound('bambu_click.mp3')
 		playsound('CorrectoLogin.mp3')
@@ -821,7 +825,7 @@ decrypt.resizable(0, 0)
 username_dbc = tk.StringVar()
 password_dbc = tk.StringVar()
 position_dbc = tk.StringVar()
-player_answer_decrypt = tk.IntVar()
+password_user_classic = tk.StringVar()
 packet = tk.IntVar()
 player_message_encrypt = tk.StringVar()
 passw_em = tk.StringVar()
@@ -1290,15 +1294,23 @@ keyCaesarAnswer = tk.IntVar()
 keyLinearTranspostAnswer = tk.IntVar()
 keyInverseTranspostAnswer = tk.IntVar()
 
+ddatos = bytes(password_user_classic.get(), 'utf-8')
+u = hashlib.new(algoritmo, ddatos)
+hash4 = HASH.generaHash(u)
+
 
 
 def reverse_adjust():
 
 	global translation
+	global login_check
 
-	translation = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
-	ciphertext.delete(1.0, tk.END)
-	ciphertext.insert(tk.END, translation)
+	if login_check == True:
+
+		translation = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
+		ciphertext.delete(1.0, tk.END)
+		playsound('bambu_click.mp3')
+		ciphertext.insert(tk.END, translation)
 
 def enc_classic():
 
@@ -1319,6 +1331,7 @@ def caesarApply():
 	global mode_classic
 	global translation
 	global keyApply
+	global login_check
 
 	if mode_classic == 'e':
 
@@ -1337,7 +1350,7 @@ def caesarApply():
 
 		keyApply = keyCaesarAnswer.get()
 
-		if keyApply != 0:
+		if keyApply != 0 and login_check == True:
 
 			translation = getTranslatedMessage(mode_classic, message_apply, keyCaesarAnswer.get())
 
@@ -1347,11 +1360,13 @@ def caesarApply():
 			if mode_classic == 'e':
 
 				ciphertext.delete(1.0, tk.END)
+				playsound('bambu_click.mp3')
 				ciphertext.insert(tk.END, translation)
 
 			elif mode_classic == 'd':
 
 				plaintext.delete(1.0, tk.END)
+				playsound('bambu_click.mp3')
 				plaintext.insert(tk.END, translation)
 
 
@@ -1365,12 +1380,13 @@ def TranspositionApply():
 	global mode_classic
 	global translation
 	global keyApply_transLinear
+	global login_check
 		
 
 	if mode_classic == 'e':
 
 		message_apply_tl = plaintext.get('1.0', 'end-1c')
-		print(len(message_apply_tl))
+		#print(len(message_apply_tl))
 
 	elif mode_classic == 'd':
 
@@ -1384,21 +1400,23 @@ def TranspositionApply():
 
 		keyApply_transLinear = keyLinearTranspostAnswer.get()
 
-		if keyApply_transLinear != 0:
+		if keyApply_transLinear != 0 and login_check == True:
 
 			translation = encryptMessageTransLinear(keyApply_transLinear, message_apply_tl)
 
 			ciphertext.delete(1.0, tk.END)
+			playsound('bambu_click.mp3')
 			ciphertext.insert(tk.END, translation)
 
 	if mode_classic == 'd':
 
 		keyApply_transLinear = keyLinearTranspostAnswer.get()
 
-		if keyApply_transLinear != 0:
+		if keyApply_transLinear != 0 and login_check == True:
 
 			translation = decryptMessages(keyApply_transLinear, message_apply_tl)
 			plaintext.delete(1.0, tk.END)
+			playsound('bambu_click.mp3')
 			plaintext.insert(tk.END, translation)
 
 
@@ -1463,7 +1481,7 @@ ciphertext.config(bg = '#050005', fg = '#FFFFFF', width = 62, height = 4, padx =
 ciphertext.place(x = 60, y = 160)
 scrollCiphertext.config(command = ciphertext.yview)
 
-nicknameCuad = tk.Entry(fr, textvariable=player_answer_decrypt, font = ("Comic Sans MS", 13), justify = "center")
+nicknameCuad = tk.Entry(fr, textvariable=password_user_classic, font = ("Comic Sans MS", 13), justify = "center")
 #nicknameCuad.config(bg="black", fg="green")
 #nicknameCuad.place(x=50, y=55)
 #nicknameCuad.pack(padx = 30, pady = 30)
