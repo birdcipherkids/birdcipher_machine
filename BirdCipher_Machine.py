@@ -379,6 +379,7 @@ def send_message():
 	global key_encryption
 	global token
 	global target_person
+	global login_check
 
 	bdatos = bytes(passw_em.get(), 'utf-8')
 	h = hashlib.new(algoritmo, bdatos)
@@ -389,17 +390,17 @@ def send_message():
 		
 	miCursor2 = miConexion2.cursor()
 
-	sql_verf_hash = 'select * from Players where nickname = (%s)'
-	sql_verf_hash_data = (nickname_db,)
+	sql_verf_hash = 'select * from users where username = (%s)'
+	sql_verf_hash_data = (username_db,)
 	miCursor2.execute(sql_verf_hash, sql_verf_hash_data)
 	dlt5 = miCursor2.fetchall()
 
-	if dlt5[0][5] >= 10 and hash2 == dlt5[0][3]:
+	if login_check == True and dlt5[0][5] >= 0 and hash2 == dlt5[0][2]:
 
 		if target_person != '':
 
-			sql_verf_server = 'select * from encryptedMessages where (nickname = (%s) and server = (%s))'
-			sql_verf_server_data = (nickname_db, target_person)
+			sql_verf_server = 'select * from encryptedMessages where (username = (%s) and server = (%s))'
+			sql_verf_server_data = (username_db, target_person)
 			miCursor2.execute(sql_verf_server, sql_verf_server_data)
 			df1 = miCursor2.fetchall()
 			df1_test = True
@@ -409,44 +410,44 @@ def send_message():
 				if token != '' and key_encryption != '':
 
 					#key_encryption = key_encryption.decode()
-					sql110 = 'insert into encryptedMessages(nickname, password, server, actual_message, key_b) values(%s,%s,%s,%s,%s)'
-					datos_sql110 = (nickname_db, hash2, target_person, token.decode(), key_encryption.decode())
+					sql110 = 'insert into encryptedMessages(username, password, server, actual_message, key_b) values(%s,%s,%s,%s,%s)'
+					datos_sql110 = (username_db, hash2, target_person, token.decode(), key_encryption.decode())
 					miCursor2.execute(sql110, datos_sql110)
-					playsound('cartoon130.mp3')
-					playsound('message_sent_success.mp3')
+					playsound('bambu_click.mp3')
+					#playsound('message_sent_success.mp3')
 
-				elif token == '' or key_encryption == '':
+				# elif token == '' or key_encryption == '':
 
-					playsound('StepsForSending.mp3')
+				# 	playsound('StepsForSending.mp3')
 
 			elif len(df1) > 0 and df1_test == True:
 
 				if token != '' and key_encryption != '':
 
-					sql111 = 'update encryptedMessages set (nickname, password, server, actual_message, key_b) = (%s,%s,%s,%s,%s) where (nickname = (%s) and server = (%s))'
-					datasql111 = (nickname_db, hash2, target_person, token.decode(), key_encryption.decode(), nickname_db, target_person)
+					sql111 = 'update encryptedMessages set (username, password, server, actual_message, key_b) = (%s,%s,%s,%s,%s) where (nickname = (%s) and server = (%s))'
+					datasql111 = (username_db, hash2, target_person, token.decode(), key_encryption.decode(), username_db, target_person)
 					miCursor2.execute(sql111, datasql111)
-					playsound('cartoon130.mp3')
-					playsound('message_sent_success.mp3')
+					playsound('bambu_click.mp3')
+					#playsound('message_sent_success.mp3')
 
-				elif token == '' or key_encryption == '':
+				# elif token == '' or key_encryption == '':
 
-					playsound('StepsForSending.mp3')
+				# 	playsound('StepsForSending.mp3')
 
-		elif target_person == '':
+		# elif target_person == '':
 
-			playsound('RecipientUsername.mp3')
-			df = -1
-			df1_test = False
+		# 	playsound('RecipientUsername.mp3')
+		# 	df = -1
+		# 	df1_test = False
 
 
-	elif dlt5[0][5] >= 10 and hash2 != dlt5[0][3]:
+	# elif dlt5[0][5] >= 0 and hash2 != dlt5[0][3]:
 
-		playsound('WrongPass.mp3')
+	# 	playsound('WrongPass.mp3')
 
-	elif dlt5[0][5] < 10:
+	# elif dlt5[0][5] < 10:
 
-		playsound('AuthorizationSendMssg.mp3')
+	# 	playsound('AuthorizationSendMssg.mp3')
 
 
 	miConexion2.commit()
@@ -472,11 +473,11 @@ def displayCiphertext():
 		
 	miCursor3 = miConexion3.cursor()
 
-	sql33 = 'select * from Players where nickname = (%s)'
-	datasql33 = (nickname_db,)
+	sql33 = 'select * from users where nickname = (%s)'
+	datasql33 = (username_db,)
 
-	sql330 = 'select * from encryptedMessages where server = (%s) and nickname = (%s)'
-	datasql330 = (nickname_db, target_person_decrypt)
+	sql330 = 'select * from encryptedMessages where server = (%s) and username = (%s)'
+	datasql330 = (username_db, target_person_decrypt)
 
 	miCursor3.execute(sql33, datasql33)
 	dlt6 = miCursor3.fetchall()
@@ -524,8 +525,8 @@ def bc_decription_machine():
 
 	miCursor3 = miConexion3.cursor()
 
-	sql555 = 'select * from encryptedMessages where server = (%s) and nickname = (%s)'
-	datasql555 = (nickname_db, target_person_decrypt)
+	sql555 = 'select * from encryptedMessages where server = (%s) and username = (%s)'
+	datasql555 = (username_db, target_person_decrypt)
 
 	miCursor3.execute(sql555, datasql555)
 	dlt555 = miCursor3.fetchall()
@@ -551,7 +552,7 @@ def fernet_key_gen():
 	key_encryption = Fernet.generate_key()
 		
 	key_fernet_text.config(text = key_encryption)
-	clipboard.copy(key_encryption)
+	#clipboard.copy(key_encryption)
 	key_encryption_test = True
 
 
@@ -569,7 +570,7 @@ def fernet_encryption_function():
 		token = f.encrypt(message_to_encrypt)
 		#token = token.decode()
 		cipher_text2_encrp.insert(tk.END, token)
-		clipboard.copy(token)
+		#clipboard.copy(token)
 
 	elif key_encryption_test == False:
 
@@ -642,7 +643,7 @@ def person1_actv():
 		person4_activated = False
 		target_person = person1_var.get()
 		playsound('bambu_click.mp3')
-		playsound('activatedPersonA.mp3')
+		#playsound('activatedPersonA.mp3')
 
 	elif person1_var.get() == '':
 
@@ -661,7 +662,7 @@ def person2_actv():
 		person4_activated = False
 		target_person = person2_var.get()
 		playsound('bambu_click.mp3')
-		playsound('activatedPersonA.mp3')
+		#playsound('activatedPersonA.mp3')
 
 	elif person2_var.get() == '':
 
@@ -679,7 +680,7 @@ def person3_actv():
 		person4_activated = False
 		target_person = person3_var.get()
 		playsound('bambu_click.mp3')
-		playsound('activatedPersonA.mp3')
+		#playsound('activatedPersonA.mp3')
 
 	elif person3_var.get() == '':
 
@@ -697,7 +698,7 @@ def person4_actv():
 		person4_activated = True
 		target_person = person4_var.get()
 		playsound('bambu_click.mp3')
-		playsound('activatedPersonA.mp3')
+		#playsound('activatedPersonA.mp3')
 
 	elif person4_var.get() == '':
 
