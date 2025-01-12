@@ -1312,6 +1312,10 @@ def reverse_adjust():
 		playsound('bambu_click.mp3')
 		ciphertext.insert(tk.END, translation)
 
+	else:
+
+		playsound('IniciarSesionUtilizarFuncion.mp3')
+
 def enc_classic():
 
 	global mode_classic
@@ -1343,7 +1347,7 @@ def caesarApply():
 
 	elif mode_classic == '':
 
-		playsound('Hello.mp3')
+		playsound('Encriptar_o_desencriptar.mp3')
 
 
 	if mode_classic != '':
@@ -1372,7 +1376,11 @@ def caesarApply():
 
 		elif keyApply == 0:
 
-			playsound('Hello.mp3')
+			playsound('DebesDefinirLlave.mp3')
+
+		elif login_check == False:
+
+			playsound('IniciarSesionUtilizarFuncion.mp3')
 
 
 def TranspositionApply():
@@ -1394,7 +1402,7 @@ def TranspositionApply():
 
 	elif mode_classic == '':
 
-		playsound('Hello.mp3')
+		playsound('Encriptar_o_desencriptar.mp3')
 
 	if mode_classic == 'e':
 
@@ -1408,6 +1416,14 @@ def TranspositionApply():
 			playsound('bambu_click.mp3')
 			ciphertext.insert(tk.END, translation)
 
+		elif keyApply_transLinear == 0:
+
+			playsound('DebesDefinirLlave.mp3')
+
+		elif login_check == False:
+
+			playsound('IniciarSesionUtilizarFuncion.mp3')
+
 	if mode_classic == 'd':
 
 		keyApply_transLinear = keyLinearTranspostAnswer.get()
@@ -1418,6 +1434,14 @@ def TranspositionApply():
 			plaintext.delete(1.0, tk.END)
 			playsound('bambu_click.mp3')
 			plaintext.insert(tk.END, translation)
+
+		elif keyApply_transLinear == 0:
+
+			playsound('DebesDefinirLlave.mp3')
+
+		elif login_check == False:
+
+			playsound('IniciarSesionUtilizarFuncion.mp3')
 
 
 def TranspositionInverseApply():
