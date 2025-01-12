@@ -519,46 +519,6 @@ def bc_decription_machine():
 	miConexion3.close()
 
 
-# def comd_decrypt():
-
-# 		global key
-# 		global keys
-# 		global message
-# 		global chances_decrypt
-# 		global match
-# 		global coins
-
-# 		message = secret_messages[index]
-# 		key = player_answer_decrypt.get()
-		
-
-# 		if chances_decrypt <= 3 and key == keys[index]:
-
-# 			playsound('C:/BirdCipher/Audios/VoiceAudios/CorrectKey.mp3')
-# 			time.sleep(2)
-# 			cipher_text.config(text = getTranslatedMessage(message, key), font = ("Comic Sans MS", 9))
-# 			cipher_text.config(bg = '#050005', fg = '#7e086c')
-# 			coins = coins + 1
-# 			playsound("rightDecrypt.mp3")
-# 			playsound("GoldCoin.mp3")
-# 			updatePlayer_coins()
-# 			labelCoins.config(text = coins)
-# 			match = True
-# 			decrypt_button.config(state = 'disabled')
-			
-
-# 		elif chances_decrypt <= 3 and key!= keys[index]:
-
-# 			playsound('C:/BirdCipher/Audios/VoiceAudios/WrongKey.mp3')
-# 			cipher_text.config(text = getTranslatedMessage(message, key), font = ("Comic Sans MS", 9))
-# 			cipher_text.config(bg = '#050005', fg = '#FFFFFF')
-# 			chances_decrypt = chances_decrypt + 1
-
-# 		elif chances_decrypt > 3:
-
-# 			decrypt_button.config(state = 'disabled')
-# 			playsound('C:/BirdCipher/Audios/VoiceAudios/chances_decrypt.mp3')
-
 
 def fernet_key_gen():
 
@@ -1182,10 +1142,11 @@ closeBCM_checkpass.place(x = 100, y = 460)
 def hashingExecution():
 
 	global algorithm_hashing
+	global login_check
 
 	archive_url_funct = archive_url.get()
 
-	if archive_url_funct == '':
+	if archive_url_funct == '' and login_check == True:
 
 		wbdatos = bytes(textToHashing.get('1.0', 'end-1c'), 'utf-8')
 		hd = hashlib.new(algorithm_hashing[hashOption.get()], wbdatos)
@@ -1193,11 +1154,15 @@ def hashingExecution():
 		playsound('bambu_click.mp3')
 		labelHashResult.config(text = hash200)
 
-	elif archive_url_funct != '':
+	elif archive_url_funct != '' and login_check == True:
 
 		hashForFile = hash_file_birdcipher(archive_url_funct, algorithm_hashing[hashOption.get()])
 		playsound('bambu_click.mp3')
 		labelHashResult.config(text = hashForFile)
+
+	elif login_check == False:
+
+		playsound('IniciarSesionUtilizarFuncion.mp3')
 
 
 
