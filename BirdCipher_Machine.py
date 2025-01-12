@@ -1609,7 +1609,7 @@ cipher_text2_encrp.config(bg = '#050005', fg = '#FFFFFF', padx = 30)
 cipher_text2_encrp.place(x = 60, y = 210, height = 80)
 
 scrollVetrn2 = tk.Scrollbar(fr2, command = cipher_text2_encrp.yview)
-scrollVetrn2.place(x = 710, y = 210)
+scrollVetrn2.place(x = 710, y = 210, height = 79)
 
 nicknameCuad2 = tk.Entry(fr2, textvariable = passw_em, font = ("Comic Sans MS", 13), justify = "center")
 nicknameCuad2.config(bg = '#050005', fg = '#7e086c')
@@ -1687,12 +1687,12 @@ closeMachineButton2.config(fg = "#7e086c")
 ### ------------------------------------------- Message decryption section --------------------------------------------------
 
 
-cipher_text3 = tk.Text(fr3, font = ("Comic Sans MS", 10), width = 72, height = 4)
+cipher_text3 = tk.Text(fr3, font = ("Comic Sans MS", 10), width = 79, height = 4)
 cipher_text3.config(bg = '#050005', fg = '#FFFFFF', padx = 8)
 cipher_text3.place(x = 60, y = 40)
 
 scrollVetrn3 = tk.Scrollbar(fr3, command = cipher_text3.yview)
-scrollVetrn3.place(x = 710, y = 40)
+scrollVetrn3.place(x = 710, y = 40, height = 75)
 
 nicknameCuad3 = tk.Entry(fr3, textvariable=password_for_decrypt, font = ("Comic Sans MS", 13), justify = "center")
 nicknameCuad3.config(bg = '#050005', fg = '#7e086c')
@@ -1726,12 +1726,12 @@ encrypted_label2 = tk.Label(fr3, text = "Your decrypted message is: ")
 encrypted_label2.config(font = ("Comic Sans MS", 12), fg = "#7e086c")
 encrypted_label2.place(x = 65, y = 180)
 	
-cipher_text2_encrp2 = tk.Text(fr3, font = ("Comic Sans MS", 10), width = 80)
+cipher_text2_encrp2 = tk.Text(fr3, font = ("Comic Sans MS", 10), width = 79)
 cipher_text2_encrp2.config(bg = '#050005', fg = '#FFFFFF', padx = 8)
 cipher_text2_encrp2.place(x = 60, y = 210, height = 80)
 
 scrollVetrn4 = tk.Scrollbar(fr3, command = cipher_text2_encrp2.yview)
-scrollVetrn4.place(x = 710, y = 210)
+scrollVetrn4.place(x = 710, y = 210, height = 80)
 
 buttonPoints3 = tk.Button(fr3, image = imageCaesar, command = lambda:pointsAudio())
 buttonPoints3.place(x = 210, y = 300)
