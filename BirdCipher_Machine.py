@@ -216,6 +216,7 @@ def encrypt_files_ramson_funct():
 
 	global directory
 	global username_db
+	global login_check
 
 
 	wdatos = bytes(password_for_ramson.get(), 'utf-8')
@@ -232,7 +233,7 @@ def encrypt_files_ramson_funct():
 	miCursor12.execute(sql_verf_hash_ramson, sql_verf_hash_data_ramson)
 	dlt5 = miCursor12.fetchall()
 
-	if dlt5[0][5] >= 0 and hash2 == dlt5[0][2]:
+	if login_check == True and dlt5[0][5] >= 0 and hash2 == dlt5[0][2]:
 
 		print(dlt5[0][2])
 		print(dlt5[0][5])
@@ -292,6 +293,11 @@ def encrypt_files_ramson_funct():
 			df12_test = False
 
 
+	elif login_check == False:
+
+		playsound('IniciarSesionUtilizarFuncion.mp3')
+
+
 	# if dlt5[0][5] >= 1 and hash2 != dlt5[0][3]:
 
 	# 	playsound('WrongPass.mp3')
@@ -302,11 +308,17 @@ def encrypt_files_ramson_funct():
 
 
 
+
+
 	miConexion12.commit()
 	miConexion12.close()
 
 
 def decrypt_files_ramson_funct():
+
+	global directory
+	global username_db
+	global login_check
 
 	wdatos = bytes(password_for_ramson.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -322,7 +334,7 @@ def decrypt_files_ramson_funct():
 	miCursor122.execute(sql_verf_hash_ramson, sql_verf_hash_data_ramson)
 	dlt909 = miCursor122.fetchall()
 
-	if dlt909[0][5] >= 0 and hash2 == dlt909[0][2]:
+	if login_check == True and dlt909[0][5] >= 0 and hash2 == dlt909[0][2]:
 
 		if target_receiver_ramson != '':
 
@@ -344,6 +356,10 @@ def decrypt_files_ramson_funct():
 			elif len(df202) == 0:
 
 				playsound('cartoon121.mp3')
+
+	elif login_check == False:
+
+		playsound('IniciarSesionUtilizarFuncion.mp3')
 
 	miConexion122.commit()
 	miConexion122.close()
