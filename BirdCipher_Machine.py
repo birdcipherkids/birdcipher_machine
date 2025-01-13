@@ -10,6 +10,8 @@ import psycopg2
 import os
 import pyhibp
 from pyhibp import pwnedpasswords as pw
+import requests
+import json
 
 from imagenes_ing_social import *
 from tests_ing_social import *
@@ -1294,11 +1296,33 @@ closeBCM_hashing.place(x = 950 , y = 10)
 
 archive_upload_vt = tk.StringVar()
 formatUploadFile = tk.IntVar()
+upload_file_image = tk.PhotoImage(file = 'Upload file-logo1.png')
+
+def uploadFileVirusTotal():
+
+	global directoryVirusTotal
+
+	url = "https://www.virustotal.com/api/v3/files"
+
+	files = { "file": (directoryVirusTotal, open(directoryVirusTotal, "rb"), "image/png") }
+	headers = {
+    	"accept": "application/json",
+    	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
+	}
+
+	response = requests.post(url, files=files, headers=headers)
+	datos_diccionario = json.loads(response.text)
+
+	if datos_diccionario['data']['id'] != '':
+
+		playsound('bambu_click.mp3')
+		print('Done')
+
 
 
 titleVirusTotal = tk.Label(virusTotal, text = 'Upload your file to Virus Total')
 titleVirusTotal.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
-titleVirusTotal.place(x = 50, y = 20)
+titleVirusTotal.place(x = 80, y = 20)
 
 urlUploadFile = tk.Entry(virusTotal, textvariable = archive_upload_vt, font = ('Comic Sans MS', 8), width = 65)
 urlUploadFile.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
@@ -1333,11 +1357,14 @@ pp_button.place(x = 310, y = 160)
 
 pdf_button = tk.Radiobutton(virusTotal, text = 'PDF', variable = formatUploadFile, value = 5)
 pdf_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-pdf_button.place(x = 420, y = 160)
+pdf_button.place(x = 30, y = 200)
 
 mp3_button = tk.Radiobutton(virusTotal, text = 'mp3', variable = formatUploadFile, value = 6)
 mp3_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-mp3_button.place(x = 485, y = 160)
+mp3_button.place(x = 100, y = 200)
+
+upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
+upload_button.place(x = 460, y = 130)
 
 
 
