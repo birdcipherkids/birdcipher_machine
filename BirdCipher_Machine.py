@@ -152,6 +152,7 @@ def selectDirectoryVirusTotal():
 	urlUploadFile.config(text = archive_upload_vt.set(directoryVirusTotal))
 	hashForFileVT = hash_file_birdcipher(directoryVirusTotal, 'sha256')
 	hashLabelVirusTotal.config(text = hashForFileVT)
+	playsound('bambu_click.mp3')
 
 def generate_key_ramson():
 
@@ -1303,6 +1304,8 @@ closeBCM_hashing.place(x = 950 , y = 10)
 archive_upload_vt = tk.StringVar()
 formatUploadFile = tk.IntVar()
 upload_file_image = tk.PhotoImage(file = 'Upload file-logo1.png')
+examine_file_image = tk.PhotoImage(file = 'Examine-logo1.png')
+mitre_image = tk.PhotoImage(file = 'Mitre Attack-logo1.png')
 formats_VT = []
 
 def uploadFileVirusTotal():
@@ -1349,6 +1352,12 @@ hashLabelVirusTotal.place(x = 30, y = 145)
 
 upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
 upload_button.place(x = 60, y = 200)
+
+examine_button = tk.Button(virusTotal, image = examine_file_image)
+examine_button.place(x = 200, y = 200)
+
+mitre_button = tk.Button(virusTotal, image = mitre_image)
+mitre_button.place(x = 350, y = 200)
 
 
 
