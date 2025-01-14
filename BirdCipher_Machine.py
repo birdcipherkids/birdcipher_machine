@@ -150,6 +150,8 @@ def selectDirectoryVirusTotal():
 
 	directoryVirusTotal = filedialog.askopenfilename(title = 'Open file to upload in Virus Total')
 	urlUploadFile.config(text = archive_upload_vt.set(directoryVirusTotal))
+	hashForFileVT = hash_file_birdcipher(directoryVirusTotal, 'sha256')
+	hashLabelVirusTotal.config(text = hashForFileVT)
 
 def generate_key_ramson():
 
@@ -860,7 +862,7 @@ person4c_activated = False
 encrypt_buttonImg = tk.PhotoImage(file = "Encrypt-logo1.png")
 decrypt_buttonImg = tk.PhotoImage(file = "Decrypt-logo1.png")
 directory_browser = tk.PhotoImage(file = 'Browse directories.png')
-directory_browser1 = tk.PhotoImage(file = 'Browse directories1.png')
+directory_browser1 = tk.PhotoImage(file = 'Browse-logo1.png')
 ramson_instructions = tk.PhotoImage(file = 'Instructions.png')
 generateRamsonKey_de = tk.PhotoImage(file = 'Generate RamsonBird Key.png')
 bringRamsonKey_de = tk.PhotoImage(file = 'Bring RamsonBird key.png')
@@ -1325,61 +1327,30 @@ def uploadFileVirusTotal():
 		print('Done')
 
 
-	hashForFileVT = hash_file_birdcipher(directoryVirusTotal, 'sha256')
-	hashLabelVirusTotal.config(text = hashForFileVT)
 
+titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
+titleVirusTotal.config(font = ('Comic Sans MS', 15), fg = '#7a0684')
+titleVirusTotal.place(x = 70, y = 20)
 
-
-
-titleVirusTotal = tk.Label(virusTotal, text = 'Upload your file to Virus Total')
-titleVirusTotal.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
-titleVirusTotal.place(x = 80, y = 20)
-
-urlUploadFile = tk.Entry(virusTotal, textvariable = archive_upload_vt, font = ('Comic Sans MS', 8), width = 65)
+urlUploadFile = tk.Entry(virusTotal, textvariable = archive_upload_vt, font = ('Comic Sans MS', 7), width = 75)
 urlUploadFile.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
-urlUploadFile.place(x = 20, y = 60)
+urlUploadFile.place(x = 30, y = 60)
 
 urlUploadLogo = tk.Button(virusTotal, image = directory_browser1, command = lambda:selectDirectoryVirusTotal())
-urlUploadLogo.place(x = 500, y = 45)
+urlUploadLogo.place(x = 505, y = 37)
 
-formatLabel = tk.Label(virusTotal, text = 'File format')
-formatLabel.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
-formatLabel.place(x = 30, y = 120)
-
-jpg_button = tk.Radiobutton(virusTotal, text = 'JPG', variable = formatUploadFile, value = 0)
-jpg_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-jpg_button.place(x = 30, y = 160)
-
-png_button = tk.Radiobutton(virusTotal, text = 'PNG', variable = formatUploadFile, value = 1)
-png_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-png_button.place(x = 100, y = 160)
-
-word_button = tk.Radiobutton(virusTotal, text = 'Word', variable = formatUploadFile, value = 2)
-word_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-word_button.place(x = 170, y = 160)
-
-excel_button = tk.Radiobutton(virusTotal, text = 'Excel', variable = formatUploadFile, value = 3)
-excel_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-excel_button.place(x = 240, y = 160)
-
-pp_button = tk.Radiobutton(virusTotal, text = 'Power Point', variable = formatUploadFile, value = 4)
-pp_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-pp_button.place(x = 310, y = 160)
-
-pdf_button = tk.Radiobutton(virusTotal, text = 'PDF', variable = formatUploadFile, value = 5)
-pdf_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-pdf_button.place(x = 30, y = 200)
-
-mp3_button = tk.Radiobutton(virusTotal, text = 'mp3', variable = formatUploadFile, value = 6)
-mp3_button.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-mp3_button.place(x = 100, y = 200)
-
-upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
-upload_button.place(x = 460, y = 130)
+hashFileLabel = tk.Label(virusTotal, text = 'The hash (sha 256) of your file is:')
+hashFileLabel.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+hashFileLabel.place(x = 130, y = 110)
 
 hashLabelVirusTotal = tk.Label(virusTotal)
-hashLabelVirusTotal.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 70)
-hashLabelVirusTotal.place(x = 20, y = 280)
+hashLabelVirusTotal.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 64)
+hashLabelVirusTotal.place(x = 30, y = 145)
+
+upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
+upload_button.place(x = 60, y = 200)
+
+
 
 
 
