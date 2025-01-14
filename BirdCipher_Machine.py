@@ -67,7 +67,7 @@ def login_user():
 	miCursor1.execute(sql1, sql1_data)
 	dlt1 = miCursor1.fetchall()
 
-	if len(dlt1) == 0:
+	if len(dlt1) == 0 and username_dbc.get() != '' and password_dbc.get() != '':
 
 		miCursor1.execute(sql2, sql2_data)
 		miCursor1.execute(sql1, sql1_data)
@@ -105,6 +105,10 @@ def login_user():
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
 		playsound('ContrasenaIncorrectaVI.mp3')
+
+	elif username_dbc.get() == '' or password_dbc.get() == '':
+
+		playsound('DebesIngresarCredenciales.mp3')
 
 	miConexion1.commit()
 	miConexion1.close()
@@ -1297,6 +1301,7 @@ closeBCM_hashing.place(x = 950 , y = 10)
 archive_upload_vt = tk.StringVar()
 formatUploadFile = tk.IntVar()
 upload_file_image = tk.PhotoImage(file = 'Upload file-logo1.png')
+formats_VT = []
 
 def uploadFileVirusTotal():
 
@@ -1304,7 +1309,7 @@ def uploadFileVirusTotal():
 
 	url = "https://www.virustotal.com/api/v3/files"
 
-	files = { "file": (directoryVirusTotal, open(directoryVirusTotal, "rb"), "image/png") }
+	files = { "file": (directoryVirusTotal, open(directoryVirusTotal, "rb"))}
 	headers = {
     	"accept": "application/json",
     	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
@@ -1318,6 +1323,11 @@ def uploadFileVirusTotal():
 		playsound('bambu_click.mp3')
 		playsound('archivoSubidoSatisfactoriamenteVT.mp3')
 		print('Done')
+
+
+	hashForFileVT = hash_file_birdcipher(directoryVirusTotal, 'sha256')
+	hashLabelVirusTotal.config(text = hashForFileVT)
+
 
 
 
@@ -1366,6 +1376,10 @@ mp3_button.place(x = 100, y = 200)
 
 upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
 upload_button.place(x = 460, y = 130)
+
+hashLabelVirusTotal = tk.Label(virusTotal)
+hashLabelVirusTotal.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 70)
+hashLabelVirusTotal.place(x = 20, y = 280)
 
 
 
