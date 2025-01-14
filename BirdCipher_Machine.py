@@ -1316,6 +1316,7 @@ def uploadFileVirusTotal():
 	if datos_diccionario['data']['id'] != '':
 
 		playsound('bambu_click.mp3')
+		playsound('archivoSubidoSatisfactoriamenteVT.mp3')
 		print('Done')
 
 
