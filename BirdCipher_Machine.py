@@ -1366,12 +1366,19 @@ def examine_vt():
 	undetected_label = tk.Label(virusTotal, text = 'Undetected')
 	undetected_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
 	undetected_label.place(x = 355, y = 490)
-	Baidu_category.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['category'])
-	Baidu_update.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['engine_update'])
+	Baidu_category.config(text = '')
+	Baidu_update.config(text = '')
 	Baidu_result.config(text = '')
-	Baidu_result.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['result'])
 
+	try:
+		Baidu_category.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['category'])
+		Baidu_update.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['engine_update'])
+		Baidu_result.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['result'])
+		playsound('bambu_click.mp3')
 
+	except KeyError:
+
+		playsound('Espere_ejecute_nuevamente.mp3')
 
 
 titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
