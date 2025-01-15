@@ -1341,7 +1341,17 @@ def examine_vt():
 
 	response = requests.get(url, headers=headers)
 	data = json.loads(response.text)
-	malicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+
+	if data['data']['attributes']['last_analysis_stats']['malicious'] > 0:
+
+		malicious_stat.config(fg = 'red')
+
+	else:
+
+		malicious_stat.config(fg = '#f7a6f1')
+
+
+	malicious_stat.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
 	malicious_stat.config(text = data['data']['attributes']['last_analysis_stats']['malicious'])
 	suspicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
 	suspicious_stat.config(text = data['data']['attributes']['last_analysis_stats']['suspicious'])
@@ -1356,6 +1366,12 @@ def examine_vt():
 	undetected_label = tk.Label(virusTotal, text = 'Undetected')
 	undetected_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
 	undetected_label.place(x = 355, y = 490)
+	Baidu_category.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['category'])
+	Baidu_update.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['engine_update'])
+	Baidu_result.config(text = '')
+	Baidu_result.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['result'])
+
+
 
 
 titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
@@ -1405,6 +1421,54 @@ suspicious_stat.place(x = 200, y = 380)
 undetected_stat = tk.Label(virusTotal)
 undetected_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
 undetected_stat.place(x = 350, y = 380)
+
+last_analysis_results_label = tk.Label(virusTotal, text = 'LAST ANALYSIS RESULTS')
+last_analysis_results_label.config(font = ('Comic Sans MS', 15), fg = '#7a0684')
+last_analysis_results_label.place(x = 700, y = 20)
+
+category_vt = tk.Label(virusTotal, text = 'Category')
+category_vt.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
+category_vt.place(x = 650, y = 80)
+
+result_vt = tk.Label(virusTotal, text = 'Result')
+result_vt.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
+result_vt.place(x = 920, y = 80)
+
+engine_update_vt = tk.Label(virusTotal, text = 'Engine update')
+engine_update_vt.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
+engine_update_vt.place(x = 750, y = 80)
+
+Baidu_label = tk.Label(virusTotal, text = 'Baidu')
+Baidu_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Baidu_label.place(x = 580, y = 130)
+
+Baidu_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Baidu_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Baidu_category.place(x = 640, y = 130)
+
+Baidu_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Baidu_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Baidu_update.place(x = 755, y = 130)
+
+Baidu_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 19)
+Baidu_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Baidu_result.place(x = 880, y = 130)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # --------------------------------------------------------------------------------------------------------------------------
