@@ -883,36 +883,36 @@ notebk.add(hr, text = " Login")
 
 fr0 = ttk.Frame(notebk, width = 1050, height = 540)
 fr0.pack(fill = 'both', expand = True)
-notebk.add(fr0, text = '   Cybersecurity awareness')
+notebk.add(fr0, text = '   Cyber awareness')
 
 passcheck = ttk.Frame(notebk, width = 1050, height = 540)
 passcheck.pack(fill = 'both', expand = True)
-notebk.add(passcheck, text = '   Password Checking')
+notebk.add(passcheck, text = ' Password Checking')
 
 hashing = ttk.Frame(notebk, width = 1050, height = 540)
 hashing.pack(fill = 'both', expand = True)
-notebk.add(hashing, text = '   Hashing')
+notebk.add(hashing, text = ' Hashing')
 
 virusTotal = ttk.Frame(notebk, width = 1050, height = 540)
 virusTotal.pack(fill = 'both', expand = True)
-notebk.add(virusTotal, text = '   Virus Total')
+notebk.add(virusTotal, text = ' Virus Total')
 		
 fr = ttk.Frame(notebk, width = 1050, height=540)
 fr.configure(style = "BW.TLabel")
 fr.pack(fill = 'both', expand = True)
-notebk.add(fr, text = "      Classic Cryptography")
+notebk.add(fr, text = "  Classic Cryptography")
 
 fr2 = ttk.Frame(notebk, width = 1150, height = 540)
 fr2.pack(fill = 'both', expand = True)
-notebk.add(fr2, text = "   Encryption Machine")
+notebk.add(fr2, text = " Encryption Machine")
 
 fr3 = ttk.Frame(notebk, width = 1050, height = 540)
 fr3.pack(fill = 'both', expand = True)
-notebk.add(fr3, text = "   Decryption Machine")
+notebk.add(fr3, text = " Decryption Machine")
 
 fr0a = ttk.Frame(notebk, width = 1050, height = 540)
 fr0a.pack(fill = 'both', expand = True)
-notebk.add(fr0a, text = '   RamsonBird Machine')
+notebk.add(fr0a, text = ' RamsonBird Machine')
 
 
 
@@ -1358,6 +1358,35 @@ examine_button.place(x = 200, y = 200)
 
 mitre_button = tk.Button(virusTotal, image = mitre_image)
 mitre_button.place(x = 350, y = 200)
+
+results_vt = tk.Label(virusTotal, text = 'LAST ANALYSIS STATS')
+results_vt.config(font = ('Comic Sans MS', 12), fg = '#7a0684')
+results_vt.place(x = 160, y = 340)
+
+malicious_label = tk.Label(virusTotal, text = 'Malicious')
+malicious_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+malicious_label.place(x = 70, y = 480)
+
+malicious_stat = tk.Label(virusTotal)
+malicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 15, height = 6)
+malicious_stat.place(x = 50, y = 380)
+
+suspicious_label = tk.Label(virusTotal, text = 'Suspicious')
+suspicious_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+suspicious_label.place(x = 215, y = 480)
+
+suspicious_stat = tk.Label(virusTotal)
+suspicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 15, height = 6)
+suspicious_stat.place(x = 200, y = 380)
+
+undetected_label = tk.Label(virusTotal, text = 'Undetected')
+undetected_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+undetected_label.place(x = 360, y = 480)
+
+undetected_stat = tk.Label(virusTotal)
+undetected_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 15, height = 6)
+undetected_stat.place(x = 350, y = 380)
+
 
 
 
