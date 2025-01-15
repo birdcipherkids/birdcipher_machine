@@ -38,8 +38,6 @@ directoryVirusTotal = ''
 username_db = ''
 key_ramson = ''
 login_check = False
-hashForFileVT = ''
-
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -148,12 +146,11 @@ def selectDirectoryHash():
 def selectDirectoryVirusTotal():
 
 	global directoryVirusTotal
-	global hashForFileVT
-
+	
 	directoryVirusTotal = filedialog.askopenfilename(title = 'Open file to upload in Virus Total')
 	urlUploadFile.config(text = archive_upload_vt.set(directoryVirusTotal))
-	hashForFileVT = hash_file_birdcipher(directoryVirusTotal, 'sha256')
-	hashLabelVirusTotal.config(text = hashForFileVT)
+	hash_file_label_vt.set(hash_file_birdcipher(directoryVirusTotal, 'sha256'))
+	#hashLabelVirusTotal.config(text = hash_file_label_vt.set(hashForFileVT))
 	playsound('bambu_click.mp3')
 
 def generate_key_ramson():
@@ -1304,6 +1301,7 @@ closeBCM_hashing.place(x = 950 , y = 10)
 ### ---------------------------------------------- Virus Total section -----------------------------------------------------
 
 archive_upload_vt = tk.StringVar()
+hash_file_label_vt = tk.StringVar()
 formatUploadFile = tk.IntVar()
 upload_file_image = tk.PhotoImage(file = 'Upload file-logo1.png')
 examine_file_image = tk.PhotoImage(file = 'Examine-logo1.png')
@@ -1334,10 +1332,8 @@ def uploadFileVirusTotal():
 
 def examine_vt():
 
-	global hashForFileVT
-
-	url = "https://www.virustotal.com/api/v3/files/" + hashForFileVT
-
+	url = "https://www.virustotal.com/api/v3/files/" + hash_file_label_vt.get()
+	
 	headers = {
     	"accept": "application/json",
     	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
@@ -1377,8 +1373,8 @@ hashFileLabel = tk.Label(virusTotal, text = 'The hash (sha 256) of your file is:
 hashFileLabel.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
 hashFileLabel.place(x = 130, y = 110)
 
-hashLabelVirusTotal = tk.Label(virusTotal)
-hashLabelVirusTotal.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 64)
+hashLabelVirusTotal = tk.Entry(virusTotal, textvariable = hash_file_label_vt)
+hashLabelVirusTotal.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 75)
 hashLabelVirusTotal.place(x = 30, y = 145)
 
 upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
