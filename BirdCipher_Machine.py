@@ -38,6 +38,7 @@ directoryVirusTotal = ''
 username_db = ''
 key_ramson = ''
 login_check = False
+hashForFileVT = ''
 
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
@@ -147,6 +148,7 @@ def selectDirectoryHash():
 def selectDirectoryVirusTotal():
 
 	global directoryVirusTotal
+	global hashForFileVT
 
 	directoryVirusTotal = filedialog.askopenfilename(title = 'Open file to upload in Virus Total')
 	urlUploadFile.config(text = archive_upload_vt.set(directoryVirusTotal))
@@ -1330,6 +1332,35 @@ def uploadFileVirusTotal():
 		print('Done')
 
 
+def examine_vt():
+
+	global hashForFileVT
+
+	url = "https://www.virustotal.com/api/v3/files/" + hashForFileVT
+
+	headers = {
+    	"accept": "application/json",
+    	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
+	}
+
+	response = requests.get(url, headers=headers)
+	data = json.loads(response.text)
+	malicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	malicious_stat.config(text = data['data']['attributes']['last_analysis_stats']['malicious'])
+	suspicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	suspicious_stat.config(text = data['data']['attributes']['last_analysis_stats']['suspicious'])
+	undetected_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	undetected_stat.config(text = data['data']['attributes']['last_analysis_stats']['undetected'])
+	malicious_label = tk.Label(virusTotal, text = 'Malicious')
+	malicious_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	malicious_label.place(x = 70, y = 490)
+	suspicious_label = tk.Label(virusTotal, text = 'Suspicious')
+	suspicious_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	suspicious_label.place(x = 210, y = 490)
+	undetected_label = tk.Label(virusTotal, text = 'Undetected')
+	undetected_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	undetected_label.place(x = 355, y = 490)
+
 
 titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
 titleVirusTotal.config(font = ('Comic Sans MS', 15), fg = '#7a0684')
@@ -1353,7 +1384,7 @@ hashLabelVirusTotal.place(x = 30, y = 145)
 upload_button = tk.Button(virusTotal, image = upload_file_image, command = lambda:uploadFileVirusTotal())
 upload_button.place(x = 60, y = 200)
 
-examine_button = tk.Button(virusTotal, image = examine_file_image)
+examine_button = tk.Button(virusTotal, image = examine_file_image, command = lambda:examine_vt())
 examine_button.place(x = 200, y = 200)
 
 mitre_button = tk.Button(virusTotal, image = mitre_image)
@@ -1363,44 +1394,17 @@ results_vt = tk.Label(virusTotal, text = 'LAST ANALYSIS STATS')
 results_vt.config(font = ('Comic Sans MS', 12), fg = '#7a0684')
 results_vt.place(x = 160, y = 340)
 
-malicious_label = tk.Label(virusTotal, text = 'Malicious')
-malicious_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
-malicious_label.place(x = 70, y = 480)
-
 malicious_stat = tk.Label(virusTotal)
-malicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 15, height = 6)
-malicious_stat.place(x = 50, y = 380)
-
-suspicious_label = tk.Label(virusTotal, text = 'Suspicious')
-suspicious_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
-suspicious_label.place(x = 215, y = 480)
+malicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+malicious_stat.place(x = 60, y = 380)
 
 suspicious_stat = tk.Label(virusTotal)
-suspicious_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 15, height = 6)
+suspicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
 suspicious_stat.place(x = 200, y = 380)
 
-undetected_label = tk.Label(virusTotal, text = 'Undetected')
-undetected_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
-undetected_label.place(x = 360, y = 480)
-
 undetected_stat = tk.Label(virusTotal)
-undetected_stat.config(bg = '#050005', fg = '#f7a6f1', justify = 'center', width = 15, height = 6)
+undetected_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
 undetected_stat.place(x = 350, y = 380)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # --------------------------------------------------------------------------------------------------------------------------
