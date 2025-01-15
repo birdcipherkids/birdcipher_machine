@@ -1388,7 +1388,11 @@ mitre_button.place(x = 350, y = 200)
 
 results_vt = tk.Label(virusTotal, text = 'LAST ANALYSIS STATS')
 results_vt.config(font = ('Comic Sans MS', 12), fg = '#7a0684')
-results_vt.place(x = 160, y = 340)
+results_vt.place(x = 160, y = 330)
+
+explanation_vt = tk.Label(virusTotal, text = '(Number of antivirus reports per category)')
+explanation_vt.config(font = ('Comic Sans MS', 10), fg = '#7a0684')
+explanation_vt.place(x = 130, y = 355)
 
 malicious_stat = tk.Label(virusTotal)
 malicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
