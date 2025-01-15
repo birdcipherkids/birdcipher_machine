@@ -151,7 +151,7 @@ def selectDirectoryVirusTotal():
 	urlUploadFile.config(text = archive_upload_vt.set(directoryVirusTotal))
 	hash_file_label_vt.set(hash_file_birdcipher(directoryVirusTotal, 'sha256'))
 	#hashLabelVirusTotal.config(text = hash_file_label_vt.set(hashForFileVT))
-	playsound('bambu_click.mp3')
+	#playsound('bambu_click.mp3')
 
 def generate_key_ramson():
 
@@ -1325,8 +1325,8 @@ def uploadFileVirusTotal():
 
 	if datos_diccionario['data']['id'] != '':
 
-		playsound('bambu_click.mp3')
-		playsound('archivoSubidoSatisfactoriamenteVT.mp3')
+		#playsound('bambu_click.mp3')
+		#playsound('archivoSubidoSatisfactoriamenteVT.mp3')
 		print('Done')
 
 
@@ -1369,16 +1369,54 @@ def examine_vt():
 	Baidu_category.config(text = '')
 	Baidu_update.config(text = '')
 	Baidu_result.config(text = '')
+	Tencent_category.config(text = '')
+	Tencent_update.config(text = '')
+	Tencent_result.config(text = '')
+	Kaspersky_category.config(text = '')
+	Kaspersky_update.config(text = '')
+	Kaspersky_result.config(text = '')
+	Avast_category.config(text = '')
+	Avast_update.config(text = '')
+	Avast_result.config(text = '')
+	Fortinet_category.config(text = '')
+	Fortinet_update.config(text = '')
+	Fortinet_result.config(text = '')
+	Microsoft_category.config(text = '')
+	Microsoft_update.config(text = '')
+	Microsoft_result.config(text = '')
+	Avira_category.config(text = '')
+	Avira_update.config(text = '')
+	Avira_result.config(text = '')
+
 
 	try:
 		Baidu_category.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['category'])
 		Baidu_update.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['engine_update'])
 		Baidu_result.config(text = data['data']['attributes']['last_analysis_results']['Baidu']['result'])
-		playsound('bambu_click.mp3')
+		Tencent_category.config(text = data['data']['attributes']['last_analysis_results']['Tencent']['category'])
+		Tencent_update.config(text = data['data']['attributes']['last_analysis_results']['Tencent']['engine_update'])
+		Tencent_result.config(text = data['data']['attributes']['last_analysis_results']['Tencent']['result'])
+		Kaspersky_category.config(text = data['data']['attributes']['last_analysis_results']['Kaspersky']['category'])
+		Kaspersky_update.config(text = data['data']['attributes']['last_analysis_results']['Kaspersky']['engine_update'])
+		Kaspersky_result.config(text = data['data']['attributes']['last_analysis_results']['Kaspersky']['result'])
+		Avast_category.config(text = data['data']['attributes']['last_analysis_results']['Avast']['category'])
+		Avast_update.config(text = data['data']['attributes']['last_analysis_results']['Avast']['engine_update'])
+		Avast_result.config(text = data['data']['attributes']['last_analysis_results']['Avast']['result'])
+		Fortinet_category.config(text = data['data']['attributes']['last_analysis_results']['Fortinet']['category'])
+		Fortinet_update.config(text = data['data']['attributes']['last_analysis_results']['Fortinet']['engine_update'])
+		Fortinet_result.config(text = data['data']['attributes']['last_analysis_results']['Fortinet']['result'])
+		Microsoft_category.config(text = data['data']['attributes']['last_analysis_results']['Microsoft']['category'])
+		Microsoft_update.config(text = data['data']['attributes']['last_analysis_results']['Microsoft']['engine_update'])
+		Microsoft_result.config(text = data['data']['attributes']['last_analysis_results']['Microsoft']['result'])
+		Avira_category.config(text = data['data']['attributes']['last_analysis_results']['Avira']['category'])
+		Avira_update.config(text = data['data']['attributes']['last_analysis_results']['Avira']['engine_update'])
+		Avira_result.config(text = data['data']['attributes']['last_analysis_results']['Avira']['result'])
+		#playsound('bambu_click.mp3')
 
 	except KeyError:
 
-		playsound('Espere_ejecute_nuevamente.mp3')
+		print('espere')
+		#playsound('Espere_ejecute_nuevamente.mp3')
 
 
 titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
@@ -1431,51 +1469,131 @@ undetected_stat.place(x = 350, y = 380)
 
 last_analysis_results_label = tk.Label(virusTotal, text = 'LAST ANALYSIS RESULTS')
 last_analysis_results_label.config(font = ('Comic Sans MS', 15), fg = '#7a0684')
-last_analysis_results_label.place(x = 700, y = 20)
+last_analysis_results_label.place(x = 700, y = 10)
 
 category_vt = tk.Label(virusTotal, text = 'Category')
 category_vt.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
-category_vt.place(x = 650, y = 80)
+category_vt.place(x = 650, y = 70)
 
 result_vt = tk.Label(virusTotal, text = 'Result')
 result_vt.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
-result_vt.place(x = 920, y = 80)
+result_vt.place(x = 920, y = 70)
 
 engine_update_vt = tk.Label(virusTotal, text = 'Engine update')
 engine_update_vt.config(font = ('Comic Sans MS', 13), fg = '#7a0684')
-engine_update_vt.place(x = 750, y = 80)
+engine_update_vt.place(x = 750, y = 70)
 
 Baidu_label = tk.Label(virusTotal, text = 'Baidu')
 Baidu_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
-Baidu_label.place(x = 580, y = 130)
+Baidu_label.place(x = 550, y = 120)
 
 Baidu_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
 Baidu_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
-Baidu_category.place(x = 640, y = 130)
+Baidu_category.place(x = 640, y = 120)
 
 Baidu_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
 Baidu_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
-Baidu_update.place(x = 755, y = 130)
+Baidu_update.place(x = 755, y = 120)
 
-Baidu_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 19)
+Baidu_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
 Baidu_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
-Baidu_result.place(x = 880, y = 130)
+Baidu_result.place(x = 880, y = 120)
 
+Tencent_label = tk.Label(virusTotal, text = 'Tencent')
+Tencent_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Tencent_label.place(x = 550, y = 180)
 
+Tencent_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Tencent_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Tencent_category.place(x = 640, y = 180)
 
+Tencent_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Tencent_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Tencent_update.place(x = 755, y = 180)
 
+Tencent_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
+Tencent_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Tencent_result.place(x = 880, y = 180)
 
+Kaspersky_label = tk.Label(virusTotal, text = 'Kaspersky')
+Kaspersky_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Kaspersky_label.place(x = 550, y = 240)
 
+Kaspersky_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Kaspersky_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Kaspersky_category.place(x = 640, y = 240)
 
+Kaspersky_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Kaspersky_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Kaspersky_update.place(x = 755, y = 240)
 
+Kaspersky_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
+Kaspersky_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Kaspersky_result.place(x = 880, y = 240)
 
+Avast_label = tk.Label(virusTotal, text = 'Avast')
+Avast_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Avast_label.place(x = 550, y = 300)
 
+Avast_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Avast_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Avast_category.place(x = 640, y = 300)
 
+Avast_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Avast_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Avast_update.place(x = 755, y = 300)
 
+Avast_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
+Avast_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Avast_result.place(x = 880, y = 300)
 
+Fortinet_label = tk.Label(virusTotal, text = 'Fortinet')
+Fortinet_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Fortinet_label.place(x = 550, y = 360)
 
+Fortinet_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Fortinet_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Fortinet_category.place(x = 640, y = 360)
 
+Fortinet_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Fortinet_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Fortinet_update.place(x = 755, y = 360)
 
+Fortinet_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
+Fortinet_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Fortinet_result.place(x = 880, y = 360)
+
+Microsoft_label = tk.Label(virusTotal, text = 'Microsoft')
+Microsoft_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Microsoft_label.place(x = 550, y = 420)
+
+Microsoft_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Microsoft_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Microsoft_category.place(x = 640, y = 420)
+
+Microsoft_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Microsoft_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Microsoft_update.place(x = 755, y = 420)
+
+Microsoft_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
+Microsoft_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Microsoft_result.place(x = 880, y = 420)
+
+Avira_label = tk.Label(virusTotal, text = 'Avira')
+Avira_label.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+Avira_label.place(x = 550, y = 480)
+
+Avira_category = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 13)
+Avira_category.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Avira_category.place(x = 640, y = 480)
+
+Avira_update = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 15)
+Avira_update.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Avira_update.place(x = 755, y = 480)
+
+Avira_result = tk.Label(virusTotal, font = ('Comic Sans MS', 9), width = 20)
+Avira_result.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+Avira_result.place(x = 880, y = 480)
 
 
 # --------------------------------------------------------------------------------------------------------------------------
