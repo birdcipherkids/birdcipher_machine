@@ -2238,6 +2238,7 @@ def capaExecution():
 
 			labels_capa_tactics[x].config(text = data['data']['CAPA']['tactics'][x]['name'])
 			capa_tactics_descriptions[x].insert(tk.END, data['data']['CAPA']['tactics'][x]['description'])
+			
 			x = x + 1
 
 	except KeyError:
@@ -2321,6 +2322,10 @@ tactic7_capa.place(x = 550, y = 160)
 tactic7_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 25, height = 3)
 tactic7_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
 tactic7_capa_explan.place(x = 760, y = 160)
+
+techniques_capa = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 50, height = 12)
+techniques_capa.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+techniques_capa.place(x = 550, y = 270)
 
 
 
