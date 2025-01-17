@@ -2057,7 +2057,7 @@ upload_button.place(x = 60, y = 200)
 examine_button = tk.Button(virusTotal, image = examine_file_image, command = lambda:examine_vt())
 examine_button.place(x = 200, y = 200)
 
-mitre_button = tk.Button(virusTotal, image = mitre_image, command = lambda:[capaExecution(), capeSandboxExecution()])
+mitre_button = tk.Button(virusTotal, image = mitre_image, command = lambda:[capaExecution(), capeSandboxExecution(), zenboxExecution()])
 mitre_button.place(x = 350, y = 200)
 
 results_vt = tk.Label(virusTotal, text = 'LAST ANALYSIS STATS')
@@ -2298,7 +2298,7 @@ descriptions_label_capa2.config(font = ('Comic Sans MS', 14), fg = '#067297')
 descriptions_label_capa2.place(x = 820, y = 40)
 
 
-tactic1_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic1_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic1_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic1_capa.place(x = 40, y = 80)
 
@@ -2306,53 +2306,53 @@ tactic1_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26
 tactic1_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
 tactic1_capa_explan.place(x = 255, y = 80)
 
-tactic2_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic2_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic2_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic2_capa.place(x = 40, y = 160)
 
 tactic2_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic2_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic2_capa_explan.place(x = 250, y = 160)
+tactic2_capa_explan.place(x = 255, y = 160)
 
-tactic3_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic3_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic3_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic3_capa.place(x = 40, y = 240)
 
 tactic3_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic3_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic3_capa_explan.place(x = 250, y = 240)
+tactic3_capa_explan.place(x = 255, y = 240)
 
-tactic4_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic4_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic4_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic4_capa.place(x = 40, y = 320)
 
 tactic4_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic4_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic4_capa_explan.place(x = 250, y = 320)
+tactic4_capa_explan.place(x = 255, y = 320)
 
-tactic5_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic5_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic5_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic5_capa.place(x = 40, y = 400)
 
 tactic5_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic5_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic5_capa_explan.place(x = 250, y = 400)
+tactic5_capa_explan.place(x = 255, y = 400)
 
-tactic6_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic6_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic6_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic6_capa.place(x = 550, y = 80)
 
 tactic6_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic6_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic6_capa_explan.place(x = 760, y = 80)
+tactic6_capa_explan.place(x = 765, y = 80)
 
-tactic7_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic7_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic7_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic7_capa.place(x = 550, y = 160)
 
 tactic7_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic7_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic7_capa_explan.place(x = 760, y = 160)
+tactic7_capa_explan.place(x = 765, y = 160)
 
 techniques_capa_label = tk.Label(capa_tab, text = 'Techniques', font = ('Comic Sans MS', 14))
 techniques_capa_label.config(fg = '#067297')
@@ -2453,7 +2453,7 @@ descriptions_label_cape2.config(font = ('Comic Sans MS', 14), fg = '#067297')
 descriptions_label_cape2.place(x = 820, y = 40)
 
 
-tactic1_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic1_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic1_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic1_cape.place(x = 40, y = 80)
 
@@ -2461,53 +2461,53 @@ tactic1_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), wi
 tactic1_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
 tactic1_cape_explan.place(x = 255, y = 80)
 
-tactic2_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic2_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic2_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic2_cape.place(x = 40, y = 160)
 
 tactic2_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic2_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic2_cape_explan.place(x = 250, y = 160)
+tactic2_cape_explan.place(x = 255, y = 160)
 
-tactic3_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic3_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic3_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic3_cape.place(x = 40, y = 240)
 
 tactic3_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic3_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic3_cape_explan.place(x = 250, y = 240)
+tactic3_cape_explan.place(x = 255, y = 240)
 
-tactic4_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic4_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic4_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic4_cape.place(x = 40, y = 320)
 
 tactic4_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic4_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic4_cape_explan.place(x = 250, y = 320)
+tactic4_cape_explan.place(x = 255, y = 320)
 
-tactic5_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic5_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic5_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic5_cape.place(x = 40, y = 400)
 
 tactic5_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic5_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic5_cape_explan.place(x = 250, y = 400)
+tactic5_cape_explan.place(x = 255, y = 400)
 
-tactic6_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic6_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic6_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic6_cape.place(x = 550, y = 80)
 
 tactic6_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic6_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic6_cape_explan.place(x = 760, y = 80)
+tactic6_cape_explan.place(x = 765, y = 80)
 
-tactic7_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 9), width = 25)
+tactic7_cape = tk.Label(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 24)
 tactic7_cape.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
 tactic7_cape.place(x = 550, y = 160)
 
 tactic7_cape_explan = tk.Text(cape_sandbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
 tactic7_cape_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic7_cape_explan.place(x = 760, y = 160)
+tactic7_cape_explan.place(x = 765, y = 160)
 
 techniques_cape_label = tk.Label(cape_sandbox_tab, text = 'Techniques', font = ('Comic Sans MS', 14))
 techniques_cape_label.config(fg = '#067297')
@@ -2520,6 +2520,166 @@ techniques_cape.place(x = 550, y = 270)
 scrollVetrn50 = ttk.Scrollbar(cape_sandbox_tab, command = techniques_cape.yview)
 #cipher_text2['yscrollcommand'] = scrollVetrn.set()
 scrollVetrn50.place(x = 960, y = 270, height = 220)
+
+
+# -----------------------------------------------------------------------------------------------------------------------------
+
+
+
+### ---------------------------------------------- Zenbox section --------------------------------------------------------------
+
+
+
+def zenboxExecution():
+
+	url3 = 'https://www.virustotal.com/api/v3/files/' + hash_file_label_vt.get() + '/behaviour_mitre_trees'
+
+	headers3 = {
+    	"accept": "application/json",
+    	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
+	}
+
+	response3 = requests.get(url3, headers=headers3)
+	data3 = json.loads(response3.text)
+
+	
+	labels_zenbox_tactics = [tactic1_zen, tactic2_zen, tactic3_zen, tactic4_zen, tactic5_zen, tactic6_zen, tactic7_zen]
+	zen_tactics_descriptions = [tactic1_zen_explan, tactic2_zen_explan, tactic3_zen_explan, tactic4_zen_explan,
+	tactic5_zen_explan, tactic6_zen_explan, tactic7_zen_explan]
+
+	x_zen = 0
+	y_zen = 0
+
+	tactic1_zen.config(text = '')
+	tactic2_zen.config(text = '')
+	tactic3_zen.config(text = '')
+	tactic4_zen.config(text = '')
+	tactic5_zen.config(text = '')
+	tactic6_zen.config(text = '')
+	tactic7_zen.config(text = '')
+	tactic1_zen_explan.delete(1.0, tk.END)
+	tactic2_zen_explan.delete(1.0, tk.END)
+	tactic3_zen_explan.delete(1.0, tk.END)
+	tactic4_zen_explan.delete(1.0, tk.END)
+	tactic5_zen_explan.delete(1.0, tk.END)
+	tactic6_zen_explan.delete(1.0, tk.END)
+	tactic7_zen_explan.delete(1.0, tk.END)
+	techniques_zen.delete(1.0, tk.END)
+
+	try:
+
+		while x_zen < len(data3['data']['Zenbox']['tactics']):
+
+			labels_zenbox_tactics[x_zen].config(text = data3['data']['Zenbox']['tactics'][x_zen]['name'])
+			zen_tactics_descriptions[x_zen].delete(1.0, tk.END)
+			zen_tactics_descriptions[x_zen].insert(tk.END, data3['data']['Zenbox']['tactics'][x_zen]['id'] + ':  ' + 
+				data3['data']['Zenbox']['tactics'][x_zen]['description'])
+			y_zen = 0
+
+			while y_zen < len(data3['data']['Zenbox']['tactics'][x_zen]['techniques']):
+
+				techniques_zen.insert(tk.END, '[' + data3['data']['Zenbox']['tactics'][x_zen]['id'] + ']  [' + 
+				data3['data']['Zenbox']['tactics'][x_zen]['techniques'][y_zen]['id'] + ']:   ' +
+				 data3['data']['Zenbox']['tactics'][x_zen]['techniques'][y_zen]['name'] + ' \n')
+				y_zen = y_zen + 1
+
+			x_zen = x_zen + 1
+		
+
+	except KeyError:
+
+		print('No report')
+
+
+	
+tactics_label_zen = tk.Label(zenbox_tab, text = 'TACTICS DETECTED BY ZENBOX')
+tactics_label_zen.config(font = ('Comic Sans MS', 17), fg = '#067297')
+tactics_label_zen.place(x = 300, y = 5)
+
+tactics_label_zen1 = tk.Label(zenbox_tab, text = 'Tactic')
+tactics_label_zen1.config(font = ('Comic Sans MS', 14), fg = '#067297')
+tactics_label_zen1.place(x = 100, y = 40)
+
+tactics_label_zen2 = tk.Label(zenbox_tab, text = 'Tactic')
+tactics_label_zen2.config(font = ('Comic Sans MS', 14), fg = '#067297')
+tactics_label_zen2.place(x = 600, y = 40)
+
+descriptions_label_zen1 = tk.Label(zenbox_tab, text = 'Description')
+descriptions_label_zen1.config(font = ('Comic Sans MS', 14), fg = '#067297')
+descriptions_label_zen1.place(x = 300, y = 40)
+
+descriptions_label_zen2 = tk.Label(zenbox_tab, text = 'Description')
+descriptions_label_zen2.config(font = ('Comic Sans MS', 14), fg = '#067297')
+descriptions_label_zen2.place(x = 820, y = 40)
+
+
+tactic1_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic1_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic1_zen.place(x = 40, y = 80)
+
+tactic1_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic1_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic1_zen_explan.place(x = 255, y = 80)
+
+tactic2_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic2_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic2_zen.place(x = 40, y = 160)
+
+tactic2_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic2_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic2_zen_explan.place(x = 255, y = 160)
+
+tactic3_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic3_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic3_zen.place(x = 40, y = 240)
+
+tactic3_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic3_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic3_zen_explan.place(x = 255, y = 240)
+
+tactic4_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic4_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic4_zen.place(x = 40, y = 320)
+
+tactic4_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic4_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic4_zen_explan.place(x = 255, y = 320)
+
+tactic5_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic5_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic5_zen.place(x = 40, y = 400)
+
+tactic5_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic5_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic5_zen_explan.place(x = 255, y = 400)
+
+tactic6_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic6_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic6_zen.place(x = 550, y = 80)
+
+tactic6_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic6_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic6_zen_explan.place(x = 765, y = 80)
+
+tactic7_zen = tk.Label(zenbox_tab, font = ('Comic Sans MS', 10), width = 24)
+tactic7_zen.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+tactic7_zen.place(x = 550, y = 160)
+
+tactic7_zen_explan = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+tactic7_zen_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+tactic7_zen_explan.place(x = 765, y = 160)
+
+techniques_zen_label = tk.Label(zenbox_tab, text = 'Techniques', font = ('Comic Sans MS', 14))
+techniques_zen_label.config(fg = '#067297')
+techniques_zen_label.place(x = 700, y = 230)
+
+techniques_zen = tk.Text(zenbox_tab, font = ('Comic Sans MS', 10), width = 50, height = 12)
+techniques_zen.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+techniques_zen.place(x = 550, y = 270)
+
+scrollVetrn70 = ttk.Scrollbar(zenbox_tab, command = techniques_zen.yview)
+#cipher_text2['yscrollcommand'] = scrollVetrn.set()
+scrollVetrn70.place(x = 960, y = 270, height = 220)
 
 
 

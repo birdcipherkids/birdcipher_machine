@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "https://www.virustotal.com/api/v3/files/8f80cf878a3e05c06c9d03646443e41d/behaviour_mitre_trees"
+url = "https://www.virustotal.com/api/v3/files/999eb1840c209aa70a84c5cf64909e5f/behaviour_mitre_trees"
 
 headers = {
     "accept": "application/json",
@@ -15,14 +15,14 @@ x = 0
 
 try:
 
-    while x < len(data['data']['CAPE Sandbox']['tactics']):
+    while x < len(data['data']['Zenbox']['tactics']):
 
-        print('Tactic: ', data['data']['CAPE Sandbox']['tactics'][x]['name'])
+        print('Tactic: ', data['data']['Zenbox']['tactics'][x]['name'])
         y = 0
 
-        while y < len(data['data']['CAPE Sandbox']['tactics'][x]['techniques']):
+        while y < len(data['data']['Zenbox']['tactics'][x]['techniques']):
 
-            print(data['data']['CAPE Sandbox']['tactics'][x]['techniques'][y]['name'])
+            print(data['data']['Zenbox']['tactics'][x]['techniques'][y]['name'])
             y = y + 1
 
         x = x + 1
