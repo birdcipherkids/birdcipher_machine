@@ -2246,7 +2246,7 @@ def capaExecution():
 		print('No report')
 
 	
-tactics_label_capa = tk.Label(capa_tab, text = 'TATICS DETECTED BY CAPA')
+tactics_label_capa = tk.Label(capa_tab, text = 'TACTICS DETECTED BY CAPA')
 tactics_label_capa.config(font = ('Comic Sans MS', 17), fg = '#067297')
 tactics_label_capa.place(x = 380, y = 5)
 
