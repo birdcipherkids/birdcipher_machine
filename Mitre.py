@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "https://www.virustotal.com/api/v3/files/d1bdc5aaa294b4c52678c4c60f052569/behaviour_mitre_trees"
+url = "https://www.virustotal.com/api/v3/files/ffb456a28adf28a05af5746f996a96dc/behaviour_mitre_trees"
 
 headers = {
     "accept": "application/json",
@@ -15,9 +15,16 @@ x = 0
 
 try:
 
-    while x < len(data['data']['Zenbox']['tactics']):
+    while x < len(data['data']['CAPA']['tactics']):
 
-        print(data['data']['Zenbox']['tactics'][x]['name'])
+        print('Tactic: ', data['data']['CAPA']['tactics'][x]['name'])
+        y = 0
+
+        while y < len(data['data']['CAPA']['tactics'][x]['techniques']):
+
+            print(data['data']['CAPA']['tactics'][x]['techniques'][y]['name'])
+            y = y + 1
+
         x = x + 1
 
 except KeyError:
