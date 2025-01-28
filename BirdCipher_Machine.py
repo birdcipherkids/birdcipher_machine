@@ -874,6 +874,7 @@ closeLog = tk.PhotoImage(file = 'CloseLog1.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
+#notebk.config(font = ("Comic Sans MS", 14))
 
 hr = ttk.Frame(notebk, width = 1050, height=540)
 hr.configure(style = "BW.TLabel")
