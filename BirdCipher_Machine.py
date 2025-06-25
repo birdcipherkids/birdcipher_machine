@@ -75,9 +75,9 @@ def login_user():
 		username_db = dlt2[0][1]
 		login_check = True
 		#print(username_db)
-		playsound('bambu_click.mp3')
-		playsound('NuevoUsuarioCreado.mp3')
-		playsound('NewUserCreated.mp3')
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/NuevoUsuarioCreado.mp3')
+		playsound('Audios/NewUserCreated.mp3')
 		time.sleep(2)
 		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
 		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
@@ -90,9 +90,9 @@ def login_user():
 		username_db = dlt1[0][1]
 		login_check = True
 		#print(username_db)
-		playsound('bambu_click.mp3')
-		playsound('CorrectoLogin.mp3')
-		playsound('CorrectLogin.mp3')
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/CorrectoLogin.mp3')
+		playsound('Audios/CorrectLogin.mp3')
 		time.sleep(2)
 		#playsound('UseMachine.mp3')
 		labelPlayerBCM.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
@@ -103,11 +103,11 @@ def login_user():
 
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
-		playsound('ContrasenaIncorrectaVI.mp3')
+		playsound('Audios/ContrasenaIncorrectaVI.mp3')
 
 	elif username_dbc.get() == '' or password_dbc.get() == '':
 
-		playsound('DebesIngresarCredenciales.mp3')
+		playsound('Audios/DebesIngresarCredenciales.mp3')
 
 	miConexion1.commit()
 	miConexion1.close()
@@ -119,9 +119,9 @@ def copyHashLogin():
 	h = hashlib.new(algoritmo, wdatos)
 	hash2 = HASH.generaHash(h)
 
-	playsound('bambu_click.mp3')
-	playsound('HashCopiadoLogin.mp3')
-	playsound('HashCopiedLogin.mp3')
+	playsound('Audios/bambu_click.mp3')
+	playsound('Audios/HashCopiadoLogin.mp3')
+	playsound('Audios/HashCopiedLogin.mp3')
 	pyperclip.copy(hash2)
 
 
@@ -134,7 +134,7 @@ def selectDirectory():
 
 	directory = filedialog.askdirectory(title = 'Open directory')
 	ramsonDirectoryUrl.config(text = directory)
-	playsound('DirectorioDefinido.mp3')
+	playsound('Audios/DirectorioDefinido.mp3')
 
 def selectDirectoryHash():
 
@@ -159,8 +159,8 @@ def generate_key_ramson():
 
 	key_ramson = Fernet.generate_key()
 	ramsonKey.config(text = key_ramson)
-	playsound('bambu_click.mp3')
-	playsound('LLaveGenerada.mp3')
+	playsound('Audios/bambu_click.mp3')
+	playsound('Audios/LLaveGenerada.mp3')
 
 def bring_key_ramson():
 
@@ -190,8 +190,8 @@ def bring_key_ramson():
 			dlt456 = miCursor13.fetchall()
 			key_ramson = dlt456[0][4]
 			ramsonKey.config(text = key_ramson)
-			playsound('bambu_click.mp3')
-			playsound('LlaveRecuperada.mp3')
+			playsound('Audios/bambu_click.mp3')
+			playsound('Audios/LlaveRecuperada.mp3')
 
 	miConexion13.commit()
 	miConexion13.close()
@@ -279,12 +279,12 @@ def encrypt_files_ramson_funct():
 					execution_encrypt_files(archivos2, key_ramson)
 					print(key_ramson)
 
-					playsound('bambu_click.mp3')
-					playsound('ArchivosEncriptadosExitosamente.mp3')
+					playsound('Audios/bambu_click.mp3')
+					playsound('Audios/ArchivosEncriptadosExitosamente.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
-					playsound('cartoon121.mp3')
+					playsound('Audios/cartoon121.mp3')
 
 
 			elif len(df20) > 0 and df12_test == True:
@@ -300,23 +300,23 @@ def encrypt_files_ramson_funct():
 					execution_encrypt_files(archivos2, key_ramson)
 					print(key_ramson)
 
-					playsound('bambu_click.mp3')
-					playsound('ArchivosEncriptadosExitosamente.mp3')
+					playsound('Audios/bambu_click.mp3')
+					playsound('Audios/ArchivosEncriptadosExitosamente.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
-					playsound('cartoon121.mp3')
+					playsound('Audios/cartoon121.mp3')
 
 
 		elif target_receiver_ramson == '':
 
-			playsound('RecipientUsername.mp3')
+			playsound('Audios/RecipientUsername.mp3')
 			df12_test = False
 
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 	# if dlt5[0][5] >= 1 and hash2 != dlt5[0][3]:
@@ -373,16 +373,16 @@ def decrypt_files_ramson_funct():
 				execution_decrypt_files(archivos2, key_ramson)
 				print(key_ramson)
 				ramsonBird_message.insert(tk.END, df202[0][5])
-				playsound('bambu_click.mp3')
-				playsound('ArchivosDesencriptadosExitosamente.mp3')
+				playsound('Audios/bambu_click.mp3')
+				playsound('Audios/ArchivosDesencriptadosExitosamente.mp3')
 
 			elif len(df202) == 0:
 
-				playsound('cartoon121.mp3')
+				playsound('Audios/cartoon121.mp3')
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 	miConexion122.commit()
 	miConexion122.close()
@@ -429,7 +429,7 @@ def send_message():
 					sql110 = 'insert into encryptedMessages(username, password, server, actual_message, key_b) values(%s,%s,%s,%s,%s)'
 					datos_sql110 = (username_db, hash2, target_person, token.decode(), key_encryption.decode())
 					miCursor2.execute(sql110, datos_sql110)
-					playsound('bambu_click.mp3')
+					playsound('Audios/bambu_click.mp3')
 					#playsound('message_sent_success.mp3')
 
 				# elif token == '' or key_encryption == '':
@@ -443,7 +443,7 @@ def send_message():
 					sql111 = 'update encryptedMessages set (username, password, server, actual_message, key_b) = (%s,%s,%s,%s,%s) where (nickname = (%s) and server = (%s))'
 					datasql111 = (username_db, hash2, target_person, token.decode(), key_encryption.decode(), username_db, target_person)
 					miCursor2.execute(sql111, datasql111)
-					playsound('bambu_click.mp3')
+					playsound('Audios/bambu_click.mp3')
 					#playsound('message_sent_success.mp3')
 
 				# elif token == '' or key_encryption == '':
@@ -507,8 +507,8 @@ def displayCiphertext():
 
 		elif target_person_decrypt == '':
 
-			playsound('perder_incorrecto_no_valido.mp3')
-			playsound('activatePersonFirst_toReceive.mp3')
+			playsound('Audios/perder_incorrecto_no_valido.mp3')
+			playsound('Audios/activatePersonFirst_toReceive.mp3')
 
 		if len(dlt7) > 0:
 
@@ -519,11 +519,11 @@ def displayCiphertext():
 			cipher_text3.config(font = ("Comic Sans MS", 10))
 				
 			key_fernet_text2.config(text = dlt7[0][5], justify = 'center', wraplength = 700, font = ('Comic Sans MS', 10))
-			playsound('bambu_click.mp3')
+			playsound('Audios/bambu_click.mp3')
 
 	elif hash3 != dlt6[0][3]:
 
-		playsound('WrongPass.mp3')
+		playsound('Audios/WrongPass.mp3')
 
 
 	miConexion3.commit()
@@ -555,7 +555,7 @@ def bc_decription_machine():
 	token2 = token2.decode()
 	cipher_text2_encrp2.insert(tk.END, token2)
 	cipher_text2_encrp2.config(font = ("Comic Sans MS", 10))
-	playsound('bambu_click.mp3')
+	playsound('Audios/bambu_click.mp3')
 
 	miConexion3.commit()
 	miConexion3.close()
@@ -592,7 +592,7 @@ def fernet_encryption_function():
 
 	elif key_encryption_test == False:
 
-		playsound('MustGenerateKey.mp3')
+		playsound('Audios/MustGenerateKey.mp3')
 
 
 def listen_decrypt_text():
@@ -643,8 +643,8 @@ def closeMachine():
 	chances_decrypt = 0
 	target_person = ''
 	target_person_decrypt = ''
-	playsound('HastaLuego.mp3')
-	playsound('Bye.mp3')
+	playsound('Audios/HastaLuego.mp3')
+	playsound('Audios/Bye.mp3')
 	time.sleep(2)
 	decrypt.destroy()
 
@@ -660,12 +660,12 @@ def person1_actv():
 		person3_activated = False
 		person4_activated = False
 		target_person = person1_var.get()
-		playsound('bambu_click.mp3')
-		#playsound('activatedPersonA.mp3')
+		playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/activatedPersonA.mp3')
 
 	elif person1_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 
 def person2_actv():
@@ -679,12 +679,12 @@ def person2_actv():
 		person3_activated = False
 		person4_activated = False
 		target_person = person2_var.get()
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		#playsound('activatedPersonA.mp3')
 
 	elif person2_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 def person3_actv():
 
@@ -697,12 +697,12 @@ def person3_actv():
 		person3_activated = True
 		person4_activated = False
 		target_person = person3_var.get()
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		#playsound('activatedPersonA.mp3')
 
 	elif person3_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 def person4_actv():
 
@@ -715,12 +715,12 @@ def person4_actv():
 		person3_activated = False
 		person4_activated = True
 		target_person = person4_var.get()
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		#playsound('activatedPersonA.mp3')
 
 	elif person4_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 
 def person1c_actv():
@@ -734,12 +734,12 @@ def person1c_actv():
 		person3c_activated = False
 		person4c_activated = False
 		target_person_decrypt = person1c_var.get()
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		#playsound('activatedPersonB.mp3')
 
 	elif person1c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 def person2c_actv():
 
@@ -752,12 +752,12 @@ def person2c_actv():
 		person3c_activated = False
 		person4c_activated = False
 		target_person_decrypt = person2c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('Audios/button_click.mp3')
+		playsound('Audios/activatedPersonB.mp3')
 
 	elif person2c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 def person3c_actv():
 
@@ -770,12 +770,12 @@ def person3c_actv():
 		person3c_activated = True
 		person4c_activated = False
 		target_person_decrypt = person3c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('Audios/button_click.mp3')
+		playsound('Audios/activatedPersonB.mp3')
 
 	elif person3c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 def person4c_actv():
 
@@ -788,12 +788,12 @@ def person4c_actv():
 		person3c_activated = False
 		person4c_activated = True
 		target_person_decrypt = person4c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('Audios/button_click.mp3')
+		playsound('Audios/activatedPersonB.mp3')
 
 	elif person4c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 
 def receiver_ramson_actv():
@@ -803,12 +803,12 @@ def receiver_ramson_actv():
 	if receiver_var.get() != '':
 
 		target_receiver_ramson = receiver_var.get()
-		playsound('bambu_click.mp3')
-		playsound('UsuarioArchivosEncriptadosExitoso.mp3')
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/UsuarioArchivosEncriptadosExitoso.mp3')
 
 	elif receiver_var.get() == '':
 
-		playsound('PrimeroNombreDestinatario.mp3')
+		playsound('Audios/PrimeroNombreDestinatario.mp3')
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -999,7 +999,7 @@ def send_answer_social_eng():
 
 	if varOption.get() == correct_answers_social_eng[index_social_eng_choose]:
 
-		playsound('wonFeather.mp3')
+		playsound('Audios/wonFeather.mp3')
 		feathers = feathers + 1
 		updatePlayer_feathers()
 		labelFeathers.config(text = feathers)
@@ -1007,7 +1007,7 @@ def send_answer_social_eng():
 
 	elif varOption.get() != correct_answers_social_eng[index_social_eng_choose]:
 
-		playsound('lostFeather.mp3')
+		playsound('Audios/lostFeather.mp3')
 		answer_button_social_eng.config(state = 'disabled')
 
 
@@ -1102,7 +1102,7 @@ def evaluate_password():
 
 		if count_lack == 0:
 
-			playsound('buen_trabajo.mp3')
+			playsound('Audios/buen_trabajo.mp3')
 			time.sleep(2)
 
 
@@ -1125,9 +1125,9 @@ def check_password():
 		result_check.config(fg = '#ef1d13')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#ef1d13', font = ('Comic Sans MS', 30))
-		playsound('ContrasenaInsegura.mp3')
+		playsound('Audios/ContrasenaInsegura.mp3')
 		time.sleep(2)
-		playsound('ImprovePass.mp3')
+		playsound('Audios/ImprovePass.mp3')
 		time.sleep(4)
 
 	elif resp == False and login_check == True:
@@ -1137,20 +1137,20 @@ def check_password():
 		result_check.config(fg = '#7ed2ef')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#7ed2ef', width = 5, height = 1, font = ('Comic Sans MS', 45))
-		playsound('ContrasenaSegura.mp3')
+		playsound('Audios/ContrasenaSegura.mp3')
 		time.sleep(2)
-		playsound('SafePass.mp3')
+		playsound('Audios/SafePass.mp3')
 		time.sleep(4)
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 def passchecking_explanation():
 
-	playsound('explicacion_passwordHIBP.mp3')
-	playsound('passcheck_explant.mp3')
+	playsound('Audios/explicacion_passwordHIBP.mp3')
+	playsound('Audios/passcheck_explant.mp3')
 	
 
 password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
@@ -1218,18 +1218,18 @@ def hashingExecution():
 		wbdatos = bytes(textToHashing.get('1.0', 'end-1c'), 'utf-8')
 		hd = hashlib.new(algorithm_hashing[hashOption.get()], wbdatos)
 		hash200 = HASH.generaHash(hd)
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		labelHashResult.config(text = hash200)
 
 	elif archive_url_funct != '' and login_check == True:
 
 		hashForFile = hash_file_birdcipher(archive_url_funct, algorithm_hashing[hashOption.get()])
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		labelHashResult.config(text = hashForFile)
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 
@@ -1344,12 +1344,12 @@ def reverse_adjust():
 
 		translation = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
 		ciphertext.delete(1.0, tk.END)
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		ciphertext.insert(tk.END, translation)
 
 	else:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 def enc_classic():
 
@@ -1382,7 +1382,7 @@ def caesarApply():
 
 	elif mode_classic == '':
 
-		playsound('Encriptar_o_desencriptar.mp3')
+		playsound('Audios/Encriptar_o_desencriptar.mp3')
 
 
 	if mode_classic != '':
@@ -1399,23 +1399,23 @@ def caesarApply():
 			if mode_classic == 'e':
 
 				ciphertext.delete(1.0, tk.END)
-				playsound('bambu_click.mp3')
+				playsound('Audios/bambu_click.mp3')
 				ciphertext.insert(tk.END, translation)
 
 			elif mode_classic == 'd':
 
 				plaintext.delete(1.0, tk.END)
-				playsound('bambu_click.mp3')
+				playsound('Audios/bambu_click.mp3')
 				plaintext.insert(tk.END, translation)
 
 
 		elif keyApply == 0:
 
-			playsound('DebesDefinirLlave.mp3')
+			playsound('Audios/DebesDefinirLlave.mp3')
 
 		elif login_check == False:
 
-			playsound('IniciarSesionUtilizarFuncion.mp3')
+			playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 def TranspositionApply():
@@ -1437,7 +1437,7 @@ def TranspositionApply():
 
 	elif mode_classic == '':
 
-		playsound('Encriptar_o_desencriptar.mp3')
+		playsound('Audios/Encriptar_o_desencriptar.mp3')
 
 	if mode_classic == 'e':
 
@@ -1448,16 +1448,16 @@ def TranspositionApply():
 			translation = encryptMessageTransLinear(keyApply_transLinear, message_apply_tl)
 
 			ciphertext.delete(1.0, tk.END)
-			playsound('bambu_click.mp3')
+			playsound('Audios/bambu_click.mp3')
 			ciphertext.insert(tk.END, translation)
 
 		elif keyApply_transLinear == 0:
 
-			playsound('DebesDefinirLlave.mp3')
+			playsound('Audios/DebesDefinirLlave.mp3')
 
 		elif login_check == False:
 
-			playsound('IniciarSesionUtilizarFuncion.mp3')
+			playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 	if mode_classic == 'd':
 
@@ -1467,16 +1467,16 @@ def TranspositionApply():
 
 			translation = decryptMessages(keyApply_transLinear, message_apply_tl)
 			plaintext.delete(1.0, tk.END)
-			playsound('bambu_click.mp3')
+			playsound('Audios/bambu_click.mp3')
 			plaintext.insert(tk.END, translation)
 
 		elif keyApply_transLinear == 0:
 
-			playsound('DebesDefinirLlave.mp3')
+			playsound('Audios/DebesDefinirLlave.mp3')
 
 		elif login_check == False:
 
-			playsound('IniciarSesionUtilizarFuncion.mp3')
+			playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 def TranspositionInverseApply():
@@ -1497,7 +1497,7 @@ def TranspositionInverseApply():
 
 	elif mode_classic == '':
 
-		playsound('Hello.mp3')
+		playsound('Audios/Hello.mp3')
 
 	if mode_classic == 'e':
 
@@ -1939,8 +1939,8 @@ def uploadFileVirusTotal():
 
 	if datos_diccionario['data']['id'] != '':
 
-		#playsound('bambu_click.mp3')
-		#playsound('archivoSubidoSatisfactoriamenteVT.mp3')
+		#playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/archivoSubidoSatisfactoriamenteVT.mp3')
 		print('Done')
 
 
@@ -2030,7 +2030,7 @@ def examine_vt():
 	except KeyError:
 
 		print('espere')
-		#playsound('Espere_ejecute_nuevamente.mp3')
+		#playsound('Audios/Espere_ejecute_nuevamente.mp3')
 
 
 titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
