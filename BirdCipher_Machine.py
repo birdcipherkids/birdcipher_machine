@@ -894,6 +894,9 @@ decryptFilesImage = tk.PhotoImage(file = 'Images/Encrypt files.png')
 bc_logo_loginImage = tk.PhotoImage(file = 'Images/BirdCipher Machine-logoLogin-white1.png')
 hashingImage = tk.PhotoImage(file = 'Images/Hashing-logo-white1.png')
 closeLog = tk.PhotoImage(file = 'Images/CloseLog1.png')
+arrow_asc = tk.PhotoImage(file = 'Images/Arrow_ascend.png')
+arrow_des = tk.PhotoImage(file = 'Images/Arrow_descend.png')
+cyberaware = tk.PhotoImage(file = 'Images/Cyber Awareness.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1041,7 +1044,7 @@ index_social_eng_choose = index_social_eng[counter_social_eng]
 img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choose])
 varOption = tk.IntVar()
 
-img_social_eng_label = tk.Button(fr0, image = img_social_eng, command = lambda:play_video_social_eng())
+img_social_eng_label = tk.Button(fr0, image = cyberaware, command = lambda:play_video_social_eng())
 img_social_eng_label.place(x = 30, y = 30)
 img_social_eng_label.config(bg = '#20011c')
 
@@ -1065,9 +1068,13 @@ answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda
 answer_button_social_eng.place(x = 600, y = 200)
 answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
-number_video = tk.Button(fr0, text = 'Next Video', command = lambda:change_video_number())
-number_video.place(x = 100, y = 450)
+number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number())
+number_video.place(x = 150, y = 450)
 number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
+
+number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number())
+number_video2.place(x = 50, y = 450)
+number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 closeBCM_awareness = tk.Button(fr0, image = closeLog, command = lambda:closeMachine())
 closeBCM_awareness.place(x = 950 , y = 430)
