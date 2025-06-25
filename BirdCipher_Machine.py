@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
+import pygame
+import moviepy.editor
 import time
 from playsound import playsound
 import hashlib
@@ -23,6 +25,7 @@ from CaesarCipher import *
 from TranspositionEncrypt import *
 from TranspositionDecrypt import *
 from TranspositionColumnarEncrypt import *
+from Video_play import *
 
 
 
@@ -811,11 +814,21 @@ def receiver_ramson_actv():
 		playsound('Audios/PrimeroNombreDestinatario.mp3')
 
 
+def play_video_social_eng():
+
+	pygame.init()
+	video = moviepy.editor.VideoFileClip('cdh.mp4', target_resolution=(350,650))
+	video.preview()
+	pygame.quit()
+
+
 # ---------------------------------------------------------------------------------------------------------------------------
 
 ## ------------------------------------------------ Graphical Interface -----------------------------------------------------
 
 ### ----------------------------------------------------- Basic -------------------------------------------------------------
+
+
 
 
 
@@ -993,6 +1006,13 @@ def play_social_eng_audio():
 
 	playsound(social_eng_audio[index_social_eng_choose])
 
+
+
+
+
+	
+	
+
 def send_answer_social_eng():
 
 	global feathers
@@ -1017,7 +1037,7 @@ index_social_eng_choose = index_social_eng[counter_social_eng]
 img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choose])
 varOption = tk.IntVar()
 
-img_social_eng_label = tk.Button(fr0, image = img_social_eng, command = lambda:play_social_eng_audio())
+img_social_eng_label = tk.Button(fr0, image = img_social_eng, command = lambda:play_video_social_eng())
 img_social_eng_label.place(x = 30, y = 30)
 img_social_eng_label.config(bg = '#20011c')
 
