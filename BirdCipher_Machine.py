@@ -25,7 +25,7 @@ from CaesarCipher import *
 from TranspositionEncrypt import *
 from TranspositionDecrypt import *
 from TranspositionColumnarEncrypt import *
-from Video_play import *
+from Videos_Awareness import *
 
 
 
@@ -41,6 +41,7 @@ directoryVirusTotal = ''
 username_db = ''
 key_ramson = ''
 login_check = False
+no_video = 0
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -814,10 +815,19 @@ def receiver_ramson_actv():
 		playsound('Audios/PrimeroNombreDestinatario.mp3')
 
 
+def change_video_number():
+
+	global no_video
+
+	no_video = no_video + 1
+
+
 def play_video_social_eng():
 
+	global no_video
+
 	pygame.init()
-	video = moviepy.editor.VideoFileClip('cdh.mp4', target_resolution=(350,650))
+	video = moviepy.editor.VideoFileClip(videos_awareness[no_video], target_resolution=(350,650))
 	video.preview()
 	pygame.quit()
 
@@ -1007,12 +1017,6 @@ def play_social_eng_audio():
 	playsound(social_eng_audio[index_social_eng_choose])
 
 
-
-
-
-	
-	
-
 def send_answer_social_eng():
 
 	global feathers
@@ -1060,6 +1064,10 @@ rad_button4.config(font = ('Comic Sans MS', 9), justify = 'left')
 answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
 answer_button_social_eng.place(x = 600, y = 200)
 answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
+
+number_video = tk.Button(fr0, text = 'Next Video', command = lambda:change_video_number())
+number_video.place(x = 100, y = 450)
+number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 closeBCM_awareness = tk.Button(fr0, image = closeLog, command = lambda:closeMachine())
 closeBCM_awareness.place(x = 950 , y = 430)
