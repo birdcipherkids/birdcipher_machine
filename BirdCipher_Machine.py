@@ -321,11 +321,11 @@ def encrypt_files_ramson_funct():
 
 	# if dlt5[0][5] >= 1 and hash2 != dlt5[0][3]:
 
-	# 	playsound('WrongPass.mp3')
+	# 	playsound('Audios/WrongPass.mp3')
 
 	# elif dlt5[0][5] < 1:
 
-	# 	playsound('AuthorizationSendMssg.mp3')
+	# 	playsound('Audios/AuthorizationSendMssg.mp3')
 
 
 
@@ -444,26 +444,26 @@ def send_message():
 					datasql111 = (username_db, hash2, target_person, token.decode(), key_encryption.decode(), username_db, target_person)
 					miCursor2.execute(sql111, datasql111)
 					playsound('Audios/bambu_click.mp3')
-					#playsound('message_sent_success.mp3')
+					#playsound('Audios/message_sent_success.mp3')
 
 				# elif token == '' or key_encryption == '':
 
-				# 	playsound('StepsForSending.mp3')
+				# 	playsound('Audios/StepsForSending.mp3')
 
 		# elif target_person == '':
 
-		# 	playsound('RecipientUsername.mp3')
+		# 	playsound('Audios/RecipientUsername.mp3')
 		# 	df = -1
 		# 	df1_test = False
 
 
 	# elif dlt5[0][5] >= 0 and hash2 != dlt5[0][3]:
 
-	# 	playsound('WrongPass.mp3')
+	# 	playsound('Audios/WrongPass.mp3')
 
 	# elif dlt5[0][5] < 10:
 
-	# 	playsound('AuthorizationSendMssg.mp3')
+	# 	playsound('Audios/AuthorizationSendMssg.mp3')
 
 
 	miConexion2.commit()
@@ -611,11 +611,11 @@ def listen_decrypt_text():
 
 	elif match == False and chances_decrypt <= 3:
 			
-		playsound('C:/BirdCipher/Audios/VoiceAudios/WrongKey.mp3')
+		playsound('Audios/WrongKey.mp3')
 
 	elif chances_decrypt > 3:
 
-		playsound('C:/BirdCipher/Audios/VoiceAudios/chances_decrypt.mp3')
+		playsound('Audios/chances_decrypt.mp3')
 
 def audioPoints():
 
@@ -698,7 +698,7 @@ def person3_actv():
 		person4_activated = False
 		target_person = person3_var.get()
 		playsound('Audios/bambu_click.mp3')
-		#playsound('activatedPersonA.mp3')
+		#playsound('Audios/activatedPersonA.mp3')
 
 	elif person3_var.get() == '':
 
@@ -716,7 +716,7 @@ def person4_actv():
 		person4_activated = True
 		target_person = person4_var.get()
 		playsound('Audios/bambu_click.mp3')
-		#playsound('activatedPersonA.mp3')
+		#playsound('Audios/activatedPersonA.mp3')
 
 	elif person4_var.get() == '':
 
@@ -735,7 +735,7 @@ def person1c_actv():
 		person4c_activated = False
 		target_person_decrypt = person1c_var.get()
 		playsound('Audios/bambu_click.mp3')
-		#playsound('activatedPersonB.mp3')
+		#playsound('Audios/activatedPersonB.mp3')
 
 	elif person1c_var.get() == '':
 
@@ -859,18 +859,18 @@ person2c_activated = False
 person3c_activated = False
 person4c_activated = False
 
-encrypt_buttonImg = tk.PhotoImage(file = "Encrypt-logo1.png")
-decrypt_buttonImg = tk.PhotoImage(file = "Decrypt-logo1.png")
-directory_browser = tk.PhotoImage(file = 'Browse directories.png')
-directory_browser1 = tk.PhotoImage(file = 'Browse-logo1.png')
-ramson_instructions = tk.PhotoImage(file = 'Instructions.png')
-generateRamsonKey_de = tk.PhotoImage(file = 'Generate RamsonBird Key.png')
-bringRamsonKey_de = tk.PhotoImage(file = 'Bring RamsonBird key.png')
-encryptFilesImage = tk.PhotoImage(file = 'Decrypt files.png')
-decryptFilesImage = tk.PhotoImage(file = 'Encrypt files.png')
-bc_logo_loginImage = tk.PhotoImage(file = 'BirdCipher Machine-logoLogin-white1.png')
-hashingImage = tk.PhotoImage(file = 'Hashing-logo-white1.png')
-closeLog = tk.PhotoImage(file = 'CloseLog1.png')
+encrypt_buttonImg = tk.PhotoImage(file = "Images/Encrypt-logo1.png")
+decrypt_buttonImg = tk.PhotoImage(file = "Images/Decrypt-logo1.png")
+directory_browser = tk.PhotoImage(file = 'Images/Browse directories.png')
+directory_browser1 = tk.PhotoImage(file = 'Images/Browse-logo1.png')
+ramson_instructions = tk.PhotoImage(file = 'Images/Instructions.png')
+generateRamsonKey_de = tk.PhotoImage(file = 'Images/Generate RamsonBird Key.png')
+bringRamsonKey_de = tk.PhotoImage(file = 'Images/Bring RamsonBird key.png')
+encryptFilesImage = tk.PhotoImage(file = 'Images/Decrypt files.png')
+decryptFilesImage = tk.PhotoImage(file = 'Images/Encrypt files.png')
+bc_logo_loginImage = tk.PhotoImage(file = 'Images/BirdCipher Machine-logoLogin-white1.png')
+hashingImage = tk.PhotoImage(file = 'Images/Hashing-logo-white1.png')
+closeLog = tk.PhotoImage(file = 'Images/CloseLog1.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1153,10 +1153,10 @@ def passchecking_explanation():
 	playsound('Audios/passcheck_explant.mp3')
 	
 
-password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
-hibp1_logo = tk.PhotoImage(file = 'hibp1.png')
-hibp_info_logo = tk.PhotoImage(file = 'Password Check Info-logo-white1.png')
-padlock_image = tk.PhotoImage(file = 'Candado4a.png')
+password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
+hibp1_logo = tk.PhotoImage(file = 'Images/hibp1.png')
+hibp_info_logo = tk.PhotoImage(file = 'Images/Password Check Info-logo-white1.png')
+padlock_image = tk.PhotoImage(file = 'Images/Candado4a.png')
 password_user_entry = tk.StringVar()
 
 password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:[check_password(), evaluate_password()])
@@ -1555,14 +1555,14 @@ decrypt_button_classic = tk.Button(fr, image = decrypt_buttonImg, command = lamb
 decrypt_button_classic.config(fg = '#1af017')
 decrypt_button_classic.place(x = 900, y = 140)
 	
-imagen_caesar_cipher = tk.PhotoImage(file = 'Imagen_caesar.png')
-imageCaesar = tk.PhotoImage(file = "Caesar Cipher-logo1.png")
-imageReverse = tk.PhotoImage(file = "Reverse Cipher-logo1.png")
-imageLinearTransposition = tk.PhotoImage(file = "Linear Transposition -logo1.png")
-imageInverseTransposition = tk.PhotoImage(file = "Inverse Transposition -logo1.png")
-imageLives = tk.PhotoImage(file = "Lives-logo1.png")
-cryptoMachineImage = tk.PhotoImage(file = "Cryptographic Machine-logo1.png")
-ramson_image = tk.PhotoImage(file = 'RamsonBird_MachineImage.png')
+imagen_caesar_cipher = tk.PhotoImage(file = 'Images/Imagen_caesar.png')
+imageCaesar = tk.PhotoImage(file = "Images/Caesar Cipher-logo1.png")
+imageReverse = tk.PhotoImage(file = "Images/Reverse Cipher-logo1.png")
+imageLinearTransposition = tk.PhotoImage(file = "Images/Linear Transposition -logo1.png")
+imageInverseTransposition = tk.PhotoImage(file = "Images/Inverse Transposition -logo1.png")
+imageLives = tk.PhotoImage(file = "Images/Lives-logo1.png")
+cryptoMachineImage = tk.PhotoImage(file = "Images/Cryptographic Machine-logo1.png")
+ramson_image = tk.PhotoImage(file = 'Images/RamsonBird_MachineImage.png')
 
 imagen_caesar_cipher_lab = tk.Label(fr, image = imagen_caesar_cipher)
 #imagen_caesar_cipher_lab.config(bg = '#FFFFFF')
@@ -1618,14 +1618,14 @@ closeMachineButton.config(fg = "#7e086c")
 ### ------------------------------------------------ Message encryption section -----------------------------------------------
 
 	
-encryption_machine_logo = tk.PhotoImage(file = "Send Encrypted Message-logo.png")
-generate_key_image = tk.PhotoImage(file = "Generate Key-logo.png")
-encrypt_message_image = tk.PhotoImage(file = "Encrypt Message-logo1.png")
-person1_image = tk.PhotoImage(file = 'Person1.png')
-person2_image = tk.PhotoImage(file = 'Person2.png')
-person3_image = tk.PhotoImage(file = 'Person3.png')
-person4_image = tk.PhotoImage(file = 'Person4.png')
-receiver_ramson_image = tk.PhotoImage(file = 'PersonRansom-logo1.png')
+encryption_machine_logo = tk.PhotoImage(file = "Images/Send Encrypted Message-logo.png")
+generate_key_image = tk.PhotoImage(file = "Images/Generate Key-logo.png")
+encrypt_message_image = tk.PhotoImage(file = "Images/Encrypt Message-logo1.png")
+person1_image = tk.PhotoImage(file = 'Images/Person1.png')
+person2_image = tk.PhotoImage(file = 'Images/Person2.png')
+person3_image = tk.PhotoImage(file = 'Images/Person3.png')
+person4_image = tk.PhotoImage(file = 'Images/Person4.png')
+receiver_ramson_image = tk.PhotoImage(file = 'Images/PersonRansom-logo1.png')
 
 scrollVetrn = ttk.Scrollbar(fr2, orient = tk.VERTICAL)
 #cipher_text2['yscrollcommand'] = scrollVetrn.set()
@@ -1917,9 +1917,9 @@ decryptFilesButton.place(x = 830, y = 380)
 archive_upload_vt = tk.StringVar()
 hash_file_label_vt = tk.StringVar()
 formatUploadFile = tk.IntVar()
-upload_file_image = tk.PhotoImage(file = 'Upload file-logo1.png')
-examine_file_image = tk.PhotoImage(file = 'Examine-logo1.png')
-mitre_image = tk.PhotoImage(file = 'Mitre Attack-logo1.png')
+upload_file_image = tk.PhotoImage(file = 'Images/Upload file-logo1.png')
+examine_file_image = tk.PhotoImage(file = 'Images/Examine-logo1.png')
+mitre_image = tk.PhotoImage(file = 'Images/Mitre Attack-logo1.png')
 formats_VT = []
 
 def uploadFileVirusTotal():

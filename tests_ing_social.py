@@ -26,4 +26,4 @@ correct_answers_social_eng = [1,1,1,0]
 
 
 
-social_eng_audio = ['Tip0.mp3', 'Tip1.mp3', 'Tip2.mp3']
+social_eng_audio = ['Audios/Tip0.mp3', 'Audios/Tip1.mp3', 'Audios/Tip2.mp3']
