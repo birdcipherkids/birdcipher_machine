@@ -54,6 +54,8 @@ def login_user():
 
 	global username_db
 	global login_check
+	global English_mode
+	global Spanish_mode
 
 	wdatos = bytes(password_dbc.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -86,10 +88,22 @@ def login_user():
 		playsound('Audios/NuevoUsuarioCreado.mp3')
 		playsound('Audios/NewUserCreated.mp3')
 		time.sleep(2)
-		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+
+		if English_mode:
+
+			labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+
+		elif Spanish_mode:
+
+			labelPlayerBCM.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+
+
 
 	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
 
@@ -102,11 +116,24 @@ def login_user():
 		playsound('Audios/CorrectLogin.mp3')
 		time.sleep(2)
 		#playsound('UseMachine.mp3')
-		labelPlayerBCM.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerBCM2.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerBCM3.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerBCM4.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerLoginHashing.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
+
+		if English_mode:
+
+			labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerLoginHashing.config(text = 'Welcome, {}'.format(username_dbc.get()))
+
+		elif Spanish_mode:
+
+			labelPlayerBCM.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerLoginHashing.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+
+
 
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
@@ -908,6 +935,13 @@ def translator():
 		labelQuestionKey.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 14))
 		labelPlayerBCM.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 14))
 		closeMachineButton.config(text = 'Cierra la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 14))
+		titleBirdCipherMachine20.config(text = 'BirdCipher Machine: una herramienta para garantizar la confidencialidad de tus mensajes', font = ("Comic Sans MS", 12))
+		notebk.add(fr2, text = " Encripción")
+		key_fernet_label.config(text = 'Llave para el algoritmo Fernet', font = ("Comic Sans MS", 12))
+		encrypted_label.config(text = 'Tu mensaje encriptado es:', font = ("Comic Sans MS", 12))
+		labelPlayerBCM2.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 11))
+
+
 
 	elif English_mode == True:
 
@@ -935,6 +969,14 @@ def translator():
 		labelQuestionKey.config(text = 'Enter your password', font = ("Comic Sans MS", 14))
 		labelPlayerBCM.config(text = 'Welcome, ', font = ("Comic Sans MS", 14))
 		closeMachineButton.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 14))
+		titleBirdCipherMachine20.config(text = 'BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages', font = ("Comic Sans MS", 12))
+		notebk.add(fr2, text = " Encryption")
+		key_fernet_label.config(text = 'Key for Fernet Algorithm', font = ("Comic Sans MS", 12))
+		encrypted_label.config(text = 'Your encrypted message is:', font = ("Comic Sans MS", 12))
+		labelPlayerBCM2.config(text = 'Welcome, ', font = ("Comic Sans MS", 11))
+
+
+
 
 	elif Chinese_mode == True:
 
