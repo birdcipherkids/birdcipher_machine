@@ -42,6 +42,8 @@ username_db = ''
 key_ramson = ''
 login_check = False
 no_video = 0
+English_mode = True
+Spanish_mode = False
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -843,6 +845,64 @@ def play_video_social_eng():
 	video.preview()
 	pygame.quit()
 
+def change_spanish_mode():
+
+	global Spanish_mode
+	global English_mode
+
+	Spanish_mode = True
+	English_mode = False
+
+def change_english_mode():
+
+	global Spanish_mode
+	global English_mode
+
+	English_mode = True
+	Spanish_mode = False
+
+def translator():
+
+	global Spanish_mode
+	global English_mode
+
+	if Spanish_mode == True:
+
+		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!')
+		username_label.config(text = 'Usuario')
+		password_label.config(text = 'Contraseña')
+		position_label.config(text = 'Posición')
+		send_login_data.config(text = 'Enviar datos')
+		notebk.add(hr, text = " Inicio")
+		hash256_passw.config(text = 'El hash de tu contraseña (SHA 265) es:')
+		hash256passw_copy_btt.config(text = 'Copiar hash al portapapeles')
+		close_machine_from_login.config(text = 'Cierra la maquina BirdCipher')
+
+	elif English_mode == True:
+
+		login_label.config(text = 'Log in to BirdCipher Machine!!')
+		username_label.config(text = 'Username')
+		password_label.config(text = 'Password')
+		position_label.config(text = 'Position')
+		send_login_data.config(text = 'Send data')
+		notebk.add(hr, text = " Login")
+		hash256_passw.config(text = 'Your password hash (SHA 265) is:')
+		hash256passw_copy_btt.config(text = 'Copy hash to clipboard')
+		close_machine_from_login.config(text = '  close_machine_from_login  ')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
@@ -970,8 +1030,8 @@ notebk.add(zenbox_tab, text = " Zenbox")
 
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
-login_label = tk.Label(hr, text = 'Log in the BirdCipher Machine!!', font = ("Comic Sans MS", 14))
-login_label.config(fg = "#2c0215")
+login_label = tk.Label(hr, text = 'Log in to BirdCipher Machine', font = ("Comic Sans MS", 14))
+login_label.config(fg = "#7e086c")
 login_label.place(x = 50, y = 20)
 
 username_label = tk.Label(hr, text = 'Username', font = ('Comic Sans MS', 12))
@@ -1022,9 +1082,13 @@ bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login
 bc_logo_login.config(bg = '#260223')
 bc_logo_login.place(x = 420, y = 30)
 
-english = tk.Button(hr, text = 'English')
+english = tk.Button(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
 english.place(x = 50, y = 380)
 english.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
+
+spanish = tk.Button(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
+spanish.place(x = 140, y = 380)
+spanish.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
@@ -2744,7 +2808,7 @@ scrollVetrn70.place(x = 960, y = 270, height = 220)
 
 
 
-
+#translator()
 
 #decrypt.protocol("WM_DELETE_WINDOW", lambda: None)
 
