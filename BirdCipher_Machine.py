@@ -877,6 +877,21 @@ def translator():
 		hash256_passw.config(text = 'El hash de tu contraseña (SHA 265) es:')
 		hash256passw_copy_btt.config(text = 'Copiar hash al portapapeles')
 		close_machine_from_login.config(text = 'Cierra la maquina BirdCipher')
+		enter_password_label.config(text = 'Ingresa tu contraseña')
+		result_check_label.config(text = 'Reporte de resultados')
+		times_label.config(text = 'No veces usada antes')
+		notebk.add(passcheck, text = 'Chequeo de contraseña')
+		closeBCM_checkpass.config(text = 'Cierre la Maquina Criptográfica BirdCipher')
+		labelTextHashing.config(text = 'Ingrese el texto para crear hash:')
+		labelPlayerLoginHashing.config(text = 'Bienvenido, ')
+		labelHashEntry.config(text = 'El hash de tu mensaje/archivo es: ')
+		labelArchive.config(text = 'La ruta a tu archivo es: ')
+		notebk.add(fr, text = "Criptografía clásica")
+		titleBirdCipherMachine.config(text = 'Ingresa el texto a encriptar (Texto plano)')
+		titleBirdCipherMachine2.config(text = 'Tu mensaje encriptado (texto cifrado) es: ')
+		labelQuestionKey.config(text = 'Ingresa tu contraseña')
+		labelPlayerBCM.config(text = 'Bienvenido, ')
+		closeMachineButton.config(text = 'Cierra la Maquina Criptográfica BirdCipher')
 
 	elif English_mode == True:
 
@@ -888,7 +903,22 @@ def translator():
 		notebk.add(hr, text = " Login")
 		hash256_passw.config(text = 'Your password hash (SHA 265) is:')
 		hash256passw_copy_btt.config(text = 'Copy hash to clipboard')
-		close_machine_from_login.config(text = '  close_machine_from_login  ')
+		close_machine_from_login.config(text = '  Close the BirdCipher Machine  ')
+		enter_password_label.config(text = 'Enter your password')
+		result_check_label.config(text = 'Results report')
+		times_label.config(text = 'Times used before: ')
+		notebk.add(passcheck, text = ' Password Checking')
+		closeBCM_checkpass.config(text = 'Close the BirdCipher Cryptographic Machine')
+		labelTextHashing.config(text = 'Enter the text to hash:')
+		labelPlayerLoginHashing.config(text = 'Welcome, ')
+		labelHashEntry.config(text = 'The hash of your message/file is: ')
+		labelArchive.config(text = 'The URL of your file is: ')
+		notebk.add(fr, text = "  Classic Cryptography")
+		titleBirdCipherMachine.config(text = 'Enter the message to encrypt (Plaintext)')
+		titleBirdCipherMachine2.config(text = 'Your encrypted message (Ciphertext) is: ')
+		labelQuestionKey.config(text = 'Enter your password')
+		labelPlayerBCM.config(text = 'Welcome, ')
+		closeMachineButton.config(text = 'Close the BirdCipher Cryptographic Machine')
 
 
 
@@ -1090,6 +1120,10 @@ spanish = tk.Button(hr, text = 'Español', command = lambda:[change_spanish_mode
 spanish.place(x = 140, y = 380)
 spanish.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
 
+chinese = tk.Button(hr, text = '中文')
+chinese.place(x = 230, y = 380)
+chinese.config(fg = '#7e086c', font = ('Kaiti', 17))
+
 # ---------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1168,7 +1202,7 @@ closeBCM_awareness.config(fg = '#2c0215', font = ('Comic Sans MS', 14))
 # --------------------------------------------------------------------------------------------------------------------------
 
 
-### ----------------------------------------- Checking password section ----------------------------------------------------
+### ----------------------------------------- Password Checking Section ----------------------------------------------------
 
 
 def evaluate_password():
@@ -1717,7 +1751,7 @@ keyInverseTransposition.place(x = 530, y = 360)
 
 labelQuestionKey = tk.Label(fr, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey.config(fg = "#7e086c")
-labelQuestionKey.place(x = 805, y = 50)
+labelQuestionKey.place(x = 800, y = 50)
 
 labelPlayerBCM = tk.Label(fr, text = "Welcome, ", font = ("Comic Sans MS", 11))
 labelPlayerBCM.config(fg = "#eba5f1", bg = "#050005")
@@ -1790,9 +1824,9 @@ fernet_encryption_message.place(x = 900, y = 150)
 imagen_caesar_cipher_lab2 = tk.Label(fr2, image = imagen_caesar_cipher)
 imagen_caesar_cipher_lab2.place(x = 30, y = 300)
 
-titleBirdCipherMachine2 = tk.Label(fr2, text = "BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages", font = ("Comic Sans MS", 12))
-titleBirdCipherMachine2.config(fg = "#7e086c")
-titleBirdCipherMachine2.place(x = 70, y = 8)
+titleBirdCipherMachine20 = tk.Label(fr2, text = "BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages", font = ("Comic Sans MS", 12))
+titleBirdCipherMachine20.config(fg = "#7e086c")
+titleBirdCipherMachine20.place(x = 70, y = 8)
 
 buttonPoints2 = tk.Button(fr2, image = imageCaesar, command = lambda:pointsAudio())
 buttonPoints2.place(x = 210, y = 300)
