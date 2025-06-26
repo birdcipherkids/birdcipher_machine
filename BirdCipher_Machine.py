@@ -815,11 +815,23 @@ def receiver_ramson_actv():
 		playsound('Audios/PrimeroNombreDestinatario.mp3')
 
 
-def change_video_number():
+def change_video_number_asc():
 
 	global no_video
 
 	no_video = no_video + 1
+
+def change_video_number_desc():
+
+	global no_video
+
+	if no_video > 0:
+
+		no_video = no_video - 1
+
+	else:
+
+		playsound('Audios/avanzar_lista_ciberawareness.mp3')
 
 
 def play_video_social_eng():
@@ -894,9 +906,10 @@ decryptFilesImage = tk.PhotoImage(file = 'Images/Encrypt files.png')
 bc_logo_loginImage = tk.PhotoImage(file = 'Images/BirdCipher Machine-logoLogin-white1.png')
 hashingImage = tk.PhotoImage(file = 'Images/Hashing-logo-white1.png')
 closeLog = tk.PhotoImage(file = 'Images/CloseLog1.png')
-arrow_asc = tk.PhotoImage(file = 'Images/Arrow_ascend.png')
-arrow_des = tk.PhotoImage(file = 'Images/Arrow_descend.png')
+arrow_asc = tk.PhotoImage(file = 'Images/arrow_asc.png')
+arrow_des = tk.PhotoImage(file = 'Images/arrow_desc.png')
 cyberaware = tk.PhotoImage(file = 'Images/Cyber Awareness.png')
+Swords = tk.PhotoImage(file = 'Images/Swords.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -958,7 +971,7 @@ notebk.add(zenbox_tab, text = " Zenbox")
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
 login_label = tk.Label(hr, text = 'Log in the BirdCipher Machine!!', font = ("Comic Sans MS", 14))
-login_label.config(fg = "#7e086c")
+login_label.config(fg = "#2c0215")
 login_label.place(x = 50, y = 20)
 
 username_label = tk.Label(hr, text = 'Username', font = ('Comic Sans MS', 12))
@@ -1009,6 +1022,10 @@ bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login
 bc_logo_login.config(bg = '#260223')
 bc_logo_login.place(x = 420, y = 30)
 
+english = tk.Button(hr, text = 'English')
+english.place(x = 50, y = 380)
+english.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
+
 # ---------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1050,34 +1067,38 @@ img_social_eng_label.config(bg = '#20011c')
 
 rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
 rad_button1.place(x = 550, y = 40)
-rad_button1.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button1.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button2 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][1], variable = varOption, value = 1)
 rad_button2.place(x = 550, y = 80)
-rad_button2.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button2.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
 rad_button3.place(x = 550, y = 120)
-rad_button3.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button3.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
 rad_button4.place(x = 550, y = 160)
-rad_button4.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button4.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
-answer_button_social_eng.place(x = 600, y = 200)
-answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
+answer_button_social_eng.place(x = 900, y = 220)
+answer_button_social_eng.config(fg = '#2c0215', font = ('Comic Sans MS', 10))
 
-number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number())
-number_video.place(x = 150, y = 450)
+number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number_asc())
+number_video.place(x = 300, y = 450)
 number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
-number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number())
-number_video2.place(x = 50, y = 450)
+number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
+number_video2.place(x = 200, y = 450)
 number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
-closeBCM_awareness = tk.Button(fr0, image = closeLog, command = lambda:closeMachine())
-closeBCM_awareness.place(x = 950 , y = 430)
+swords_insig = tk.Button(fr0, image = Swords)
+swords_insig.place(x = 800, y = 300)
+
+closeBCM_awareness = tk.Button(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
+closeBCM_awareness.place(x = 550 , y = 470)
+closeBCM_awareness.config(fg = '#2c0215', font = ('Comic Sans MS', 14))
 	
 
 # --------------------------------------------------------------------------------------------------------------------------
