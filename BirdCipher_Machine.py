@@ -44,6 +44,7 @@ login_check = False
 no_video = 0
 English_mode = True
 Spanish_mode = False
+Chinese_mode = False
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -849,76 +850,102 @@ def change_spanish_mode():
 
 	global Spanish_mode
 	global English_mode
+	global Chinese_mode
 
 	Spanish_mode = True
 	English_mode = False
+	Chinese_mode = False
 
 def change_english_mode():
 
 	global Spanish_mode
 	global English_mode
+	global Chinese_mode
 
 	English_mode = True
+	Spanish_mode = False
+	Chinese_mode = False
+
+def change_chinese_mode():
+
+	global English_mode
+	global Chinese_mode
+	global Spanish_mode
+
+	Chinese_mode = True
+	English_mode = False
 	Spanish_mode = False
 
 def translator():
 
 	global Spanish_mode
 	global English_mode
+	global Chinese_mode
 
 	if Spanish_mode == True:
 
-		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!')
-		username_label.config(text = 'Usuario')
-		password_label.config(text = 'Contraseña')
-		position_label.config(text = 'Posición')
-		send_login_data.config(text = 'Enviar datos')
+		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!', font = ("Comic Sans MS", 14))
+		username_label.config(text = 'Usuario', font = ("Comic Sans MS", 12))
+		password_label.config(text = 'Contraseña', font = ("Comic Sans MS", 12))
+		position_label.config(text = 'Posición', font = ("Comic Sans MS", 12))
+		send_login_data.config(text = 'Enviar datos', font = ("Comic Sans MS", 9))
 		notebk.add(hr, text = " Inicio")
-		hash256_passw.config(text = 'El hash de tu contraseña (SHA 265) es:')
-		hash256passw_copy_btt.config(text = 'Copiar hash al portapapeles')
-		close_machine_from_login.config(text = 'Cierra la maquina BirdCipher')
-		enter_password_label.config(text = 'Ingresa tu contraseña')
-		result_check_label.config(text = 'Reporte de resultados')
-		times_label.config(text = 'No veces usada antes')
+		hash256_passw.config(text = 'El hash de tu contraseña (SHA 265) es:', font = ("Comic Sans MS", 12))
+		hash256passw_copy_btt.config(text = 'Copiar hash al portapapeles', font = ("Comic Sans MS", 9))
+		close_machine_from_login.config(text = 'Cierra la maquina BirdCipher', font = ("Comic Sans MS", 14))
+		enter_password_label.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 14))
+		result_check_label.config(text = 'Reporte de resultados', font = ("Comic Sans MS", 14))
+		times_label.config(text = 'No veces usada antes', font = ("Comic Sans MS", 14))
 		notebk.add(passcheck, text = 'Chequeo de contraseña')
-		closeBCM_checkpass.config(text = 'Cierre la Maquina Criptográfica BirdCipher')
-		labelTextHashing.config(text = 'Ingrese el texto para crear hash:')
-		labelPlayerLoginHashing.config(text = 'Bienvenido, ')
+		closeBCM_checkpass.config(text = 'Cierre la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 14))
+		labelTextHashing.config(text = 'Ingrese el texto para crear hash:', font = ("Comic Sans MS", 14))
+		labelPlayerLoginHashing.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 14))
 		labelHashEntry.config(text = 'El hash de tu mensaje/archivo es: ')
-		labelArchive.config(text = 'La ruta a tu archivo es: ')
+		labelArchive.config(text = 'La ruta a tu archivo es: ', font = ("Comic Sans MS", 14))
 		notebk.add(fr, text = "Criptografía clásica")
-		titleBirdCipherMachine.config(text = 'Ingresa el texto a encriptar (Texto plano)')
-		titleBirdCipherMachine2.config(text = 'Tu mensaje encriptado (texto cifrado) es: ')
-		labelQuestionKey.config(text = 'Ingresa tu contraseña')
-		labelPlayerBCM.config(text = 'Bienvenido, ')
-		closeMachineButton.config(text = 'Cierra la Maquina Criptográfica BirdCipher')
+		titleBirdCipherMachine.config(text = 'Ingresa el texto a encriptar (Texto plano)', font = ("Comic Sans MS", 14))
+		titleBirdCipherMachine2.config(text = 'Tu mensaje encriptado (texto cifrado) es: ', font = ("Comic Sans MS", 14))
+		labelQuestionKey.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 14))
+		labelPlayerBCM.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 14))
+		closeMachineButton.config(text = 'Cierra la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 14))
 
 	elif English_mode == True:
 
-		login_label.config(text = 'Log in to BirdCipher Machine!!')
-		username_label.config(text = 'Username')
-		password_label.config(text = 'Password')
-		position_label.config(text = 'Position')
-		send_login_data.config(text = 'Send data')
+		login_label.config(text = 'Log in to BirdCipher Machine!!', font = ("Comic Sans MS", 14))
+		username_label.config(text = 'Username', font = ("Comic Sans MS", 12))
+		password_label.config(text = 'Password', font = ("Comic Sans MS", 12))
+		position_label.config(text = 'Position', font = ("Comic Sans MS", 12))
+		send_login_data.config(text = 'Send data', font = ("Comic Sans MS", 9))
 		notebk.add(hr, text = " Login")
-		hash256_passw.config(text = 'Your password hash (SHA 265) is:')
-		hash256passw_copy_btt.config(text = 'Copy hash to clipboard')
-		close_machine_from_login.config(text = '  Close the BirdCipher Machine  ')
-		enter_password_label.config(text = 'Enter your password')
-		result_check_label.config(text = 'Results report')
-		times_label.config(text = 'Times used before: ')
+		hash256_passw.config(text = 'Your password hash (SHA 265) is:', font = ("Comic Sans MS", 12))
+		hash256passw_copy_btt.config(text = 'Copy hash to clipboard', font = ("Comic Sans MS", 9))
+		close_machine_from_login.config(text = '  Close the BirdCipher Machine  ', font = ("Comic Sans MS", 14))
+		enter_password_label.config(text = 'Enter your password', font = ("Comic Sans MS", 14))
+		result_check_label.config(text = 'Results report', font = ("Comic Sans MS", 14))
+		times_label.config(text = 'Times used before: ', font = ("Comic Sans MS", 14))
 		notebk.add(passcheck, text = ' Password Checking')
-		closeBCM_checkpass.config(text = 'Close the BirdCipher Cryptographic Machine')
-		labelTextHashing.config(text = 'Enter the text to hash:')
-		labelPlayerLoginHashing.config(text = 'Welcome, ')
-		labelHashEntry.config(text = 'The hash of your message/file is: ')
-		labelArchive.config(text = 'The URL of your file is: ')
+		closeBCM_checkpass.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 14))
+		labelTextHashing.config(text = 'Enter the text to hash:', font = ("Comic Sans MS", 14))
+		labelPlayerLoginHashing.config(text = 'Welcome, ', font = ("Comic Sans MS", 14))
+		labelHashEntry.config(text = 'The hash of your message/file is: ', font = ("Comic Sans MS", 14))
+		labelArchive.config(text = 'The URL of your file is: ', font = ("Comic Sans MS", 14))
 		notebk.add(fr, text = "  Classic Cryptography")
-		titleBirdCipherMachine.config(text = 'Enter the message to encrypt (Plaintext)')
-		titleBirdCipherMachine2.config(text = 'Your encrypted message (Ciphertext) is: ')
-		labelQuestionKey.config(text = 'Enter your password')
-		labelPlayerBCM.config(text = 'Welcome, ')
-		closeMachineButton.config(text = 'Close the BirdCipher Cryptographic Machine')
+		titleBirdCipherMachine.config(text = 'Enter the message to encrypt (Plaintext)', font = ("Comic Sans MS", 14))
+		titleBirdCipherMachine2.config(text = 'Your encrypted message (Ciphertext) is: ', font = ("Comic Sans MS", 14))
+		labelQuestionKey.config(text = 'Enter your password', font = ("Comic Sans MS", 14))
+		labelPlayerBCM.config(text = 'Welcome, ', font = ("Comic Sans MS", 14))
+		closeMachineButton.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 14))
+
+	elif Chinese_mode == True:
+
+		login_label.config(text = '登录 BirdCipher Machine', font = ('Kaiti', 20))
+		username_label.config(text = '用户名', font = ('Kaiti', 18))
+		password_label.config(text = '密码', font = ('Kaiti', 18))
+		position_label.config(text = '角色', font = ("Kaiti", 18))
+		send_login_data.config(text = '发送数据', font = ("Kaiti", 15))
+		notebk.add(hr, text = " 登录")
+
+
 
 
 
@@ -1120,7 +1147,7 @@ spanish = tk.Button(hr, text = 'Español', command = lambda:[change_spanish_mode
 spanish.place(x = 140, y = 380)
 spanish.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
 
-chinese = tk.Button(hr, text = '中文')
+chinese = tk.Button(hr, text = '中文', command = lambda:[change_chinese_mode(), translator()])
 chinese.place(x = 230, y = 380)
 chinese.config(fg = '#7e086c', font = ('Kaiti', 17))
 
