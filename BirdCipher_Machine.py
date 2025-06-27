@@ -1379,14 +1379,30 @@ number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 swords_insig = tk.Button(fr0, image = Swords)
 swords_insig.place(x = 800, y = 280)
 
+swords_score = tk.Label(fr0, text = 'Swords', width = 11)
+swords_score.place(x = 802, y = 400)
+swords_score.config(bg = 'black', fg = 'white')
+
 Llave_final = tk.Button(fr0, image = Keys_aware)
 Llave_final.place(x = 714, y = 280)
+
+Llave_score = tk.Label(fr0, text = 'Keys', width = 9)
+Llave_score.place(x = 714, y = 400)
+Llave_score.config(bg = 'black', fg = 'white')
 
 Caduceus_final = tk.Button(fr0, image = Caduceus_aware)
 Caduceus_final.place(x = 900, y = 280)
 
+Caduceus_score = tk.Label(fr0, text = 'Caduceus', width = 12)
+Caduceus_score.place(x = 900, y = 400)
+Caduceus_score.config(bg = 'black', fg = 'white')
+
 Book_final = tk.Button(fr0, image = Book_aware)
 Book_final.place(x = 610, y = 280)
+
+Book_score = tk.Label(fr0, text = 'Books', width = 12)
+Book_score.place(x = 610, y = 400)
+Book_score.config(bg = 'black', fg = 'white')
 
 closeBCM_awareness = tk.Button(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
 closeBCM_awareness.place(x = 550 , y = 470)
