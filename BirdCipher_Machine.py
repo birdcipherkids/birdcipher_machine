@@ -29,10 +29,10 @@ from Videos_Awareness import *
 
 
 
-points = 0
-coins = 0
-feathers = 0
-diamonds = 0
+books_pt = 0
+keys_pt = 0
+swords_pt = 0
+caduceus_pt = 0
 lives = 5
 counter_social_eng = -1
 directory = ''
@@ -56,6 +56,10 @@ def login_user():
 	global login_check
 	global English_mode
 	global Spanish_mode
+	global books_pt
+	global keys_pt
+	global swords_pt
+	global caduceus_pt
 
 	wdatos = bytes(password_dbc.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -69,8 +73,8 @@ def login_user():
 	sql1 = 'select * from users where username = (%s)'
 	sql1_data = (username_dbc.get(), )
 
-	sql2 = 'insert into users(username, password, position, points, coins, feathers, emeralds, diamonds) values(%s,%s,%s,%s,%s,%s,%s,%s)'
-	sql2_data = (username_dbc.get(), hash2, position_dbc.get(), 0, 0, 0, 0, 0)
+	sql2 = 'insert into users(username, password, position, books, keys, swords, caduceus) values(%s,%s,%s,%s,%s,%s,%s)'
+	sql2_data = (username_dbc.get(), hash2, position_dbc.get(), 1, 0, 0, 0)
 
 	miCursor1.execute(sql1, sql1_data)
 	dlt1 = miCursor1.fetchall()
@@ -82,6 +86,11 @@ def login_user():
 		dlt2 = miCursor1.fetchall()
 		hash256_passw_label.config(text = hash2)
 		username_db = dlt2[0][1]
+		books_pt = dlt2[0][4]
+		Book_score.config(text = books_pt)
+		keys_pt = dlt2[0][5]
+		swords_pt = dlt2[0][6]
+		caduceus_pt = dlt2[0][7]
 		login_check = True
 		#print(username_db)
 		playsound('Audios/bambu_click.mp3')
@@ -109,6 +118,11 @@ def login_user():
 
 		hash256_passw_label.config(text = dlt1[0][2])
 		username_db = dlt1[0][1]
+		books_pt = dlt1[0][4]
+		Book_score.config(text = books_pt)
+		keys_pt = dlt1[0][5]
+		swords_pt = dlt1[0][6]
+		caduceus_pt = dlt1[0][7]
 		login_check = True
 		#print(username_db)
 		playsound('Audios/bambu_click.mp3')
@@ -1101,17 +1115,6 @@ def translator():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 # ---------------------------------------------------------------------------------------------------------------------------
 
 ## ------------------------------------------------ Graphical Interface -----------------------------------------------------
@@ -1379,28 +1382,28 @@ number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 swords_insig = tk.Button(fr0, image = Swords)
 swords_insig.place(x = 800, y = 280)
 
-swords_score = tk.Label(fr0, text = 'Swords', width = 11)
+swords_score = tk.Label(fr0, text = swords_pt, width = 11)
 swords_score.place(x = 802, y = 400)
 swords_score.config(bg = 'black', fg = 'white')
 
 Llave_final = tk.Button(fr0, image = Keys_aware)
 Llave_final.place(x = 714, y = 280)
 
-Llave_score = tk.Label(fr0, text = 'Keys', width = 9)
+Llave_score = tk.Label(fr0, text = keys_pt, width = 9)
 Llave_score.place(x = 714, y = 400)
 Llave_score.config(bg = 'black', fg = 'white')
 
 Caduceus_final = tk.Button(fr0, image = Caduceus_aware)
 Caduceus_final.place(x = 900, y = 280)
 
-Caduceus_score = tk.Label(fr0, text = 'Caduceus', width = 12)
+Caduceus_score = tk.Label(fr0, text = caduceus_pt, width = 12)
 Caduceus_score.place(x = 900, y = 400)
 Caduceus_score.config(bg = 'black', fg = 'white')
 
 Book_final = tk.Button(fr0, image = Book_aware)
 Book_final.place(x = 610, y = 280)
 
-Book_score = tk.Label(fr0, text = 'Books', width = 12)
+Book_score = tk.Label(fr0, text = books_pt, width = 12)
 Book_score.place(x = 610, y = 400)
 Book_score.config(bg = 'black', fg = 'white')
 
@@ -2053,7 +2056,7 @@ buttonPerson3a.place(x= 500, y = 300)
 buttonPerson4a = tk.Button(fr2, image = person4_image, command = lambda:person4_actv())
 buttonPerson4a.place(x = 615, y = 300)
 
-labelPoints2 = tk.Label(fr2, text = points, font = ("Comic Sans MS", 13), justify = "center", width = 6)
+labelPoints2 = tk.Label(fr2, font = ("Comic Sans MS", 13), justify = "center", width = 6)
 labelPoints2.config(bg = "#050005", fg = "#7e086c")
 labelPoints2.place(x = 212, y = 410)
 
@@ -2156,7 +2159,7 @@ buttonPerson3b.place(x= 500, y = 300)
 buttonPerson4b = tk.Button(fr3, image = person4_image, command = lambda:person4c_actv())
 buttonPerson4b.place(x = 615, y = 300)
 
-labelPoints3 = tk.Label(fr3, text = points, font = ("Comic Sans MS", 13), justify = "center", width = 6)
+labelPoints3 = tk.Label(fr3, font = ("Comic Sans MS", 13), justify = "center", width = 6)
 labelPoints3.config(bg = "#050005", fg = "#7e086c")
 labelPoints3.place(x = 212, y = 410)
 
@@ -3045,14 +3048,6 @@ techniques_zen.place(x = 550, y = 270)
 scrollVetrn70 = ttk.Scrollbar(zenbox_tab, command = techniques_zen.yview)
 #cipher_text2['yscrollcommand'] = scrollVetrn.set()
 scrollVetrn70.place(x = 960, y = 270, height = 220)
-
-
-
-
-
-
-
-#translator()
 
 #decrypt.protocol("WM_DELETE_WINDOW", lambda: None)
 
