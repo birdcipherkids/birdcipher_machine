@@ -922,7 +922,7 @@ def translator():
 		close_machine_from_login.config(text = 'Cierra la maquina BirdCipher', font = ("Comic Sans MS", 14))
 		enter_password_label.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 14))
 		result_check_label.config(text = 'Reporte de resultados', font = ("Comic Sans MS", 14))
-		times_label.config(text = 'No veces usada antes', font = ("Comic Sans MS", 14))
+		times_label.config(text = 'No. veces usada antes', font = ("Comic Sans MS", 13))
 		notebk.add(passcheck, text = 'Chequeo de contraseña')
 		closeBCM_checkpass.config(text = 'Cierre la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 14))
 		labelTextHashing.config(text = 'Ingrese el texto para crear hash:', font = ("Comic Sans MS", 14))
@@ -956,6 +956,12 @@ def translator():
 		packet_label.config(text = 'Paquete No.', font = ("Comic Sans MS", 11))
 		labelQuestionKey4.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 13))
 		labelPlayerBCM4.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 11))
+		titleVirusTotal.config(text = 'SUBE TU ARCHIVO A VIRUS TOTAL', font = ('Comic Sans MS', 15))
+		hashFileLabel.config(text = 'El hash (sha 256) de tu archivo es:', font = ('Comic Sans MS', 11))
+		img_social_eng_label.config(image = firewall_humano)
+		password_checking_button.config(image = chequeoContraseña)
+		logoBrowseDirectoriesHash.config(image = busqueda_directorio)
+		urlUploadLogo.config(image = busqueda_directorio_vt)
 
 
 
@@ -1006,6 +1012,12 @@ def translator():
 		packet_label.config(text = 'Packet No.', font = ("Comic Sans MS", 11))
 		labelQuestionKey4.config(text = 'Enter your password', font = ("Comic Sans MS", 13))
 		labelPlayerBCM4.config(text = 'Welcome, ', font = ("Comic Sans MS", 11))
+		titleVirusTotal.config(text = 'UPLOAD YOUR FILE TO VIRUS TOTAL', font = ('Comic Sans MS', 15))
+		hashFileLabel.config(text = 'The hash (sha 256) of your file is:', font = ('Comic Sans MS', 11))
+		img_social_eng_label.config(image = cyberaware)
+		password_checking_button.config(image = password_checking_logo)
+		logoBrowseDirectoriesHash.config(image = directory_browser)
+		urlUploadLogo.config(image = directory_browser1)
 
 
 
@@ -1089,6 +1101,8 @@ encrypt_buttonImg = tk.PhotoImage(file = "Images/Encrypt-logo1.png")
 decrypt_buttonImg = tk.PhotoImage(file = "Images/Decrypt-logo1.png")
 directory_browser = tk.PhotoImage(file = 'Images/Browse directories.png')
 directory_browser1 = tk.PhotoImage(file = 'Images/Browse-logo1.png')
+busqueda_directorio = tk.PhotoImage(file = 'Images/Buscar directorio.png')
+busqueda_directorio_vt = tk.PhotoImage(file = 'Images/Buscar.png')
 ramson_instructions = tk.PhotoImage(file = 'Images/Instructions.png')
 generateRamsonKey_de = tk.PhotoImage(file = 'Images/Generate RamsonBird Key.png')
 bringRamsonKey_de = tk.PhotoImage(file = 'Images/Bring RamsonBird key.png')
@@ -1100,6 +1114,8 @@ closeLog = tk.PhotoImage(file = 'Images/CloseLog1.png')
 arrow_asc = tk.PhotoImage(file = 'Images/arrow_asc.png')
 arrow_des = tk.PhotoImage(file = 'Images/arrow_desc.png')
 cyberaware = tk.PhotoImage(file = 'Images/Cyber Awareness.png')
+firewall_humano = tk.PhotoImage(file = 'Images/Firewall Humano.png')
+chequeoContraseña = tk.PhotoImage(file = 'Images/Chequeo de contraseña.png')
 Swords = tk.PhotoImage(file = 'Images/Swords.png')
 
 notebk = ttk.Notebook(decrypt)
