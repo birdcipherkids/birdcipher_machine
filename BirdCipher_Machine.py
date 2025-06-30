@@ -1191,6 +1191,7 @@ Keys_aware = tk.PhotoImage(file = 'Images/Llave_fin.png')
 Caduceus_aware = tk.PhotoImage(file = 'Images/Caduceus_fin.png')
 Book_aware = tk.PhotoImage(file = 'Images/Book_fin.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
+virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -2299,11 +2300,29 @@ url_for_test = tk.StringVar()
 
 def url_test_function():
 
-	url = "https://www.virustotal.com/api/v3/urls/" + url_for_test.get()
+	ldatos = bytes(url_for_test.get(), 'utf-8')
+	h = hashlib.new(algoritmo, ldatos)
+	hash2000 = HASH.generaHash(h)
+	url_hash_display.config(text = hash2000)
+
+	url = "https://www.virustotal.com/api/v3/urls/" + hash2000
+
+	headers = {
+    "accept": "application/json",
+    "x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
+	}
+
+	response = requests.get(url, headers=headers)
+
+	data = json.loads(response.text)
+
+	category_webpage.config(text = data['data']['attributes']['categories']['Forcepoint ThreatSeeker'])
 
 
 
-url_test_title = tk.Label(url_test_ntk, text = 'Check the security of the websites you browse', font = ("Comic Sans MS", 15))
+
+
+url_test_title = tk.Label(url_test_ntk, text = 'CHECK THE SECURITY OF THE WEBSITES YOU BROWSE', font = ("Comic Sans MS", 14))
 url_test_title.config(fg = '#7e086c')
 url_test_title.place(x = 20, y = 10)
 
@@ -2315,16 +2334,47 @@ url_test_entry = tk.Entry(url_test_ntk, textvariable = url_for_test, font = ('Co
 url_test_entry.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
 url_test_entry.place(x = 50, y = 80)
 
-examine_button_url_test = tk.Button(url_test_ntk, image = button_examine_url_test)
+examine_button_url_test = tk.Button(url_test_ntk, image = button_examine_url_test, command = lambda:url_test_function())
 examine_button_url_test.place(x = 525, y = 62)
 
 url_hash_label = tk.Label(url_test_ntk, text = 'The hash (sha 256) of your URL is:', font = ("Comic Sans MS", 12))
 url_hash_label.config(fg = '#7e086c')
 url_hash_label.place(x = 50, y = 120)
 
-url_hash_display = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 12), width = 45)
+url_hash_display = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 9), width = 64)
 url_hash_display.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
 url_hash_display.place(x = 50, y = 150)
+
+category_webpage_label = tk.Label(url_test_ntk, text = 'Webpage category', font = ('Comic Sans MS', 12))
+category_webpage_label.config(fg = '#7e086c')
+category_webpage_label.place(x = 100, y = 200)
+
+category_webpage = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 10), width = 25)
+category_webpage.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+category_webpage.place(x = 60, y = 240)
+
+results_url_test = tk.Label(url_test_ntk, text = 'LAST ANALYSIS STATS')
+results_url_test.config(font = ('Comic Sans MS', 12), fg = '#7a0684')
+results_url_test.place(x = 160, y = 330)
+
+explanation_url_test = tk.Label(url_test_ntk, text = '(Number of antivirus reports per category)')
+explanation_url_test.config(font = ('Comic Sans MS', 10), fg = '#7a0684')
+explanation_url_test.place(x = 130, y = 355)
+
+malicious_stat = tk.Label(virusTotal)
+malicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+malicious_stat.place(x = 60, y = 380)
+
+suspicious_stat = tk.Label(virusTotal)
+suspicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+suspicious_stat.place(x = 200, y = 380)
+
+undetected_stat = tk.Label(virusTotal)
+undetected_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+undetected_stat.place(x = 350, y = 380)
+
+virus_total_logo_url_section = tk.Button(url_test_ntk, image = virus_total_logo, command = lambda:url_test_function())
+virus_total_logo_url_section.place(x = 930, y = 10)
 
 
 
