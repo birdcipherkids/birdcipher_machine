@@ -1190,6 +1190,7 @@ Swords = tk.PhotoImage(file = 'Images/Swords.png')
 Keys_aware = tk.PhotoImage(file = 'Images/Llave_fin.png')
 Caduceus_aware = tk.PhotoImage(file = 'Images/Caduceus_fin.png')
 Book_aware = tk.PhotoImage(file = 'Images/Book_fin.png')
+button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -2291,6 +2292,42 @@ decryptFilesButton = tk.Button(fr0a, image = encryptFilesImage, command = lambda
 decryptFilesButton.place(x = 830, y = 380)
 
 # -----------------------------------------------------------------------------------------------------------------------------
+
+### ---------------------------------------------- Virus Total URL Test section -----------------------------------------------
+
+url_for_test = tk.StringVar()
+
+def url_test_function():
+
+	url = "https://www.virustotal.com/api/v3/urls/" + url_for_test.get()
+
+
+
+url_test_title = tk.Label(url_test_ntk, text = 'Check the security of the websites you browse', font = ("Comic Sans MS", 15))
+url_test_title.config(fg = '#7e086c')
+url_test_title.place(x = 20, y = 10)
+
+url_test_label = tk.Label(url_test_ntk, text = 'Enter the website URL', font = ("Comic Sans MS", 12))
+url_test_label.config(fg = '#7e086c')
+url_test_label.place(x = 50, y = 50)
+
+url_test_entry = tk.Entry(url_test_ntk, textvariable = url_for_test, font = ('Comic Sans MS', 12), width = 45)
+url_test_entry.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+url_test_entry.place(x = 50, y = 80)
+
+examine_button_url_test = tk.Button(url_test_ntk, image = button_examine_url_test)
+examine_button_url_test.place(x = 525, y = 62)
+
+url_hash_label = tk.Label(url_test_ntk, text = 'The hash (sha 256) of your URL is:', font = ("Comic Sans MS", 12))
+url_hash_label.config(fg = '#7e086c')
+url_hash_label.place(x = 50, y = 120)
+
+url_hash_display = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 12), width = 45)
+url_hash_display.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+url_hash_display.place(x = 50, y = 150)
+
+
+
 
 
 ### ---------------------------------------------- Virus Total section -----------------------------------------------------
