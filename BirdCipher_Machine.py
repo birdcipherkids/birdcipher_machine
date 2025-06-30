@@ -2317,6 +2317,23 @@ def url_test_function():
 	data = json.loads(response.text)
 
 	category_webpage.config(text = data['data']['attributes']['categories']['Forcepoint ThreatSeeker'])
+	malicious_stat_url_test.config(text = data['data']['attributes']['last_analysis_stats']['malicious'])
+	malicious_stat_url_test.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	malicious_label_url_test = tk.Label(url_test_ntk, text = 'Malicious')
+	malicious_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	malicious_label_url_test.place(x = 70, y = 490)
+	suspicious_stat_url_test.config(text = data['data']['attributes']['last_analysis_stats']['suspicious'])
+	suspicious_stat_url_test.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	suspicious_label_url_test = tk.Label(url_test_ntk, text = 'Suspicious')
+	suspicious_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	suspicious_label_url_test.place(x = 210, y = 490)
+	undetected_stat_url_test.config(text = data['data']['attributes']['last_analysis_stats']['harmless'])
+	undetected_stat_url_test.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	undetected_label_url_test = tk.Label(url_test_ntk, text = 'Harmless')
+	undetected_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	undetected_label_url_test.place(x = 362, y = 490)
+	description_html_meta_content = data['data']['attributes']['html_meta']['description']
+	description_html_meta.insert(tk.END, description_html_meta_content)
 
 
 
@@ -2347,7 +2364,7 @@ url_hash_display.place(x = 50, y = 150)
 
 category_webpage_label = tk.Label(url_test_ntk, text = 'Webpage category', font = ('Comic Sans MS', 12))
 category_webpage_label.config(fg = '#7e086c')
-category_webpage_label.place(x = 100, y = 200)
+category_webpage_label.place(x = 100, y = 205)
 
 category_webpage = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 10), width = 25)
 category_webpage.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
@@ -2357,21 +2374,33 @@ results_url_test = tk.Label(url_test_ntk, text = 'LAST ANALYSIS STATS')
 results_url_test.config(font = ('Comic Sans MS', 12), fg = '#7a0684')
 results_url_test.place(x = 160, y = 330)
 
-explanation_url_test = tk.Label(url_test_ntk, text = '(Number of antivirus reports per category)')
+explanation_url_test = tk.Label(url_test_ntk, text = '(Number of engine reports per category)')
 explanation_url_test.config(font = ('Comic Sans MS', 10), fg = '#7a0684')
 explanation_url_test.place(x = 130, y = 355)
 
-malicious_stat = tk.Label(virusTotal)
-malicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
-malicious_stat.place(x = 60, y = 380)
+malicious_stat_url_test = tk.Label(url_test_ntk)
+malicious_stat_url_test.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+malicious_stat_url_test.place(x = 60, y = 380)
 
-suspicious_stat = tk.Label(virusTotal)
-suspicious_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
-suspicious_stat.place(x = 200, y = 380)
+suspicious_stat_url_test = tk.Label(url_test_ntk)
+suspicious_stat_url_test.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+suspicious_stat_url_test.place(x = 200, y = 380)
 
-undetected_stat = tk.Label(virusTotal)
-undetected_stat.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
-undetected_stat.place(x = 350, y = 380)
+undetected_stat_url_test = tk.Label(url_test_ntk)
+undetected_stat_url_test.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+undetected_stat_url_test.place(x = 350, y = 380)
+
+description_html_meta_label = tk.Label(url_test_ntk, text = 'Description', font = ('Comic Sans MS', 12))
+description_html_meta_label.config(fg = '#7e086c')
+description_html_meta_label.place(x = 400, y = 190)
+
+scrollDescription_html_meta = ttk.Scrollbar(url_test_ntk, orient = tk.VERTICAL)
+scrollDescription_html_meta.place(x = 570, y = 220, height = 90)
+
+description_html_meta = tk.Text(url_test_ntk, font = ('Comic Sans MS', 9), wrap = tk.WORD, width = 35, height = 5, padx = 10)
+description_html_meta.config(bg = '#050005', fg = '#f7a6f1')
+description_html_meta.place(x = 300, y = 220)
+scrollDescription_html_meta.config(command = description_html_meta.yview)
 
 virus_total_logo_url_section = tk.Button(url_test_ntk, image = virus_total_logo, command = lambda:url_test_function())
 virus_total_logo_url_section.place(x = 930, y = 10)
