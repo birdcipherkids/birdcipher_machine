@@ -37,6 +37,7 @@ lives = 5
 counter_social_eng = -1
 directory = ''
 directoryHash = ''
+directoryDigitalSignature = ''
 directoryVirusTotal = ''
 username_db = ''
 key_ramson = ''
@@ -190,6 +191,17 @@ def selectDirectoryHash():
 
 	directoryHash = filedialog.askopenfilename(title = 'Open file to hash')
 	archiveURLShow.config(text = archive_url.set(directoryHash))
+
+def selectDirectoryDigitalSignature():
+
+	global directoryDigitalSignature
+
+	directoryDigitalSignature = filedialog.askopenfilename(title = 'Open file to sign or verify')
+	url_file_label_DS.config(text = directoryDigitalSignature)
+	hash_file_label_DS.config(text = hash_file_birdcipher(directoryDigitalSignature, 'sha256'))
+
+
+
 
 def selectDirectoryVirusTotal():
 
@@ -1194,6 +1206,12 @@ Caduceus_aware = tk.PhotoImage(file = 'Images/Caduceus_fin.png')
 Book_aware = tk.PhotoImage(file = 'Images/Book_fin.png')
 digital_signature_logo = tk.PhotoImage(file = 'Images/Digital Signature.png')
 firma_digital_logo = tk.PhotoImage(file = 'Images/Firma Digital.png')
+sign_document_logo = tk.PhotoImage(file = 'Images/Sign document.png')
+non_repudiation_logo = tk.PhotoImage(file = 'Images/Non-repudiation.png')
+verify_integrity_logo = tk.PhotoImage(file = 'Images/Verify Integrity.png')
+browse_ds_logo = tk.PhotoImage(file = 'Images/Browse_ds1.png')
+private_key_logo = tk.PhotoImage(file = 'Images/private.png')
+public_key_logo = tk.PhotoImage(file = 'Images/public.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 
@@ -1704,6 +1722,56 @@ closeBCM_hashing.place(x = 950 , y = 10)
 digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
 digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
+
+sign_document_button = tk.Button(digital_signature, image = sign_document_logo)
+sign_document_button.place(x = 20, y = 380)
+
+non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo)
+non_repudiation_button.place(x = 178, y = 380)
+
+verify_integrity_button = tk.Button(digital_signature, image = verify_integrity_logo)
+verify_integrity_button.place(x = 315, y = 380)
+
+upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD THE FILE TO THE DIGITAL SIGNATURE TOOL')
+upload_file_label_DS.config(font = ('Comic Sans MS', 13), fg = '#040339')
+upload_file_label_DS.place(x = 500, y = 20)
+
+url_file_label_DS = tk.Label(digital_signature, width = 50)
+url_file_label_DS.config(font = ('Comic Sans MS', 10), fg = '#9daee1', bg = '#050005', justify = 'center')
+url_file_label_DS.place(x = 520, y = 70)
+
+browse_ds_button = tk.Button(digital_signature, image = browse_ds_logo, command = lambda:selectDirectoryDigitalSignature())
+browse_ds_button.place(x = 940, y = 55)
+
+hash_file_ds_label = tk.Label(digital_signature, text = 'The hash (sha 256) of your file is: ')
+hash_file_ds_label.config(font = ('Comic Sans MS', 11), fg = '#040339')
+hash_file_ds_label.place(x = 520, y = 120)
+
+hash_file_label_DS = tk.Label(digital_signature, width = 63)
+hash_file_label_DS.config(font = ('Comic Sans MS', 8), fg = '#9daee1', bg = '#050005', justify = 'center')
+hash_file_label_DS.place(x = 520, y = 150)
+
+create_key_pair_label = tk.Label(digital_signature, text = 'Create key pair')
+create_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
+create_key_pair_label.place(x = 550, y = 190)
+
+bring_key_pair_label = tk.Label(digital_signature, text = 'Bring key pair')
+bring_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
+bring_key_pair_label.place(x = 800, y = 190)
+
+private_key_name_label = tk.Entry(digital_signature, width = 15)
+private_key_name_label.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
+private_key_name_label.place(x = 530, y = 220)
+
+private_key_button = tk.Button(digital_signature, image = private_key_logo)
+private_key_button.place(x = 700, y = 202)
+
+public_key_name_label = tk.Entry(digital_signature, width = 15)
+public_key_name_label.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
+public_key_name_label.place(x = 530, y = 300)
+
+public_key_button = tk.Button(digital_signature, image = public_key_logo)
+public_key_button.place(x = 700, y = 282)
 
 
 
