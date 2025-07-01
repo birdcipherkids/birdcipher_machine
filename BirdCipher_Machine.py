@@ -965,6 +965,7 @@ def translator():
 		playsound('Audios/Espanol.mp3')
 		english.config(fg = '#7e086c', bg = 'white')
 		spanish.config(bg = '#3b0332', fg = 'white')
+		chinese.config(fg = '#7e086c', bg = 'white')
 		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!', font = ("Comic Sans MS", 14))
 		username_label.config(text = 'Usuario', font = ("Comic Sans MS", 12))
 		password_label.config(text = 'Contraseña', font = ("Comic Sans MS", 12))
@@ -1059,6 +1060,7 @@ def translator():
 		playsound('Audios/English_mode.mp3')
 		english.config(bg = '#3b0332', fg = 'white')
 		spanish.config(fg = '#7e086c', bg = 'white')
+		chinese.config(fg = '#7e086c', bg = 'white')
 		login_label.config(text = 'Log in to BirdCipher Machine!!', font = ("Comic Sans MS", 14))
 		username_label.config(text = 'Username', font = ("Comic Sans MS", 12))
 		password_label.config(text = 'Password', font = ("Comic Sans MS", 12))
@@ -1150,6 +1152,10 @@ def translator():
 
 	elif Chinese_mode == True:
 
+		playsound('Audios/Zhong_wen.mp3')
+		english.config(fg = '#7e086c', bg = 'white')
+		spanish.config(fg = '#7e086c', bg = 'white')
+		chinese.config(bg = '#3b0332', fg = 'white')
 		login_label.config(text = '登录 BirdCipher Machine', font = ('Kaiti', 20))
 		username_label.config(text = '用户名', font = ('Kaiti', 18))
 		password_label.config(text = '密码', font = ('Kaiti', 18))
