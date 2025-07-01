@@ -1008,6 +1008,7 @@ def translator():
 		techniques_zen_label.config(text = 'Técnicas', font = ('Comic Sans MS', 14))
 		img_social_eng_label.config(image = firewall_humano)
 		password_checking_button.config(image = chequeoContraseña)
+		digital_signature_button.config(image = firma_digital_logo)
 		logoBrowseDirectoriesHash.config(image = busqueda_directorio)
 		urlUploadLogo.config(image = busqueda_directorio_vt)
 
@@ -1097,6 +1098,7 @@ def translator():
 		techniques_zen_label.config(text = 'Techniques', font = ('Comic Sans MS', 14))
 		img_social_eng_label.config(image = cyberaware)
 		password_checking_button.config(image = password_checking_logo)
+		digital_signature_button.config(image = digital_signature_logo)
 		logoBrowseDirectoriesHash.config(image = directory_browser)
 		urlUploadLogo.config(image = directory_browser1)
 
@@ -1190,6 +1192,8 @@ Swords = tk.PhotoImage(file = 'Images/Swords.png')
 Keys_aware = tk.PhotoImage(file = 'Images/Llave_fin.png')
 Caduceus_aware = tk.PhotoImage(file = 'Images/Caduceus_fin.png')
 Book_aware = tk.PhotoImage(file = 'Images/Book_fin.png')
+digital_signature_logo = tk.PhotoImage(file = 'Images/Digital Signature.png')
+firma_digital_logo = tk.PhotoImage(file = 'Images/Firma Digital.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 
@@ -1694,6 +1698,12 @@ closeBCM_hashing.place(x = 950 , y = 10)
 # -------------------------------------------------------------------------------------------------------------------------
 
 
+### ---------------------------------------------- Digital Signature section -----------------------------------------------
+
+
+digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
+digital_signature_button.config(bg = '#040339')
+digital_signature_button.place(x = 20, y = 20)
 
 
 
@@ -2333,6 +2343,7 @@ def url_test_function():
 	undetected_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
 	undetected_label_url_test.place(x = 362, y = 490)
 	description_html_meta_content = data['data']['attributes']['html_meta']['description']
+	description_html_meta.delete("1.0", tk.END)
 	description_html_meta.insert(tk.END, description_html_meta_content)
 
 

@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "https://www.virustotal.com/api/v3/urls/fbed8d711f240852f54164f7c196f19277d022fc8bd02e7751b9246cdfe9b62d"
+url = "https://www.virustotal.com/api/v3/urls/b99117b3ec674ad0a2c198089d3c156bf65819ff6c32f354476f1bfefcae58d3"
 
 headers = {
     "accept": "application/json",
@@ -10,8 +10,8 @@ headers = {
 
 response = requests.get(url, headers=headers)
 
-data = json.loads(response.text)
+#data = json.loads(response.text)
 
-print(data['data']['attributes']['categories']['Forcepoint ThreatSeeker'])
+print(response.text)
 
 #print(response.text)
