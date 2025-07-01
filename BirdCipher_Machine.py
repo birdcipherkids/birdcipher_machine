@@ -201,7 +201,14 @@ def selectDirectory():
 
 	directory = filedialog.askdirectory(title = 'Open directory')
 	ramsonDirectoryUrl.config(text = directory)
-	playsound('Audios/DirectorioDefinido.mp3')
+
+	if English_mode:
+
+		playsound('Audios/Directory_correctly_defined.mp3')
+
+	elif Spanish_mode:
+
+		playsound('Audios/DirectorioDefinido.mp3')
 
 def selectDirectoryHash():
 
@@ -217,9 +224,6 @@ def selectDirectoryDigitalSignature():
 	directoryDigitalSignature = filedialog.askopenfilename(title = 'Open file to sign or verify')
 	url_file_label_DS.config(text = directoryDigitalSignature)
 	hash_file_label_DS.config(text = hash_file_birdcipher(directoryDigitalSignature, 'sha256'))
-
-
-
 
 def selectDirectoryVirusTotal():
 
