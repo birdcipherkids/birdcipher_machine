@@ -204,11 +204,18 @@ def selectDirectory():
 
 	if English_mode:
 
+		playsound('Audios/bambu_click.mp3')
 		playsound('Audios/Directory_correctly_defined.mp3')
 
 	elif Spanish_mode:
 
+		playsound('Audios/bambu_click.mp3')
 		playsound('Audios/DirectorioDefinido.mp3')
+
+	elif Chinese_mode:
+
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/Directory_correctly_defined_zh.mp3')
 
 def selectDirectoryHash():
 
