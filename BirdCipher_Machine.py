@@ -95,8 +95,6 @@ def login_user():
 		login_check = True
 		#print(username_db)
 		playsound('Audios/bambu_click.mp3')
-		playsound('Audios/NuevoUsuarioCreado.mp3')
-		playsound('Audios/NewUserCreated.mp3')
 		time.sleep(2)
 
 		if English_mode:
@@ -105,6 +103,8 @@ def login_user():
 			labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
 			labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
 			labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			playsound('Audios/NewUserCreated.mp3')
+
 
 		elif Spanish_mode:
 
@@ -112,6 +112,7 @@ def login_user():
 			labelPlayerBCM2.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
 			labelPlayerBCM3.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
 			labelPlayerBCM4.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			playsound('Audios/NuevoUsuarioCreado.mp3')
 
 
 
@@ -127,10 +128,8 @@ def login_user():
 		login_check = True
 		#print(username_db)
 		playsound('Audios/bambu_click.mp3')
-		playsound('Audios/CorrectoLogin.mp3')
-		playsound('Audios/CorrectLogin.mp3')
 		time.sleep(2)
-		#playsound('UseMachine.mp3')
+		
 
 		if English_mode:
 
@@ -139,6 +138,7 @@ def login_user():
 			labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
 			labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
 			labelPlayerLoginHashing.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			playsound('Audios/CorrectLogin.mp3')
 
 		elif Spanish_mode:
 
@@ -147,16 +147,29 @@ def login_user():
 			labelPlayerBCM3.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
 			labelPlayerBCM4.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
 			labelPlayerLoginHashing.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			playsound('Audios/CorrectoLogin.mp3')
 
 
 
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
-		playsound('Audios/ContrasenaIncorrectaVI.mp3')
+		if English_mode:
+
+			playsound('Audios/Incorrect_password.mp3')
+
+		elif Spanish_mode:
+
+			playsound('Audios/ContrasenaIncorrectaVI.mp3')
 
 	elif username_dbc.get() == '' or password_dbc.get() == '':
 
-		playsound('Audios/DebesIngresarCredenciales.mp3')
+		if English_mode:
+
+			playsound('Audios/Enter_credencials.mp3')
+
+		elif Spanish_mode:
+
+			playsound('Audios/DebesIngresarCredenciales.mp3')
 
 	miConexion1.commit()
 	miConexion1.close()
@@ -169,8 +182,13 @@ def copyHashLogin():
 	hash2 = HASH.generaHash(h)
 
 	playsound('Audios/bambu_click.mp3')
-	playsound('Audios/HashCopiadoLogin.mp3')
-	playsound('Audios/HashCopiedLogin.mp3')
+
+	if Spanish_mode:
+		playsound('Audios/HashCopiadoLogin.mp3')
+
+	elif English_mode:
+		playsound('Audios/HashCopiedLogin.mp3')
+	
 	pyperclip.copy(hash2)
 
 
@@ -703,8 +721,15 @@ def closeMachine():
 	chances_decrypt = 0
 	target_person = ''
 	target_person_decrypt = ''
-	playsound('Audios/HastaLuego.mp3')
-	playsound('Audios/Bye.mp3')
+
+	if English_mode:
+
+		playsound('Audios/Bye.mp3')
+
+	elif Spanish_mode:
+
+		playsound('Audios/HastaLuego.mp3')
+	
 	time.sleep(2)
 	decrypt.destroy()
 
@@ -937,6 +962,9 @@ def translator():
 
 	if Spanish_mode == True:
 
+		playsound('Audios/Espanol.mp3')
+		english.config(fg = '#7e086c', bg = 'white')
+		spanish.config(bg = '#3b0332', fg = 'white')
 		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!', font = ("Comic Sans MS", 14))
 		username_label.config(text = 'Usuario', font = ("Comic Sans MS", 12))
 		password_label.config(text = 'Contraseña', font = ("Comic Sans MS", 12))
@@ -1028,6 +1056,9 @@ def translator():
 
 	elif English_mode == True:
 
+		playsound('Audios/English_mode.mp3')
+		english.config(bg = '#3b0332', fg = 'white')
+		spanish.config(fg = '#7e086c', bg = 'white')
 		login_label.config(text = 'Log in to BirdCipher Machine!!', font = ("Comic Sans MS", 14))
 		username_label.config(text = 'Username', font = ("Comic Sans MS", 12))
 		password_label.config(text = 'Password', font = ("Comic Sans MS", 12))
@@ -1340,7 +1371,7 @@ bc_logo_login.place(x = 420, y = 30)
 
 english = tk.Button(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
 english.place(x = 50, y = 380)
-english.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
+english.config(bg = '#3b0332', fg = 'white', font = ('Comic Sans MS', 12))
 
 spanish = tk.Button(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
 spanish.place(x = 140, y = 380)
