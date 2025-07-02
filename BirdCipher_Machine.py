@@ -38,6 +38,7 @@ counter_social_eng = -1
 directory = ''
 directoryHash = ''
 directoryDigitalSignature = ''
+directoryFindKeysDS = ''
 directoryVirusTotal = ''
 username_db = ''
 key_ramson = ''
@@ -201,6 +202,7 @@ def selectDirectory():
 
 	directory = filedialog.askdirectory(title = 'Open directory')
 	ramsonDirectoryUrl.config(text = directory)
+	print(directory)
 
 	if English_mode:
 
@@ -221,7 +223,7 @@ def selectDirectoryHash():
 
 	global directoryHash
 
-	directoryHash = filedialog.askopenfilename(title = 'Open file to hash')
+	directoryHash = filedialog.askopenfilename(title = 'Open file')
 	archiveURLShow.config(text = archive_url.set(directoryHash))
 
 def selectDirectoryDigitalSignature():
@@ -231,6 +233,20 @@ def selectDirectoryDigitalSignature():
 	directoryDigitalSignature = filedialog.askopenfilename(title = 'Open file to sign or verify')
 	url_file_label_DS.config(text = directoryDigitalSignature)
 	hash_file_label_DS.config(text = hash_file_birdcipher(directoryDigitalSignature, 'sha256'))
+	playsound('Audios/bambu_click.mp3')
+
+def selectDirectoryOpenFindKeysDS():
+
+	global directoryFindKeysDS
+
+	directoryDS = filedialog.askdirectory(title = 'Open directory')
+	directory_label_DS.config(text = directoryDS)
+	playsound('Audios/bambu_click.mp3')
+
+
+
+
+
 
 def selectDirectoryVirusTotal():
 
@@ -1784,8 +1800,8 @@ upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD THE FILE TO TH
 upload_file_label_DS.config(font = ('Comic Sans MS', 13), fg = '#040339')
 upload_file_label_DS.place(x = 510, y = 20)
 
-url_file_label_DS = tk.Label(digital_signature, width = 50)
-url_file_label_DS.config(font = ('Comic Sans MS', 10), fg = '#9daee1', bg = '#050005', justify = 'center')
+url_file_label_DS = tk.Label(digital_signature, width = 57)
+url_file_label_DS.config(font = ('Comic Sans MS', 8), fg = '#9daee1', bg = '#050005', justify = 'center')
 url_file_label_DS.place(x = 520, y = 70)
 
 browse_ds_button = tk.Button(digital_signature, image = browse_ds_logo, command = lambda:selectDirectoryDigitalSignature())
@@ -1843,7 +1859,7 @@ directory_label_DS = tk.Label(digital_signature, width = 63)
 directory_label_DS.config(bg = '#050005', fg = '#9daee1')
 directory_label_DS.place(x = 520, y = 390)
 
-directory_browse_DS = tk.Button(digital_signature, image = browse_ds_logo)
+directory_browse_DS = tk.Button(digital_signature, image = browse_ds_logo, command = lambda:selectDirectoryOpenFindKeysDS())
 directory_browse_DS.place(x = 975, y = 370)
 
 file_hash_ciphertext_title = tk.Label(digital_signature, text = 'File hash ciphertext')
