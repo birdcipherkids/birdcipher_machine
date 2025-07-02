@@ -1229,6 +1229,8 @@ password_for_decrypt = tk.StringVar()
 password_for_ramson = tk.StringVar()
 private_key_name_cr = tk.StringVar()
 public_key_name_cr = tk.StringVar()
+private_key_name_br = tk.StringVar()
+public_key_name_br = tk.StringVar()
 
 
 person1_var = tk.StringVar()
@@ -1803,6 +1805,8 @@ def private_key_generator():
 		backend = default_backend()
 		)
 
+	print(private_key_user)
+
 	pem_private_key_user = private_key_user.private_bytes(
 		encoding = serialization.Encoding.PEM,
 		format = serialization.PrivateFormat.PKCS8,
@@ -1823,6 +1827,7 @@ def public_key_generator():
 	global directoryFindKeysDS
 
 	public_key_user = private_key_user.public_key()
+	print(public_key_user)
 
 	pem_public_key_user = public_key_user.public_bytes(
 		encoding = serialization.Encoding.PEM,
@@ -1832,6 +1837,43 @@ def public_key_generator():
 	with open(directoryFindKeysDS + public_key_name_cr.get(), 'wb') as f:
 
 		f.write(pem_public_key_user)
+
+
+def private_key_reader():
+
+	global directoryFindKeysDS
+	global private_key_user
+
+	with open(directoryFindKeysDS + private_key_name_br.get(), 'rb') as key_file:
+
+		private_key_user = serialization.load_pem_private_key(
+
+			key_file.read(),
+			password = None,
+			backend = default_backend()
+			)
+
+	print(private_key_user)
+
+def public_key_reader():
+
+	global directoryFindKeysDS
+	global private_key_user
+	global public_key_user
+
+	public_key_user = private_key_user.public_key()
+	print(public_key_user)
+
+	pem_public_key_user = public_key_user.public_bytes(
+		encoding = serialization.Encoding.PEM,
+		format = serialization.PublicFormat.SubjectPublicKeyInfo
+		)
+
+	with open(directoryFindKeysDS + public_key_name_br.get(), 'wb') as f:
+
+		f.write(pem_public_key_user)
+
+	print('Public key generated')
 
 
 
@@ -1890,18 +1932,18 @@ public_key_name_label_cr.place(x = 520, y = 300)
 public_key_button_cr = tk.Button(digital_signature, image = public_key_logo, command = lambda:public_key_generator())
 public_key_button_cr.place(x = 690, y = 282)
 
-private_key_name_label_br = tk.Entry(digital_signature, width = 15)
+private_key_name_label_br = tk.Entry(digital_signature, textvariable = private_key_name_br, width = 15)
 private_key_name_label_br.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
 private_key_name_label_br.place(x = 780, y = 220)
 
-private_key_button_br = tk.Button(digital_signature, image = private_key_logo)
+private_key_button_br = tk.Button(digital_signature, image = private_key_logo, command = lambda:private_key_reader())
 private_key_button_br.place(x = 950, y = 202)
 
-public_key_name_label_br = tk.Entry(digital_signature, width = 15)
+public_key_name_label_br = tk.Entry(digital_signature, textvariable = public_key_name_br, width = 15)
 public_key_name_label_br.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
 public_key_name_label_br.place(x = 780, y = 300)
 
-public_key_button_br = tk.Button(digital_signature, image = public_key_logo)
+public_key_button_br = tk.Button(digital_signature, image = public_key_logo, command = lambda:public_key_reader())
 public_key_button_br.place(x = 950, y = 282)
 
 bring_directory_DS = tk.Label(digital_signature, text = 'Define the directory for keys saving/searching')
