@@ -7,6 +7,11 @@ import time
 from playsound import playsound
 import hashlib
 from cryptography.fernet import Fernet
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric import rsa
 import pyperclip
 import psycopg2
 import os
@@ -47,6 +52,8 @@ no_video = 0
 English_mode = True
 Spanish_mode = False
 Chinese_mode = False
+private_key_user = ''
+public_key_user = ''
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -239,9 +246,9 @@ def selectDirectoryOpenFindKeysDS():
 
 	global directoryFindKeysDS
 
-	directoryDS = filedialog.askdirectory(title = 'Open directory')
-	directory_label_DS.config(text = directoryDS)
-	playsound('Audios/bambu_click.mp3')
+	directoryFindKeysDS = filedialog.askdirectory(title = 'Open directory')
+	directory_label_DS.config(text = directoryFindKeysDS)
+	#playsound('Audios/bambu_click.mp3')
 
 
 
@@ -1220,6 +1227,8 @@ player_message_encrypt = tk.StringVar()
 passw_em = tk.StringVar()
 password_for_decrypt = tk.StringVar()
 password_for_ramson = tk.StringVar()
+private_key_name_cr = tk.StringVar()
+public_key_name_cr = tk.StringVar()
 
 
 person1_var = tk.StringVar()
@@ -1783,6 +1792,50 @@ closeBCM_hashing.place(x = 950 , y = 10)
 ### ---------------------------------------------- Digital Signature section -----------------------------------------------
 
 
+def private_key_generator():
+
+	global private_key_user
+	global directoryFindKeysDS
+
+	private_key_user = rsa.generate_private_key(
+		public_exponent = 65537,
+		key_size = 2048,
+		backend = default_backend()
+		)
+
+	pem_private_key_user = private_key_user.private_bytes(
+		encoding = serialization.Encoding.PEM,
+		format = serialization.PrivateFormat.PKCS8,
+		encryption_algorithm = serialization.NoEncryption()
+		)
+
+	with open(directoryFindKeysDS + private_key_name_cr.get(), 'wb') as f:
+
+		f.write(pem_private_key_user)
+
+	print('Done')
+
+
+def public_key_generator():
+
+	global private_key_user
+	global public_key_user
+	global directoryFindKeysDS
+
+	public_key_user = private_key_user.public_key()
+
+	pem_public_key_user = public_key_user.public_bytes(
+		encoding = serialization.Encoding.PEM,
+		format = serialization.PublicFormat.SubjectPublicKeyInfo
+		)
+
+	with open(directoryFindKeysDS + public_key_name_cr.get(), 'wb') as f:
+
+		f.write(pem_public_key_user)
+
+
+
+
 digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
 digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
@@ -1823,18 +1876,18 @@ bring_key_pair_label = tk.Label(digital_signature, text = 'Bring key pair')
 bring_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
 bring_key_pair_label.place(x = 800, y = 190)
 
-private_key_name_label_cr = tk.Entry(digital_signature, width = 15)
+private_key_name_label_cr = tk.Entry(digital_signature, textvariable = private_key_name_cr, width = 15)
 private_key_name_label_cr.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
 private_key_name_label_cr.place(x = 520, y = 220)
 
-private_key_button_cr = tk.Button(digital_signature, image = private_key_logo)
+private_key_button_cr = tk.Button(digital_signature, image = private_key_logo, command = lambda:private_key_generator())
 private_key_button_cr.place(x = 690, y = 202)
 
-public_key_name_label_cr = tk.Entry(digital_signature, width = 15)
+public_key_name_label_cr = tk.Entry(digital_signature, textvariable = public_key_name_cr, width = 15)
 public_key_name_label_cr.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
 public_key_name_label_cr.place(x = 520, y = 300)
 
-public_key_button_cr = tk.Button(digital_signature, image = public_key_logo)
+public_key_button_cr = tk.Button(digital_signature, image = public_key_logo, command = lambda:public_key_generator())
 public_key_button_cr.place(x = 690, y = 282)
 
 private_key_name_label_br = tk.Entry(digital_signature, width = 15)
