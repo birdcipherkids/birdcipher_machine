@@ -1782,7 +1782,7 @@ verify_integrity_button.place(x = 315, y = 380)
 
 upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD THE FILE TO THE DIGITAL SIGNATURE TOOL')
 upload_file_label_DS.config(font = ('Comic Sans MS', 13), fg = '#040339')
-upload_file_label_DS.place(x = 500, y = 20)
+upload_file_label_DS.place(x = 510, y = 20)
 
 url_file_label_DS = tk.Label(digital_signature, width = 50)
 url_file_label_DS.config(font = ('Comic Sans MS', 10), fg = '#9daee1', bg = '#050005', justify = 'center')
@@ -1801,7 +1801,7 @@ hash_file_label_DS.place(x = 520, y = 150)
 
 create_key_pair_label = tk.Label(digital_signature, text = 'Create key pair')
 create_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
-create_key_pair_label.place(x = 550, y = 190)
+create_key_pair_label.place(x = 540, y = 190)
 
 bring_key_pair_label = tk.Label(digital_signature, text = 'Bring key pair')
 bring_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
@@ -1809,17 +1809,17 @@ bring_key_pair_label.place(x = 800, y = 190)
 
 private_key_name_label_cr = tk.Entry(digital_signature, width = 15)
 private_key_name_label_cr.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
-private_key_name_label_cr.place(x = 530, y = 220)
+private_key_name_label_cr.place(x = 520, y = 220)
 
 private_key_button_cr = tk.Button(digital_signature, image = private_key_logo)
-private_key_button_cr.place(x = 700, y = 202)
+private_key_button_cr.place(x = 690, y = 202)
 
 public_key_name_label_cr = tk.Entry(digital_signature, width = 15)
 public_key_name_label_cr.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
-public_key_name_label_cr.place(x = 530, y = 300)
+public_key_name_label_cr.place(x = 520, y = 300)
 
 public_key_button_cr = tk.Button(digital_signature, image = public_key_logo)
-public_key_button_cr.place(x = 700, y = 282)
+public_key_button_cr.place(x = 690, y = 282)
 
 private_key_name_label_br = tk.Entry(digital_signature, width = 15)
 private_key_name_label_br.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
@@ -1837,7 +1837,7 @@ public_key_button_br.place(x = 950, y = 282)
 
 bring_directory_DS = tk.Label(digital_signature, text = 'Define the directory for keys saving/searching')
 bring_directory_DS.config(font = ('Comic Sans MS', 14), fg = '#040339')
-bring_directory_DS.place(x = 530, y = 360)
+bring_directory_DS.place(x = 520, y = 360)
 
 directory_label_DS = tk.Label(digital_signature, width = 63)
 directory_label_DS.config(bg = '#050005', fg = '#9daee1')
@@ -1852,7 +1852,7 @@ file_hash_ciphertext_title.place(x = 530, y = 415)
 
 file_hash_ciphertext_label = tk.Text(digital_signature, width = 65, height = 4, padx = 10)
 file_hash_ciphertext_label.config(font = ('Comic Sans MS', 9), fg = '#9daee1', bg = '#050005')
-file_hash_ciphertext_label.place(x = 530, y = 445)
+file_hash_ciphertext_label.place(x = 520, y = 445)
 
 
 
