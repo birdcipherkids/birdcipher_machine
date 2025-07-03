@@ -58,6 +58,8 @@ public_key_user = ''
 public_key_user_string = ''
 hash_file_DS = ''
 signature = ''
+option_sign_choose = True
+option_verify_choose = False
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -1898,6 +1900,7 @@ def public_key_reader():
 
 
 
+
 	# 	f.write(pem_public_key_user)
 
 	print('Public key generated')
@@ -1968,24 +1971,82 @@ def verify_function():
 		file_hash_ciphertext_label.insert(tk.END, 'Verification failed')
 
 
-def send_signature():
+def option_sign():
+
+	global option_sign_choose
+	global option_verify_choose
+
+	option_sign_choose = True
+	option_verify_choose = False
+
+
+def option_verify():
+
+	global option_sign_choose
+	global option_verify_choose
+
+	option_verify_choose = True
+	option_sign_choose = False
+
+
+
+
+def manage_signature():
 
 	global public_key_user
-
-	miConexion1000 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
-	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
-
-	miCursor1000 = miConexion1000.cursor()
-
-	sql2000 = 'insert into digital_signature(author, public_key) values(%s,%s)'
-	sql2000_data = (author_name_variable.get(), public_key_user_string)
-
-	miCursor1000.execute(sql2000, sql2000_data)
-
-	miConexion1000.commit()
-	miConexion1000.close()
+	global option_sign_choose
+	global option_verify_choose
 
 
+	if option_sign_choose:
+
+		miConexion1000 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+		user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
+
+		miCursor1000 = miConexion1000.cursor()
+
+		sql2000 = 'insert into digital_signature(author, public_key) values(%s,%s)'
+		sql2000_data = (author_name_variable.get(), public_key_user_string)
+
+		miCursor1000.execute(sql2000, sql2000_data)
+
+		miConexion1000.commit()
+		miConexion1000.close()
+
+	elif option_verify_choose:
+
+		miConexion3000 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+		user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
+
+		miCursor3000 = miConexion3000.cursor()
+
+		sql3000 = 'select * from digital_signature where author = (%s)'
+		sql3000_data = (author_name_variable.get(), )
+
+		miCursor3000.execute(sql3000, sql3000_data)
+		dlt3000 = miCursor3000.fetchall()
+
+		public_key_user_temp = dlt3000[0][2]
+		public_key_user_temp2 = public_key_user_temp.encode('utf-8')
+
+		with open(directoryFindKeysDS + public_key_name_br.get(), 'wb') as f:
+
+			f.write(public_key_user_temp2)
+
+		# pem_encoded_public_key = public_key_user_temp2.public_bytes(
+    	# 	encoding=serialization.Encoding.PEM,
+    	# 	format=serialization.PublicFormat.SubjectPublicKeyInfo)
+
+		# public_key_user = pem_encoded_public_key
+		# public_key_name_br.set('public.pem')
+		#public_key_name_label_br.config()
+		
+
+
+
+
+		miConexion3000.commit()
+		miConexion3000.close()
 
 
 
@@ -1996,7 +2057,7 @@ def person_non_repudiation():
 	person_registry.title('Person')
 	person_registry.geometry('500x400')
 
-	author_button = tk.Button(person_registry, image = author_logo, command = lambda:send_signature())
+	author_button = tk.Button(person_registry, image = author_logo, command = lambda:manage_signature())
 	author_button.config(bg = '#040339')
 	author_button.place(x = 20, y = 20)
 
@@ -2007,6 +2068,14 @@ def person_non_repudiation():
 	author_name_label = tk.Entry(person_registry, textvariable = author_name_variable, width = 22)
 	author_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
 	author_name_label.place(x = 20, y = 310)
+
+	option_sign_document = tk.Button(person_registry, text = 'Sign document', font = ('Comic Sans MS', 11), command = lambda:option_sign())
+	option_sign_document.place(x = 250, y = 30)
+
+	option_verify_document = tk.Button(person_registry, text = 'Verify document', font = ('Comic Sans MS', 11), command = lambda:option_verify())
+	option_verify_document.place(x = 250, y = 100)
+
+
 
 
 digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
