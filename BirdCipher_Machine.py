@@ -1837,6 +1837,7 @@ def public_key_generator():
 	global private_key_user
 	global public_key_user
 	global directoryFindKeysDS
+	global public_key_user_string
 
 	public_key_user = private_key_user.public_key()
 	print(public_key_user)
@@ -1849,6 +1850,8 @@ def public_key_generator():
 	with open(directoryFindKeysDS + public_key_name_cr.get(), 'wb') as f:
 
 		f.write(pem_public_key_user)
+
+	public_key_user_string = pem_public_key_user.decode('utf-8')
 
 
 def private_key_reader():
