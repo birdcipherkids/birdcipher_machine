@@ -55,6 +55,7 @@ Spanish_mode = False
 Chinese_mode = False
 private_key_user = ''
 public_key_user = ''
+public_key_user_string = ''
 hash_file_DS = ''
 signature = ''
 
@@ -1238,6 +1239,7 @@ private_key_name_cr = tk.StringVar()
 public_key_name_cr = tk.StringVar()
 private_key_name_br = tk.StringVar()
 public_key_name_br = tk.StringVar()
+author_name_variable = tk.StringVar()
 
 
 person1_var = tk.StringVar()
@@ -1294,6 +1296,7 @@ verify_integrity_logo = tk.PhotoImage(file = 'Images/Verify Integrity.png')
 browse_ds_logo = tk.PhotoImage(file = 'Images/Browse_ds1.png')
 private_key_logo = tk.PhotoImage(file = 'Images/private.png')
 public_key_logo = tk.PhotoImage(file = 'Images/public.png')
+author_logo = tk.PhotoImage(file = 'Images/Author.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 
@@ -1867,6 +1870,7 @@ def public_key_reader():
 	global directoryFindKeysDS
 	global private_key_user
 	global public_key_user
+	global public_key_user_string
 
 	# public_key_user = private_key_user.public_key()
 	# print(public_key_user)
@@ -1885,9 +1889,19 @@ def public_key_reader():
 
 			)
 
+
+	public_pem_bytes = public_key_user.public_bytes(
+    	encoding=serialization.Encoding.PEM,
+    	format=serialization.PublicFormat.SubjectPublicKeyInfo)
+
+	public_key_user_string = public_pem_bytes.decode('utf-8')
+
+
+
 	# 	f.write(pem_public_key_user)
 
 	print('Public key generated')
+	print(public_key_user)
 
 
 
@@ -1954,6 +1968,47 @@ def verify_function():
 		file_hash_ciphertext_label.insert(tk.END, 'Verification failed')
 
 
+def send_signature():
+
+	global public_key_user
+
+	miConexion1000 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+	user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
+
+	miCursor1000 = miConexion1000.cursor()
+
+	sql2000 = 'insert into digital_signature(author, public_key) values(%s,%s)'
+	sql2000_data = (author_name_variable.get(), public_key_user_string)
+
+	miCursor1000.execute(sql2000, sql2000_data)
+
+	miConexion1000.commit()
+	miConexion1000.close()
+
+
+
+
+
+
+def person_non_repudiation():
+
+	person_registry = tk.Toplevel(decrypt)
+	person_registry.title('Person')
+	person_registry.geometry('500x400')
+
+	author_button = tk.Button(person_registry, image = author_logo, command = lambda:send_signature())
+	author_button.config(bg = '#040339')
+	author_button.place(x = 20, y = 20)
+
+	author_name_title = tk.Label(person_registry, text = 'Username')
+	author_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
+	author_name_title.place(x = 30, y = 270)
+
+	author_name_label = tk.Entry(person_registry, textvariable = author_name_variable, width = 22)
+	author_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
+	author_name_label.place(x = 20, y = 310)
+
+
 digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
 digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
@@ -1961,7 +2016,7 @@ digital_signature_button.place(x = 20, y = 20)
 sign_document_button = tk.Button(digital_signature, image = sign_document_logo, command = lambda:sign_document_function())
 sign_document_button.place(x = 20, y = 380)
 
-non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo)
+non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo, command = lambda:person_non_repudiation())
 non_repudiation_button.place(x = 178, y = 380)
 
 verify_integrity_button = tk.Button(digital_signature, image = verify_integrity_logo, command = lambda:verify_function())
