@@ -1323,10 +1323,6 @@ hashing = ttk.Frame(notebk, width = 1050, height = 540)
 hashing.pack(fill = 'both', expand = True)
 notebk.add(hashing, text = 'Hashing')
 
-digital_signature = ttk.Frame(notebk, width = 1050, height = 540)
-digital_signature.pack(fill = 'both', expand = True)
-notebk.add(digital_signature, text = 'Digital signature')
-
 fr = ttk.Frame(notebk, width = 1050, height=540)
 fr.configure(style = "BW.TLabel")
 fr.pack(fill = 'both', expand = True)
@@ -1339,6 +1335,10 @@ notebk.add(fr2, text = "Encryption")
 fr3 = ttk.Frame(notebk, width = 1050, height = 540)
 fr3.pack(fill = 'both', expand = True)
 notebk.add(fr3, text = "Decryption")
+
+digital_signature = ttk.Frame(notebk, width = 1050, height = 540)
+digital_signature.pack(fill = 'both', expand = True)
+notebk.add(digital_signature, text = 'Digital signature')
 
 pki = ttk.Frame(notebk, width = 1050, height = 540)
 pki.pack(fill = 'both', expand = True)
@@ -2153,14 +2153,14 @@ bring_directory_DS = tk.Label(digital_signature, text = 'Define the directory fo
 bring_directory_DS.config(font = ('Comic Sans MS', 14), fg = '#040339')
 bring_directory_DS.place(x = 520, y = 360)
 
-directory_label_DS = tk.Label(digital_signature, width = 63)
+directory_label_DS = tk.Label(digital_signature, width = 59)
 directory_label_DS.config(bg = '#050005', fg = '#9daee1')
 directory_label_DS.place(x = 520, y = 390)
 
 directory_browse_DS = tk.Button(digital_signature, image = browse_ds_logo, command = lambda:selectDirectoryOpenFindKeysDS())
-directory_browse_DS.place(x = 975, y = 370)
+directory_browse_DS.place(x = 950, y = 370)
 
-file_hash_ciphertext_title = tk.Label(digital_signature, text = 'File hash ciphertext')
+file_hash_ciphertext_title = tk.Label(digital_signature, text = 'Digital Signature Results')
 file_hash_ciphertext_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
 file_hash_ciphertext_title.place(x = 530, y = 415)
 
