@@ -12,6 +12,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.exceptions import InvalidSignature
 import pyperclip
 import psycopg2
 import os
@@ -54,6 +55,8 @@ Spanish_mode = False
 Chinese_mode = False
 private_key_user = ''
 public_key_user = ''
+hash_file_DS = ''
+signature = ''
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -236,11 +239,15 @@ def selectDirectoryHash():
 def selectDirectoryDigitalSignature():
 
 	global directoryDigitalSignature
+	global hash_file_DS
 
 	directoryDigitalSignature = filedialog.askopenfilename(title = 'Open file to sign or verify')
 	url_file_label_DS.config(text = directoryDigitalSignature)
-	hash_file_label_DS.config(text = hash_file_birdcipher(directoryDigitalSignature, 'sha256'))
-	playsound('Audios/bambu_click.mp3')
+	hash_file_DS = hash_file_birdcipher(directoryDigitalSignature, 'sha256')
+	hash_file_label_DS.config(text = hash_file_DS)
+	hash_file_DS = hash_file_DS.encode()
+
+	#playsound('Audios/bambu_click.mp3')
 
 def selectDirectoryOpenFindKeysDS():
 
@@ -1861,34 +1868,103 @@ def public_key_reader():
 	global private_key_user
 	global public_key_user
 
-	public_key_user = private_key_user.public_key()
-	print(public_key_user)
+	# public_key_user = private_key_user.public_key()
+	# print(public_key_user)
 
-	pem_public_key_user = public_key_user.public_bytes(
-		encoding = serialization.Encoding.PEM,
-		format = serialization.PublicFormat.SubjectPublicKeyInfo
-		)
+	# pem_public_key_user = public_key_user.public_bytes(
+	# 	encoding = serialization.Encoding.PEM,
+	# 	format = serialization.PublicFormat.SubjectPublicKeyInfo
+	# 	)
 
-	with open(directoryFindKeysDS + public_key_name_br.get(), 'wb') as f:
+	with open(directoryFindKeysDS + public_key_name_br.get(), 'rb') as f:
 
-		f.write(pem_public_key_user)
+		public_key_user = serialization.load_pem_public_key(
+
+			f.read(),
+			backend = default_backend()
+
+			)
+
+	# 	f.write(pem_public_key_user)
 
 	print('Public key generated')
 
 
 
 
+def sign_document_function():
+
+	global hash_file_DS
+	global private_key_user
+	global signature
+
+	signature = private_key_user.sign(
+
+		hash_file_DS,
+		padding.PSS(
+			mgf = padding.MGF1(hashes.SHA256()),
+			salt_length = padding.PSS.MAX_LENGTH
+			),
+		hashes.SHA256()
+		) 
+
+	file_hash_ciphertext_label.delete('1.0', tk.END)
+	file_hash_ciphertext_label.insert(tk.END, signature)
+
+	with open(directoryFindKeysDS + 'signature.txt', 'wb') as j:
+
+		j.write(signature)
+
+
+def verify_function():
+
+	global signature
+	global hash_file_DS
+	global public_key_user
+
+	if signature == '':
+
+		with open(directoryFindKeysDS + 'signature.txt', 'rb') as l:
+
+			signature = l.read()
+
+	try:
+
+		verification = public_key_user.verify(
+
+			signature,
+			hash_file_DS,
+			padding.PSS(
+			
+				mgf = padding.MGF1(hashes.SHA256()),
+				salt_length = padding.PSS.MAX_LENGTH
+				),
+			hashes.SHA256()
+
+			)
+
+		file_hash_ciphertext_label.delete('1.0', tk.END)
+
+		if verification is None:
+
+			file_hash_ciphertext_label.insert(tk.END, 'Verification is OK')
+
+	except InvalidSignature:
+
+		file_hash_ciphertext_label.insert(tk.END, 'Verification failed')
+
+
 digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
 digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
 
-sign_document_button = tk.Button(digital_signature, image = sign_document_logo)
+sign_document_button = tk.Button(digital_signature, image = sign_document_logo, command = lambda:sign_document_function())
 sign_document_button.place(x = 20, y = 380)
 
 non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo)
 non_repudiation_button.place(x = 178, y = 380)
 
-verify_integrity_button = tk.Button(digital_signature, image = verify_integrity_logo)
+verify_integrity_button = tk.Button(digital_signature, image = verify_integrity_logo, command = lambda:verify_function())
 verify_integrity_button.place(x = 315, y = 380)
 
 upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD THE FILE TO THE DIGITAL SIGNATURE TOOL')
