@@ -1242,6 +1242,7 @@ public_key_name_cr = tk.StringVar()
 private_key_name_br = tk.StringVar()
 public_key_name_br = tk.StringVar()
 author_name_variable = tk.StringVar()
+signature_name_variable = tk.StringVar()
 
 
 person1_var = tk.StringVar()
@@ -1295,6 +1296,7 @@ firma_digital_logo = tk.PhotoImage(file = 'Images/Firma Digital.png')
 sign_document_logo = tk.PhotoImage(file = 'Images/Sign document.png')
 non_repudiation_logo = tk.PhotoImage(file = 'Images/Non-repudiation.png')
 verify_integrity_logo = tk.PhotoImage(file = 'Images/Verify Integrity.png')
+instructions_ds_logo = tk.PhotoImage(file = 'Images/InstructionsDS.png')
 browse_ds_logo = tk.PhotoImage(file = 'Images/Browse_ds1.png')
 private_key_logo = tk.PhotoImage(file = 'Images/private.png')
 public_key_logo = tk.PhotoImage(file = 'Images/public.png')
@@ -1931,7 +1933,7 @@ def sign_document_function():
 	file_hash_ciphertext_label.delete('1.0', tk.END)
 	file_hash_ciphertext_label.insert(tk.END, signature)
 
-	with open(directoryFindKeysDS + 'signature.txt', 'wb') as j:
+	with open(directoryFindKeysDS + signature_name_variable.get(), 'wb') as j:
 
 		j.write(signature)
 
@@ -1944,7 +1946,7 @@ def verify_function():
 
 	if signature == '':
 
-		with open(directoryFindKeysDS + 'signature.txt', 'rb') as l:
+		with open(directoryFindKeysDS + signature_name_variable.get(), 'rb') as l:
 
 			signature = l.read()
 
@@ -2066,17 +2068,30 @@ def person_non_repudiation():
 
 	author_name_title = tk.Label(person_registry, text = 'Username')
 	author_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
-	author_name_title.place(x = 30, y = 270)
+	author_name_title.place(x = 30, y = 260)
 
 	author_name_label = tk.Entry(person_registry, textvariable = author_name_variable, width = 22)
 	author_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
-	author_name_label.place(x = 20, y = 310)
+	author_name_label.place(x = 20, y = 290)
 
-	option_sign_document = tk.Button(person_registry, text = 'Sign document', font = ('Comic Sans MS', 11), command = lambda:option_sign())
+	signature_name_title = tk.Label(person_registry, text = 'Signature file name')
+	signature_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
+	signature_name_title.place(x = 30, y = 320)
+
+	signature_name_label = tk.Entry(person_registry, textvariable = signature_name_variable, width = 22)
+	signature_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
+	signature_name_label.place(x = 20, y = 350)
+
+	option_sign_document = tk.Button(person_registry, text = 'Sign document mode', command = lambda:option_sign())
 	option_sign_document.place(x = 250, y = 30)
+	option_sign_document.config(font = ('Comic Sans MS', 11), fg = '#040339')
 
-	option_verify_document = tk.Button(person_registry, text = 'Verify document', font = ('Comic Sans MS', 11), command = lambda:option_verify())
-	option_verify_document.place(x = 250, y = 100)
+	option_verify_document = tk.Button(person_registry, text = 'Verify document mode', command = lambda:option_verify())
+	option_verify_document.place(x = 250, y = 80)
+	option_verify_document.config(font = ('Comic Sans MS', 11), fg = '#040339')
+
+	sign_document_button = tk.Button(person_registry, image = sign_document_logo, command = lambda:sign_document_function())
+	sign_document_button.place(x = 340, y = 267)
 
 
 
@@ -2085,8 +2100,8 @@ digital_signature_button = tk.Button(digital_signature, image = digital_signatur
 digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
 
-sign_document_button = tk.Button(digital_signature, image = sign_document_logo, command = lambda:sign_document_function())
-sign_document_button.place(x = 20, y = 380)
+instructions_ds_button = tk.Button(digital_signature, image = instructions_ds_logo)
+instructions_ds_button.place(x = 30, y = 380)
 
 non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo, command = lambda:person_non_repudiation())
 non_repudiation_button.place(x = 178, y = 380)
@@ -2164,8 +2179,8 @@ file_hash_ciphertext_title = tk.Label(digital_signature, text = 'Digital Signatu
 file_hash_ciphertext_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
 file_hash_ciphertext_title.place(x = 530, y = 415)
 
-file_hash_ciphertext_label = tk.Text(digital_signature, width = 65, height = 4, padx = 10)
-file_hash_ciphertext_label.config(font = ('Comic Sans MS', 9), fg = '#9daee1', bg = '#050005')
+file_hash_ciphertext_label = tk.Text(digital_signature, width = 50, height = 3, padx = 10)
+file_hash_ciphertext_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005')
 file_hash_ciphertext_label.place(x = 520, y = 445)
 
 
