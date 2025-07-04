@@ -1303,6 +1303,7 @@ public_key_logo = tk.PhotoImage(file = 'Images/public.png')
 author_logo = tk.PhotoImage(file = 'Images/Author.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
+algorithm_logo = tk.PhotoImage(file = 'Images/algorithm.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -2538,47 +2539,45 @@ fernet_encryption_message = tk.Button(fr2, image = encrypt_message_image, font =
 fernet_encryption_message.config(fg = '#1af017')
 fernet_encryption_message.place(x = 900, y = 150)
 
-imagen_caesar_cipher_lab2 = tk.Label(fr2, image = imagen_caesar_cipher)
-imagen_caesar_cipher_lab2.place(x = 30, y = 300)
+algorithm_button = tk.Button(fr2, image = algorithm_logo)
+algorithm_button.place(x = 30, y = 310)
+algorithm_button.config(bg = '#3f0322')
 
 titleBirdCipherMachine20 = tk.Label(fr2, text = "BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages", font = ("Comic Sans MS", 12))
 titleBirdCipherMachine20.config(fg = "#7e086c")
 titleBirdCipherMachine20.place(x = 70, y = 8)
 
-buttonPoints2 = tk.Button(fr2, image = imageCaesar, command = lambda:pointsAudio())
-buttonPoints2.place(x = 210, y = 300)
-
 buttonPerson1a = tk.Button(fr2, image = person1_image, command = lambda:person1_actv())
-buttonPerson1a.place(x = 300, y = 300)
+buttonPerson1a.place(x = 270, y = 310)
 
 buttonPerson2a = tk.Button(fr2, image = person2_image, command = lambda:person2_actv())
-buttonPerson2a.place(x = 400, y = 300)
+buttonPerson2a.place(x = 370, y = 310)
 
 buttonPerson3a = tk.Button(fr2, image = person3_image, command = lambda:person3_actv())
-buttonPerson3a.place(x= 500, y = 300)
+buttonPerson3a.place(x= 470, y = 310)
 
 buttonPerson4a = tk.Button(fr2, image = person4_image, command = lambda:person4_actv())
-buttonPerson4a.place(x = 615, y = 300)
+buttonPerson4a.place(x = 570, y = 310)
 
-labelPoints2 = tk.Label(fr2, font = ("Comic Sans MS", 13), justify = "center", width = 6)
-labelPoints2.config(bg = "#050005", fg = "#7e086c")
-labelPoints2.place(x = 212, y = 410)
+# labelPoints2 = tk.Label(fr2, font = ("Comic Sans MS", 13), justify = "center", width = 6)
+# labelPoints2.config(bg = "#050005", fg = "#7e086c")
+# labelPoints2.place(x = 212, y = 410)
 
 person1 = tk.Entry(fr2, textvariable = person1_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
 person1.config(bg = "#050005", fg = "#7e086c")
-person1.place(x = 300, y = 410)
+person1.place(x = 270, y = 410)
 
 person2 = tk.Entry(fr2, textvariable = person2_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
 person2.config(bg = "#050005", fg = "#7e086c")
-person2.place(x = 400, y = 410)
+person2.place(x = 370, y = 410)
 
 person3 = tk.Entry(fr2, textvariable = person3_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
 person3.config(bg = "#050005", fg = "#7e086c")
-person3.place(x = 500, y = 410)
+person3.place(x = 470, y = 410)
 
-person4 = tk.Entry(fr2, textvariable = person4_var, font = ("Comic Sans MS", 13), justify = "center", width = 7)
+person4 = tk.Entry(fr2, textvariable = person4_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
 person4.config(bg = "#050005", fg = "#7e086c")
-person4.place(x = 617, y = 410)
+person4.place(x = 570, y = 410)
 
 labelQuestionKey2 = tk.Label(fr2, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey2.config(fg = "#7e086c")
@@ -2593,7 +2592,7 @@ imageCryptographicMachine2.place(x = 760, y = 290)
 imageCryptographicMachine2.config(bg = "#3f0322")
 
 closeMachineButton2 = tk.Button(fr2, text = "Close the BirdCipher Cryptographic Machine", font = ("Comic Sans MS", 12), command = lambda:closeMachine())
-closeMachineButton2.place(x = 250, y = 460)
+closeMachineButton2.place(x = 290, y = 460)
 closeMachineButton2.config(fg = "#7e086c")
 
 # ---------------------------------------------------------------------------------------------------------------------------
