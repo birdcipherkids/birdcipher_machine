@@ -1,10 +1,18 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
+import pygame
+import moviepy.editor
 import time
 from playsound import playsound
 import hashlib
 from cryptography.fernet import Fernet
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.exceptions import InvalidSignature
 import pyperclip
 import psycopg2
 import os
@@ -23,21 +31,35 @@ from CaesarCipher import *
 from TranspositionEncrypt import *
 from TranspositionDecrypt import *
 from TranspositionColumnarEncrypt import *
+from Videos_Awareness import *
 
 
 
-points = 0
-coins = 0
-feathers = 0
-diamonds = 0
+books_pt = 0
+keys_pt = 0
+swords_pt = 0
+caduceus_pt = 0
 lives = 5
 counter_social_eng = -1
 directory = ''
 directoryHash = ''
+directoryDigitalSignature = ''
+directoryFindKeysDS = ''
 directoryVirusTotal = ''
 username_db = ''
 key_ramson = ''
 login_check = False
+no_video = 0
+English_mode = True
+Spanish_mode = False
+Chinese_mode = False
+private_key_user = ''
+public_key_user = ''
+public_key_user_string = ''
+hash_file_DS = ''
+signature = ''
+option_sign_choose = True
+option_verify_choose = False
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -47,6 +69,12 @@ def login_user():
 
 	global username_db
 	global login_check
+	global English_mode
+	global Spanish_mode
+	global books_pt
+	global keys_pt
+	global swords_pt
+	global caduceus_pt
 
 	wdatos = bytes(password_dbc.get(), 'utf-8')
 	h = hashlib.new(algoritmo, wdatos)
@@ -60,8 +88,8 @@ def login_user():
 	sql1 = 'select * from users where username = (%s)'
 	sql1_data = (username_dbc.get(), )
 
-	sql2 = 'insert into users(username, password, position, points, coins, feathers, emeralds, diamonds) values(%s,%s,%s,%s,%s,%s,%s,%s)'
-	sql2_data = (username_dbc.get(), hash2, position_dbc.get(), 0, 0, 0, 0, 0)
+	sql2 = 'insert into users(username, password, position, books, keys, swords, caduceus) values(%s,%s,%s,%s,%s,%s,%s)'
+	sql2_data = (username_dbc.get(), hash2, position_dbc.get(), 1, 0, 0, 0)
 
 	miCursor1.execute(sql1, sql1_data)
 	dlt1 = miCursor1.fetchall()
@@ -73,41 +101,89 @@ def login_user():
 		dlt2 = miCursor1.fetchall()
 		hash256_passw_label.config(text = hash2)
 		username_db = dlt2[0][1]
+		books_pt = dlt2[0][4]
+		Book_score.config(text = books_pt)
+		keys_pt = dlt2[0][5]
+		swords_pt = dlt2[0][6]
+		caduceus_pt = dlt2[0][7]
 		login_check = True
 		#print(username_db)
-		playsound('bambu_click.mp3')
-		playsound('NuevoUsuarioCreado.mp3')
-		playsound('NewUserCreated.mp3')
+		playsound('Audios/bambu_click.mp3')
 		time.sleep(2)
-		labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
-		labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+
+		if English_mode:
+
+			labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			playsound('Audios/NewUserCreated.mp3')
+
+
+		elif Spanish_mode:
+
+			labelPlayerBCM.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			playsound('Audios/NuevoUsuarioCreado.mp3')
+
+
 
 	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
 
 		hash256_passw_label.config(text = dlt1[0][2])
 		username_db = dlt1[0][1]
+		books_pt = dlt1[0][4]
+		Book_score.config(text = books_pt)
+		keys_pt = dlt1[0][5]
+		swords_pt = dlt1[0][6]
+		caduceus_pt = dlt1[0][7]
 		login_check = True
 		#print(username_db)
-		playsound('bambu_click.mp3')
-		playsound('CorrectoLogin.mp3')
-		playsound('CorrectLogin.mp3')
+		playsound('Audios/bambu_click.mp3')
 		time.sleep(2)
-		#playsound('UseMachine.mp3')
-		labelPlayerBCM.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerBCM2.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerBCM3.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerBCM4.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
-		labelPlayerLoginHashing.config(text = 'Welcome to BirdCipher, {}'.format(username_dbc.get()))
+		
+
+		if English_mode:
+
+			labelPlayerBCM.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			labelPlayerLoginHashing.config(text = 'Welcome, {}'.format(username_dbc.get()))
+			playsound('Audios/CorrectLogin.mp3')
+
+		elif Spanish_mode:
+
+			labelPlayerBCM.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM2.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM3.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerBCM4.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			labelPlayerLoginHashing.config(text = 'Bienvenido, {}'.format(username_dbc.get()))
+			playsound('Audios/CorrectoLogin.mp3')
+
+
 
 	elif len(dlt1) > 0 and hash2 != dlt1[0][2]:
 
-		playsound('ContrasenaIncorrectaVI.mp3')
+		if English_mode:
+
+			playsound('Audios/Incorrect_password.mp3')
+
+		elif Spanish_mode:
+
+			playsound('Audios/ContrasenaIncorrectaVI.mp3')
 
 	elif username_dbc.get() == '' or password_dbc.get() == '':
 
-		playsound('DebesIngresarCredenciales.mp3')
+		if English_mode:
+
+			playsound('Audios/Enter_credencials.mp3')
+
+		elif Spanish_mode:
+
+			playsound('Audios/DebesIngresarCredenciales.mp3')
 
 	miConexion1.commit()
 	miConexion1.close()
@@ -119,9 +195,14 @@ def copyHashLogin():
 	h = hashlib.new(algoritmo, wdatos)
 	hash2 = HASH.generaHash(h)
 
-	playsound('bambu_click.mp3')
-	playsound('HashCopiadoLogin.mp3')
-	playsound('HashCopiedLogin.mp3')
+	playsound('Audios/bambu_click.mp3')
+
+	if Spanish_mode:
+		playsound('Audios/HashCopiadoLogin.mp3')
+
+	elif English_mode:
+		playsound('Audios/HashCopiedLogin.mp3')
+	
 	pyperclip.copy(hash2)
 
 
@@ -134,14 +215,55 @@ def selectDirectory():
 
 	directory = filedialog.askdirectory(title = 'Open directory')
 	ramsonDirectoryUrl.config(text = directory)
-	playsound('DirectorioDefinido.mp3')
+	print(directory)
+
+	if English_mode:
+
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/Directory_correctly_defined.mp3')
+
+	elif Spanish_mode:
+
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/DirectorioDefinido.mp3')
+
+	elif Chinese_mode:
+
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/Directory_correctly_defined_zh.mp3')
 
 def selectDirectoryHash():
 
 	global directoryHash
 
-	directoryHash = filedialog.askopenfilename(title = 'Open file to hash')
+	directoryHash = filedialog.askopenfilename(title = 'Open file')
 	archiveURLShow.config(text = archive_url.set(directoryHash))
+
+def selectDirectoryDigitalSignature():
+
+	global directoryDigitalSignature
+	global hash_file_DS
+
+	directoryDigitalSignature = filedialog.askopenfilename(title = 'Open file to sign or verify')
+	url_file_label_DS.config(text = directoryDigitalSignature)
+	hash_file_DS = hash_file_birdcipher(directoryDigitalSignature, 'sha256')
+	hash_file_label_DS.config(text = hash_file_DS)
+	hash_file_DS = hash_file_DS.encode()
+
+	#playsound('Audios/bambu_click.mp3')
+
+def selectDirectoryOpenFindKeysDS():
+
+	global directoryFindKeysDS
+
+	directoryFindKeysDS = filedialog.askdirectory(title = 'Open directory')
+	directory_label_DS.config(text = directoryFindKeysDS)
+	#playsound('Audios/bambu_click.mp3')
+
+
+
+
+
 
 def selectDirectoryVirusTotal():
 
@@ -159,8 +281,8 @@ def generate_key_ramson():
 
 	key_ramson = Fernet.generate_key()
 	ramsonKey.config(text = key_ramson)
-	playsound('bambu_click.mp3')
-	playsound('LLaveGenerada.mp3')
+	playsound('Audios/bambu_click.mp3')
+	playsound('Audios/LLaveGenerada.mp3')
 
 def bring_key_ramson():
 
@@ -190,8 +312,8 @@ def bring_key_ramson():
 			dlt456 = miCursor13.fetchall()
 			key_ramson = dlt456[0][4]
 			ramsonKey.config(text = key_ramson)
-			playsound('bambu_click.mp3')
-			playsound('LlaveRecuperada.mp3')
+			playsound('Audios/bambu_click.mp3')
+			playsound('Audios/LlaveRecuperada.mp3')
 
 	miConexion13.commit()
 	miConexion13.close()
@@ -279,12 +401,12 @@ def encrypt_files_ramson_funct():
 					execution_encrypt_files(archivos2, key_ramson)
 					print(key_ramson)
 
-					playsound('bambu_click.mp3')
-					playsound('ArchivosEncriptadosExitosamente.mp3')
+					playsound('Audios/bambu_click.mp3')
+					playsound('Audios/ArchivosEncriptadosExitosamente.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
-					playsound('cartoon121.mp3')
+					playsound('Audios/cartoon121.mp3')
 
 
 			elif len(df20) > 0 and df12_test == True:
@@ -300,32 +422,32 @@ def encrypt_files_ramson_funct():
 					execution_encrypt_files(archivos2, key_ramson)
 					print(key_ramson)
 
-					playsound('bambu_click.mp3')
-					playsound('ArchivosEncriptadosExitosamente.mp3')
+					playsound('Audios/bambu_click.mp3')
+					playsound('Audios/ArchivosEncriptadosExitosamente.mp3')
 
 				elif directory == '' or ramsonBird_message.get('1.0', 'end-1c') == '' or packet.get() == 0:
 
-					playsound('cartoon121.mp3')
+					playsound('Audios/cartoon121.mp3')
 
 
 		elif target_receiver_ramson == '':
 
-			playsound('RecipientUsername.mp3')
+			playsound('Audios/RecipientUsername.mp3')
 			df12_test = False
 
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 	# if dlt5[0][5] >= 1 and hash2 != dlt5[0][3]:
 
-	# 	playsound('WrongPass.mp3')
+	# 	playsound('Audios/WrongPass.mp3')
 
 	# elif dlt5[0][5] < 1:
 
-	# 	playsound('AuthorizationSendMssg.mp3')
+	# 	playsound('Audios/AuthorizationSendMssg.mp3')
 
 
 
@@ -373,16 +495,16 @@ def decrypt_files_ramson_funct():
 				execution_decrypt_files(archivos2, key_ramson)
 				print(key_ramson)
 				ramsonBird_message.insert(tk.END, df202[0][5])
-				playsound('bambu_click.mp3')
-				playsound('ArchivosDesencriptadosExitosamente.mp3')
+				playsound('Audios/bambu_click.mp3')
+				playsound('Audios/ArchivosDesencriptadosExitosamente.mp3')
 
 			elif len(df202) == 0:
 
-				playsound('cartoon121.mp3')
+				playsound('Audios/cartoon121.mp3')
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 	miConexion122.commit()
 	miConexion122.close()
@@ -429,7 +551,7 @@ def send_message():
 					sql110 = 'insert into encryptedMessages(username, password, server, actual_message, key_b) values(%s,%s,%s,%s,%s)'
 					datos_sql110 = (username_db, hash2, target_person, token.decode(), key_encryption.decode())
 					miCursor2.execute(sql110, datos_sql110)
-					playsound('bambu_click.mp3')
+					playsound('Audios/bambu_click.mp3')
 					#playsound('message_sent_success.mp3')
 
 				# elif token == '' or key_encryption == '':
@@ -443,27 +565,27 @@ def send_message():
 					sql111 = 'update encryptedMessages set (username, password, server, actual_message, key_b) = (%s,%s,%s,%s,%s) where (nickname = (%s) and server = (%s))'
 					datasql111 = (username_db, hash2, target_person, token.decode(), key_encryption.decode(), username_db, target_person)
 					miCursor2.execute(sql111, datasql111)
-					playsound('bambu_click.mp3')
-					#playsound('message_sent_success.mp3')
+					playsound('Audios/bambu_click.mp3')
+					#playsound('Audios/message_sent_success.mp3')
 
 				# elif token == '' or key_encryption == '':
 
-				# 	playsound('StepsForSending.mp3')
+				# 	playsound('Audios/StepsForSending.mp3')
 
 		# elif target_person == '':
 
-		# 	playsound('RecipientUsername.mp3')
+		# 	playsound('Audios/RecipientUsername.mp3')
 		# 	df = -1
 		# 	df1_test = False
 
 
 	# elif dlt5[0][5] >= 0 and hash2 != dlt5[0][3]:
 
-	# 	playsound('WrongPass.mp3')
+	# 	playsound('Audios/WrongPass.mp3')
 
 	# elif dlt5[0][5] < 10:
 
-	# 	playsound('AuthorizationSendMssg.mp3')
+	# 	playsound('Audios/AuthorizationSendMssg.mp3')
 
 
 	miConexion2.commit()
@@ -507,8 +629,8 @@ def displayCiphertext():
 
 		elif target_person_decrypt == '':
 
-			playsound('perder_incorrecto_no_valido.mp3')
-			playsound('activatePersonFirst_toReceive.mp3')
+			playsound('Audios/perder_incorrecto_no_valido.mp3')
+			playsound('Audios/activatePersonFirst_toReceive.mp3')
 
 		if len(dlt7) > 0:
 
@@ -519,11 +641,11 @@ def displayCiphertext():
 			cipher_text3.config(font = ("Comic Sans MS", 10))
 				
 			key_fernet_text2.config(text = dlt7[0][5], justify = 'center', wraplength = 700, font = ('Comic Sans MS', 10))
-			playsound('bambu_click.mp3')
+			playsound('Audios/bambu_click.mp3')
 
 	elif hash3 != dlt6[0][3]:
 
-		playsound('WrongPass.mp3')
+		playsound('Audios/WrongPass.mp3')
 
 
 	miConexion3.commit()
@@ -555,7 +677,7 @@ def bc_decription_machine():
 	token2 = token2.decode()
 	cipher_text2_encrp2.insert(tk.END, token2)
 	cipher_text2_encrp2.config(font = ("Comic Sans MS", 10))
-	playsound('bambu_click.mp3')
+	playsound('Audios/bambu_click.mp3')
 
 	miConexion3.commit()
 	miConexion3.close()
@@ -592,7 +714,7 @@ def fernet_encryption_function():
 
 	elif key_encryption_test == False:
 
-		playsound('MustGenerateKey.mp3')
+		playsound('Audios/MustGenerateKey.mp3')
 
 
 def listen_decrypt_text():
@@ -611,11 +733,11 @@ def listen_decrypt_text():
 
 	elif match == False and chances_decrypt <= 3:
 			
-		playsound('C:/BirdCipher/Audios/VoiceAudios/WrongKey.mp3')
+		playsound('Audios/WrongKey.mp3')
 
 	elif chances_decrypt > 3:
 
-		playsound('C:/BirdCipher/Audios/VoiceAudios/chances_decrypt.mp3')
+		playsound('Audios/chances_decrypt.mp3')
 
 def audioPoints():
 
@@ -643,8 +765,15 @@ def closeMachine():
 	chances_decrypt = 0
 	target_person = ''
 	target_person_decrypt = ''
-	playsound('HastaLuego.mp3')
-	playsound('Bye.mp3')
+
+	if English_mode:
+
+		playsound('Audios/Bye.mp3')
+
+	elif Spanish_mode:
+
+		playsound('Audios/HastaLuego.mp3')
+	
 	time.sleep(2)
 	decrypt.destroy()
 
@@ -660,12 +789,12 @@ def person1_actv():
 		person3_activated = False
 		person4_activated = False
 		target_person = person1_var.get()
-		playsound('bambu_click.mp3')
-		#playsound('activatedPersonA.mp3')
+		playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/activatedPersonA.mp3')
 
 	elif person1_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 
 def person2_actv():
@@ -679,12 +808,12 @@ def person2_actv():
 		person3_activated = False
 		person4_activated = False
 		target_person = person2_var.get()
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		#playsound('activatedPersonA.mp3')
 
 	elif person2_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 def person3_actv():
 
@@ -697,12 +826,12 @@ def person3_actv():
 		person3_activated = True
 		person4_activated = False
 		target_person = person3_var.get()
-		playsound('bambu_click.mp3')
-		#playsound('activatedPersonA.mp3')
+		playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/activatedPersonA.mp3')
 
 	elif person3_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 def person4_actv():
 
@@ -715,12 +844,12 @@ def person4_actv():
 		person3_activated = False
 		person4_activated = True
 		target_person = person4_var.get()
-		playsound('bambu_click.mp3')
-		#playsound('activatedPersonA.mp3')
+		playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/activatedPersonA.mp3')
 
 	elif person4_var.get() == '':
 
-		playsound('EnterUsername.mp3')
+		playsound('Audios/EnterUsername.mp3')
 
 
 def person1c_actv():
@@ -734,12 +863,12 @@ def person1c_actv():
 		person3c_activated = False
 		person4c_activated = False
 		target_person_decrypt = person1c_var.get()
-		playsound('bambu_click.mp3')
-		#playsound('activatedPersonB.mp3')
+		playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/activatedPersonB.mp3')
 
 	elif person1c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 def person2c_actv():
 
@@ -752,12 +881,12 @@ def person2c_actv():
 		person3c_activated = False
 		person4c_activated = False
 		target_person_decrypt = person2c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('Audios/button_click.mp3')
+		playsound('Audios/activatedPersonB.mp3')
 
 	elif person2c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 def person3c_actv():
 
@@ -770,12 +899,12 @@ def person3c_actv():
 		person3c_activated = True
 		person4c_activated = False
 		target_person_decrypt = person3c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('Audios/button_click.mp3')
+		playsound('Audios/activatedPersonB.mp3')
 
 	elif person3c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 def person4c_actv():
 
@@ -788,12 +917,12 @@ def person4c_actv():
 		person3c_activated = False
 		person4c_activated = True
 		target_person_decrypt = person4c_var.get()
-		playsound('button_click.mp3')
-		playsound('activatedPersonB.mp3')
+		playsound('Audios/button_click.mp3')
+		playsound('Audios/activatedPersonB.mp3')
 
 	elif person4c_var.get() == '':
 
-		playsound('activatePersonReceiveMessages.mp3')
+		playsound('Audios/activatePersonReceiveMessages.mp3')
 
 
 def receiver_ramson_actv():
@@ -803,12 +932,326 @@ def receiver_ramson_actv():
 	if receiver_var.get() != '':
 
 		target_receiver_ramson = receiver_var.get()
-		playsound('bambu_click.mp3')
-		playsound('UsuarioArchivosEncriptadosExitoso.mp3')
+		playsound('Audios/bambu_click.mp3')
+		playsound('Audios/UsuarioArchivosEncriptadosExitoso.mp3')
 
 	elif receiver_var.get() == '':
 
-		playsound('PrimeroNombreDestinatario.mp3')
+		playsound('Audios/PrimeroNombreDestinatario.mp3')
+
+
+def change_video_number_asc():
+
+	global no_video
+
+	no_video = no_video + 1
+
+def change_video_number_desc():
+
+	global no_video
+
+	if no_video > 0:
+
+		no_video = no_video - 1
+
+	else:
+
+		playsound('Audios/avanzar_lista_ciberawareness.mp3')
+
+
+def play_video_social_eng():
+
+	global no_video
+
+	pygame.init()
+	video = moviepy.editor.VideoFileClip(videos_awareness[no_video], target_resolution=(350,650))
+	video.preview()
+	pygame.quit()
+
+def change_spanish_mode():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	Spanish_mode = True
+	English_mode = False
+	Chinese_mode = False
+
+def change_english_mode():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	English_mode = True
+	Spanish_mode = False
+	Chinese_mode = False
+
+def change_chinese_mode():
+
+	global English_mode
+	global Chinese_mode
+	global Spanish_mode
+
+	Chinese_mode = True
+	English_mode = False
+	Spanish_mode = False
+
+def translator():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	if Spanish_mode == True:
+
+		playsound('Audios/Espanol.mp3')
+		english.config(fg = '#7e086c', bg = 'white')
+		spanish.config(bg = '#3b0332', fg = 'white')
+		chinese.config(fg = '#7e086c', bg = 'white')
+		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!', font = ("Comic Sans MS", 14))
+		username_label.config(text = 'Usuario', font = ("Comic Sans MS", 12))
+		password_label.config(text = 'Contraseña', font = ("Comic Sans MS", 12))
+		position_label.config(text = 'Posición', font = ("Comic Sans MS", 12))
+		send_login_data.config(text = 'Enviar datos', font = ("Comic Sans MS", 9))
+		notebk.add(hr, text = " Inicio")
+		notebk.add(fr0, text = ' Firewall Humano')
+		hash256_passw.config(text = 'El hash de tu contraseña (SHA 265) es:', font = ("Comic Sans MS", 12))
+		hash256passw_copy_btt.config(text = 'Copiar hash al portapapeles', font = ("Comic Sans MS", 9))
+		close_machine_from_login.config(text = 'Cierra la maquina BirdCipher', font = ("Comic Sans MS", 14))
+		closeBCM_awareness.config(text = 'Cierra la Máquina BirdCipher', font = ("Comic Sans MS", 14))
+		answer_button_social_eng.config(text = 'Enviar respuesta', font = ("Comic Sans MS", 10))
+		enter_password_label.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 14))
+		result_check_label.config(text = 'Reporte de resultados', font = ("Comic Sans MS", 14))
+		times_label.config(text = 'No. veces usada antes', font = ("Comic Sans MS", 13))
+		notebk.add(passcheck, text = 'Chequeo de contraseña')
+		notebk.add(digital_signature, text = 'Firma digital')
+		closeBCM_checkpass.config(text = 'Cierre la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 14))
+		labelTextHashing.config(text = 'Ingrese el texto para crear hash:', font = ("Comic Sans MS", 14))
+		labelPlayerLoginHashing.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 14))
+		labelHashEntry.config(text = 'El hash de tu mensaje/archivo es: ')
+		labelArchive.config(text = 'La ruta a tu archivo es: ', font = ("Comic Sans MS", 14))
+		notebk.add(fr, text = "Criptografía")
+		titleBirdCipherMachine.config(text = 'Ingresa el texto a encriptar (Texto plano)', font = ("Comic Sans MS", 14))
+		titleBirdCipherMachine2.config(text = 'Tu mensaje encriptado (texto cifrado) es: ', font = ("Comic Sans MS", 14))
+		labelQuestionKey.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 14))
+		labelPlayerBCM.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 14))
+		closeMachineButton.config(text = 'Cierra la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 12))
+		titleBirdCipherMachine20.config(text = 'BirdCipher Machine: una herramienta para garantizar la confidencialidad de tus mensajes', font = ("Comic Sans MS", 12))
+		notebk.add(fr2, text = " Cifrado")
+		key_fernet_label.config(text = 'Llave para el algoritmo Fernet', font = ("Comic Sans MS", 12))
+		encrypted_label.config(text = 'Tu mensaje encriptado es:', font = ("Comic Sans MS", 12))
+		labelPlayerBCM2.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 11))
+		labelQuestionKey2.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 13))
+		closeMachineButton2.config(text = 'Cierra la Maquina Criptográfica BirdCipher', font = ("Comic Sans MS", 12))
+		notebk.add(fr3, text = " Descifrado")
+		titleBirdCipherMachine3.config(text = 'Máquina de descifrado BirdCipher', font = ("Comic Sans MS", 12))
+		key_fernet_label2.config(text = 'Llave para el Algoritmo Fernet', font = ("Comic Sans MS", 12))
+		encrypted_label2.config(text = 'Tu mensaje desencriptado es: ', font = ("Comic Sans MS", 12))
+		labelQuestionKey3.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 13))
+		labelPlayerBCM3.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 11))
+		closeMachineButton3.config(text = 'Cierra la Máquina Criptográfica BirdCipher', font = ("Comic Sans MS", 12))
+		notebk.add(fr0a, text = 'RamsonBird')
+		ramsonBirdMessageTitle.config(text = 'Ingresa tu mensaje para identificar la acción de encriptado de archivos', font = ("Comic Sans MS", 12))
+		ramsonKeyTitle.config(text = 'Llave para el Algoritmo Fernet', font = ("Comic Sans MS", 12))
+		ramsonDirectoryTitle.config(text = 'Has escogido el directorio: ', font = ("Comic Sans MS", 12))
+		packet_label.config(text = 'Paquete No.', font = ("Comic Sans MS", 11))
+		labelQuestionKey4.config(text = 'Ingresa tu contraseña', font = ("Comic Sans MS", 13))
+		labelPlayerBCM4.config(text = 'Bienvenido, ', font = ("Comic Sans MS", 11))
+		titleVirusTotal.config(text = 'SUBE TU ARCHIVO A VIRUS TOTAL', font = ('Comic Sans MS', 15))
+		hashFileLabel.config(text = 'El hash (sha 256) de tu archivo es:', font = ('Comic Sans MS', 11))
+		results_vt.config(text = 'ESTADÍSTICAS DEL ÚLTIMO ANÁLISIS', font = ('Comic Sans MS', 11))
+		results_vt.place(x = 115, y = 330)
+		explanation_vt.config(text = 'Número de reportes de antivirus por categoría', font = ('Comic Sans MS', 10))
+		explanation_vt.place(x = 123, y = 355)
+		last_analysis_results_label.config(text = 'RESULTADOS DEL ÚLTIMO ANÁLISIS', font = ('Comic Sans MS', 15))
+		last_analysis_results_label.place(x = 630, y = 20)
+		category_vt.config(text = 'Categoría', font = ('Comic Sans MS', 13))
+		engine_update_vt.config(text = 'Actualización', font = ('Comic Sans MS', 13))
+		result_vt.config(text = 'Resultado', font = ('Comic Sans MS', 13))
+		result_vt.place(x = 905, y = 70)
+		tactics_label_capa.config(text = 'TACTICAS DETECTADAS POR CAPA', font = ('Comic Sans MS', 17))
+		tactics_label_capa.place(x = 340, y = 5)
+		tactics_label_capa1.config(text = 'Táctica', font = ('Comic Sans MS', 14))
+		tactics_label_capa2.config(text = 'Táctica', font = ('Comic Sans MS', 14))
+		descriptions_label_capa1.config(text = 'Descripción', font = ('Comic Sans MS', 14))
+		descriptions_label_capa2.config(text = 'Descripción', font = ('Comic Sans MS', 14))
+		techniques_capa_label.config(text = 'Técnicas', font = ('Comic Sans MS', 14))
+		tactics_label_cape.config(text = 'TÁCTICAS DETECTADAS POR CAPE SANDBOX', font = ('Comic Sans MS', 17))
+		tactics_label_cape.place(x = 250, y = 5)
+		tactics_label_cape1.config(text = 'Táctica', font = ('Comic Sans MS', 14))
+		tactics_label_cape2.config(text = 'Táctica', font = ('Comic Sans MS', 14))
+		descriptions_label_cape1.config(text = 'Descripción', font = ('Comic Sans MS', 14))
+		descriptions_label_cape2.config(text = 'Descripción', font = ('Comic Sans MS', 14))
+		techniques_cape_label.config(text = 'Técnicas', font = ('Comic Sans MS', 14))
+		tactics_label_zen.config(text = 'TÁCTICAS DETECTADAS POR ZENBOX', font = ('Comic Sans MS', 17))
+		tactics_label_zen1.config(text = 'Táctica', font = ('Comic Sans MS', 14))
+		tactics_label_zen2.config(text = 'Táctica', font = ('Comic Sans MS', 14))
+		descriptions_label_zen1.config(text = 'Descripción', font = ('Comic Sans MS', 14))
+		descriptions_label_zen2.config(text = 'Descripción', font = ('Comic Sans MS', 14))
+		techniques_zen_label.config(text = 'Técnicas', font = ('Comic Sans MS', 14))
+		upload_file_label_DS.config(text = 'CARGA TU DOCUMENTO A LA HERRAMIENTA DE FIRMA DIGITAL', font = ('Comic Sans MS', 11))
+		hash_file_ds_label.config(text = 'El hash (sha 256) de tu archivo es: ')
+		create_key_pair_label.config(text = 'Crear par de llaves')
+		bring_key_pair_label.config(text = 'Cargar par de llaves')
+		create_key_pair_label.place(x = 525, y = 190)
+		bring_key_pair_label.place(x = 780, y = 190)
+		bring_directory_DS.config(text = 'Defina el directorio para guardar/buscar llaves')
+		file_hash_ciphertext_title.config(text = 'Resultados de la firma digital')
+		img_social_eng_label.config(image = firewall_humano)
+		password_checking_button.config(image = chequeoContraseña)
+		digital_signature_button.config(image = firma_digital_logo)
+		logoBrowseDirectoriesHash.config(image = busqueda_directorio)
+		urlUploadLogo.config(image = busqueda_directorio_vt)
+		private_key_button_cr.config(image = llave_privada_logo)
+		private_key_button_br.config(image = llave_privada_logo)
+		public_key_button_cr.config(image = llave_publica_logo)
+		public_key_button_br.config(image = llave_publica_logo)
+		browse_ds_button.config(image = buscar_ds_logo)
+		directory_browse_DS.config(image = buscar_ds_logo)
+		verify_integrity_button.config(image = verificar_integridad_logo)
+		non_repudiation_button.config(image = no_repudio_logo)
+		instructions_ds_button.config(image = instrucciones_ds_logo)
+		digital_signature_button.place(x = 30, y = 20)
+		instructions_ds_button.place(x = 30, y = 380)
+		non_repudiation_button.place(x = 178, y = 380)
+		
+
+
+
+	elif English_mode == True:
+
+		playsound('Audios/English_mode.mp3')
+		english.config(bg = '#3b0332', fg = 'white')
+		spanish.config(fg = '#7e086c', bg = 'white')
+		chinese.config(fg = '#7e086c', bg = 'white')
+		login_label.config(text = 'Log in to BirdCipher Machine!!', font = ("Comic Sans MS", 14))
+		username_label.config(text = 'Username', font = ("Comic Sans MS", 12))
+		password_label.config(text = 'Password', font = ("Comic Sans MS", 12))
+		position_label.config(text = 'Position', font = ("Comic Sans MS", 12))
+		send_login_data.config(text = 'Send data', font = ("Comic Sans MS", 9))
+		notebk.add(hr, text = "Login")
+		notebk.add(fr0, text = 'Human Firewall')
+		hash256_passw.config(text = 'Your password hash (SHA 265) is:', font = ("Comic Sans MS", 12))
+		hash256passw_copy_btt.config(text = 'Copy hash to clipboard', font = ("Comic Sans MS", 9))
+		close_machine_from_login.config(text = '  Close the BirdCipher Machine  ', font = ("Comic Sans MS", 14))
+		closeBCM_awareness.config(text = 'Close the BirdCipher Machine', font = ("Comic Sans MS", 14))
+		answer_button_social_eng.config(text = 'Send answer', font = ("Comic Sans MS", 10))
+		enter_password_label.config(text = 'Enter your password', font = ("Comic Sans MS", 14))
+		result_check_label.config(text = 'Results report', font = ("Comic Sans MS", 14))
+		times_label.config(text = 'Times used before: ', font = ("Comic Sans MS", 14))
+		notebk.add(passcheck, text = 'Password Checking')
+		notebk.add(digital_signature, text = 'Digital signature')
+		closeBCM_checkpass.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 14))
+		labelTextHashing.config(text = 'Enter the text to hash:', font = ("Comic Sans MS", 14))
+		labelPlayerLoginHashing.config(text = 'Welcome, ', font = ("Comic Sans MS", 14))
+		labelHashEntry.config(text = 'The hash of your message/file is: ', font = ("Comic Sans MS", 14))
+		labelArchive.config(text = 'The URL of your file is: ', font = ("Comic Sans MS", 14))
+		notebk.add(fr, text = "Cryptography")
+		titleBirdCipherMachine.config(text = 'Enter the message to encrypt (Plaintext)', font = ("Comic Sans MS", 14))
+		titleBirdCipherMachine2.config(text = 'Your encrypted message (Ciphertext) is: ', font = ("Comic Sans MS", 14))
+		labelQuestionKey.config(text = 'Enter your password', font = ("Comic Sans MS", 14))
+		labelPlayerBCM.config(text = 'Welcome, ', font = ("Comic Sans MS", 14))
+		closeMachineButton.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 12))
+		titleBirdCipherMachine20.config(text = 'BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages', font = ("Comic Sans MS", 12))
+		notebk.add(fr2, text = "Encryption")
+		key_fernet_label.config(text = 'Key for Fernet Algorithm', font = ("Comic Sans MS", 12))
+		encrypted_label.config(text = 'Your encrypted message is:', font = ("Comic Sans MS", 12))
+		labelPlayerBCM2.config(text = 'Welcome, ', font = ("Comic Sans MS", 11))
+		labelQuestionKey2.config(text = 'Enter your password', font = ("Comic Sans MS", 13))
+		closeMachineButton2.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 12))
+		notebk.add(fr3, text = "Decryption")
+		titleBirdCipherMachine3.config(text = 'BirdCipher Decryption Machine', font = ("Comic Sans MS", 12))
+		key_fernet_label2.config(text = 'Key for Fernet Algorithm', font = ("Comic Sans MS", 12))
+		encrypted_label2.config(text = 'Your decrypted message is: ', font = ("Comic Sans MS", 12))
+		labelQuestionKey3.config(text = 'Enter your password', font = ("Comic Sans MS", 13))
+		labelPlayerBCM3.config(text = 'Welcome, ', font = ("Comic Sans MS", 11))
+		closeMachineButton3.config(text = 'Close the BirdCipher Cryptographic Machine', font = ("Comic Sans MS", 12))
+		notebk.add(fr0a, text = 'RamsonBird')
+		ramsonBirdMessageTitle.config(text = 'Enter your message for identifying the ramson action', font = ("Comic Sans MS", 12))
+		ramsonKeyTitle.config(text = 'Key for Fernet Algorithm', font = ("Comic Sans MS", 12))
+		ramsonDirectoryTitle.config(text = 'You have chosen the directory:', font = ("Comic Sans MS", 12))
+		packet_label.config(text = 'Packet No.', font = ("Comic Sans MS", 11))
+		labelQuestionKey4.config(text = 'Enter your password', font = ("Comic Sans MS", 13))
+		labelPlayerBCM4.config(text = 'Welcome, ', font = ("Comic Sans MS", 11))
+		titleVirusTotal.config(text = 'UPLOAD YOUR FILE TO VIRUS TOTAL', font = ('Comic Sans MS', 15))
+		hashFileLabel.config(text = 'The hash (sha 256) of your file is:', font = ('Comic Sans MS', 11))
+		results_vt.config(text = 'LAST ANALYSIS STATS', font = ('Comic Sans MS', 12))
+		results_vt.place(x = 160, y = 330)
+		explanation_vt.config(text = 'Number of antivirus reports per category', font = ('Comic Sans MS', 10))
+		last_analysis_results_label.config(text = 'LAST ANALYSIS RESULTS', font = ('Comic Sans MS', 15))
+		last_analysis_results_label.place(x = 700, y = 10)
+		category_vt.config(text = 'Category', font = ('Comic Sans MS', 13))
+		engine_update_vt.config(text = 'Engine update', font = ('Comic Sans MS', 13))
+		result_vt.config(text = 'Result', font = ('Comic Sans MS', 13))
+		result_vt.place(x = 920, y = 70)
+		tactics_label_capa.config(text = 'TACTICS DETECTED BY CAPA', font = ('Comic Sans MS', 17))
+		tactics_label_capa.place(x = 380, y = 5)
+		tactics_label_capa1.config(text = 'Tactic', font = ('Comic Sans MS', 14))
+		tactics_label_capa2.config(text = 'Tactic', font = ('Comic Sans MS', 14))
+		descriptions_label_capa1.config(text = 'Description', font = ('Comic Sans MS', 14))
+		descriptions_label_capa2.config(text = 'Description', font = ('Comic Sans MS', 14))
+		techniques_capa_label.config(text = 'Techniques', font = ('Comic Sans MS', 14))
+		tactics_label_cape.config(text = 'TACTICS DETECTED BY CAPE SANDBOX', font = ('Comic Sans MS', 17))
+		tactics_label_cape.place(x = 300, y = 5)
+		tactics_label_cape1.config(text = 'Tactic', font = ('Comic Sans MS', 14))
+		tactics_label_cape2.config(text = 'Tactic', font = ('Comic Sans MS', 14))
+		descriptions_label_cape1.config(text = 'Description', font = ('Comic Sans MS', 14))
+		descriptions_label_cape2.config(text = 'Description', font = ('Comic Sans MS', 14))
+		techniques_cape_label.config(text = 'Techniques', font = ('Comic Sans MS', 14))
+		tactics_label_zen.config(text = 'TACTICS DETECTED BY ZENBOX', font = ('Comic Sans MS', 17))
+		tactics_label_zen1.config(text = 'Tactic', font = ('Comic Sans MS', 14))
+		tactics_label_zen2.config(text = 'Tactic', font = ('Comic Sans MS', 14))
+		descriptions_label_zen1.config(text = 'Description', font = ('Comic Sans MS', 14))
+		descriptions_label_zen2.config(text = 'Description', font = ('Comic Sans MS', 14))
+		techniques_zen_label.config(text = 'Techniques', font = ('Comic Sans MS', 14))
+		upload_file_label_DS.config(text = 'UPLOAD YOUR FILE TO THE DIGITAL SIGNATURE TOOL', font = ('Comic Sans MS', 13))
+		hash_file_ds_label.config(text = 'The hash (sha 256) of your file is: ')
+		create_key_pair_label.config(text = 'Create key pair')
+		bring_key_pair_label.config(text = 'Bring key pair')
+		create_key_pair_label.place(x = 540, y = 190)
+		bring_key_pair_label.place(x = 800, y = 190)
+		bring_directory_DS.config(text = 'Define the directory for keys saving/searching')
+		file_hash_ciphertext_title.config(text = 'Digital signature results')
+		img_social_eng_label.config(image = cyberaware)
+		password_checking_button.config(image = password_checking_logo)
+		digital_signature_button.config(image = digital_signature_logo)
+		logoBrowseDirectoriesHash.config(image = directory_browser)
+		urlUploadLogo.config(image = directory_browser1)
+		private_key_button_cr.config(image = private_key_logo)
+		private_key_button_br.config(image = private_key_logo)
+		public_key_button_cr.config(image = public_key_logo)
+		public_key_button_br.config(image = public_key_logo)
+		browse_ds_button.config(image = browse_ds_logo)
+		directory_browse_DS.config(image = browse_ds_logo)
+		verify_integrity_button.config(image = verify_integrity_logo)
+		non_repudiation_button.config(image = non_repudiation_logo)
+		instructions_ds_button.config(image = instructions_ds_logo)
+		digital_signature_button.place(x = 20, y = 20)
+		instructions_ds_button.place(x = 20, y = 380)
+		non_repudiation_button.place(x = 168, y = 380)
+		author_button.config(image = author_logo)
+
+
+
+
+	elif Chinese_mode == True:
+
+		playsound('Audios/Zhong_wen.mp3')
+		english.config(fg = '#7e086c', bg = 'white')
+		spanish.config(fg = '#7e086c', bg = 'white')
+		chinese.config(bg = '#3b0332', fg = 'white')
+		login_label.config(text = '登录 BirdCipher Machine', font = ('Kaiti', 20))
+		username_label.config(text = '用户名', font = ('Kaiti', 18))
+		password_label.config(text = '密码', font = ('Kaiti', 18))
+		position_label.config(text = '角色', font = ("Kaiti", 18))
+		send_login_data.config(text = '发送数据', font = ("Kaiti", 15))
+		notebk.add(hr, text = " 登录")
+
+
+
+
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -816,6 +1259,8 @@ def receiver_ramson_actv():
 ## ------------------------------------------------ Graphical Interface -----------------------------------------------------
 
 ### ----------------------------------------------------- Basic -------------------------------------------------------------
+
+
 
 
 
@@ -834,6 +1279,12 @@ player_message_encrypt = tk.StringVar()
 passw_em = tk.StringVar()
 password_for_decrypt = tk.StringVar()
 password_for_ramson = tk.StringVar()
+private_key_name_cr = tk.StringVar()
+public_key_name_cr = tk.StringVar()
+private_key_name_br = tk.StringVar()
+public_key_name_br = tk.StringVar()
+author_name_variable = tk.StringVar()
+signature_name_variable = tk.StringVar()
 
 
 person1_var = tk.StringVar()
@@ -859,78 +1310,123 @@ person2c_activated = False
 person3c_activated = False
 person4c_activated = False
 
-encrypt_buttonImg = tk.PhotoImage(file = "Encrypt-logo1.png")
-decrypt_buttonImg = tk.PhotoImage(file = "Decrypt-logo1.png")
-directory_browser = tk.PhotoImage(file = 'Browse directories.png')
-directory_browser1 = tk.PhotoImage(file = 'Browse-logo1.png')
-ramson_instructions = tk.PhotoImage(file = 'Instructions.png')
-generateRamsonKey_de = tk.PhotoImage(file = 'Generate RamsonBird Key.png')
-bringRamsonKey_de = tk.PhotoImage(file = 'Bring RamsonBird key.png')
-encryptFilesImage = tk.PhotoImage(file = 'Decrypt files.png')
-decryptFilesImage = tk.PhotoImage(file = 'Encrypt files.png')
-bc_logo_loginImage = tk.PhotoImage(file = 'BirdCipher Machine-logoLogin-white1.png')
-hashingImage = tk.PhotoImage(file = 'Hashing-logo-white1.png')
-closeLog = tk.PhotoImage(file = 'CloseLog1.png')
+encrypt_buttonImg = tk.PhotoImage(file = "Images/Encrypt-logo1.png")
+decrypt_buttonImg = tk.PhotoImage(file = "Images/Decrypt-logo1.png")
+directory_browser = tk.PhotoImage(file = 'Images/Browse directories.png')
+directory_browser1 = tk.PhotoImage(file = 'Images/Browse-logo1.png')
+busqueda_directorio = tk.PhotoImage(file = 'Images/Buscar directorio.png')
+busqueda_directorio_vt = tk.PhotoImage(file = 'Images/Buscar.png')
+ramson_instructions = tk.PhotoImage(file = 'Images/Instructions.png')
+generateRamsonKey_de = tk.PhotoImage(file = 'Images/Generate RamsonBird Key.png')
+bringRamsonKey_de = tk.PhotoImage(file = 'Images/Bring RamsonBird key.png')
+encryptFilesImage = tk.PhotoImage(file = 'Images/Decrypt files.png')
+decryptFilesImage = tk.PhotoImage(file = 'Images/Encrypt files.png')
+bc_logo_loginImage = tk.PhotoImage(file = 'Images/BirdCipher Machine-logoLogin-white1.png')
+hashingImage = tk.PhotoImage(file = 'Images/Hashing-logo-white1.png')
+closeLog = tk.PhotoImage(file = 'Images/CloseLog1.png')
+arrow_asc = tk.PhotoImage(file = 'Images/arrow_asc.png')
+arrow_des = tk.PhotoImage(file = 'Images/arrow_desc.png')
+cyberaware = tk.PhotoImage(file = 'Images/Cyber Awareness.png')
+firewall_humano = tk.PhotoImage(file = 'Images/Firewall Humano.png')
+chequeoContraseña = tk.PhotoImage(file = 'Images/Chequeo de contraseña.png')
+Swords = tk.PhotoImage(file = 'Images/Swords.png')
+Keys_aware = tk.PhotoImage(file = 'Images/Llave_fin.png')
+Caduceus_aware = tk.PhotoImage(file = 'Images/Caduceus_fin.png')
+Book_aware = tk.PhotoImage(file = 'Images/Book_fin.png')
+digital_signature_logo = tk.PhotoImage(file = 'Images/Digital Signature.png')
+firma_digital_logo = tk.PhotoImage(file = 'Images/Firma Digital.png')
+sign_document_logo = tk.PhotoImage(file = 'Images/Sign document.png')
+non_repudiation_logo = tk.PhotoImage(file = 'Images/Non-repudiation.png')
+no_repudio_logo = tk.PhotoImage(file = 'Images/No Repudio.png')
+verify_integrity_logo = tk.PhotoImage(file = 'Images/Verify Integrity.png')
+verificar_integridad_logo = tk.PhotoImage(file = 'Images/Verificar integridad.png')
+instructions_ds_logo = tk.PhotoImage(file = 'Images/InstructionsDS.png')
+instrucciones_ds_logo = tk.PhotoImage(file = 'Images/Instrucciones.png')
+browse_ds_logo = tk.PhotoImage(file = 'Images/Browse_ds1.png')
+private_key_logo = tk.PhotoImage(file = 'Images/private.png')
+public_key_logo = tk.PhotoImage(file = 'Images/public.png')
+llave_privada_logo = tk.PhotoImage(file = 'Images/Privada.png')
+llave_publica_logo = tk.PhotoImage(file = 'Images/Publica.png')
+buscar_ds_logo = tk.PhotoImage(file = 'Images/Buscar-ds.png')
+author_logo = tk.PhotoImage(file = 'Images/Author.png')
+autor_logo = tk.PhotoImage(file = 'Images/Autor.png')
+firmar_documento_logo = tk.PhotoImage(file = 'Images/Firmar documento.png')
+button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
+virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
+algorithm_logo = tk.PhotoImage(file = 'Images/algorithm.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
+#notebk.config(font = ("Comic Sans MS", 14))
 
 hr = ttk.Frame(notebk, width = 1050, height=540)
 hr.configure(style = "BW.TLabel")
 hr.pack(fill = 'both', expand = True)
-notebk.add(hr, text = " Login")
+notebk.add(hr, text = "Login")
 
 fr0 = ttk.Frame(notebk, width = 1050, height = 540)
 fr0.pack(fill = 'both', expand = True)
-notebk.add(fr0, text = ' Cyber awareness')
+notebk.add(fr0, text = 'Human Firewall')
 
 passcheck = ttk.Frame(notebk, width = 1050, height = 540)
 passcheck.pack(fill = 'both', expand = True)
-notebk.add(passcheck, text = ' Password Checking')
+notebk.add(passcheck, text = 'Password Checking')
 
 hashing = ttk.Frame(notebk, width = 1050, height = 540)
 hashing.pack(fill = 'both', expand = True)
-notebk.add(hashing, text = ' Hashing')
+notebk.add(hashing, text = 'Hashing')
 
 fr = ttk.Frame(notebk, width = 1050, height=540)
 fr.configure(style = "BW.TLabel")
 fr.pack(fill = 'both', expand = True)
-notebk.add(fr, text = "  Classic Cryptography")
+notebk.add(fr, text = "Cryptography")
 
 fr2 = ttk.Frame(notebk, width = 1150, height = 540)
 fr2.pack(fill = 'both', expand = True)
-notebk.add(fr2, text = " Encryption")
+notebk.add(fr2, text = "Encryption")
 
 fr3 = ttk.Frame(notebk, width = 1050, height = 540)
 fr3.pack(fill = 'both', expand = True)
-notebk.add(fr3, text = " Decryption")
+notebk.add(fr3, text = "Decryption")
+
+digital_signature = ttk.Frame(notebk, width = 1050, height = 540)
+digital_signature.pack(fill = 'both', expand = True)
+notebk.add(digital_signature, text = 'Digital signature')
+
+pki = ttk.Frame(notebk, width = 1050, height = 540)
+pki.pack(fill = 'both', expand = True)
+notebk.add(pki, text = "PKI")
 
 fr0a = ttk.Frame(notebk, width = 1050, height = 540)
 fr0a.pack(fill = 'both', expand = True)
-notebk.add(fr0a, text = ' RamsonBird Machine')
+notebk.add(fr0a, text = 'RamsonBird')
+
+url_test_ntk = ttk.Frame(notebk, width = 1050, height = 540)
+url_test_ntk.pack(fill = 'both', expand = True)
+notebk.add(url_test_ntk, text = 'URL Test')
 
 virusTotal = ttk.Frame(notebk, width = 1050, height = 540)
 virusTotal.pack(fill = 'both', expand = True)
-notebk.add(virusTotal, text = ' Virus Total')
+notebk.add(virusTotal, text = 'Virus Total')
 
 capa_tab = ttk.Frame(notebk, width = 1050, height = 540)
 capa_tab.pack(fill = 'both', expand = True)
-notebk.add(capa_tab, text = " CAPA")
+notebk.add(capa_tab, text = "CAPA")
 
 cape_sandbox_tab = ttk.Frame(notebk, width = 1050, height = 540)
 cape_sandbox_tab.pack(fill = 'both', expand = True)
-notebk.add(cape_sandbox_tab, text = " CAPE Sandbox")
+notebk.add(cape_sandbox_tab, text = "CAPE Sandbox")
 
 zenbox_tab = ttk.Frame(notebk, width = 1050, height = 540)
 zenbox_tab.pack(fill = 'both', expand = True)
-notebk.add(zenbox_tab, text = " Zenbox")
+notebk.add(zenbox_tab, text = "Zenbox")
 
 
 
 
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
-login_label = tk.Label(hr, text = 'Log in the BirdCipher Machine!!', font = ("Comic Sans MS", 14))
+login_label = tk.Label(hr, text = 'Log in to BirdCipher Machine', font = ("Comic Sans MS", 14))
 login_label.config(fg = "#7e086c")
 login_label.place(x = 50, y = 20)
 
@@ -982,6 +1478,18 @@ bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login
 bc_logo_login.config(bg = '#260223')
 bc_logo_login.place(x = 420, y = 30)
 
+english = tk.Button(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
+english.place(x = 50, y = 380)
+english.config(bg = '#3b0332', fg = 'white', font = ('Comic Sans MS', 12))
+
+spanish = tk.Button(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
+spanish.place(x = 140, y = 380)
+spanish.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
+
+chinese = tk.Button(hr, text = '中文', command = lambda:[change_chinese_mode(), translator()])
+chinese.place(x = 230, y = 380)
+chinese.config(fg = '#7e086c', font = ('Kaiti', 17))
+
 # ---------------------------------------------------------------------------------------------------------------------------
 
 
@@ -992,13 +1500,14 @@ def play_social_eng_audio():
 
 	playsound(social_eng_audio[index_social_eng_choose])
 
+
 def send_answer_social_eng():
 
 	global feathers
 
 	if varOption.get() == correct_answers_social_eng[index_social_eng_choose]:
 
-		playsound('wonFeather.mp3')
+		playsound('Audios/wonFeather.mp3')
 		feathers = feathers + 1
 		updatePlayer_feathers()
 		labelFeathers.config(text = feathers)
@@ -1006,7 +1515,7 @@ def send_answer_social_eng():
 
 	elif varOption.get() != correct_answers_social_eng[index_social_eng_choose]:
 
-		playsound('lostFeather.mp3')
+		playsound('Audios/lostFeather.mp3')
 		answer_button_social_eng.config(state = 'disabled')
 
 
@@ -1016,38 +1525,75 @@ index_social_eng_choose = index_social_eng[counter_social_eng]
 img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choose])
 varOption = tk.IntVar()
 
-img_social_eng_label = tk.Button(fr0, image = img_social_eng, command = lambda:play_social_eng_audio())
+img_social_eng_label = tk.Button(fr0, image = cyberaware, command = lambda:play_video_social_eng())
 img_social_eng_label.place(x = 30, y = 30)
 img_social_eng_label.config(bg = '#20011c')
 
 rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
 rad_button1.place(x = 550, y = 40)
-rad_button1.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button1.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button2 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][1], variable = varOption, value = 1)
 rad_button2.place(x = 550, y = 80)
-rad_button2.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button2.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
 rad_button3.place(x = 550, y = 120)
-rad_button3.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button3.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
 rad_button4.place(x = 550, y = 160)
-rad_button4.config(font = ('Comic Sans MS', 9), justify = 'left')
+rad_button4.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
-answer_button_social_eng.place(x = 600, y = 200)
-answer_button_social_eng.config(fg = 'purple', font = ('Comic Sans MS', 9))
+answer_button_social_eng.place(x = 900, y = 220)
+answer_button_social_eng.config(fg = '#2c0215', font = ('Comic Sans MS', 10))
 
-closeBCM_awareness = tk.Button(fr0, image = closeLog, command = lambda:closeMachine())
-closeBCM_awareness.place(x = 950 , y = 430)
+number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number_asc())
+number_video.place(x = 300, y = 450)
+number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
+
+number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
+number_video2.place(x = 200, y = 450)
+number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
+
+swords_insig = tk.Button(fr0, image = Swords)
+swords_insig.place(x = 800, y = 280)
+
+swords_score = tk.Label(fr0, text = swords_pt, width = 11)
+swords_score.place(x = 802, y = 400)
+swords_score.config(bg = 'black', fg = 'white')
+
+Llave_final = tk.Button(fr0, image = Keys_aware)
+Llave_final.place(x = 714, y = 280)
+
+Llave_score = tk.Label(fr0, text = keys_pt, width = 9)
+Llave_score.place(x = 714, y = 400)
+Llave_score.config(bg = 'black', fg = 'white')
+
+Caduceus_final = tk.Button(fr0, image = Caduceus_aware)
+Caduceus_final.place(x = 900, y = 280)
+
+Caduceus_score = tk.Label(fr0, text = caduceus_pt, width = 12)
+Caduceus_score.place(x = 900, y = 400)
+Caduceus_score.config(bg = 'black', fg = 'white')
+
+Book_final = tk.Button(fr0, image = Book_aware)
+Book_final.place(x = 610, y = 280)
+
+Book_score = tk.Label(fr0, text = books_pt, width = 12)
+Book_score.place(x = 610, y = 400)
+Book_score.config(bg = 'black', fg = 'white')
+
+closeBCM_awareness = tk.Button(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
+closeBCM_awareness.place(x = 550 , y = 470)
+closeBCM_awareness.config(fg = '#2c0215', font = ('Comic Sans MS', 14))
 	
 
 # --------------------------------------------------------------------------------------------------------------------------
 
 
-### ----------------------------------------- Checking password section ----------------------------------------------------
+### ----------------------------------------- Password Checking Section ----------------------------------------------------
 
 
 def evaluate_password():
@@ -1101,7 +1647,7 @@ def evaluate_password():
 
 		if count_lack == 0:
 
-			playsound('buen_trabajo.mp3')
+			playsound('Audios/buen_trabajo.mp3')
 			time.sleep(2)
 
 
@@ -1124,9 +1670,9 @@ def check_password():
 		result_check.config(fg = '#ef1d13')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#ef1d13', font = ('Comic Sans MS', 30))
-		playsound('ContrasenaInsegura.mp3')
+		playsound('Audios/ContrasenaInsegura.mp3')
 		time.sleep(2)
-		playsound('ImprovePass.mp3')
+		playsound('Audios/ImprovePass.mp3')
 		time.sleep(4)
 
 	elif resp == False and login_check == True:
@@ -1136,26 +1682,26 @@ def check_password():
 		result_check.config(fg = '#7ed2ef')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#7ed2ef', width = 5, height = 1, font = ('Comic Sans MS', 45))
-		playsound('ContrasenaSegura.mp3')
+		playsound('Audios/ContrasenaSegura.mp3')
 		time.sleep(2)
-		playsound('SafePass.mp3')
+		playsound('Audios/SafePass.mp3')
 		time.sleep(4)
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 def passchecking_explanation():
 
-	playsound('explicacion_passwordHIBP.mp3')
-	playsound('passcheck_explant.mp3')
+	playsound('Audios/explicacion_passwordHIBP.mp3')
+	playsound('Audios/passcheck_explant.mp3')
 	
 
-password_checking_logo = tk.PhotoImage(file = 'Password checking-logo-white1.png')
-hibp1_logo = tk.PhotoImage(file = 'hibp1.png')
-hibp_info_logo = tk.PhotoImage(file = 'Password Check Info-logo-white1.png')
-padlock_image = tk.PhotoImage(file = 'Candado4a.png')
+password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
+hibp1_logo = tk.PhotoImage(file = 'Images/hibp1.png')
+hibp_info_logo = tk.PhotoImage(file = 'Images/Password Check Info-logo-white1.png')
+padlock_image = tk.PhotoImage(file = 'Images/Candado4a.png')
 password_user_entry = tk.StringVar()
 
 password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:[check_password(), evaluate_password()])
@@ -1217,18 +1763,18 @@ def hashingExecution():
 		wbdatos = bytes(textToHashing.get('1.0', 'end-1c'), 'utf-8')
 		hd = hashlib.new(algorithm_hashing[hashOption.get()], wbdatos)
 		hash200 = HASH.generaHash(hd)
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		labelHashResult.config(text = hash200)
 
 	elif archive_url_funct != '' and login_check == True:
 
 		hashForFile = hash_file_birdcipher(archive_url_funct, algorithm_hashing[hashOption.get()])
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		labelHashResult.config(text = hashForFile)
 
 	elif login_check == False:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 
@@ -1310,6 +1856,414 @@ closeBCM_hashing.place(x = 950 , y = 10)
 # -------------------------------------------------------------------------------------------------------------------------
 
 
+### ---------------------------------------------- Digital Signature section -----------------------------------------------
+
+
+def private_key_generator():
+
+	global private_key_user
+	global directoryFindKeysDS
+
+	print(directoryFindKeysDS)
+
+	private_key_user = rsa.generate_private_key(
+		public_exponent = 65537,
+		key_size = 2048,
+		backend = default_backend()
+		)
+
+	print(private_key_user)
+
+	pem_private_key_user = private_key_user.private_bytes(
+		encoding = serialization.Encoding.PEM,
+		format = serialization.PrivateFormat.PKCS8,
+		encryption_algorithm = serialization.NoEncryption()
+		)
+
+	with open(directoryFindKeysDS + '/' + private_key_name_cr.get(), 'wb') as f:
+
+		f.write(pem_private_key_user)
+
+	print('Done')
+
+
+def public_key_generator():
+
+	global private_key_user
+	global public_key_user
+	global directoryFindKeysDS
+	global public_key_user_string
+
+	public_key_user = private_key_user.public_key()
+	print(public_key_user)
+
+	pem_public_key_user = public_key_user.public_bytes(
+		encoding = serialization.Encoding.PEM,
+		format = serialization.PublicFormat.SubjectPublicKeyInfo
+		)
+
+	with open(directoryFindKeysDS + '/' + public_key_name_cr.get(), 'wb') as f:
+
+		f.write(pem_public_key_user)
+
+	public_key_user_string = pem_public_key_user.decode('utf-8')
+
+
+def private_key_reader():
+
+	global directoryFindKeysDS
+	global private_key_user
+
+	with open(directoryFindKeysDS + '/' + private_key_name_br.get(), 'rb') as key_file:
+
+		private_key_user = serialization.load_pem_private_key(
+
+			key_file.read(),
+			password = None,
+			backend = default_backend()
+			)
+
+	print(private_key_user)
+
+def public_key_reader():
+
+	global directoryFindKeysDS
+	global private_key_user
+	global public_key_user
+	global public_key_user_string
+
+	# public_key_user = private_key_user.public_key()
+	# print(public_key_user)
+
+	# pem_public_key_user = public_key_user.public_bytes(
+	# 	encoding = serialization.Encoding.PEM,
+	# 	format = serialization.PublicFormat.SubjectPublicKeyInfo
+	# 	)
+
+	with open(directoryFindKeysDS + '/' + public_key_name_br.get(), 'rb') as f:
+
+		public_key_user = serialization.load_pem_public_key(
+
+			f.read(),
+			backend = default_backend()
+
+			)
+
+
+	public_pem_bytes = public_key_user.public_bytes(
+    	encoding=serialization.Encoding.PEM,
+    	format=serialization.PublicFormat.SubjectPublicKeyInfo)
+
+	public_key_user_string = public_pem_bytes.decode('utf-8')
+
+
+
+
+	# 	f.write(pem_public_key_user)
+
+	print('Public key generated')
+	print(public_key_user)
+
+
+
+
+def sign_document_function():
+
+	global hash_file_DS
+	global private_key_user
+	global signature
+
+	signature = private_key_user.sign(
+
+		hash_file_DS,
+		padding.PSS(
+			mgf = padding.MGF1(hashes.SHA256()),
+			salt_length = padding.PSS.MAX_LENGTH
+			),
+		hashes.SHA256()
+		) 
+
+	file_hash_ciphertext_label.delete('1.0', tk.END)
+	file_hash_ciphertext_label.insert(tk.END, signature)
+
+	with open(directoryFindKeysDS + '/' + signature_name_variable.get(), 'wb') as j:
+
+		j.write(signature)
+
+
+def verify_function():
+
+	global signature
+	global hash_file_DS
+	global public_key_user
+
+	if signature == '':
+
+		with open(directoryFindKeysDS + '/' + signature_name_variable.get(), 'rb') as l:
+
+			signature = l.read()
+
+	try:
+
+		verification = public_key_user.verify(
+
+			signature,
+			hash_file_DS,
+			padding.PSS(
+			
+				mgf = padding.MGF1(hashes.SHA256()),
+				salt_length = padding.PSS.MAX_LENGTH
+				),
+			hashes.SHA256()
+
+			)
+
+		file_hash_ciphertext_label.delete('1.0', tk.END)
+
+		if verification is None:
+
+			file_hash_ciphertext_label.insert(tk.END, 'Verification is OK')
+
+	except InvalidSignature:
+
+		file_hash_ciphertext_label.insert(tk.END, 'Verification failed')
+
+
+def option_sign():
+
+	global option_sign_choose
+	global option_verify_choose
+	global username_db
+
+	option_sign_choose = True
+	option_verify_choose = False
+	author_name_variable.set(username_db)
+
+
+def option_verify():
+
+	global option_sign_choose
+	global option_verify_choose
+
+	option_verify_choose = True
+	option_sign_choose = False
+
+
+
+
+def manage_signature():
+
+	global public_key_user
+	global option_sign_choose
+	global option_verify_choose
+
+
+	if option_sign_choose:
+
+		miConexion1000 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+		user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
+
+		miCursor1000 = miConexion1000.cursor()
+
+		sql2000 = 'insert into digital_signature(author, public_key) values(%s,%s)'
+		sql2000_data = (author_name_variable.get(), public_key_user_string)
+
+		miCursor1000.execute(sql2000, sql2000_data)
+
+		miConexion1000.commit()
+		miConexion1000.close()
+
+	elif option_verify_choose:
+
+		miConexion3000 = psycopg2.connect(host = 'bps57o4k0svfjp9fi4vv-postgresql.services.clever-cloud.com', port = 50013, 
+		user = 'u8kpoxoaaxlswsvwrn12', dbname = 'bps57o4k0svfjp9fi4vv', password = 'AgCdmPuBEd0gAhai93vqWI2qoIz85G')
+
+		miCursor3000 = miConexion3000.cursor()
+
+		sql3000 = 'select * from digital_signature where author = (%s)'
+		sql3000_data = (author_name_variable.get(), )
+
+		miCursor3000.execute(sql3000, sql3000_data)
+		dlt3000 = miCursor3000.fetchall()
+
+		public_key_user_temp = dlt3000[0][2]
+		public_key_user_temp2 = public_key_user_temp.encode('utf-8')
+
+		with open(directoryFindKeysDS + '/' + public_key_name_br.get(), 'wb') as f:
+
+			f.write(public_key_user_temp2)
+
+		# pem_encoded_public_key = public_key_user_temp2.public_bytes(
+    	# 	encoding=serialization.Encoding.PEM,
+    	# 	format=serialization.PublicFormat.SubjectPublicKeyInfo)
+
+		# public_key_user = pem_encoded_public_key
+		# public_key_name_br.set('public.pem')
+		#public_key_name_label_br.config()
+		
+
+
+
+
+		miConexion3000.commit()
+		miConexion3000.close()
+
+
+
+
+def person_non_repudiation():
+
+	global English_mode
+	global Spanish_mode
+
+	person_registry = tk.Toplevel(decrypt)
+	person_registry.title('Person')
+	person_registry.geometry('550x400')
+
+	author_button = tk.Button(person_registry, command = lambda:manage_signature())
+	author_button.config(bg = '#040339')
+	author_button.place(x = 20, y = 20)
+
+	author_name_title = tk.Label(person_registry)
+	author_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
+	author_name_title.place(x = 30, y = 260)
+
+	author_name_label = tk.Entry(person_registry, textvariable = author_name_variable, width = 22)
+	author_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
+	author_name_label.place(x = 20, y = 290)
+
+	signature_name_title = tk.Label(person_registry)
+	signature_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
+	signature_name_title.place(x = 30, y = 320)
+
+	signature_name_label = tk.Entry(person_registry, textvariable = signature_name_variable, width = 22)
+	signature_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
+	signature_name_label.place(x = 20, y = 350)
+
+	option_sign_document = tk.Button(person_registry, command = lambda:option_sign())
+	option_sign_document.place(x = 250, y = 30)
+	option_sign_document.config(font = ('Comic Sans MS', 11), fg = '#040339')
+
+	option_verify_document = tk.Button(person_registry, command = lambda:option_verify())
+	option_verify_document.place(x = 250, y = 80)
+	option_verify_document.config(font = ('Comic Sans MS', 11), fg = '#040339')
+
+	sign_document_button = tk.Button(person_registry, image = sign_document_logo, command = lambda:sign_document_function())
+	sign_document_button.place(x = 385, y = 267)
+
+	
+	if English_mode:
+
+		author_button.config(image = author_logo)
+		author_name_title.config(text = 'Username')
+		signature_name_title.config(text = 'Signature file name')
+		signature_name_title.place(x = 30, y = 320)
+		option_sign_document.config(text = 'Sign document mode')
+		option_verify_document.config(text = 'Verify document mode')
+		sign_document_button.config(image = sign_document_logo)
+		sign_document_button.place(x = 385, y = 267)
+
+
+	elif Spanish_mode:
+
+		author_button.config(image = autor_logo)
+		author_name_title.config(text = 'Usuario')
+		signature_name_title.config(text = 'Archivo de firma digital')
+		signature_name_title.place(x = 20, y = 320)
+		option_sign_document.config(text = 'Modo firma digital de documento')
+		option_verify_document.config(text = 'Modo verificación de firma digital')
+		sign_document_button.config(image = firmar_documento_logo)
+		sign_document_button.place(x = 385, y = 250)
+
+
+
+
+digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo, command = lambda:person_non_repudiation())
+digital_signature_button.config(bg = '#040339')
+digital_signature_button.place(x = 20, y = 20)
+
+instructions_ds_button = tk.Button(digital_signature, image = instructions_ds_logo)
+instructions_ds_button.place(x = 20, y = 380)
+
+non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo, command = lambda:person_non_repudiation())
+non_repudiation_button.place(x = 168, y = 380)
+
+verify_integrity_button = tk.Button(digital_signature, image = verify_integrity_logo, command = lambda:verify_function())
+verify_integrity_button.place(x = 315, y = 380)
+
+upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD YOUR FILE TO THE DIGITAL SIGNATURE TOOL')
+upload_file_label_DS.config(font = ('Comic Sans MS', 13), fg = '#040339')
+upload_file_label_DS.place(x = 510, y = 20)
+
+url_file_label_DS = tk.Label(digital_signature, width = 57)
+url_file_label_DS.config(font = ('Comic Sans MS', 8), fg = '#9daee1', bg = '#050005', justify = 'center')
+url_file_label_DS.place(x = 520, y = 70)
+
+browse_ds_button = tk.Button(digital_signature, image = browse_ds_logo, command = lambda:selectDirectoryDigitalSignature())
+browse_ds_button.place(x = 940, y = 55)
+
+hash_file_ds_label = tk.Label(digital_signature, text = 'The hash (sha 256) of your file is: ')
+hash_file_ds_label.config(font = ('Comic Sans MS', 11), fg = '#040339')
+hash_file_ds_label.place(x = 520, y = 120)
+
+hash_file_label_DS = tk.Label(digital_signature, width = 63)
+hash_file_label_DS.config(font = ('Comic Sans MS', 8), fg = '#9daee1', bg = '#050005', justify = 'center')
+hash_file_label_DS.place(x = 520, y = 150)
+
+create_key_pair_label = tk.Label(digital_signature, text = 'Create key pair')
+create_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
+create_key_pair_label.place(x = 540, y = 190)
+
+bring_key_pair_label = tk.Label(digital_signature, text = 'Bring key pair')
+bring_key_pair_label.config(font = ('Comic Sans MS', 12), fg = '#040339')
+bring_key_pair_label.place(x = 800, y = 190)
+
+private_key_name_label_cr = tk.Entry(digital_signature, textvariable = private_key_name_cr, width = 15)
+private_key_name_label_cr.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
+private_key_name_label_cr.place(x = 520, y = 220)
+
+private_key_button_cr = tk.Button(digital_signature, image = private_key_logo, command = lambda:private_key_generator())
+private_key_button_cr.place(x = 690, y = 202)
+
+public_key_name_label_cr = tk.Entry(digital_signature, textvariable = public_key_name_cr, width = 15)
+public_key_name_label_cr.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
+public_key_name_label_cr.place(x = 520, y = 300)
+
+public_key_button_cr = tk.Button(digital_signature, image = public_key_logo, command = lambda:public_key_generator())
+public_key_button_cr.place(x = 690, y = 282)
+
+private_key_name_label_br = tk.Entry(digital_signature, textvariable = private_key_name_br, width = 15)
+private_key_name_label_br.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
+private_key_name_label_br.place(x = 780, y = 220)
+
+private_key_button_br = tk.Button(digital_signature, image = private_key_logo, command = lambda:private_key_reader())
+private_key_button_br.place(x = 950, y = 202)
+
+public_key_name_label_br = tk.Entry(digital_signature, textvariable = public_key_name_br, width = 15)
+public_key_name_label_br.config(font = ('Comic Sans MS', 12), fg = '#9daee1', bg = '#050005', justify = 'center')
+public_key_name_label_br.place(x = 780, y = 300)
+
+public_key_button_br = tk.Button(digital_signature, image = public_key_logo, command = lambda:public_key_reader())
+public_key_button_br.place(x = 950, y = 282)
+
+bring_directory_DS = tk.Label(digital_signature, text = 'Define the directory for keys saving/searching')
+bring_directory_DS.config(font = ('Comic Sans MS', 14), fg = '#040339')
+bring_directory_DS.place(x = 520, y = 360)
+
+directory_label_DS = tk.Label(digital_signature, width = 59)
+directory_label_DS.config(bg = '#050005', fg = '#9daee1')
+directory_label_DS.place(x = 520, y = 390)
+
+directory_browse_DS = tk.Button(digital_signature, image = browse_ds_logo, command = lambda:selectDirectoryOpenFindKeysDS())
+directory_browse_DS.place(x = 950, y = 370)
+
+file_hash_ciphertext_title = tk.Label(digital_signature, text = 'Digital Signature Results')
+file_hash_ciphertext_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
+file_hash_ciphertext_title.place(x = 530, y = 415)
+
+file_hash_ciphertext_label = tk.Text(digital_signature, width = 50, height = 3, padx = 10)
+file_hash_ciphertext_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005')
+file_hash_ciphertext_label.place(x = 520, y = 445)
 
 
 
@@ -1343,12 +2297,12 @@ def reverse_adjust():
 
 		translation = reverse_cipher_apl(plaintext.get("1.0", "end-1c"))
 		ciphertext.delete(1.0, tk.END)
-		playsound('bambu_click.mp3')
+		playsound('Audios/bambu_click.mp3')
 		ciphertext.insert(tk.END, translation)
 
 	else:
 
-		playsound('IniciarSesionUtilizarFuncion.mp3')
+		playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 def enc_classic():
 
@@ -1381,7 +2335,7 @@ def caesarApply():
 
 	elif mode_classic == '':
 
-		playsound('Encriptar_o_desencriptar.mp3')
+		playsound('Audios/Encriptar_o_desencriptar.mp3')
 
 
 	if mode_classic != '':
@@ -1398,23 +2352,23 @@ def caesarApply():
 			if mode_classic == 'e':
 
 				ciphertext.delete(1.0, tk.END)
-				playsound('bambu_click.mp3')
+				#playsound('Audios/bambu_click.mp3')
 				ciphertext.insert(tk.END, translation)
 
 			elif mode_classic == 'd':
 
 				plaintext.delete(1.0, tk.END)
-				playsound('bambu_click.mp3')
+				playsound('Audios/bambu_click.mp3')
 				plaintext.insert(tk.END, translation)
 
 
 		elif keyApply == 0:
 
-			playsound('DebesDefinirLlave.mp3')
+			playsound('Audios/DebesDefinirLlave.mp3')
 
 		elif login_check == False:
 
-			playsound('IniciarSesionUtilizarFuncion.mp3')
+			playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 def TranspositionApply():
@@ -1436,7 +2390,7 @@ def TranspositionApply():
 
 	elif mode_classic == '':
 
-		playsound('Encriptar_o_desencriptar.mp3')
+		playsound('Audios/Encriptar_o_desencriptar.mp3')
 
 	if mode_classic == 'e':
 
@@ -1447,16 +2401,16 @@ def TranspositionApply():
 			translation = encryptMessageTransLinear(keyApply_transLinear, message_apply_tl)
 
 			ciphertext.delete(1.0, tk.END)
-			playsound('bambu_click.mp3')
+			playsound('Audios/bambu_click.mp3')
 			ciphertext.insert(tk.END, translation)
 
 		elif keyApply_transLinear == 0:
 
-			playsound('DebesDefinirLlave.mp3')
+			playsound('Audios/DebesDefinirLlave.mp3')
 
 		elif login_check == False:
 
-			playsound('IniciarSesionUtilizarFuncion.mp3')
+			playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 	if mode_classic == 'd':
 
@@ -1466,16 +2420,16 @@ def TranspositionApply():
 
 			translation = decryptMessages(keyApply_transLinear, message_apply_tl)
 			plaintext.delete(1.0, tk.END)
-			playsound('bambu_click.mp3')
+			playsound('Audios/bambu_click.mp3')
 			plaintext.insert(tk.END, translation)
 
 		elif keyApply_transLinear == 0:
 
-			playsound('DebesDefinirLlave.mp3')
+			playsound('Audios/DebesDefinirLlave.mp3')
 
 		elif login_check == False:
 
-			playsound('IniciarSesionUtilizarFuncion.mp3')
+			playsound('Audios/IniciarSesionUtilizarFuncion.mp3')
 
 
 def TranspositionInverseApply():
@@ -1496,7 +2450,7 @@ def TranspositionInverseApply():
 
 	elif mode_classic == '':
 
-		playsound('Hello.mp3')
+		playsound('Audios/Hello.mp3')
 
 	if mode_classic == 'e':
 
@@ -1554,14 +2508,14 @@ decrypt_button_classic = tk.Button(fr, image = decrypt_buttonImg, command = lamb
 decrypt_button_classic.config(fg = '#1af017')
 decrypt_button_classic.place(x = 900, y = 140)
 	
-imagen_caesar_cipher = tk.PhotoImage(file = 'Imagen_caesar.png')
-imageCaesar = tk.PhotoImage(file = "Caesar Cipher-logo1.png")
-imageReverse = tk.PhotoImage(file = "Reverse Cipher-logo1.png")
-imageLinearTransposition = tk.PhotoImage(file = "Linear Transposition -logo1.png")
-imageInverseTransposition = tk.PhotoImage(file = "Inverse Transposition -logo1.png")
-imageLives = tk.PhotoImage(file = "Lives-logo1.png")
-cryptoMachineImage = tk.PhotoImage(file = "Cryptographic Machine-logo1.png")
-ramson_image = tk.PhotoImage(file = 'RamsonBird_MachineImage.png')
+imagen_caesar_cipher = tk.PhotoImage(file = 'Images/Imagen_caesar.png')
+imageCaesar = tk.PhotoImage(file = "Images/Caesar Cipher-logo1.png")
+imageReverse = tk.PhotoImage(file = "Images/Reverse Cipher-logo1.png")
+imageLinearTransposition = tk.PhotoImage(file = "Images/Linear Transposition -logo1.png")
+imageInverseTransposition = tk.PhotoImage(file = "Images/Inverse Transposition -logo1.png")
+imageLives = tk.PhotoImage(file = "Images/Lives-logo1.png")
+cryptoMachineImage = tk.PhotoImage(file = "Images/Cryptographic Machine-logo1.png")
+ramson_image = tk.PhotoImage(file = 'Images/RamsonBird_MachineImage.png')
 
 imagen_caesar_cipher_lab = tk.Label(fr, image = imagen_caesar_cipher)
 #imagen_caesar_cipher_lab.config(bg = '#FFFFFF')
@@ -1596,7 +2550,7 @@ keyInverseTransposition.place(x = 530, y = 360)
 
 labelQuestionKey = tk.Label(fr, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey.config(fg = "#7e086c")
-labelQuestionKey.place(x = 805, y = 50)
+labelQuestionKey.place(x = 800, y = 50)
 
 labelPlayerBCM = tk.Label(fr, text = "Welcome, ", font = ("Comic Sans MS", 11))
 labelPlayerBCM.config(fg = "#eba5f1", bg = "#050005")
@@ -1616,15 +2570,22 @@ closeMachineButton.config(fg = "#7e086c")
 
 ### ------------------------------------------------ Message encryption section -----------------------------------------------
 
+
+def algorithm_selection():
+
+	algorithm_select = tk.Toplevel(decrypt)
+	algorithm_select.title('Encryption Algorithm selection')
+	algorithm_select.geometry('400x300')
+
 	
-encryption_machine_logo = tk.PhotoImage(file = "Send Encrypted Message-logo.png")
-generate_key_image = tk.PhotoImage(file = "Generate Key-logo.png")
-encrypt_message_image = tk.PhotoImage(file = "Encrypt Message-logo1.png")
-person1_image = tk.PhotoImage(file = 'Person1.png')
-person2_image = tk.PhotoImage(file = 'Person2.png')
-person3_image = tk.PhotoImage(file = 'Person3.png')
-person4_image = tk.PhotoImage(file = 'Person4.png')
-receiver_ramson_image = tk.PhotoImage(file = 'PersonRansom-logo1.png')
+encryption_machine_logo = tk.PhotoImage(file = "Images/Send Encrypted Message-logo.png")
+generate_key_image = tk.PhotoImage(file = "Images/Generate Key-logo.png")
+encrypt_message_image = tk.PhotoImage(file = "Images/Encrypt Message-logo1.png")
+person1_image = tk.PhotoImage(file = 'Images/Person1.png')
+person2_image = tk.PhotoImage(file = 'Images/Person2.png')
+person3_image = tk.PhotoImage(file = 'Images/Person3.png')
+person4_image = tk.PhotoImage(file = 'Images/Person4.png')
+receiver_ramson_image = tk.PhotoImage(file = 'Images/PersonRansom-logo1.png')
 
 scrollVetrn = ttk.Scrollbar(fr2, orient = tk.VERTICAL)
 #cipher_text2['yscrollcommand'] = scrollVetrn.set()
@@ -1666,47 +2627,45 @@ fernet_encryption_message = tk.Button(fr2, image = encrypt_message_image, font =
 fernet_encryption_message.config(fg = '#1af017')
 fernet_encryption_message.place(x = 900, y = 150)
 
-imagen_caesar_cipher_lab2 = tk.Label(fr2, image = imagen_caesar_cipher)
-imagen_caesar_cipher_lab2.place(x = 30, y = 300)
+algorithm_button = tk.Button(fr2, image = algorithm_logo, command = lambda:algorithm_selection())
+algorithm_button.place(x = 30, y = 310)
+algorithm_button.config(bg = '#3f0322')
 
-titleBirdCipherMachine2 = tk.Label(fr2, text = "BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages", font = ("Comic Sans MS", 12))
-titleBirdCipherMachine2.config(fg = "#7e086c")
-titleBirdCipherMachine2.place(x = 70, y = 8)
-
-buttonPoints2 = tk.Button(fr2, image = imageCaesar, command = lambda:pointsAudio())
-buttonPoints2.place(x = 210, y = 300)
+titleBirdCipherMachine20 = tk.Label(fr2, text = "BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages", font = ("Comic Sans MS", 12))
+titleBirdCipherMachine20.config(fg = "#7e086c")
+titleBirdCipherMachine20.place(x = 70, y = 8)
 
 buttonPerson1a = tk.Button(fr2, image = person1_image, command = lambda:person1_actv())
-buttonPerson1a.place(x = 300, y = 300)
+buttonPerson1a.place(x = 270, y = 310)
 
 buttonPerson2a = tk.Button(fr2, image = person2_image, command = lambda:person2_actv())
-buttonPerson2a.place(x = 400, y = 300)
+buttonPerson2a.place(x = 370, y = 310)
 
 buttonPerson3a = tk.Button(fr2, image = person3_image, command = lambda:person3_actv())
-buttonPerson3a.place(x= 500, y = 300)
+buttonPerson3a.place(x= 470, y = 310)
 
 buttonPerson4a = tk.Button(fr2, image = person4_image, command = lambda:person4_actv())
-buttonPerson4a.place(x = 615, y = 300)
+buttonPerson4a.place(x = 570, y = 310)
 
-labelPoints2 = tk.Label(fr2, text = points, font = ("Comic Sans MS", 13), justify = "center", width = 6)
-labelPoints2.config(bg = "#050005", fg = "#7e086c")
-labelPoints2.place(x = 212, y = 410)
+# labelPoints2 = tk.Label(fr2, font = ("Comic Sans MS", 13), justify = "center", width = 6)
+# labelPoints2.config(bg = "#050005", fg = "#7e086c")
+# labelPoints2.place(x = 212, y = 410)
 
-person1 = tk.Entry(fr2, textvariable = person1_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person1.config(bg = "#050005", fg = "#7e086c")
-person1.place(x = 300, y = 410)
+person1 = tk.Entry(fr2, textvariable = person1_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person1.config(bg = "#050005", fg = "#efc2ee")
+person1.place(x = 270, y = 410)
 
-person2 = tk.Entry(fr2, textvariable = person2_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person2.config(bg = "#050005", fg = "#7e086c")
-person2.place(x = 400, y = 410)
+person2 = tk.Entry(fr2, textvariable = person2_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person2.config(bg = "#050005", fg = "#efc2ee")
+person2.place(x = 370, y = 410)
 
-person3 = tk.Entry(fr2, textvariable = person3_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person3.config(bg = "#050005", fg = "#7e086c")
-person3.place(x = 500, y = 410)
+person3 = tk.Entry(fr2, textvariable = person3_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person3.config(bg = "#050005", fg = "#efc2ee")
+person3.place(x = 470, y = 410)
 
-person4 = tk.Entry(fr2, textvariable = person4_var, font = ("Comic Sans MS", 13), justify = "center", width = 7)
-person4.config(bg = "#050005", fg = "#7e086c")
-person4.place(x = 617, y = 410)
+person4 = tk.Entry(fr2, textvariable = person4_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person4.config(bg = "#050005", fg = "#efc2ee")
+person4.place(x = 570, y = 410)
 
 labelQuestionKey2 = tk.Label(fr2, text = "Enter your password", font = ("Comic Sans MS", 13))
 labelQuestionKey2.config(fg = "#7e086c")
@@ -1721,7 +2680,7 @@ imageCryptographicMachine2.place(x = 760, y = 290)
 imageCryptographicMachine2.config(bg = "#3f0322")
 
 closeMachineButton2 = tk.Button(fr2, text = "Close the BirdCipher Cryptographic Machine", font = ("Comic Sans MS", 12), command = lambda:closeMachine())
-closeMachineButton2.place(x = 250, y = 460)
+closeMachineButton2.place(x = 290, y = 460)
 closeMachineButton2.config(fg = "#7e086c")
 
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -1791,7 +2750,7 @@ buttonPerson3b.place(x= 500, y = 300)
 buttonPerson4b = tk.Button(fr3, image = person4_image, command = lambda:person4c_actv())
 buttonPerson4b.place(x = 615, y = 300)
 
-labelPoints3 = tk.Label(fr3, text = points, font = ("Comic Sans MS", 13), justify = "center", width = 6)
+labelPoints3 = tk.Label(fr3, font = ("Comic Sans MS", 13), justify = "center", width = 6)
 labelPoints3.config(bg = "#050005", fg = "#7e086c")
 labelPoints3.place(x = 212, y = 410)
 
@@ -1910,15 +2869,130 @@ decryptFilesButton.place(x = 830, y = 380)
 
 # -----------------------------------------------------------------------------------------------------------------------------
 
+### ---------------------------------------------- Virus Total URL Test section -----------------------------------------------
+
+url_for_test = tk.StringVar()
+
+def url_test_function():
+
+	ldatos = bytes(url_for_test.get(), 'utf-8')
+	h = hashlib.new(algoritmo, ldatos)
+	hash2000 = HASH.generaHash(h)
+	url_hash_display.config(text = hash2000)
+
+	url = "https://www.virustotal.com/api/v3/urls/" + hash2000
+
+	headers = {
+    "accept": "application/json",
+    "x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
+	}
+
+	response = requests.get(url, headers=headers)
+
+	data = json.loads(response.text)
+
+	category_webpage.config(text = data['data']['attributes']['categories']['Forcepoint ThreatSeeker'])
+	malicious_stat_url_test.config(text = data['data']['attributes']['last_analysis_stats']['malicious'])
+	malicious_stat_url_test.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	malicious_label_url_test = tk.Label(url_test_ntk, text = 'Malicious')
+	malicious_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	malicious_label_url_test.place(x = 70, y = 490)
+	suspicious_stat_url_test.config(text = data['data']['attributes']['last_analysis_stats']['suspicious'])
+	suspicious_stat_url_test.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	suspicious_label_url_test = tk.Label(url_test_ntk, text = 'Suspicious')
+	suspicious_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	suspicious_label_url_test.place(x = 210, y = 490)
+	undetected_stat_url_test.config(text = data['data']['attributes']['last_analysis_stats']['harmless'])
+	undetected_stat_url_test.config(bg = '#050005', justify = 'center', width = 4, height = 2, font = ('Comic Sans MS', 28))
+	undetected_label_url_test = tk.Label(url_test_ntk, text = 'Harmless')
+	undetected_label_url_test.config(font = ('Comic Sans MS', 11), fg = '#7a0684')
+	undetected_label_url_test.place(x = 362, y = 490)
+	description_html_meta_content = data['data']['attributes']['html_meta']['description']
+	description_html_meta.delete("1.0", tk.END)
+	description_html_meta.insert(tk.END, description_html_meta_content)
+
+
+
+
+
+url_test_title = tk.Label(url_test_ntk, text = 'CHECK THE SECURITY OF THE WEBSITES YOU BROWSE', font = ("Comic Sans MS", 14))
+url_test_title.config(fg = '#7e086c')
+url_test_title.place(x = 20, y = 10)
+
+url_test_label = tk.Label(url_test_ntk, text = 'Enter the website URL', font = ("Comic Sans MS", 12))
+url_test_label.config(fg = '#7e086c')
+url_test_label.place(x = 50, y = 50)
+
+url_test_entry = tk.Entry(url_test_ntk, textvariable = url_for_test, font = ('Comic Sans MS', 12), width = 45)
+url_test_entry.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+url_test_entry.place(x = 50, y = 80)
+
+examine_button_url_test = tk.Button(url_test_ntk, image = button_examine_url_test, command = lambda:url_test_function())
+examine_button_url_test.place(x = 525, y = 62)
+
+url_hash_label = tk.Label(url_test_ntk, text = 'The hash (sha 256) of your URL is:', font = ("Comic Sans MS", 12))
+url_hash_label.config(fg = '#7e086c')
+url_hash_label.place(x = 50, y = 120)
+
+url_hash_display = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 9), width = 64)
+url_hash_display.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+url_hash_display.place(x = 50, y = 150)
+
+category_webpage_label = tk.Label(url_test_ntk, text = 'Webpage category', font = ('Comic Sans MS', 12))
+category_webpage_label.config(fg = '#7e086c')
+category_webpage_label.place(x = 100, y = 205)
+
+category_webpage = tk.Label(url_test_ntk, text = '', font = ('Comic Sans MS', 10), width = 25)
+category_webpage.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
+category_webpage.place(x = 60, y = 240)
+
+results_url_test = tk.Label(url_test_ntk, text = 'LAST ANALYSIS STATS')
+results_url_test.config(font = ('Comic Sans MS', 12), fg = '#7a0684')
+results_url_test.place(x = 160, y = 330)
+
+explanation_url_test = tk.Label(url_test_ntk, text = '(Number of engine reports per category)')
+explanation_url_test.config(font = ('Comic Sans MS', 10), fg = '#7a0684')
+explanation_url_test.place(x = 130, y = 355)
+
+malicious_stat_url_test = tk.Label(url_test_ntk)
+malicious_stat_url_test.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+malicious_stat_url_test.place(x = 60, y = 380)
+
+suspicious_stat_url_test = tk.Label(url_test_ntk)
+suspicious_stat_url_test.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+suspicious_stat_url_test.place(x = 200, y = 380)
+
+undetected_stat_url_test = tk.Label(url_test_ntk)
+undetected_stat_url_test.config(fg = '#f7a6f1', justify = 'center', width = 4, height = 2)
+undetected_stat_url_test.place(x = 350, y = 380)
+
+description_html_meta_label = tk.Label(url_test_ntk, text = 'Description', font = ('Comic Sans MS', 12))
+description_html_meta_label.config(fg = '#7e086c')
+description_html_meta_label.place(x = 400, y = 190)
+
+scrollDescription_html_meta = ttk.Scrollbar(url_test_ntk, orient = tk.VERTICAL)
+scrollDescription_html_meta.place(x = 570, y = 220, height = 90)
+
+description_html_meta = tk.Text(url_test_ntk, font = ('Comic Sans MS', 9), wrap = tk.WORD, width = 35, height = 5, padx = 10)
+description_html_meta.config(bg = '#050005', fg = '#f7a6f1')
+description_html_meta.place(x = 300, y = 220)
+scrollDescription_html_meta.config(command = description_html_meta.yview)
+
+virus_total_logo_url_section = tk.Button(url_test_ntk, image = virus_total_logo, command = lambda:url_test_function())
+virus_total_logo_url_section.place(x = 930, y = 10)
+
+
+
+
 
 ### ---------------------------------------------- Virus Total section -----------------------------------------------------
 
 archive_upload_vt = tk.StringVar()
 hash_file_label_vt = tk.StringVar()
 formatUploadFile = tk.IntVar()
-upload_file_image = tk.PhotoImage(file = 'Upload file-logo1.png')
-examine_file_image = tk.PhotoImage(file = 'Examine-logo1.png')
-mitre_image = tk.PhotoImage(file = 'Mitre Attack-logo1.png')
+upload_file_image = tk.PhotoImage(file = 'Images/Upload file-logo1.png')
+examine_file_image = tk.PhotoImage(file = 'Images/Examine-logo1.png')
+mitre_image = tk.PhotoImage(file = 'Images/Mitre Attack-logo1.png')
 formats_VT = []
 
 def uploadFileVirusTotal():
@@ -1938,8 +3012,8 @@ def uploadFileVirusTotal():
 
 	if datos_diccionario['data']['id'] != '':
 
-		#playsound('bambu_click.mp3')
-		#playsound('archivoSubidoSatisfactoriamenteVT.mp3')
+		#playsound('Audios/bambu_click.mp3')
+		#playsound('Audios/archivoSubidoSatisfactoriamenteVT.mp3')
 		print('Done')
 
 
@@ -2029,7 +3103,7 @@ def examine_vt():
 	except KeyError:
 
 		print('espere')
-		#playsound('Espere_ejecute_nuevamente.mp3')
+		#playsound('Audios/Espere_ejecute_nuevamente.mp3')
 
 
 titleVirusTotal = tk.Label(virusTotal, text = 'UPLOAD YOUR FILE TO VIRUS TOTAL')
@@ -2680,14 +3754,6 @@ techniques_zen.place(x = 550, y = 270)
 scrollVetrn70 = ttk.Scrollbar(zenbox_tab, command = techniques_zen.yview)
 #cipher_text2['yscrollcommand'] = scrollVetrn.set()
 scrollVetrn70.place(x = 960, y = 270, height = 220)
-
-
-
-
-
-
-
-
 
 #decrypt.protocol("WM_DELETE_WINDOW", lambda: None)
 
