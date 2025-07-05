@@ -1814,6 +1814,8 @@ def private_key_generator():
 	global private_key_user
 	global directoryFindKeysDS
 
+	print(directoryFindKeysDS)
+
 	private_key_user = rsa.generate_private_key(
 		public_exponent = 65537,
 		key_size = 2048,
@@ -1828,7 +1830,7 @@ def private_key_generator():
 		encryption_algorithm = serialization.NoEncryption()
 		)
 
-	with open(directoryFindKeysDS + private_key_name_cr.get(), 'wb') as f:
+	with open(directoryFindKeysDS + '/' + private_key_name_cr.get(), 'wb') as f:
 
 		f.write(pem_private_key_user)
 
@@ -1850,7 +1852,7 @@ def public_key_generator():
 		format = serialization.PublicFormat.SubjectPublicKeyInfo
 		)
 
-	with open(directoryFindKeysDS + public_key_name_cr.get(), 'wb') as f:
+	with open(directoryFindKeysDS + '/' + public_key_name_cr.get(), 'wb') as f:
 
 		f.write(pem_public_key_user)
 
@@ -1862,7 +1864,7 @@ def private_key_reader():
 	global directoryFindKeysDS
 	global private_key_user
 
-	with open(directoryFindKeysDS + private_key_name_br.get(), 'rb') as key_file:
+	with open(directoryFindKeysDS + '/' + private_key_name_br.get(), 'rb') as key_file:
 
 		private_key_user = serialization.load_pem_private_key(
 
@@ -1888,7 +1890,7 @@ def public_key_reader():
 	# 	format = serialization.PublicFormat.SubjectPublicKeyInfo
 	# 	)
 
-	with open(directoryFindKeysDS + public_key_name_br.get(), 'rb') as f:
+	with open(directoryFindKeysDS + '/' + public_key_name_br.get(), 'rb') as f:
 
 		public_key_user = serialization.load_pem_public_key(
 
@@ -1934,7 +1936,7 @@ def sign_document_function():
 	file_hash_ciphertext_label.delete('1.0', tk.END)
 	file_hash_ciphertext_label.insert(tk.END, signature)
 
-	with open(directoryFindKeysDS + signature_name_variable.get(), 'wb') as j:
+	with open(directoryFindKeysDS + '/' + signature_name_variable.get(), 'wb') as j:
 
 		j.write(signature)
 
@@ -1947,7 +1949,7 @@ def verify_function():
 
 	if signature == '':
 
-		with open(directoryFindKeysDS + signature_name_variable.get(), 'rb') as l:
+		with open(directoryFindKeysDS + '/' + signature_name_variable.get(), 'rb') as l:
 
 			signature = l.read()
 
@@ -1981,9 +1983,11 @@ def option_sign():
 
 	global option_sign_choose
 	global option_verify_choose
+	global username_db
 
 	option_sign_choose = True
 	option_verify_choose = False
+	author_name_variable.set(username_db)
 
 
 def option_verify():
@@ -2035,7 +2039,7 @@ def manage_signature():
 		public_key_user_temp = dlt3000[0][2]
 		public_key_user_temp2 = public_key_user_temp.encode('utf-8')
 
-		with open(directoryFindKeysDS + public_key_name_br.get(), 'wb') as f:
+		with open(directoryFindKeysDS + '/' + public_key_name_br.get(), 'wb') as f:
 
 			f.write(public_key_user_temp2)
 
