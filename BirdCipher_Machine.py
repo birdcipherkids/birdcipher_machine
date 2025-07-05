@@ -2178,7 +2178,7 @@ def person_non_repudiation():
 
 
 
-digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo)
+digital_signature_button = tk.Button(digital_signature, image = digital_signature_logo, command = lambda:person_non_repudiation())
 digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
 
