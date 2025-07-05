@@ -1091,11 +1091,32 @@ def translator():
 		descriptions_label_zen1.config(text = 'Descripción', font = ('Comic Sans MS', 14))
 		descriptions_label_zen2.config(text = 'Descripción', font = ('Comic Sans MS', 14))
 		techniques_zen_label.config(text = 'Técnicas', font = ('Comic Sans MS', 14))
+		upload_file_label_DS.config(text = 'CARGA TU DOCUMENTO A LA HERRAMIENTA DE FIRMA DIGITAL', font = ('Comic Sans MS', 11))
+		hash_file_ds_label.config(text = 'El hash (sha 256) de tu archivo es: ')
+		create_key_pair_label.config(text = 'Crear par de llaves')
+		bring_key_pair_label.config(text = 'Cargar par de llaves')
+		create_key_pair_label.place(x = 525, y = 190)
+		bring_key_pair_label.place(x = 780, y = 190)
+		bring_directory_DS.config(text = 'Defina el directorio para guardar/buscar llaves')
+		file_hash_ciphertext_title.config(text = 'Resultados de la firma digital')
 		img_social_eng_label.config(image = firewall_humano)
 		password_checking_button.config(image = chequeoContraseña)
 		digital_signature_button.config(image = firma_digital_logo)
 		logoBrowseDirectoriesHash.config(image = busqueda_directorio)
 		urlUploadLogo.config(image = busqueda_directorio_vt)
+		private_key_button_cr.config(image = llave_privada_logo)
+		private_key_button_br.config(image = llave_privada_logo)
+		public_key_button_cr.config(image = llave_publica_logo)
+		public_key_button_br.config(image = llave_publica_logo)
+		browse_ds_button.config(image = buscar_ds_logo)
+		directory_browse_DS.config(image = buscar_ds_logo)
+		verify_integrity_button.config(image = verificar_integridad_logo)
+		non_repudiation_button.config(image = no_repudio_logo)
+		instructions_ds_button.config(image = instrucciones_ds_logo)
+		digital_signature_button.place(x = 30, y = 20)
+		instructions_ds_button.place(x = 30, y = 380)
+		non_repudiation_button.place(x = 178, y = 380)
+		
 
 
 
@@ -1185,11 +1206,32 @@ def translator():
 		descriptions_label_zen1.config(text = 'Description', font = ('Comic Sans MS', 14))
 		descriptions_label_zen2.config(text = 'Description', font = ('Comic Sans MS', 14))
 		techniques_zen_label.config(text = 'Techniques', font = ('Comic Sans MS', 14))
+		upload_file_label_DS.config(text = 'UPLOAD YOUR FILE TO THE DIGITAL SIGNATURE TOOL', font = ('Comic Sans MS', 13))
+		hash_file_ds_label.config(text = 'The hash (sha 256) of your file is: ')
+		create_key_pair_label.config(text = 'Create key pair')
+		bring_key_pair_label.config(text = 'Bring key pair')
+		create_key_pair_label.place(x = 540, y = 190)
+		bring_key_pair_label.place(x = 800, y = 190)
+		bring_directory_DS.config(text = 'Define the directory for keys saving/searching')
+		file_hash_ciphertext_title.config(text = 'Digital signature results')
 		img_social_eng_label.config(image = cyberaware)
 		password_checking_button.config(image = password_checking_logo)
 		digital_signature_button.config(image = digital_signature_logo)
 		logoBrowseDirectoriesHash.config(image = directory_browser)
 		urlUploadLogo.config(image = directory_browser1)
+		private_key_button_cr.config(image = private_key_logo)
+		private_key_button_br.config(image = private_key_logo)
+		public_key_button_cr.config(image = public_key_logo)
+		public_key_button_br.config(image = public_key_logo)
+		browse_ds_button.config(image = browse_ds_logo)
+		directory_browse_DS.config(image = browse_ds_logo)
+		verify_integrity_button.config(image = verify_integrity_logo)
+		non_repudiation_button.config(image = non_repudiation_logo)
+		instructions_ds_button.config(image = instructions_ds_logo)
+		digital_signature_button.place(x = 20, y = 20)
+		instructions_ds_button.place(x = 20, y = 380)
+		non_repudiation_button.place(x = 168, y = 380)
+		author_button.config(image = author_logo)
 
 
 
@@ -1295,12 +1337,20 @@ digital_signature_logo = tk.PhotoImage(file = 'Images/Digital Signature.png')
 firma_digital_logo = tk.PhotoImage(file = 'Images/Firma Digital.png')
 sign_document_logo = tk.PhotoImage(file = 'Images/Sign document.png')
 non_repudiation_logo = tk.PhotoImage(file = 'Images/Non-repudiation.png')
+no_repudio_logo = tk.PhotoImage(file = 'Images/No Repudio.png')
 verify_integrity_logo = tk.PhotoImage(file = 'Images/Verify Integrity.png')
+verificar_integridad_logo = tk.PhotoImage(file = 'Images/Verificar integridad.png')
 instructions_ds_logo = tk.PhotoImage(file = 'Images/InstructionsDS.png')
+instrucciones_ds_logo = tk.PhotoImage(file = 'Images/Instrucciones.png')
 browse_ds_logo = tk.PhotoImage(file = 'Images/Browse_ds1.png')
 private_key_logo = tk.PhotoImage(file = 'Images/private.png')
 public_key_logo = tk.PhotoImage(file = 'Images/public.png')
+llave_privada_logo = tk.PhotoImage(file = 'Images/Privada.png')
+llave_publica_logo = tk.PhotoImage(file = 'Images/Publica.png')
+buscar_ds_logo = tk.PhotoImage(file = 'Images/Buscar-ds.png')
 author_logo = tk.PhotoImage(file = 'Images/Author.png')
+autor_logo = tk.PhotoImage(file = 'Images/Autor.png')
+firmar_documento_logo = tk.PhotoImage(file = 'Images/Firmar documento.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 algorithm_logo = tk.PhotoImage(file = 'Images/algorithm.png')
@@ -2063,15 +2113,18 @@ def manage_signature():
 
 def person_non_repudiation():
 
+	global English_mode
+	global Spanish_mode
+
 	person_registry = tk.Toplevel(decrypt)
 	person_registry.title('Person')
-	person_registry.geometry('500x400')
+	person_registry.geometry('550x400')
 
-	author_button = tk.Button(person_registry, image = author_logo, command = lambda:manage_signature())
+	author_button = tk.Button(person_registry, command = lambda:manage_signature())
 	author_button.config(bg = '#040339')
 	author_button.place(x = 20, y = 20)
 
-	author_name_title = tk.Label(person_registry, text = 'Username')
+	author_name_title = tk.Label(person_registry)
 	author_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
 	author_name_title.place(x = 30, y = 260)
 
@@ -2079,7 +2132,7 @@ def person_non_repudiation():
 	author_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
 	author_name_label.place(x = 20, y = 290)
 
-	signature_name_title = tk.Label(person_registry, text = 'Signature file name')
+	signature_name_title = tk.Label(person_registry)
 	signature_name_title.config(font = ('Comic Sans MS', 13), fg = '#040339')
 	signature_name_title.place(x = 30, y = 320)
 
@@ -2087,16 +2140,40 @@ def person_non_repudiation():
 	signature_name_label.config(font = ('Comic Sans MS', 11), fg = '#9daee1', bg = '#050005', justify = 'center')
 	signature_name_label.place(x = 20, y = 350)
 
-	option_sign_document = tk.Button(person_registry, text = 'Sign document mode', command = lambda:option_sign())
+	option_sign_document = tk.Button(person_registry, command = lambda:option_sign())
 	option_sign_document.place(x = 250, y = 30)
 	option_sign_document.config(font = ('Comic Sans MS', 11), fg = '#040339')
 
-	option_verify_document = tk.Button(person_registry, text = 'Verify document mode', command = lambda:option_verify())
+	option_verify_document = tk.Button(person_registry, command = lambda:option_verify())
 	option_verify_document.place(x = 250, y = 80)
 	option_verify_document.config(font = ('Comic Sans MS', 11), fg = '#040339')
 
 	sign_document_button = tk.Button(person_registry, image = sign_document_logo, command = lambda:sign_document_function())
-	sign_document_button.place(x = 340, y = 267)
+	sign_document_button.place(x = 385, y = 267)
+
+	
+	if English_mode:
+
+		author_button.config(image = author_logo)
+		author_name_title.config(text = 'Username')
+		signature_name_title.config(text = 'Signature file name')
+		signature_name_title.place(x = 30, y = 320)
+		option_sign_document.config(text = 'Sign document mode')
+		option_verify_document.config(text = 'Verify document mode')
+		sign_document_button.config(image = sign_document_logo)
+		sign_document_button.place(x = 385, y = 267)
+
+
+	elif Spanish_mode:
+
+		author_button.config(image = autor_logo)
+		author_name_title.config(text = 'Usuario')
+		signature_name_title.config(text = 'Archivo de firma digital')
+		signature_name_title.place(x = 20, y = 320)
+		option_sign_document.config(text = 'Modo firma digital de documento')
+		option_verify_document.config(text = 'Modo verificación de firma digital')
+		sign_document_button.config(image = firmar_documento_logo)
+		sign_document_button.place(x = 385, y = 250)
 
 
 
@@ -2106,15 +2183,15 @@ digital_signature_button.config(bg = '#040339')
 digital_signature_button.place(x = 20, y = 20)
 
 instructions_ds_button = tk.Button(digital_signature, image = instructions_ds_logo)
-instructions_ds_button.place(x = 30, y = 380)
+instructions_ds_button.place(x = 20, y = 380)
 
 non_repudiation_button = tk.Button(digital_signature, image = non_repudiation_logo, command = lambda:person_non_repudiation())
-non_repudiation_button.place(x = 178, y = 380)
+non_repudiation_button.place(x = 168, y = 380)
 
 verify_integrity_button = tk.Button(digital_signature, image = verify_integrity_logo, command = lambda:verify_function())
 verify_integrity_button.place(x = 315, y = 380)
 
-upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD THE FILE TO THE DIGITAL SIGNATURE TOOL')
+upload_file_label_DS = tk.Label(digital_signature, text = 'UPLOAD YOUR FILE TO THE DIGITAL SIGNATURE TOOL')
 upload_file_label_DS.config(font = ('Comic Sans MS', 13), fg = '#040339')
 upload_file_label_DS.place(x = 510, y = 20)
 
