@@ -2489,6 +2489,13 @@ closeMachineButton.config(fg = "#7e086c")
 
 ### ------------------------------------------------ Message encryption section -----------------------------------------------
 
+
+def algorithm_selection():
+
+	algorithm_select = tk.Toplevel(decrypt)
+	algorithm_select.title('Encryption Algorithm selection')
+	algorithm_select.geometry('400x300')
+
 	
 encryption_machine_logo = tk.PhotoImage(file = "Images/Send Encrypted Message-logo.png")
 generate_key_image = tk.PhotoImage(file = "Images/Generate Key-logo.png")
@@ -2539,7 +2546,7 @@ fernet_encryption_message = tk.Button(fr2, image = encrypt_message_image, font =
 fernet_encryption_message.config(fg = '#1af017')
 fernet_encryption_message.place(x = 900, y = 150)
 
-algorithm_button = tk.Button(fr2, image = algorithm_logo)
+algorithm_button = tk.Button(fr2, image = algorithm_logo, command = lambda:algorithm_selection())
 algorithm_button.place(x = 30, y = 310)
 algorithm_button.config(bg = '#3f0322')
 
@@ -2563,20 +2570,20 @@ buttonPerson4a.place(x = 570, y = 310)
 # labelPoints2.config(bg = "#050005", fg = "#7e086c")
 # labelPoints2.place(x = 212, y = 410)
 
-person1 = tk.Entry(fr2, textvariable = person1_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person1.config(bg = "#050005", fg = "#7e086c")
+person1 = tk.Entry(fr2, textvariable = person1_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person1.config(bg = "#050005", fg = "#efc2ee")
 person1.place(x = 270, y = 410)
 
-person2 = tk.Entry(fr2, textvariable = person2_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person2.config(bg = "#050005", fg = "#7e086c")
+person2 = tk.Entry(fr2, textvariable = person2_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person2.config(bg = "#050005", fg = "#efc2ee")
 person2.place(x = 370, y = 410)
 
-person3 = tk.Entry(fr2, textvariable = person3_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person3.config(bg = "#050005", fg = "#7e086c")
+person3 = tk.Entry(fr2, textvariable = person3_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person3.config(bg = "#050005", fg = "#efc2ee")
 person3.place(x = 470, y = 410)
 
-person4 = tk.Entry(fr2, textvariable = person4_var, font = ("Comic Sans MS", 13), justify = "center", width = 8)
-person4.config(bg = "#050005", fg = "#7e086c")
+person4 = tk.Entry(fr2, textvariable = person4_var, font = ("Comic Sans MS", 10), justify = "center", width = 10)
+person4.config(bg = "#050005", fg = "#efc2ee")
 person4.place(x = 570, y = 410)
 
 labelQuestionKey2 = tk.Label(fr2, text = "Enter your password", font = ("Comic Sans MS", 13))
