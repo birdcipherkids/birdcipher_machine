@@ -1720,8 +1720,12 @@ def hibp_breaches_info():
 
 		hibp_breaches_text.delete(1.0, tk.END)
 		hibp_breaches_text.insert(tk.END, 'Service name: {} \n'.format(resp[count_breach_list]['Name']))
+		hibp_breaches_text.insert(tk.END, 'Domain: {} \n'.format(resp[count_breach_list]['Domain']))
 		hibp_breaches_text.insert(tk.END, 'Breach date: {} \n'.format(resp[count_breach_list]['BreachDate']))
-		hibp_breaches_text.insert(tk.END, 'Pwn count: {} \n'.format(resp[count_breach_list]['PwnCount']))
+		hibp_breaches_text.insert(tk.END, 'Pwn account: {} \n'.format(resp[count_breach_list]['PwnCount']))
+		hibp_breaches_text.insert(tk.END, '\n')
+		hibp_breaches_text.insert(tk.END, 'Pwn data type: {} \n'.format(resp[count_breach_list]['DataClasses']))
+		hibp_breaches_text.insert(tk.END, '\n')
 		hibp_breaches_text.insert(tk.END, 'Description: {} \n '.format(resp[count_breach_list]['Description']))
 
 
