@@ -60,6 +60,7 @@ hash_file_DS = ''
 signature = ''
 option_sign_choose = True
 option_verify_choose = False
+count_breach_list = -1
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -1696,6 +1697,55 @@ def passchecking_explanation():
 
 	playsound('Audios/explicacion_passwordHIBP.mp3')
 	playsound('Audios/passcheck_explant.mp3')
+
+
+
+
+
+
+
+
+def hibp_breaches_info():
+
+	global count_breach_list
+
+	def hibp_breaches_list():
+
+		global count_breach_list
+
+		count_breach_list = count_breach_list + 1		
+
+		pyhibp.set_user_agent(ua = 'Awesome application/0.0.1 (An awesome description)')
+		resp = pyhibp.get_all_breaches()
+
+		hibp_breaches_text.delete(1.0, tk.END)
+		hibp_breaches_text.insert(tk.END, 'Service name: {} \n'.format(resp[count_breach_list]['Name']))
+		hibp_breaches_text.insert(tk.END, 'Breach date: {} \n'.format(resp[count_breach_list]['BreachDate']))
+		hibp_breaches_text.insert(tk.END, 'Pwn count: {} \n'.format(resp[count_breach_list]['PwnCount']))
+		hibp_breaches_text.insert(tk.END, 'Description: {} \n '.format(resp[count_breach_list]['Description']))
+
+
+
+
+	hibp_breaches_window = tk.Toplevel(decrypt)
+	hibp_breaches_window.title('Data breaches reports by Have I Been Pwned')
+	hibp_breaches_window.geometry('450x500')
+
+	hibp_breaches_title = tk.Label(hibp_breaches_window, text = 'DATA BREACHES INFO')
+	hibp_breaches_title.config(fg = '#067297', font = ('Comic Sans MS', 14))
+	hibp_breaches_title.place(x = 20, y = 20)
+
+	scrollBreaches_text = ttk.Scrollbar(hibp_breaches_window, orient = tk.VERTICAL)
+	scrollBreaches_text.place(x = 413, y = 60, height = 350)
+
+	hibp_breaches_text = tk.Text(hibp_breaches_window, width = 36, height = 15, wrap = tk.WORD, padx = 10)
+	hibp_breaches_text.config(bg = '#050005', fg = '#c2ddef', font = ('Comic Sans MS', 12))
+	hibp_breaches_text.place(x = 30, y = 60)
+	scrollBreaches_text.config(command = hibp_breaches_text.yview)
+
+	hibp_breaches_query_asc = tk.Button(hibp_breaches_window, text = 'up', command = lambda:hibp_breaches_list())
+	hibp_breaches_query_asc.config(font = ('Comic Sans MS', 16))
+	hibp_breaches_query_asc.place(x = 150, y = 430)
 	
 
 password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
@@ -1708,7 +1758,7 @@ password_checking_button = tk.Button(passcheck, image = password_checking_logo, 
 password_checking_button.config(bg = '#067297')
 password_checking_button.place(x = 610, y = 20)
 
-hibp_logo = tk.Label(passcheck, image = hibp1_logo)
+hibp_logo = tk.Button(passcheck, image = hibp1_logo, command = lambda:hibp_breaches_info())
 hibp_logo.place(x = 610, y = 400)
 
 hibp_info = tk.Button(passcheck, image = hibp_info_logo, command = lambda:passchecking_explanation())
