@@ -61,6 +61,8 @@ signature = ''
 option_sign_choose = True
 option_verify_choose = False
 count_breach_list = -1
+arrow_breaches_asc = True
+arrow_breaches_desc = False
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -1355,6 +1357,9 @@ firmar_documento_logo = tk.PhotoImage(file = 'Images/Firmar documento.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 algorithm_logo = tk.PhotoImage(file = 'Images/algorithm.png')
+arrow_breaches_asc_logo = tk.PhotoImage(file = 'Images/arrow_breaches_asc_fn.png')
+arrow_breaches_desc_logo = tk.PhotoImage(file = 'Images/arrow_breaches_desc_fn.png')
+data_breaches_logo = tk.PhotoImage(file = 'Images/Data breaches.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1699,21 +1704,47 @@ def passchecking_explanation():
 	playsound('Audios/passcheck_explant.mp3')
 
 
-
-
-
-
-
-
 def hibp_breaches_info():
 
 	global count_breach_list
+	global arrow_breaches_asc
+	global arrow_breaches_desc
+
+	def switch_breaches_asc():
+
+		global arrow_breaches_asc
+		global arrow_breaches_desc
+
+		arrow_breaches_asc = True
+		arrow_breaches_desc = False
+
+	def switch_breaches_desc():
+
+		global arrow_breaches_asc
+		global arrow_breaches_desc
+
+		arrow_breaches_desc = True
+		arrow_breaches_asc = False
+
 
 	def hibp_breaches_list():
 
 		global count_breach_list
+		global arrow_breaches_asc
+		global arrow_breaches_desc
 
-		count_breach_list = count_breach_list + 1		
+		if arrow_breaches_asc:
+
+			count_breach_list = count_breach_list + 1
+
+		elif arrow_breaches_desc == True and count_breach_list > 0:
+
+			count_breach_list = count_breach_list - 1
+
+		elif arrow_breaches_desc == True and count_breach_list <= 0:
+
+			print('You must advance')
+
 
 		pyhibp.set_user_agent(ua = 'Awesome application/0.0.1 (An awesome description)')
 		resp = pyhibp.get_all_breaches()
@@ -1729,15 +1760,13 @@ def hibp_breaches_info():
 		hibp_breaches_text.insert(tk.END, 'Description: {} \n '.format(resp[count_breach_list]['Description']))
 
 
-
-
 	hibp_breaches_window = tk.Toplevel(decrypt)
 	hibp_breaches_window.title('Data breaches reports by Have I Been Pwned')
 	hibp_breaches_window.geometry('450x500')
 
 	hibp_breaches_title = tk.Label(hibp_breaches_window, text = 'DATA BREACHES INFO')
 	hibp_breaches_title.config(fg = '#067297', font = ('Comic Sans MS', 14))
-	hibp_breaches_title.place(x = 20, y = 20)
+	hibp_breaches_title.place(x = 110, y = 20)
 
 	scrollBreaches_text = ttk.Scrollbar(hibp_breaches_window, orient = tk.VERTICAL)
 	scrollBreaches_text.place(x = 413, y = 60, height = 350)
@@ -1747,9 +1776,16 @@ def hibp_breaches_info():
 	hibp_breaches_text.place(x = 30, y = 60)
 	scrollBreaches_text.config(command = hibp_breaches_text.yview)
 
-	hibp_breaches_query_asc = tk.Button(hibp_breaches_window, text = 'up', command = lambda:hibp_breaches_list())
+	hibp_breaches_query_asc = tk.Button(hibp_breaches_window, image = arrow_breaches_asc_logo, command = lambda:[switch_breaches_asc(), hibp_breaches_list()])
 	hibp_breaches_query_asc.config(font = ('Comic Sans MS', 16))
-	hibp_breaches_query_asc.place(x = 150, y = 430)
+	hibp_breaches_query_asc.place(x = 230, y = 420)
+
+	hibp_breaches_query_desc = tk.Button(hibp_breaches_window, image = arrow_breaches_desc_logo, command = lambda:[switch_breaches_desc(), hibp_breaches_list()])
+	hibp_breaches_query_desc.config(font = ('Comic Sans MS', 16))
+	hibp_breaches_query_desc.place(x = 150, y = 420)
+
+	data_breaches_image = tk.Label(hibp_breaches_window, image = data_breaches_logo)
+	data_breaches_image.place(x = 350, y = 420)
 	
 
 password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
