@@ -20,6 +20,7 @@ import pyhibp
 from pyhibp import pwnedpasswords as pw
 import requests
 import json
+import webbrowser
 
 from imagenes_ing_social import *
 from tests_ing_social import *
@@ -60,6 +61,9 @@ hash_file_DS = ''
 signature = ''
 option_sign_choose = True
 option_verify_choose = False
+count_breach_list = -1
+arrow_breaches_asc = True
+arrow_breaches_desc = False
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -1354,6 +1358,17 @@ firmar_documento_logo = tk.PhotoImage(file = 'Images/Firmar documento.png')
 button_examine_url_test = tk.PhotoImage(file = 'Images/Examine-logo2.png')
 virus_total_logo = tk.PhotoImage(file = 'Images/VirusTotal_Logo1.png')
 algorithm_logo = tk.PhotoImage(file = 'Images/algorithm.png')
+arrow_breaches_asc_logo = tk.PhotoImage(file = 'Images/arrow_breaches_asc_fn.png')
+arrow_breaches_desc_logo = tk.PhotoImage(file = 'Images/arrow_breaches_desc_fn.png')
+data_breaches_logo = tk.PhotoImage(file = 'Images/Data breaches.png')
+blue_team_logo = tk.PhotoImage(file = 'Images/Blue Team.png')
+red_team_logo = tk.PhotoImage(file = 'Images/Red Team.png')
+ideas_red_logo = tk.PhotoImage(file = 'Images/Ideas-red.png')
+ideas_blue_logo = tk.PhotoImage(file = 'Images/Ideas-blue.png')
+presentacion_blue_logo = tk.PhotoImage(file = 'Images/Presentacion-blue.png')
+presentation_blue_logo = tk.PhotoImage(file = 'Images/Presentation-blue.png')
+presentation_red_logo = tk.PhotoImage(file = 'Images/Presentation-red.png')
+presentacion_red_logo = tk.PhotoImage(file = 'Images/Presentacion-red.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1519,6 +1534,70 @@ def send_answer_social_eng():
 		answer_button_social_eng.config(state = 'disabled')
 
 
+def red_team_function():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	def OpenDWVideo():
+
+		url = 'https://www.youtube.com/watch?v=vnxFgddu4Co'
+		webbrowser.open_new(url)
+
+	red_team_window = tk.Toplevel(decrypt)
+	red_team_window.title('Red Team')
+	red_team_window.geometry('400x220')
+
+	ideas_red_button = tk.Button(red_team_window, image = ideas_red_logo, command = lambda:OpenDWVideo())
+	ideas_red_button.place(x = 30, y = 30)
+
+	presentation_red_button = tk.Button(red_team_window, image = presentation_red_logo)
+	presentation_red_button.place(x = 190, y = 30)
+
+	if Spanish_mode == True:
+
+		presentation_red_button.config(image = presentacion_red_logo)
+
+	elif English_mode == True:
+
+		presentation_red_button.config(image = presentation_red_logo)
+
+	
+
+def blue_team_function():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	def OpenHackingBrainVideo():
+
+		url = 'https://www.youtube.com/watch?v=eaXT2YerTzo'
+		webbrowser.open_new(url)
+
+	
+	blue_team_window = tk.Toplevel(decrypt)
+	blue_team_window.title('Blue Team')
+	blue_team_window.geometry('390x220')
+
+	ideas_blue_button = tk.Button(blue_team_window, image = ideas_blue_logo, command = lambda:OpenHackingBrainVideo())
+	ideas_blue_button.place(x = 30, y = 30)
+
+	presentation_blue_button = tk.Button(blue_team_window, image = presentation_blue_logo)
+	presentation_blue_button.place(x = 190, y = 30)
+
+	if Spanish_mode == True:
+
+		presentation_blue_button.config(image = presentacion_blue_logo)
+
+	elif English_mode == True:
+
+		presentation_blue_button.config(image = presentation_blue_logo)
+
+
+
+
 counter_social_eng = counter_social_eng + 1
 index_social_eng = list(range(44))
 index_social_eng_choose = index_social_eng[counter_social_eng]
@@ -1526,7 +1605,7 @@ img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choos
 varOption = tk.IntVar()
 
 img_social_eng_label = tk.Button(fr0, image = cyberaware, command = lambda:play_video_social_eng())
-img_social_eng_label.place(x = 30, y = 30)
+img_social_eng_label.place(x = 30, y = 15)
 img_social_eng_label.config(bg = '#20011c')
 
 rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
@@ -1550,11 +1629,11 @@ answer_button_social_eng.place(x = 900, y = 220)
 answer_button_social_eng.config(fg = '#2c0215', font = ('Comic Sans MS', 10))
 
 number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number_asc())
-number_video.place(x = 300, y = 450)
+number_video.place(x = 400, y = 440)
 number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
-number_video2.place(x = 200, y = 450)
+number_video2.place(x = 300, y = 440)
 number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 swords_insig = tk.Button(fr0, image = Swords)
@@ -1585,8 +1664,14 @@ Book_score = tk.Label(fr0, text = books_pt, width = 12)
 Book_score.place(x = 610, y = 400)
 Book_score.config(bg = 'black', fg = 'white')
 
+blue_team_button = tk.Button(fr0, image = blue_team_logo, command = lambda:blue_team_function())
+blue_team_button.place(x = 50, y = 425)
+
+red_team_button = tk.Button(fr0, image = red_team_logo, command = lambda:red_team_function())
+red_team_button.place(x = 160, y = 425)
+
 closeBCM_awareness = tk.Button(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
-closeBCM_awareness.place(x = 550 , y = 470)
+closeBCM_awareness.place(x = 700 , y = 470)
 closeBCM_awareness.config(fg = '#2c0215', font = ('Comic Sans MS', 14))
 	
 
@@ -1696,6 +1781,90 @@ def passchecking_explanation():
 
 	playsound('Audios/explicacion_passwordHIBP.mp3')
 	playsound('Audios/passcheck_explant.mp3')
+
+
+def hibp_breaches_info():
+
+	global count_breach_list
+	global arrow_breaches_asc
+	global arrow_breaches_desc
+
+	def switch_breaches_asc():
+
+		global arrow_breaches_asc
+		global arrow_breaches_desc
+
+		arrow_breaches_asc = True
+		arrow_breaches_desc = False
+
+	def switch_breaches_desc():
+
+		global arrow_breaches_asc
+		global arrow_breaches_desc
+
+		arrow_breaches_desc = True
+		arrow_breaches_asc = False
+
+
+	def hibp_breaches_list():
+
+		global count_breach_list
+		global arrow_breaches_asc
+		global arrow_breaches_desc
+
+		if arrow_breaches_asc:
+
+			count_breach_list = count_breach_list + 1
+
+		elif arrow_breaches_desc == True and count_breach_list > 0:
+
+			count_breach_list = count_breach_list - 1
+
+		elif arrow_breaches_desc == True and count_breach_list <= 0:
+
+			print('You must advance')
+
+
+		pyhibp.set_user_agent(ua = 'Awesome application/0.0.1 (An awesome description)')
+		resp = pyhibp.get_all_breaches()
+
+		hibp_breaches_text.delete(1.0, tk.END)
+		hibp_breaches_text.insert(tk.END, 'Service name: {} \n'.format(resp[count_breach_list]['Name']))
+		hibp_breaches_text.insert(tk.END, 'Domain: {} \n'.format(resp[count_breach_list]['Domain']))
+		hibp_breaches_text.insert(tk.END, 'Breach date: {} \n'.format(resp[count_breach_list]['BreachDate']))
+		hibp_breaches_text.insert(tk.END, 'Pwn account: {} \n'.format(resp[count_breach_list]['PwnCount']))
+		hibp_breaches_text.insert(tk.END, '\n')
+		hibp_breaches_text.insert(tk.END, 'Pwn data type: {} \n'.format(resp[count_breach_list]['DataClasses']))
+		hibp_breaches_text.insert(tk.END, '\n')
+		hibp_breaches_text.insert(tk.END, 'Description: {} \n '.format(resp[count_breach_list]['Description']))
+
+
+	hibp_breaches_window = tk.Toplevel(decrypt)
+	hibp_breaches_window.title('Data breaches reports by Have I Been Pwned')
+	hibp_breaches_window.geometry('450x500')
+
+	hibp_breaches_title = tk.Label(hibp_breaches_window, text = 'DATA BREACHES INFO')
+	hibp_breaches_title.config(fg = '#067297', font = ('Comic Sans MS', 14))
+	hibp_breaches_title.place(x = 110, y = 20)
+
+	scrollBreaches_text = ttk.Scrollbar(hibp_breaches_window, orient = tk.VERTICAL)
+	scrollBreaches_text.place(x = 413, y = 60, height = 350)
+
+	hibp_breaches_text = tk.Text(hibp_breaches_window, width = 36, height = 15, wrap = tk.WORD, padx = 10)
+	hibp_breaches_text.config(bg = '#050005', fg = '#c2ddef', font = ('Comic Sans MS', 12))
+	hibp_breaches_text.place(x = 30, y = 60)
+	scrollBreaches_text.config(command = hibp_breaches_text.yview)
+
+	hibp_breaches_query_asc = tk.Button(hibp_breaches_window, image = arrow_breaches_asc_logo, command = lambda:[switch_breaches_asc(), hibp_breaches_list()])
+	hibp_breaches_query_asc.config(font = ('Comic Sans MS', 16))
+	hibp_breaches_query_asc.place(x = 230, y = 420)
+
+	hibp_breaches_query_desc = tk.Button(hibp_breaches_window, image = arrow_breaches_desc_logo, command = lambda:[switch_breaches_desc(), hibp_breaches_list()])
+	hibp_breaches_query_desc.config(font = ('Comic Sans MS', 16))
+	hibp_breaches_query_desc.place(x = 150, y = 420)
+
+	data_breaches_image = tk.Label(hibp_breaches_window, image = data_breaches_logo)
+	data_breaches_image.place(x = 350, y = 420)
 	
 
 password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
@@ -1708,7 +1877,7 @@ password_checking_button = tk.Button(passcheck, image = password_checking_logo, 
 password_checking_button.config(bg = '#067297')
 password_checking_button.place(x = 610, y = 20)
 
-hibp_logo = tk.Label(passcheck, image = hibp1_logo)
+hibp_logo = tk.Button(passcheck, image = hibp1_logo, command = lambda:hibp_breaches_info())
 hibp_logo.place(x = 610, y = 400)
 
 hibp_info = tk.Button(passcheck, image = hibp_info_logo, command = lambda:passchecking_explanation())
