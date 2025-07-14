@@ -20,6 +20,7 @@ import pyhibp
 from pyhibp import pwnedpasswords as pw
 import requests
 import json
+import webbrowser
 
 from imagenes_ing_social import *
 from tests_ing_social import *
@@ -1360,6 +1361,14 @@ algorithm_logo = tk.PhotoImage(file = 'Images/algorithm.png')
 arrow_breaches_asc_logo = tk.PhotoImage(file = 'Images/arrow_breaches_asc_fn.png')
 arrow_breaches_desc_logo = tk.PhotoImage(file = 'Images/arrow_breaches_desc_fn.png')
 data_breaches_logo = tk.PhotoImage(file = 'Images/Data breaches.png')
+blue_team_logo = tk.PhotoImage(file = 'Images/Blue Team.png')
+red_team_logo = tk.PhotoImage(file = 'Images/Red Team.png')
+ideas_red_logo = tk.PhotoImage(file = 'Images/Ideas-red.png')
+ideas_blue_logo = tk.PhotoImage(file = 'Images/Ideas-blue.png')
+presentacion_blue_logo = tk.PhotoImage(file = 'Images/Presentacion-blue.png')
+presentation_blue_logo = tk.PhotoImage(file = 'Images/Presentation-blue.png')
+presentation_red_logo = tk.PhotoImage(file = 'Images/Presentation-red.png')
+presentacion_red_logo = tk.PhotoImage(file = 'Images/Presentacion-red.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1525,6 +1534,74 @@ def send_answer_social_eng():
 		answer_button_social_eng.config(state = 'disabled')
 
 
+def red_team_function():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	def OpenDWVideo():
+
+		url = 'https://www.youtube.com/watch?v=vnxFgddu4Co'
+		webbrowser.open_new(url)
+
+	red_team_window = tk.Toplevel(decrypt)
+	red_team_window.title('Human Firewall Red Team')
+	red_team_window.geometry('400x220')
+
+	ideas_red_button = tk.Button(red_team_window, image = ideas_red_logo, command = lambda:OpenDWVideo())
+	ideas_red_button.place(x = 30, y = 30)
+
+	presentation_red_button = tk.Button(red_team_window, image = presentation_red_logo)
+	presentation_red_button.place(x = 190, y = 30)
+
+	if Spanish_mode == True:
+
+		red_team_window.title('Equipo Rojo del Firewall Humano')
+		presentation_red_button.config(image = presentacion_red_logo)
+
+	elif English_mode == True:
+
+		red_team_window.title('Human Firewall Red Team')
+		presentation_red_button.config(image = presentation_red_logo)
+
+	
+
+def blue_team_function():
+
+	global Spanish_mode
+	global English_mode
+	global Chinese_mode
+
+	def OpenHackingBrainVideo():
+
+		url = 'https://www.youtube.com/watch?v=eaXT2YerTzo'
+		webbrowser.open_new(url)
+
+	
+	blue_team_window = tk.Toplevel(decrypt)
+	blue_team_window.title('Human Firewall Blue Team')
+	blue_team_window.geometry('390x220')
+
+	ideas_blue_button = tk.Button(blue_team_window, image = ideas_blue_logo, command = lambda:OpenHackingBrainVideo())
+	ideas_blue_button.place(x = 30, y = 30)
+
+	presentation_blue_button = tk.Button(blue_team_window, image = presentation_blue_logo)
+	presentation_blue_button.place(x = 190, y = 30)
+
+	if Spanish_mode == True:
+
+		blue_team_window.title('Equipo Azul del Firewall Humano')
+		presentation_blue_button.config(image = presentacion_blue_logo)
+
+	elif English_mode == True:
+
+		blue_team_window.title('Human Firewall Blue Team')
+		presentation_blue_button.config(image = presentation_blue_logo)
+
+
+
+
 counter_social_eng = counter_social_eng + 1
 index_social_eng = list(range(44))
 index_social_eng_choose = index_social_eng[counter_social_eng]
@@ -1532,7 +1609,7 @@ img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choos
 varOption = tk.IntVar()
 
 img_social_eng_label = tk.Button(fr0, image = cyberaware, command = lambda:play_video_social_eng())
-img_social_eng_label.place(x = 30, y = 30)
+img_social_eng_label.place(x = 30, y = 15)
 img_social_eng_label.config(bg = '#20011c')
 
 rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
@@ -1556,11 +1633,11 @@ answer_button_social_eng.place(x = 900, y = 220)
 answer_button_social_eng.config(fg = '#2c0215', font = ('Comic Sans MS', 10))
 
 number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number_asc())
-number_video.place(x = 300, y = 450)
+number_video.place(x = 400, y = 440)
 number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
-number_video2.place(x = 200, y = 450)
+number_video2.place(x = 300, y = 440)
 number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 swords_insig = tk.Button(fr0, image = Swords)
@@ -1591,8 +1668,14 @@ Book_score = tk.Label(fr0, text = books_pt, width = 12)
 Book_score.place(x = 610, y = 400)
 Book_score.config(bg = 'black', fg = 'white')
 
+blue_team_button = tk.Button(fr0, image = blue_team_logo, command = lambda:blue_team_function())
+blue_team_button.place(x = 50, y = 425)
+
+red_team_button = tk.Button(fr0, image = red_team_logo, command = lambda:red_team_function())
+red_team_button.place(x = 160, y = 425)
+
 closeBCM_awareness = tk.Button(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
-closeBCM_awareness.place(x = 550 , y = 470)
+closeBCM_awareness.place(x = 700 , y = 470)
 closeBCM_awareness.config(fg = '#2c0215', font = ('Comic Sans MS', 14))
 	
 

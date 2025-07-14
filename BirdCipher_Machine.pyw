@@ -1546,7 +1546,7 @@ def red_team_function():
 		webbrowser.open_new(url)
 
 	red_team_window = tk.Toplevel(decrypt)
-	red_team_window.title('Red Team')
+	red_team_window.title('Human Firewall Red Team')
 	red_team_window.geometry('400x220')
 
 	ideas_red_button = tk.Button(red_team_window, image = ideas_red_logo, command = lambda:OpenDWVideo())
@@ -1557,10 +1557,12 @@ def red_team_function():
 
 	if Spanish_mode == True:
 
+		red_team_window.title('Equipo Rojo del Firewall Humano')
 		presentation_red_button.config(image = presentacion_red_logo)
 
 	elif English_mode == True:
 
+		red_team_window.title('Human Firewall Red Team')
 		presentation_red_button.config(image = presentation_red_logo)
 
 	
@@ -1578,7 +1580,7 @@ def blue_team_function():
 
 	
 	blue_team_window = tk.Toplevel(decrypt)
-	blue_team_window.title('Blue Team')
+	blue_team_window.title('Human Firewall Blue Team')
 	blue_team_window.geometry('390x220')
 
 	ideas_blue_button = tk.Button(blue_team_window, image = ideas_blue_logo, command = lambda:OpenHackingBrainVideo())
@@ -1589,10 +1591,12 @@ def blue_team_function():
 
 	if Spanish_mode == True:
 
+		blue_team_window.title('Equipo Azul del Firewall Humano')
 		presentation_blue_button.config(image = presentacion_blue_logo)
 
 	elif English_mode == True:
 
+		blue_team_window.title('Human Firewall Blue Team')
 		presentation_blue_button.config(image = presentation_blue_logo)
 
 
