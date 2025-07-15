@@ -2801,7 +2801,7 @@ fernet_encryption_message.config(fg = '#1af017')
 fernet_encryption_message.place(x = 900, y = 150)
 
 algorithm_button = tk.Button(fr2, image = algorithm_logo, command = lambda:algorithm_selection())
-algorithm_button.place(x = 30, y = 310)
+algorithm_button.place(x = 50, y = 310)
 algorithm_button.config(bg = '#3f0322')
 
 titleBirdCipherMachine20 = tk.Label(fr2, text = "BirdCipher Encryption Machine: a tool to guarantee the confidentiality of your messages", font = ("Comic Sans MS", 12))
