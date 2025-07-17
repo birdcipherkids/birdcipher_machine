@@ -1369,6 +1369,7 @@ presentacion_blue_logo = tk.PhotoImage(file = 'Images/Presentacion-blue.png')
 presentation_blue_logo = tk.PhotoImage(file = 'Images/Presentation-blue.png')
 presentation_red_logo = tk.PhotoImage(file = 'Images/Presentation-red.png')
 presentacion_red_logo = tk.PhotoImage(file = 'Images/Presentacion-red.png')
+birdcipher_ssh_logo = tk.PhotoImage(file = 'Images/BirdCipher SSH_log.png')
 
 notebk = ttk.Notebook(decrypt)
 notebk.pack(expand=True)
@@ -1629,53 +1630,57 @@ rad_button4.place(x = 550, y = 160)
 rad_button4.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
-answer_button_social_eng.place(x = 900, y = 220)
+answer_button_social_eng.place(x = 900, y = 200)
 answer_button_social_eng.config(fg = '#2c0215', font = ('Comic Sans MS', 10))
 
 number_video = tk.Button(fr0, image = arrow_asc, command = lambda:change_video_number_asc())
-number_video.place(x = 400, y = 440)
+number_video.place(x = 450, y = 440)
 number_video.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
-number_video2.place(x = 300, y = 440)
+number_video2.place(x = 360, y = 440)
 number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 swords_insig = tk.Button(fr0, image = Swords)
-swords_insig.place(x = 800, y = 280)
+swords_insig.place(x = 800, y = 270)
 
 swords_score = tk.Label(fr0, text = swords_pt, width = 11)
-swords_score.place(x = 802, y = 400)
+swords_score.place(x = 802, y = 390)
 swords_score.config(bg = 'black', fg = 'white')
 
 Llave_final = tk.Button(fr0, image = Keys_aware)
-Llave_final.place(x = 714, y = 280)
+Llave_final.place(x = 714, y = 270)
 
 Llave_score = tk.Label(fr0, text = keys_pt, width = 9)
-Llave_score.place(x = 714, y = 400)
+Llave_score.place(x = 714, y = 390)
 Llave_score.config(bg = 'black', fg = 'white')
 
 Caduceus_final = tk.Button(fr0, image = Caduceus_aware)
-Caduceus_final.place(x = 900, y = 280)
+Caduceus_final.place(x = 900, y = 270)
 
 Caduceus_score = tk.Label(fr0, text = caduceus_pt, width = 12)
-Caduceus_score.place(x = 900, y = 400)
+Caduceus_score.place(x = 900, y = 390)
 Caduceus_score.config(bg = 'black', fg = 'white')
 
 Book_final = tk.Button(fr0, image = Book_aware)
-Book_final.place(x = 610, y = 280)
+Book_final.place(x = 610, y = 270)
 
 Book_score = tk.Label(fr0, text = books_pt, width = 12)
-Book_score.place(x = 610, y = 400)
+Book_score.place(x = 610, y = 390)
 Book_score.config(bg = 'black', fg = 'white')
 
 blue_team_button = tk.Button(fr0, image = blue_team_logo, command = lambda:blue_team_function())
-blue_team_button.place(x = 50, y = 425)
+blue_team_button.place(x = 140, y = 425)
 
 red_team_button = tk.Button(fr0, image = red_team_logo, command = lambda:red_team_function())
-red_team_button.place(x = 160, y = 425)
+red_team_button.place(x = 250, y = 425)
+
+birdcipher_ssh_button = tk.Button(fr0, image = birdcipher_ssh_logo)
+birdcipher_ssh_button.config(bg = '#20011c')
+birdcipher_ssh_button.place(x = 30, y = 425)
 
 closeBCM_awareness = tk.Button(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
-closeBCM_awareness.place(x = 700 , y = 470)
+closeBCM_awareness.place(x = 670 , y = 460)
 closeBCM_awareness.config(fg = '#2c0215', font = ('Comic Sans MS', 14))
 	
 
