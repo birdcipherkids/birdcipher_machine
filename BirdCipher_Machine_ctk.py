@@ -104,7 +104,7 @@ def login_user():
 		miCursor1.execute(sql2, sql2_data)
 		miCursor1.execute(sql1, sql1_data)
 		dlt2 = miCursor1.fetchall()
-		hash256_passw_label.config(text = hash2)
+		hash256_passw_label.configure(text = hash2)
 		username_db = dlt2[0][1]
 		books_pt = dlt2[0][4]
 		Book_score.config(text = books_pt)
@@ -137,7 +137,7 @@ def login_user():
 
 	elif len(dlt1) > 0 and hash2 == dlt1[0][2]:
 
-		hash256_passw_label.config(text = dlt1[0][2])
+		hash256_passw_label.configure(text = dlt1[0][2])
 		username_db = dlt1[0][1]
 		books_pt = dlt1[0][4]
 		Book_score.config(text = books_pt)
@@ -1374,7 +1374,7 @@ presentacion_red_logo = tk.PhotoImage(file = 'Images/Presentacion-red.png')
 birdcipher_ssh_logo = tk.PhotoImage(file = 'Images/BirdCipher SSH_log.png')
 
 notebk = customtkinter.CTkTabview(master=decrypt)
-notebk.configure(width = 1150, height = 580)
+notebk.configure(width = 1150, height = 580, segmented_button_selected_color = '#260223')
 notebk.pack(padx=10, pady=10)
 #notebk.config(font = ("Comic Sans MS", 14))
 
@@ -1430,37 +1430,33 @@ send_login_data.place(x = 170, y = 320)
 hash256_passw = customtkinter.CTkLabel(hr, text = "Your password hash (SHA 256) is:", font = ("Times New Roman", 20), fg_color = "transparent")
 hash256_passw.place(x = 20, y = 445)
 
-hash256_passw_label = tk.Label(hr, font = ('Comic Sans MS', 8), width = 62)
-hash256_passw_label.config(bg = '#050005', fg = '#f7a6f1')
+hash256_passw_label = customtkinter.CTkLabel(hr, text = '', font = ("Times New Roman", 13), fg_color = "black")
+hash256_passw_label.configure(width = 450, corner_radius = 5)
 hash256_passw_label.place(x = 20, y = 480)
 
-hash256passw_copy_btt = tk.Button(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
-hash256passw_copy_btt.config(fg = '#7e086c', font = ('Comic Sans MS', 9))
-hash256passw_copy_btt.place(x = 480, y = 475)
+hash256passw_copy_btt = customtkinter.CTkButton(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
+hash256passw_copy_btt.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5)
+hash256passw_copy_btt.place(x = 480, y = 480)
 
-close_machine_from_login = tk.Button(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
-close_machine_from_login.config(fg = '#7e086c', font = ('Comic Sans MS', 14))
-close_machine_from_login.place(x = 700, y = 470)
+close_machine_from_login = customtkinter.CTkButton(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
+close_machine_from_login.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 30))
+close_machine_from_login.place(x = 650, y = 475)
 
 bc_logo_login = customtkinter.CTkButton(hr, image = bc_logo_loginImage, text = '', command = lambda:login_user())
 bc_logo_login.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10)
 bc_logo_login.place(x = 420, y = 30)
 
-# bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login_user())
-# bc_logo_login.config(bg = '#260223')
-# bc_logo_login.place(x = 420, y = 30)
-
-english = tk.Button(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
+english = customtkinter.CTkButton(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
+english.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
 english.place(x = 50, y = 380)
-english.config(bg = '#3b0332', fg = 'white', font = ('Comic Sans MS', 12))
 
-spanish = tk.Button(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
+spanish = customtkinter.CTkButton(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
+spanish.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
 spanish.place(x = 140, y = 380)
-spanish.config(fg = '#7e086c', font = ('Comic Sans MS', 12))
 
-chinese = tk.Button(hr, text = '中文', command = lambda:[change_chinese_mode(), translator()])
-chinese.place(x = 230, y = 380)
-chinese.config(fg = '#7e086c', font = ('Kaiti', 17))
+chinese = customtkinter.CTkButton(hr, text = '中文', command = lambda:[change_chinese_mode(), translator()])
+chinese.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Kaiti", 24), width = 40)
+chinese.place(x = 240, y = 380)
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
