@@ -1272,8 +1272,9 @@ def translator():
 decrypt = customtkinter.CTk()
 
 decrypt.title("BirdCipher Cryptographic Machine")
-decrypt.geometry('1050x550')
+decrypt.geometry('1100x590')
 decrypt.resizable(0, 0)
+customtkinter.set_appearance_mode("dark")
 
 username_dbc = tk.StringVar()
 password_dbc = tk.StringVar()
@@ -1372,112 +1373,62 @@ presentation_red_logo = tk.PhotoImage(file = 'Images/Presentation-red.png')
 presentacion_red_logo = tk.PhotoImage(file = 'Images/Presentacion-red.png')
 birdcipher_ssh_logo = tk.PhotoImage(file = 'Images/BirdCipher SSH_log.png')
 
-notebk = ttk.Notebook(decrypt)
-notebk.pack(expand=True)
+notebk = customtkinter.CTkTabview(master=decrypt)
+notebk.configure(width = 1150, height = 580)
+notebk.pack(padx=10, pady=10)
 #notebk.config(font = ("Comic Sans MS", 14))
 
-hr = ttk.Frame(notebk, width = 1050, height=540)
-hr.configure(style = "BW.TLabel")
-hr.pack(fill = 'both', expand = True)
-notebk.add(hr, text = "Login")
-
-fr0 = ttk.Frame(notebk, width = 1050, height = 540)
-fr0.pack(fill = 'both', expand = True)
-notebk.add(fr0, text = 'Human Firewall')
-
-passcheck = ttk.Frame(notebk, width = 1050, height = 540)
-passcheck.pack(fill = 'both', expand = True)
-notebk.add(passcheck, text = 'Password Checking')
-
-hashing = ttk.Frame(notebk, width = 1050, height = 540)
-hashing.pack(fill = 'both', expand = True)
-notebk.add(hashing, text = 'Hashing')
-
-fr = ttk.Frame(notebk, width = 1050, height=540)
-fr.configure(style = "BW.TLabel")
-fr.pack(fill = 'both', expand = True)
-notebk.add(fr, text = "Cryptography")
-
-fr2 = ttk.Frame(notebk, width = 1150, height = 540)
-fr2.pack(fill = 'both', expand = True)
-notebk.add(fr2, text = "Encryption")
-
-fr3 = ttk.Frame(notebk, width = 1050, height = 540)
-fr3.pack(fill = 'both', expand = True)
-notebk.add(fr3, text = "Decryption")
-
-digital_signature = ttk.Frame(notebk, width = 1050, height = 540)
-digital_signature.pack(fill = 'both', expand = True)
-notebk.add(digital_signature, text = 'Digital signature')
-
-pki = ttk.Frame(notebk, width = 1050, height = 540)
-pki.pack(fill = 'both', expand = True)
-notebk.add(pki, text = "PKI")
-
-fr0a = ttk.Frame(notebk, width = 1050, height = 540)
-fr0a.pack(fill = 'both', expand = True)
-notebk.add(fr0a, text = 'RamsonBird')
-
-url_test_ntk = ttk.Frame(notebk, width = 1050, height = 540)
-url_test_ntk.pack(fill = 'both', expand = True)
-notebk.add(url_test_ntk, text = 'URL Test')
-
-virusTotal = ttk.Frame(notebk, width = 1050, height = 540)
-virusTotal.pack(fill = 'both', expand = True)
-notebk.add(virusTotal, text = 'Virus Total')
-
-capa_tab = ttk.Frame(notebk, width = 1050, height = 540)
-capa_tab.pack(fill = 'both', expand = True)
-notebk.add(capa_tab, text = "CAPA")
-
-cape_sandbox_tab = ttk.Frame(notebk, width = 1050, height = 540)
-cape_sandbox_tab.pack(fill = 'both', expand = True)
-notebk.add(cape_sandbox_tab, text = "CAPE Sandbox")
-
-zenbox_tab = ttk.Frame(notebk, width = 1050, height = 540)
-zenbox_tab.pack(fill = 'both', expand = True)
-notebk.add(zenbox_tab, text = "Zenbox")
-
+hr = notebk.add("Login")
+fr0 = notebk.add("Human Firewall")
+passcheck = notebk.add("Password Checking")
+hashing = notebk.add("Hashing")
+fr = notebk.add("Cryptography")
+fr2 = notebk.add("Encryption")
+fr3 = notebk.add("Decryption")
+digital_signature = notebk.add("Digital Signature")
+pki = notebk.add("PKI")
+fr0a = notebk.add("RamsonBird")
+url_test_ntk = notebk.add("URL Test")
+virusTotal = notebk.add("Virus Total")
+capa_tab = notebk.add("CAPA")
+cape_sandbox_tab = notebk.add("CAPE")
+zenbox_tab = notebk.add("Zenbox")
+notebk.set('Login')
 
 
 
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
-login_label = tk.Label(hr, text = 'Log in to BirdCipher Machine', font = ("Comic Sans MS", 14))
-login_label.config(fg = "#7e086c")
+login_label = customtkinter.CTkLabel(hr, text = "Log in to BirdCipher Machine", font = ("Times New Roman", 26), fg_color = "transparent")
 login_label.place(x = 50, y = 20)
 
-username_label = tk.Label(hr, text = 'Username', font = ('Comic Sans MS', 12))
-username_label.config(fg = "#7e086c")
+username_label = customtkinter.CTkLabel(hr, text = "Username", font = ("Times New Roman", 20), fg_color = "transparent")
 username_label.place(x = 50, y = 70)
 
-username_entry = tk.Entry(hr, textvariable = username_dbc, font = ('Comic Sans MS', 15), justify = 'center')
-username_entry.config(bg = '#050005', fg = '#f7a6f1')
+username_entry = customtkinter.CTkEntry(hr, textvariable = username_dbc, font = ("Times New Roman", 20), justify = 'center')
+username_entry.configure(width = 260)
 username_entry.place(x = 50, y = 100)
 
-password_label = tk.Label(hr, text = 'Password', font = ('Comic Sans MS', 12))
-password_label.config(fg = "#7e086c")
+password_label = customtkinter.CTkLabel(hr, text = "Password", font = ("Times New Roman", 20), fg_color = "transparent")
 password_label.place(x = 50, y = 160)
 
-password_entry = tk.Entry(hr, textvariable = password_dbc, font = ('Comic Sans MS', 15), justify = 'center')
-password_entry.config(bg = '#050005', fg = '#f7a6f1', show = '*')
+password_entry = customtkinter.CTkEntry(hr, textvariable = password_dbc, font = ("Times New Roman", 20), justify = 'center')
+password_entry.configure(width = 260, show = '*')
 password_entry.place(x = 50, y = 190)
 
-position_label = tk.Label(hr, text = 'Position', font = ('Comic Sans MS', 12))
-position_label.config(fg = "#7e086c")
+position_label = customtkinter.CTkLabel(hr, text = "Position", font = ("Times New Roman", 20), fg_color = "transparent")
 position_label.place(x = 50, y = 240)
 
-position_entry = tk.Entry(hr, textvariable = position_dbc, font = ('Comic Sans MS', 15), justify = 'center')
-position_entry.config(bg = '#050005', fg = '#f7a6f1')
+position_entry = customtkinter.CTkEntry(hr, textvariable = position_dbc, font = ("Times New Roman", 20), justify = 'center')
+position_entry.configure(width = 260)
 position_entry.place(x = 50, y = 270)
 
-send_login_data = tk.Button(hr, text = 'Send login data', command = lambda:login_user())
-send_login_data.config(fg = '#7e086c', font = ('Comic Sans MS', 9))
-send_login_data.place(x = 200, y = 320)
+send_login_data = customtkinter.CTkButton(hr, text = 'Send login data', command = lambda:login_user())
+send_login_data.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5)
+send_login_data.place(x = 170, y = 320)
 
-hash256_passw = tk.Label(hr, text = 'Your password hash (SHA 256) is:', font = ('Comic Sans MS', 12))
-hash256_passw.config(fg = "#7e086c")
-hash256_passw.place(x = 20, y = 440)
+hash256_passw = customtkinter.CTkLabel(hr, text = "Your password hash (SHA 256) is:", font = ("Times New Roman", 20), fg_color = "transparent")
+hash256_passw.place(x = 20, y = 445)
 
 hash256_passw_label = tk.Label(hr, font = ('Comic Sans MS', 8), width = 62)
 hash256_passw_label.config(bg = '#050005', fg = '#f7a6f1')
@@ -1491,9 +1442,13 @@ close_machine_from_login = tk.Button(hr, text = '  Close the BirdCipher Machine 
 close_machine_from_login.config(fg = '#7e086c', font = ('Comic Sans MS', 14))
 close_machine_from_login.place(x = 700, y = 470)
 
-bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login_user())
-bc_logo_login.config(bg = '#260223')
+bc_logo_login = customtkinter.CTkButton(hr, image = bc_logo_loginImage, text = '', command = lambda:login_user())
+bc_logo_login.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10)
 bc_logo_login.place(x = 420, y = 30)
+
+# bc_logo_login = tk.Button(hr, image = bc_logo_loginImage, command = lambda:login_user())
+# bc_logo_login.config(bg = '#260223')
+# bc_logo_login.place(x = 420, y = 30)
 
 english = tk.Button(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
 english.place(x = 50, y = 380)
