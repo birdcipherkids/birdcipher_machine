@@ -1011,15 +1011,15 @@ def translator():
 
 	if Spanish_mode == True:
 
-		playsound('Audios/Espanol.mp3')
-		english.config(fg = '#7e086c', bg = 'white')
-		spanish.config(bg = '#3b0332', fg = 'white')
-		chinese.config(fg = '#7e086c', bg = 'white')
-		login_label.config(text = 'Inicia sesión en BirdCipher Machine!!', font = ("Comic Sans MS", 14))
-		username_label.config(text = 'Usuario', font = ("Comic Sans MS", 12))
-		password_label.config(text = 'Contraseña', font = ("Comic Sans MS", 12))
-		position_label.config(text = 'Posición', font = ("Comic Sans MS", 12))
-		send_login_data.config(text = 'Enviar datos', font = ("Comic Sans MS", 9))
+		# playsound('Audios/Espanol.mp3')
+		# english.config(fg = '#7e086c', bg = 'white')
+		# spanish.config(bg = '#3b0332', fg = 'white')
+		# chinese.config(fg = '#7e086c', bg = 'white')
+		login_label.configure(text = 'Inicia sesión en BirdCipher Machine!!', font = ("Times New Roman", 14))
+		username_label.configure(text = 'Usuario', font = ("Times New Roman", 12))
+		password_label.configure(text = 'Contraseña', font = ("Times New Roman", 12))
+		position_label.configure(text = 'Posición', font = ("Times New Roman", 12))
+		send_login_data.configure(text = 'Enviar datos', font = ("Times New Roman", 9))
 		notebk.add(hr, text = " Inicio")
 		notebk.add(fr0, text = ' Firewall Humano')
 		hash256_passw.config(text = 'El hash de tu contraseña (SHA 265) es:', font = ("Comic Sans MS", 12))
@@ -1561,25 +1561,49 @@ index_social_eng_choose = index_social_eng[counter_social_eng]
 img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choose])
 varOption = tk.IntVar()
 
-img_social_eng_label = tk.Button(fr0, image = cyberaware, command = lambda:play_video_social_eng())
-img_social_eng_label.place(x = 30, y = 15)
-img_social_eng_label.config(bg = '#20011c')
+img_social_eng_label = customtkinter.CTkButton(fr0, image = cyberaware, text = '', command = lambda:play_video_social_eng())
+img_social_eng_label.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10)
+img_social_eng_label.place(x = 30, y = 10)
 
-rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
-rad_button1.place(x = 550, y = 40)
-rad_button1.config(font = ('Comic Sans MS', 10), justify = 'left')
+# img_social_eng_label = tk.Button(fr0, image = cyberaware, command = lambda:play_video_social_eng())
+# img_social_eng_label.place(x = 30, y = 15)
+# img_social_eng_label.config(bg = '#20011c')
 
-rad_button2 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][1], variable = varOption, value = 1)
-rad_button2.place(x = 550, y = 80)
-rad_button2.config(font = ('Comic Sans MS', 10), justify = 'left')
+rad_button1 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][0], 
+	 variable = varOption, onvalue = 1, offvalue = 5)
+rad_button1.place(x = 570, y = 40)
+rad_button1.configure(font = ('Times New Roman', 18), fg_color = '#260223', width = 10, height = 10)
 
-rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
-rad_button3.place(x = 550, y = 120)
-rad_button3.config(font = ('Comic Sans MS', 10), justify = 'left')
+# rad_button1 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][0], variable = varOption, value = 0)
+# rad_button1.place(x = 550, y = 40)
+# rad_button1.config(font = ('Comic Sans MS', 10), justify = 'left')
 
-rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
-rad_button4.place(x = 550, y = 160)
-rad_button4.config(font = ('Comic Sans MS', 10), justify = 'left')
+# rad_button2 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][1], variable = varOption, value = 1)
+# rad_button2.place(x = 550, y = 80)
+# rad_button2.config(font = ('Comic Sans MS', 10), justify = 'left')
+
+rad_button2 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][1], 
+	 variable = varOption, onvalue = 2, offvalue = 6)
+rad_button2.place(x = 570, y = 80)
+rad_button2.configure(font = ('Times New Roman', 18), fg_color = '#260223')
+
+# rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
+# rad_button3.place(x = 550, y = 120)
+# rad_button3.config(font = ('Comic Sans MS', 10), justify = 'left')
+
+rad_button3 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][2], 
+	 variable = varOption, onvalue = 3, offvalue = 7)
+rad_button3.place(x = 570, y = 140)
+rad_button3.configure(font = ('Times New Roman', 18), fg_color = '#260223')
+
+# rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
+# rad_button4.place(x = 550, y = 160)
+# rad_button4.config(font = ('Comic Sans MS', 10), justify = 'left')
+
+rad_button4 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][3], 
+	 variable = varOption, onvalue = 4, offvalue = 8)
+rad_button4.place(x = 570, y = 180)
+rad_button4.configure(font = ('Times New Roman', 18), fg_color = '#260223')
 
 answer_button_social_eng = tk.Button(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
 answer_button_social_eng.place(x = 900, y = 200)
