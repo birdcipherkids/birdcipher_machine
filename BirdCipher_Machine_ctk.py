@@ -1435,7 +1435,7 @@ hash256_passw_label.configure(width = 450, corner_radius = 5)
 hash256_passw_label.place(x = 20, y = 480)
 
 hash256passw_copy_btt = customtkinter.CTkButton(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
-hash256passw_copy_btt.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5)
+hash256passw_copy_btt.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 15))
 hash256passw_copy_btt.place(x = 480, y = 480)
 
 close_machine_from_login = customtkinter.CTkButton(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
@@ -1883,12 +1883,13 @@ password_checking_button = customtkinter.CTkButton(passcheck, image = password_c
 password_checking_button.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 10)
 password_checking_button.place(x = 610, y = 20)
 
-hibp_logo = tk.Button(passcheck, image = hibp1_logo, command = lambda:hibp_breaches_info())
-hibp_logo.place(x = 610, y = 400)
+hibp_logo = customtkinter.CTkButton(passcheck, image = hibp1_logo, text = '', command = lambda:hibp_breaches_info())
+hibp_logo.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5)
+hibp_logo.place(x = 600, y = 400)
 
-hibp_info = tk.Button(passcheck, image = hibp_info_logo, command = lambda:passchecking_explanation())
-hibp_info.config(bg = '#067297')
-hibp_info.place(x = 920, y = 401)
+hibp_info = customtkinter.CTkButton(passcheck, image = hibp_info_logo, text = '', command = lambda:passchecking_explanation())
+hibp_info.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5, width = 30)
+hibp_info.place(x = 930, y = 401)
 
 enter_password_label = customtkinter.CTkLabel(passcheck, text = 'Enter your password', font = ("Times New Roman", 20), fg_color = "transparent")
 enter_password_label.place(x = 40, y = 30)
@@ -1897,31 +1898,15 @@ enter_password_entry = customtkinter.CTkEntry(passcheck, textvariable = password
 enter_password_entry.configure(width = 300)
 enter_password_entry.place(x = 40, y = 70)
 
-# result_check_label = tk.Label(passcheck, text = 'Results report', font = ('Comic Sans MS', 14))
-# result_check_label.config(fg = '#067297')
-# result_check_label.place(x = 40, y = 130)
-
 result_check_label = customtkinter.CTkLabel(passcheck, text = 'Results report', font = ("Times New Roman", 20), fg_color = "transparent")
 result_check_label.place(x = 40, y = 130)
-
-# result_check = tk.Text(passcheck, font = ('Comic Sans MS', 14))
-# result_check.config(bg = '#050005', fg = '#7ed2ef', width = 23, height = 10, padx = 15)
-# result_check.place(x = 40, y = 170)
 
 result_check = customtkinter.CTkTextbox(passcheck, width = 300, height = 270, padx = 15)
 result_check.configure(font = ("Times New Roman", 20), wrap = 'word', corner_radius = 5)
 result_check.place(x = 40, y = 170)
 
-# times_label = tk.Label(passcheck, text = 'Times used before: ', font = ('Comic Sans MS', 14))
-# times_label.config(fg = '#067297')
-# times_label.place(x = 400, y = 220)
-
 times_label = customtkinter.CTkLabel(passcheck, text = 'Times used before:', font = ("Times New Roman", 20), fg_color = "transparent")
 times_label.place(x = 410, y = 225)
-
-# time_breached = tk.Label(passcheck, text = '', font = ('Comic Sans MS', 30), justify = 'center')
-# time_breached.config(bg = '#050005', fg = '#7ed2ef', width = 7, height = 3)
-# time_breached.place(x = 400, y = 260)
 
 time_breached = customtkinter.CTkTextbox(passcheck, font = ("Times New Roman", 50))
 time_breached.place(x = 400, y = 260)
@@ -1930,9 +1915,9 @@ time_breached.configure(width = 180, height = 170, corner_radius = 5, wrap = 'wo
 padlock = customtkinter.CTkLabel(passcheck, image = padlock_image, text = '')
 padlock.place(x = 387, y = 10)
 
-closeBCM_checkpass = tk.Button(passcheck, text = 'Close the BirdCipher Cryptographic Machine', command = lambda:closeMachine())
-closeBCM_checkpass.config(fg = '#067297', font = ('Comic Sans MS', 14))
-closeBCM_checkpass.place(x = 100, y = 460)
+closeBCM_checkpass = customtkinter.CTkButton(passcheck, text = 'Close the BirdCipher Cryptographic Machine', command = lambda:closeMachine())
+closeBCM_checkpass.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5, font = ("Times New Roman", 25))
+closeBCM_checkpass.place(x = 80, y = 470)
 
 # --------------------------------------------------------------------------------------------------------------------------
 
