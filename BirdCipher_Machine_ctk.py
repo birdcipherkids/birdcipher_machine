@@ -107,7 +107,7 @@ def login_user():
 		hash256_passw_label.configure(text = hash2)
 		username_db = dlt2[0][1]
 		books_pt = dlt2[0][4]
-		Book_score.config(text = books_pt)
+		Book_score.configure(text = books_pt)
 		keys_pt = dlt2[0][5]
 		swords_pt = dlt2[0][6]
 		caduceus_pt = dlt2[0][7]
@@ -140,7 +140,7 @@ def login_user():
 		hash256_passw_label.configure(text = dlt1[0][2])
 		username_db = dlt1[0][1]
 		books_pt = dlt1[0][4]
-		Book_score.config(text = books_pt)
+		Book_score.configure(text = books_pt)
 		keys_pt = dlt1[0][5]
 		swords_pt = dlt1[0][6]
 		caduceus_pt = dlt1[0][7]
@@ -1406,7 +1406,7 @@ username_label = customtkinter.CTkLabel(hr, text = "Username", font = ("Times Ne
 username_label.place(x = 50, y = 70)
 
 username_entry = customtkinter.CTkEntry(hr, textvariable = username_dbc, font = ("Times New Roman", 20), justify = 'center')
-username_entry.configure(width = 260)
+username_entry.configure(width = 260, text_color = '#e8b4e5')
 username_entry.place(x = 50, y = 100)
 
 password_label = customtkinter.CTkLabel(hr, text = "Password", font = ("Times New Roman", 20), fg_color = "transparent")
@@ -1443,7 +1443,7 @@ close_machine_from_login.configure(fg_color = '#3e043a', hover_color = '#260223'
 close_machine_from_login.place(x = 650, y = 475)
 
 bc_logo_login = customtkinter.CTkButton(hr, image = bc_logo_loginImage, text = '', command = lambda:login_user())
-bc_logo_login.configure(fg_color = '#3e043a', hover_color = '#260223',corner_radius = 10)
+bc_logo_login.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
 bc_logo_login.place(x = 430, y = 30)
 
 english = customtkinter.CTkButton(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
@@ -1610,7 +1610,7 @@ rad_button4.place(x = 580, y = 180)
 rad_button4.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
 
 answer_button_social_eng = customtkinter.CTkButton(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
-answer_button_social_eng.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
+answer_button_social_eng.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10, font = ('Times New Roman', 16))
 answer_button_social_eng.place(x = 900, y = 220)
 
 number_video = customtkinter.CTkButton(fr0, image = arrow_asc, text = '', command = lambda:change_video_number_asc())
@@ -1693,7 +1693,8 @@ def evaluate_password():
 
 		password_to_evaluate = password_user_entry.get()
 		evaluation = [False, False, False, False]
-		evaluation_audios_es = ['caracter_especial.mp3', 'letra_mayuscula.mp3', 'letra_minuscula.mp3', 'numero_contrasena.mp3']
+		evaluation_audios_es = ['Audios/caracter_especial.mp3', 'Audios/letra_mayuscula.mp3', 'Audios/letra_minuscula.mp3', 
+		'Audios/numero_contrasena.mp3']
 
 		for i in password_to_evaluate:
 
@@ -1721,7 +1722,9 @@ def evaluate_password():
 
 			if evaluation[x] == False:
 
+				time.sleep(1)
 				playsound(evaluation_audios_es[x])
+				print(evaluation_audios_es[x])
 
 			else:
 
@@ -1749,11 +1752,12 @@ def check_password():
 
 	if resp and login_check == True:
 
-		result_check.delete(1.0, tk.END)
-		result_check.insert(tk.END, 'Password breached! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you change \nor improve your password')
-		result_check.config(fg = '#ef1d13')
+		result_check.delete('0.0', 'end')
+		result_check.insert('0.0', 'Password breached! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you change \nor improve your password')
+		result_check.configure(text_color = '#ef1d13')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#ef1d13', font = ('Comic Sans MS', 30))
+		playsound('Audios/bambu_click.mp3')
 		playsound('Audios/ContrasenaInsegura.mp3')
 		time.sleep(2)
 		playsound('Audios/ImprovePass.mp3')
@@ -1761,11 +1765,12 @@ def check_password():
 
 	elif resp == False and login_check == True:
 
-		result_check.delete(1.0, tk.END)
-		result_check.insert(tk.END, 'Secure password! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you can use \nyour password safely')
-		result_check.config(fg = '#7ed2ef')
+		result_check.delete('0.0', 'end')
+		result_check.insert('0.0', 'Secure password! \n\nThis password was used the \nfollowing time(s) before: \n\nThe Have I Been Pwned Portal recommends that you can use \nyour password safely')
+		result_check.configure(text_color = '#7ed2ef')
 		time_breached.config(text = resp)
 		time_breached.config(fg = '#7ed2ef', width = 5, height = 1, font = ('Comic Sans MS', 45))
+		playsound('Audios/bambu_click.mp3')
 		playsound('Audios/ContrasenaSegura.mp3')
 		time.sleep(2)
 		playsound('Audios/SafePass.mp3')
@@ -1872,8 +1877,8 @@ hibp_info_logo = tk.PhotoImage(file = 'Images/Password Check Info-logo-white1.pn
 padlock_image = tk.PhotoImage(file = 'Images/Candado4a.png')
 password_user_entry = tk.StringVar()
 
-password_checking_button = tk.Button(passcheck, image = password_checking_logo, command = lambda:[check_password(), evaluate_password()])
-password_checking_button.config(bg = '#067297')
+password_checking_button = customtkinter.CTkButton(passcheck, image = password_checking_logo, text = '', command = lambda:[check_password(), evaluate_password()])
+password_checking_button.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 10)
 password_checking_button.place(x = 610, y = 20)
 
 hibp_logo = tk.Button(passcheck, image = hibp1_logo, command = lambda:hibp_breaches_info())
@@ -1883,20 +1888,26 @@ hibp_info = tk.Button(passcheck, image = hibp_info_logo, command = lambda:passch
 hibp_info.config(bg = '#067297')
 hibp_info.place(x = 920, y = 401)
 
-enter_password_label = tk.Label(passcheck, text = 'Enter your password')
-enter_password_label.config(fg = '#067297', font = ('Comic Sans MS', 14))
+enter_password_label = customtkinter.CTkLabel(passcheck, text = 'Enter your password', font = ("Times New Roman", 20), fg_color = "transparent")
 enter_password_label.place(x = 40, y = 30)
 
-enter_password_entry = tk.Entry(passcheck, textvariable = password_user_entry, font = ('Comic Sans MS', 14), justify = 'center')
-enter_password_entry.config(bg = '#050005', fg = '#7ed2ef', width = 25)
+enter_password_entry = customtkinter.CTkEntry(passcheck, textvariable = password_user_entry, font = ("Times New Roman", 20), justify = 'center')
+enter_password_entry.configure(width = 300)
 enter_password_entry.place(x = 40, y = 70)
 
-result_check_label = tk.Label(passcheck, text = 'Results report', font = ('Comic Sans MS', 14))
-result_check_label.config(fg = '#067297')
+# result_check_label = tk.Label(passcheck, text = 'Results report', font = ('Comic Sans MS', 14))
+# result_check_label.config(fg = '#067297')
+# result_check_label.place(x = 40, y = 130)
+
+result_check_label = customtkinter.CTkLabel(passcheck, text = 'Results report', font = ("Times New Roman", 20), fg_color = "transparent")
 result_check_label.place(x = 40, y = 130)
 
-result_check = tk.Text(passcheck, font = ('Comic Sans MS', 14))
-result_check.config(bg = '#050005', fg = '#7ed2ef', width = 23, height = 10, padx = 15)
+# result_check = tk.Text(passcheck, font = ('Comic Sans MS', 14))
+# result_check.config(bg = '#050005', fg = '#7ed2ef', width = 23, height = 10, padx = 15)
+# result_check.place(x = 40, y = 170)
+
+result_check = customtkinter.CTkTextbox(passcheck, width = 300, height = 270, padx = 15)
+result_check.configure(font = ("Times New Roman", 20), wrap = 'word')
 result_check.place(x = 40, y = 170)
 
 times_label = tk.Label(passcheck, text = 'Times used before: ', font = ('Comic Sans MS', 14))
