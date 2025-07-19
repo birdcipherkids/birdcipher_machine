@@ -1424,7 +1424,7 @@ position_entry.configure(width = 260)
 position_entry.place(x = 50, y = 270)
 
 send_login_data = customtkinter.CTkButton(hr, text = 'Send login data', command = lambda:login_user())
-send_login_data.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 15))
+send_login_data.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 15))
 send_login_data.place(x = 170, y = 320)
 
 hash256_passw = customtkinter.CTkLabel(hr, text = "Your password hash (SHA 256) is:", font = ("Times New Roman", 20), fg_color = "transparent")
@@ -1435,27 +1435,27 @@ hash256_passw_label.configure(width = 450, corner_radius = 5)
 hash256_passw_label.place(x = 20, y = 480)
 
 hash256passw_copy_btt = customtkinter.CTkButton(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
-hash256passw_copy_btt.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5)
+hash256passw_copy_btt.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5)
 hash256passw_copy_btt.place(x = 480, y = 480)
 
 close_machine_from_login = customtkinter.CTkButton(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
-close_machine_from_login.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 30))
+close_machine_from_login.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 30))
 close_machine_from_login.place(x = 650, y = 475)
 
 bc_logo_login = customtkinter.CTkButton(hr, image = bc_logo_loginImage, text = '', command = lambda:login_user())
-bc_logo_login.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10)
+bc_logo_login.configure(fg_color = '#3e043a', hover_color = '#260223',corner_radius = 10)
 bc_logo_login.place(x = 430, y = 30)
 
 english = customtkinter.CTkButton(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
-english.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
+english.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
 english.place(x = 50, y = 380)
 
 spanish = customtkinter.CTkButton(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
-spanish.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
+spanish.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
 spanish.place(x = 140, y = 380)
 
 chinese = customtkinter.CTkButton(hr, text = '中文', command = lambda:[change_chinese_mode(), translator()])
-chinese.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ("Kaiti", 24), width = 40)
+chinese.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Kaiti", 24), width = 40)
 chinese.place(x = 240, y = 380)
 
 # ---------------------------------------------------------------------------------------------------------------------------
@@ -1516,12 +1516,12 @@ def red_team_function():
 	if Spanish_mode == True:
 
 		red_team_window.title('Equipo Rojo del Firewall Humano')
-		presentation_red_button.config(image = presentacion_red_logo)
+		presentation_red_button.configure(image = presentacion_red_logo)
 
 	elif English_mode == True:
 
 		red_team_window.title('Human Firewall Red Team')
-		presentation_red_button.config(image = presentation_red_logo)
+		presentation_red_button.configure(image = presentation_red_logo)
 
 	
 
@@ -1537,25 +1537,36 @@ def blue_team_function():
 		webbrowser.open_new(url)
 
 	
-	blue_team_window = tk.Toplevel(decrypt)
+	blue_team_window = customtkinter.CTkToplevel(decrypt)
 	blue_team_window.title('Human Firewall Blue Team')
 	blue_team_window.geometry('390x220')
+	blue_team_window.focus_set()
+	blue_team_window.grab_set()
 
-	ideas_blue_button = tk.Button(blue_team_window, image = ideas_blue_logo, command = lambda:OpenHackingBrainVideo())
+	ideas_blue_button = customtkinter.CTkButton(blue_team_window, image = ideas_blue_logo, text = '', command = lambda:OpenHackingBrainVideo())
+	ideas_blue_button.configure(fg_color = 'white', hover_color = '#c9d0ef', corner_radius = 10)
 	ideas_blue_button.place(x = 30, y = 30)
 
-	presentation_blue_button = tk.Button(blue_team_window, image = presentation_blue_logo)
+	# ideas_blue_button = tk.Button(blue_team_window, image = ideas_blue_logo, command = lambda:OpenHackingBrainVideo())
+	# ideas_blue_button.place(x = 30, y = 30)
+
+	presentation_blue_button = customtkinter.CTkButton(blue_team_window, image = presentation_blue_logo, text = '', command = lambda:OpenHackingBrainVideo())
+	presentation_blue_button.configure(fg_color = 'white', hover_color = '#c9d0ef', corner_radius = 10)
 	presentation_blue_button.place(x = 190, y = 30)
+
+
+	# presentation_blue_button = tk.Button(blue_team_window, image = presentation_blue_logo)
+	# presentation_blue_button.place(x = 190, y = 30)
 
 	if Spanish_mode == True:
 
 		blue_team_window.title('Equipo Azul del Firewall Humano')
-		presentation_blue_button.config(image = presentacion_blue_logo)
+		presentation_blue_button.configure(image = presentacion_blue_logo)
 
 	elif English_mode == True:
 
 		blue_team_window.title('Human Firewall Blue Team')
-		presentation_blue_button.config(image = presentation_blue_logo)
+		presentation_blue_button.configure(image = presentation_blue_logo)
 
 
 
@@ -1567,18 +1578,18 @@ img_social_eng = tk.PhotoImage(file = imagenes_ing_social[index_social_eng_choos
 varOption = tk.IntVar()
 
 img_social_eng_label = customtkinter.CTkButton(fr0, image = cyberaware, text = '', command = lambda:play_video_social_eng())
-img_social_eng_label.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10)
+img_social_eng_label.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
 img_social_eng_label.place(x = 20, y = 10)
 
 rad_button1 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][0], 
 	 variable = varOption, onvalue = 1, offvalue = 5)
 rad_button1.place(x = 580, y = 40)
-rad_button1.configure(font = ('Times New Roman', 16), fg_color = '#260223', width = 10, height = 10, checkbox_width = 20, checkbox_height = 20)
+rad_button1.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', width = 10, height = 10, checkbox_width = 20, checkbox_height = 20)
 
 rad_button2 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][1], 
 	 variable = varOption, onvalue = 2, offvalue = 6)
 rad_button2.place(x = 580, y = 80)
-rad_button2.configure(font = ('Times New Roman', 16), fg_color = '#260223', checkbox_width = 20, checkbox_height = 20)
+rad_button2.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
 
 # rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
 # rad_button3.place(x = 550, y = 120)
@@ -1587,7 +1598,7 @@ rad_button2.configure(font = ('Times New Roman', 16), fg_color = '#260223', chec
 rad_button3 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][2], 
 	 variable = varOption, onvalue = 3, offvalue = 7)
 rad_button3.place(x = 580, y = 140)
-rad_button3.configure(font = ('Times New Roman', 16), fg_color = '#260223', checkbox_width = 20, checkbox_height = 20)
+rad_button3.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
 
 # rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
 # rad_button4.place(x = 550, y = 160)
@@ -1596,19 +1607,19 @@ rad_button3.configure(font = ('Times New Roman', 16), fg_color = '#260223', chec
 rad_button4 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][3], 
 	 variable = varOption, onvalue = 4, offvalue = 8)
 rad_button4.place(x = 580, y = 180)
-rad_button4.configure(font = ('Times New Roman', 16), fg_color = '#260223', checkbox_width = 20, checkbox_height = 20)
+rad_button4.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
 
 answer_button_social_eng = customtkinter.CTkButton(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
-answer_button_social_eng.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10)
+answer_button_social_eng.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
 answer_button_social_eng.place(x = 900, y = 220)
 
 number_video = customtkinter.CTkButton(fr0, image = arrow_asc, text = '', command = lambda:change_video_number_asc())
 number_video.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 8, width = 40)
 number_video.place(x = 470, y = 440)
 
-number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
-number_video2.place(x = 380, y = 440)
-number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
+# number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
+# number_video2.place(x = 380, y = 440)
+# number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
 
 number_video2 = customtkinter.CTkButton(fr0, image = arrow_des, text = '', command = lambda:change_video_number_desc())
 number_video2.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 8, width = 40)
@@ -1655,11 +1666,11 @@ red_team_button.configure(fg_color = 'white', hover_color = '#efc9cc', corner_ra
 red_team_button.place(x = 260, y = 425)
 
 birdcipher_ssh_button = customtkinter.CTkButton(fr0, image = birdcipher_ssh_logo, text = '')
-birdcipher_ssh_button.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 10, width = 20)
+birdcipher_ssh_button.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10, width = 20)
 birdcipher_ssh_button.place(x = 10, y = 425)
 
 closeBCM_awareness = customtkinter.CTkButton(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
-closeBCM_awareness.configure(fg_color = '#260223', hover_color = '#080009', corner_radius = 5, font = ('Times New Roman', 30))
+closeBCM_awareness.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ('Times New Roman', 30))
 closeBCM_awareness.place(x = 670, y = 460)
 
 
