@@ -1493,19 +1493,24 @@ def red_team_function():
 	global English_mode
 	global Chinese_mode
 
+	
 	def OpenDWVideo():
 
 		url = 'https://www.youtube.com/watch?v=vnxFgddu4Co'
 		webbrowser.open_new(url)
 
-	red_team_window = tk.Toplevel(decrypt)
+	red_team_window = customtkinter.CTkToplevel(decrypt)
 	red_team_window.title('Human Firewall Red Team')
 	red_team_window.geometry('400x220')
+	red_team_window.focus_set()
+	red_team_window.grab_set()
 
-	ideas_red_button = tk.Button(red_team_window, image = ideas_red_logo, command = lambda:OpenDWVideo())
+	ideas_red_button = customtkinter.CTkButton(red_team_window, image = ideas_red_logo, text = '', command = lambda:OpenDWVideo())
+	ideas_red_button.configure(fg_color = 'white', hover_color = '#efc9cc', corner_radius = 10)
 	ideas_red_button.place(x = 30, y = 30)
 
-	presentation_red_button = tk.Button(red_team_window, image = presentation_red_logo)
+	presentation_red_button = customtkinter.CTkButton(red_team_window, image = presentation_red_logo, text = '')
+	presentation_red_button.configure(fg_color = 'white', hover_color = '#efc9cc', corner_radius = 10)
 	presentation_red_button.place(x = 190, y = 30)
 
 	if Spanish_mode == True:
