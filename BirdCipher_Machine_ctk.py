@@ -1843,24 +1843,24 @@ def hibp_breaches_info():
 
 	hibp_breaches_title = customtkinter.CTkLabel(hibp_breaches_window, text = 'DATA BREACHES INFO', 
 		font = ("Times New Roman", 20), fg_color = "transparent")
-	hibp_breaches_title.place(x = 100, y = 20)
+	hibp_breaches_title.grid(row = 0, column = 0, columnspan = 3, pady = (40,10))
 
 	hibp_breaches_text = customtkinter.CTkTextbox(hibp_breaches_window, width = 390, height = 350, padx = 15)
 	hibp_breaches_text.configure(font = ("Times New Roman", 18), wrap = 'word', corner_radius = 5)
-	hibp_breaches_text.place(x = 30, y = 60)
+	hibp_breaches_text.grid(row = 1, column = 0, columnspan = 3, padx = (30,0))
 
 	hibp_breaches_query_asc = customtkinter.CTkButton(hibp_breaches_window, image = arrow_breaches_asc_logo, 
 		text = '', command = lambda:[switch_breaches_asc(), hibp_breaches_list()])
 	hibp_breaches_query_asc.configure(fg_color = 'white', hover_color = '#b4bae5', corner_radius = 5, width = 20)
-	hibp_breaches_query_asc.place(x = 230, y = 440)
+	hibp_breaches_query_asc.grid(row = 2, column = 1)
 
-	hibp_breaches_query_desc = customtkinter.CTkButton(hibp_breaches_window, image = arrow_breaches_asc_logo, 
+	hibp_breaches_query_desc = customtkinter.CTkButton(hibp_breaches_window, image = arrow_breaches_desc_logo, 
 		text = '', command = lambda:[switch_breaches_desc(), hibp_breaches_list()])
 	hibp_breaches_query_desc.configure(fg_color = 'white', hover_color = '#b4bae5', corner_radius = 5, width = 20)
-	hibp_breaches_query_desc.place(x = 140, y = 440)
+	hibp_breaches_query_desc.grid(row = 2, column = 0, padx = (50,10))
 
 	data_breaches_image = customtkinter.CTkLabel(hibp_breaches_window, image = data_breaches_logo, text = '', fg_color = "transparent")
-	data_breaches_image.place(x = 320, y = 430)
+	data_breaches_image.grid(row = 2, column = 2)
 
 	
 password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
@@ -1871,43 +1871,43 @@ password_user_entry = tk.StringVar()
 
 password_checking_button = customtkinter.CTkButton(passcheck, image = password_checking_logo, text = '', command = lambda:[check_password(), evaluate_password()])
 password_checking_button.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 10)
-password_checking_button.place(x = 610, y = 20)
+password_checking_button.grid(row = 0, column = 2, rowspan = 5, columnspan = 2, padx = (70,0), pady = (30,0), sticky = 'n')
 
 hibp_logo = customtkinter.CTkButton(passcheck, image = hibp1_logo, text = '', command = lambda:hibp_breaches_info())
 hibp_logo.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5)
-hibp_logo.place(x = 600, y = 400)
+hibp_logo.grid(row = 5, column = 2, rowspan = 2, sticky = 'n', padx = (70,10))
 
 hibp_info = customtkinter.CTkButton(passcheck, image = hibp_info_logo, text = '', command = lambda:passchecking_explanation())
 hibp_info.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5, width = 30)
-hibp_info.place(x = 930, y = 401)
+hibp_info.grid(row = 5, column = 3)
 
-enter_password_label = customtkinter.CTkLabel(passcheck, text = 'Enter your password', font = ("Times New Roman", 20), fg_color = "transparent")
-enter_password_label.place(x = 40, y = 30)
+enter_password_label = customtkinter.CTkLabel(passcheck, text = 'Enter your password or e-mail', font = ("Times New Roman", 20), fg_color = "transparent")
+enter_password_label.grid(row = 0, column = 0, padx = (30,20), pady = (20,0))
 
 enter_password_entry = customtkinter.CTkEntry(passcheck, textvariable = password_user_entry, font = ("Times New Roman", 20), justify = 'center')
 enter_password_entry.configure(width = 300)
-enter_password_entry.place(x = 40, y = 70)
+enter_password_entry.grid(row = 1, column = 0, padx = (20,20), sticky = 'n')
 
 result_check_label = customtkinter.CTkLabel(passcheck, text = 'Results report', font = ("Times New Roman", 20), fg_color = "transparent")
-result_check_label.place(x = 40, y = 130)
+result_check_label.grid(row = 2, column = 0, pady = (0,10), sticky = 's')
 
-result_check = customtkinter.CTkTextbox(passcheck, width = 300, height = 270, padx = 15)
+result_check = customtkinter.CTkTextbox(passcheck, width = 300, height = 210, padx = 15)
 result_check.configure(font = ("Times New Roman", 20), wrap = 'word', corner_radius = 5)
-result_check.place(x = 40, y = 170)
+result_check.grid(row = 3, column = 0, rowspan = 2, sticky = 'n')
 
 times_label = customtkinter.CTkLabel(passcheck, text = 'Times used before:', font = ("Times New Roman", 20), fg_color = "transparent")
-times_label.place(x = 410, y = 225)
+times_label.grid(row = 3, column = 1, sticky = 'n')
 
 time_breached = customtkinter.CTkTextbox(passcheck, font = ("Times New Roman", 50))
-time_breached.place(x = 400, y = 260)
-time_breached.configure(width = 180, height = 170, corner_radius = 5, wrap = 'word', padx = 10, pady = 50)
+time_breached.grid(row = 4, column = 1, sticky = 'n')
+time_breached.configure(width = 180, height = 150, corner_radius = 5, wrap = 'word', padx = 10, pady = 50)
 
 padlock = customtkinter.CTkLabel(passcheck, image = padlock_image, text = '')
-padlock.place(x = 387, y = 10)
+padlock.grid(row = 0, column = 1, rowspan = 3, sticky = 'n', pady = (10,0))
 
 closeBCM_checkpass = customtkinter.CTkButton(passcheck, text = 'Close the BirdCipher Cryptographic Machine', command = lambda:closeMachine())
 closeBCM_checkpass.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5, font = ("Times New Roman", 25))
-closeBCM_checkpass.place(x = 80, y = 470)
+closeBCM_checkpass.grid(row = 5, column = 0, columnspan = 2, pady = (20,0))
 
 # --------------------------------------------------------------------------------------------------------------------------
 
