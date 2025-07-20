@@ -1406,7 +1406,7 @@ username_label = customtkinter.CTkLabel(hr, text = "Username", font = ("Times Ne
 username_label.place(x = 50, y = 70)
 
 username_entry = customtkinter.CTkEntry(hr, textvariable = username_dbc, font = ("Times New Roman", 20), justify = 'center')
-username_entry.configure(width = 260, text_color = '#e8b4e5')
+username_entry.configure(width = 260, text_color = '#e8b4e5', fg_color = 'black')
 username_entry.place(x = 50, y = 100)
 
 password_label = customtkinter.CTkLabel(hr, text = "Password", font = ("Times New Roman", 20), fg_color = "transparent")
@@ -1831,6 +1831,9 @@ def hibp_breaches_info():
 			print('You must advance')
 
 
+
+
+
 		pyhibp.set_user_agent(ua = 'Awesome application/0.0.1 (An awesome description)')
 		resp = pyhibp.get_all_breaches()
 
@@ -1845,32 +1848,63 @@ def hibp_breaches_info():
 		hibp_breaches_text.insert(tk.END, 'Description: {} \n '.format(resp[count_breach_list]['Description']))
 
 
-	hibp_breaches_window = tk.Toplevel(decrypt)
+	# hibp_breaches_window = tk.Toplevel(decrypt)
+	# hibp_breaches_window.title('Data breaches reports by Have I Been Pwned')
+	# hibp_breaches_window.geometry('450x500')
+
+	hibp_breaches_window = customtkinter.CTkToplevel(decrypt)
 	hibp_breaches_window.title('Data breaches reports by Have I Been Pwned')
-	hibp_breaches_window.geometry('450x500')
+	hibp_breaches_window.geometry('450x550')
+	hibp_breaches_window.focus_set()
+	hibp_breaches_window.grab_set()
 
-	hibp_breaches_title = tk.Label(hibp_breaches_window, text = 'DATA BREACHES INFO')
-	hibp_breaches_title.config(fg = '#067297', font = ('Comic Sans MS', 14))
-	hibp_breaches_title.place(x = 110, y = 20)
+	# hibp_breaches_title = tk.Label(hibp_breaches_window, text = 'DATA BREACHES INFO')
+	# hibp_breaches_title.config(fg = '#067297', font = ('Comic Sans MS', 14))
+	# hibp_breaches_title.place(x = 110, y = 20)
 
-	scrollBreaches_text = ttk.Scrollbar(hibp_breaches_window, orient = tk.VERTICAL)
-	scrollBreaches_text.place(x = 413, y = 60, height = 350)
+	hibp_breaches_title = customtkinter.CTkLabel(hibp_breaches_window, text = 'DATA BREACHES INFO', 
+		font = ("Times New Roman", 20), fg_color = "transparent")
+	hibp_breaches_title.place(x = 100, y = 20)
 
-	hibp_breaches_text = tk.Text(hibp_breaches_window, width = 36, height = 15, wrap = tk.WORD, padx = 10)
-	hibp_breaches_text.config(bg = '#050005', fg = '#c2ddef', font = ('Comic Sans MS', 12))
+	# scrollBreaches_text = ttk.Scrollbar(hibp_breaches_window, orient = tk.VERTICAL)
+	# scrollBreaches_text.place(x = 413, y = 60, height = 350)
+
+	# hibp_breaches_text = tk.Text(hibp_breaches_window, width = 36, height = 15, wrap = tk.WORD, padx = 10)
+	# hibp_breaches_text.config(bg = '#050005', fg = '#c2ddef', font = ('Comic Sans MS', 12))
+	# hibp_breaches_text.place(x = 30, y = 60)
+	# scrollBreaches_text.config(command = hibp_breaches_text.yview)
+
+	hibp_breaches_text = customtkinter.CTkTextbox(hibp_breaches_window, width = 390, height = 350, padx = 15)
+	hibp_breaches_text.configure(font = ("Times New Roman", 18), wrap = 'word', corner_radius = 5)
 	hibp_breaches_text.place(x = 30, y = 60)
-	scrollBreaches_text.config(command = hibp_breaches_text.yview)
 
-	hibp_breaches_query_asc = tk.Button(hibp_breaches_window, image = arrow_breaches_asc_logo, command = lambda:[switch_breaches_asc(), hibp_breaches_list()])
-	hibp_breaches_query_asc.config(font = ('Comic Sans MS', 16))
-	hibp_breaches_query_asc.place(x = 230, y = 420)
+	hibp_breaches_query_asc = customtkinter.CTkButton(hibp_breaches_window, image = arrow_breaches_asc_logo, 
+		text = '', command = lambda:[switch_breaches_asc(), hibp_breaches_list()])
+	hibp_breaches_query_asc.configure(fg_color = 'white', hover_color = '#b4bae5', corner_radius = 5, width = 20)
+	hibp_breaches_query_asc.place(x = 230, y = 440)
 
-	hibp_breaches_query_desc = tk.Button(hibp_breaches_window, image = arrow_breaches_desc_logo, command = lambda:[switch_breaches_desc(), hibp_breaches_list()])
-	hibp_breaches_query_desc.config(font = ('Comic Sans MS', 16))
-	hibp_breaches_query_desc.place(x = 150, y = 420)
+	# hibp_breaches_query_asc = tk.Button(hibp_breaches_window, image = arrow_breaches_asc_logo, command = lambda:[switch_breaches_asc(), hibp_breaches_list()])
+	# hibp_breaches_query_asc.config(font = ('Comic Sans MS', 16))
+	# hibp_breaches_query_asc.place(x = 230, y = 420)
 
-	data_breaches_image = tk.Label(hibp_breaches_window, image = data_breaches_logo)
-	data_breaches_image.place(x = 350, y = 420)
+	hibp_breaches_query_desc = customtkinter.CTkButton(hibp_breaches_window, image = arrow_breaches_asc_logo, 
+		text = '', command = lambda:[switch_breaches_desc(), hibp_breaches_list()])
+	hibp_breaches_query_desc.configure(fg_color = 'white', hover_color = '#b4bae5', corner_radius = 5, width = 20)
+	hibp_breaches_query_desc.place(x = 140, y = 440)
+
+	# hibp_breaches_query_desc = tk.Button(hibp_breaches_window, image = arrow_breaches_desc_logo, command = lambda:[switch_breaches_desc(), hibp_breaches_list()])
+	# hibp_breaches_query_desc.config(font = ('Comic Sans MS', 16))
+	# hibp_breaches_query_desc.place(x = 150, y = 420)
+
+	data_breaches_image = customtkinter.CTkLabel(hibp_breaches_window, image = data_breaches_logo, text = '', fg_color = "transparent")
+	data_breaches_image.place(x = 320, y = 430)
+
+	# data_breaches_image = tk.Label(hibp_breaches_window, image = data_breaches_logo)
+	# data_breaches_image.place(x = 360, y = 440)
+
+
+def liberar_grab():
+    hibp_breaches_window.grab_release()
 	
 
 password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
@@ -1887,7 +1921,7 @@ hibp_logo = customtkinter.CTkButton(passcheck, image = hibp1_logo, text = '', co
 hibp_logo.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5)
 hibp_logo.place(x = 600, y = 400)
 
-hibp_info = customtkinter.CTkButton(passcheck, image = hibp_info_logo, text = '', command = lambda:passchecking_explanation())
+hibp_info = customtkinter.CTkButton(passcheck, image = hibp_info_logo, text = '', command = lambda:[liberar_grab(), passchecking_explanation()])
 hibp_info.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5, width = 30)
 hibp_info.place(x = 930, y = 401)
 
