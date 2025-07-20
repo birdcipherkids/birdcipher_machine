@@ -1427,7 +1427,7 @@ position_entry.grid(row = 6, column = 0, columnspan = 3, padx = (10,0))
 
 send_login_data = customtkinter.CTkButton(hr, text = 'Send login data', command = lambda:login_user())
 send_login_data.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 15))
-send_login_data.grid(row = 7, column = 0, columnspan = 3, sticky = 'e')
+send_login_data.grid(row = 7, column = 0, columnspan = 3, sticky = 'e', padx = (0,40))
 
 hash256_passw = customtkinter.CTkLabel(hr, text = "Your password hash (SHA 256) is:", font = ("Times New Roman", 20), fg_color = "transparent")
 hash256_passw.grid(row = 9, column = 0, columnspan = 3, sticky = 's')
@@ -1581,99 +1581,87 @@ varOption = tk.IntVar()
 
 img_social_eng_label = customtkinter.CTkButton(fr0, image = cyberaware, text = '', command = lambda:play_video_social_eng())
 img_social_eng_label.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
-img_social_eng_label.place(x = 20, y = 10)
+img_social_eng_label.grid(row = 0, column = 0, columnspan = 5, rowspan = 7, pady = (10,15), padx = (10,30))
 
 rad_button1 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][0], 
 	 variable = varOption, onvalue = 1, offvalue = 5)
-rad_button1.place(x = 580, y = 40)
+rad_button1.grid(row = 0, column = 5, columnspan = 4, sticky = 'w', pady = (10,0))
 rad_button1.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', width = 10, height = 10, checkbox_width = 20, checkbox_height = 20)
 
 rad_button2 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][1], 
 	 variable = varOption, onvalue = 2, offvalue = 6)
-rad_button2.place(x = 580, y = 80)
+rad_button2.grid(row = 1, column = 5, columnspan = 4, sticky = 'w')
 rad_button2.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
-
-# rad_button3 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][2], variable = varOption, value = 2)
-# rad_button3.place(x = 550, y = 120)
-# rad_button3.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button3 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][2], 
 	 variable = varOption, onvalue = 3, offvalue = 7)
-rad_button3.place(x = 580, y = 140)
+rad_button3.grid(row = 2, column = 5, columnspan = 4, sticky = 'w')
 rad_button3.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
-
-# rad_button4 = tk.Radiobutton(fr0, text = tests_ing_social[index_social_eng_choose][3], variable = varOption, value = 3)
-# rad_button4.place(x = 550, y = 160)
-# rad_button4.config(font = ('Comic Sans MS', 10), justify = 'left')
 
 rad_button4 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][3], 
 	 variable = varOption, onvalue = 4, offvalue = 8)
-rad_button4.place(x = 580, y = 180)
+rad_button4.grid(row = 3, column = 5, columnspan = 4, sticky = 'w')
 rad_button4.configure(font = ('Times New Roman', 16), fg_color = '#3e043a', checkbox_width = 20, checkbox_height = 20)
 
 answer_button_social_eng = customtkinter.CTkButton(fr0, text = 'Send answer', command = lambda:send_answer_social_eng())
 answer_button_social_eng.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10, font = ('Times New Roman', 16))
-answer_button_social_eng.place(x = 900, y = 220)
+answer_button_social_eng.grid(row = 4, column = 5, columnspan = 4, sticky = 'e')
 
 number_video = customtkinter.CTkButton(fr0, image = arrow_asc, text = '', command = lambda:change_video_number_asc())
 number_video.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 8, width = 40)
-number_video.place(x = 470, y = 440)
-
-# number_video2 = tk.Button(fr0, image = arrow_des, command = lambda:change_video_number_desc())
-# number_video2.place(x = 380, y = 440)
-# number_video2.config(fg = 'purple', font = ('Comic Sans MS', 9))
+number_video.grid(row = 7, column = 4)
 
 number_video2 = customtkinter.CTkButton(fr0, image = arrow_des, text = '', command = lambda:change_video_number_desc())
 number_video2.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 8, width = 40)
-number_video2.place(x = 380, y = 440)
+number_video2.grid(row = 7, column = 3)
 
 swords_insig = customtkinter.CTkButton(fr0, image = Swords, text = '')
 swords_insig.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 5, width = 40)
-swords_insig.place(x = 810, y = 270)
+swords_insig.grid(row = 5, column = 7)
 
 swords_score = customtkinter.CTkLabel(fr0, text = '', font = ("Times New Roman", 11), fg_color = "black")
 swords_score.configure(width = 95, corner_radius = 5)
-swords_score.place(x = 811, y = 390)
+swords_score.grid(row = 6, column = 7)
 
 Llave_final = customtkinter.CTkButton(fr0, image = Keys_aware, text = '')
 Llave_final.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 5, width = 40)
-Llave_final.place(x = 715, y = 270)
+Llave_final.grid(row = 5, column = 6)
 
 Llave_score = customtkinter.CTkLabel(fr0, text = '', font = ("Times New Roman", 11), fg_color = "black")
 Llave_score.configure(width = 80, corner_radius = 5)
-Llave_score.place(x = 714, y = 390)
+Llave_score.grid(row = 6, column = 6)
 
 Caduceus_final = customtkinter.CTkButton(fr0, image = Caduceus_aware, text = '')
 Caduceus_final.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 5, width = 40)
-Caduceus_final.place(x = 920, y = 270)
+Caduceus_final.grid(row = 5, column = 8)
 
 Caduceus_score = customtkinter.CTkLabel(fr0, text = '', font = ("Times New Roman", 11), fg_color = "black")
 Caduceus_score.configure(width = 100, corner_radius = 5)
-Caduceus_score.place(x = 920, y = 390)
+Caduceus_score.grid(row = 6, column = 8)
 
 Book_final = customtkinter.CTkButton(fr0, image = Book_aware, text = '')
 Book_final.configure(fg_color = 'white', hover_color = '#ecc9ef', corner_radius = 5, width = 40)
-Book_final.place(x = 600, y = 270)
+Book_final.grid(row = 5, column = 5)
 
 Book_score = customtkinter.CTkLabel(fr0, text = '', font = ("Times New Roman", 11), fg_color = "black")
 Book_score.configure(width = 100, corner_radius = 5)
-Book_score.place(x = 600, y = 390)
+Book_score.grid(row = 6, column = 5)
 
 blue_team_button = customtkinter.CTkButton(fr0, image = blue_team_logo, text = '', command = lambda:blue_team_function())
 blue_team_button.configure(corner_radius = 8, width = 40, fg_color = '#086e91', hover_color = '#053e52')
-blue_team_button.place(x = 140, y = 425)
+blue_team_button.grid(row = 7, column = 1)
 
 red_team_button = customtkinter.CTkButton(fr0, image = red_team_logo, text = '', command = lambda:red_team_function())
 red_team_button.configure(fg_color = '#c6061e', hover_color = '#6f0512', corner_radius = 8, width = 40)
-red_team_button.place(x = 260, y = 425)
+red_team_button.grid(row = 7, column = 2)
 
 birdcipher_ssh_button = customtkinter.CTkButton(fr0, image = birdcipher_ssh_logo, text = '')
 birdcipher_ssh_button.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10, width = 20)
-birdcipher_ssh_button.place(x = 10, y = 425)
+birdcipher_ssh_button.grid(row = 7, column = 0)
 
 closeBCM_awareness = customtkinter.CTkButton(fr0, text = 'Close the BirdCipher Machine', command = lambda:closeMachine())
 closeBCM_awareness.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ('Times New Roman', 30))
-closeBCM_awareness.place(x = 670, y = 460)
+closeBCM_awareness.grid(row = 7, column = 5, columnspan = 4, padx = (80,0))
 
 
 # --------------------------------------------------------------------------------------------------------------------------
