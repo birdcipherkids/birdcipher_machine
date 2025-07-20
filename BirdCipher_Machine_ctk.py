@@ -1402,63 +1402,63 @@ notebk.set('Login')
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
 login_label = customtkinter.CTkLabel(hr, text = "Log in to BirdCipher Machine", font = ("Times New Roman", 26), fg_color = "transparent")
-login_label.place(x = 50, y = 20)
+login_label.grid(row = 0, column = 0, columnspan = 3, padx = (30,0), pady = (10,0))
 
 username_label = customtkinter.CTkLabel(hr, text = "Username", font = ("Times New Roman", 20), fg_color = "transparent")
-username_label.place(x = 50, y = 70)
+username_label.grid(row = 1, column = 0, columnspan = 1, padx = (50,0), sticky = 's')
 
 username_entry = customtkinter.CTkEntry(hr, textvariable = username_dbc, font = ("Times New Roman", 20), justify = 'center')
-username_entry.configure(width = 260, text_color = '#e8b4e5', fg_color = 'black')
-username_entry.place(x = 50, y = 100)
+username_entry.configure(width = 260)
+username_entry.grid(row = 2, column = 0, columnspan = 3, padx = (10,0))
 
 password_label = customtkinter.CTkLabel(hr, text = "Password", font = ("Times New Roman", 20), fg_color = "transparent")
-password_label.place(x = 50, y = 160)
+password_label.grid(row = 3, column = 0, columnspan = 1, padx = (50,0), sticky = 's')
 
 password_entry = customtkinter.CTkEntry(hr, textvariable = password_dbc, font = ("Times New Roman", 20), justify = 'center')
 password_entry.configure(width = 260, show = '*')
-password_entry.place(x = 50, y = 190)
+password_entry.grid(row = 4, column = 0, columnspan = 3, padx = (10,0))
 
 position_label = customtkinter.CTkLabel(hr, text = "Position", font = ("Times New Roman", 20), fg_color = "transparent")
-position_label.place(x = 50, y = 240)
+position_label.grid(row = 5, column = 0, columnspan = 1, padx = (50,0), sticky = 's')
 
 position_entry = customtkinter.CTkEntry(hr, textvariable = position_dbc, font = ("Times New Roman", 20), justify = 'center')
 position_entry.configure(width = 260)
-position_entry.place(x = 50, y = 270)
+position_entry.grid(row = 6, column = 0, columnspan = 3, padx = (10,0))
 
 send_login_data = customtkinter.CTkButton(hr, text = 'Send login data', command = lambda:login_user())
 send_login_data.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 15))
-send_login_data.place(x = 170, y = 320)
+send_login_data.grid(row = 7, column = 0, columnspan = 3, sticky = 'e')
 
 hash256_passw = customtkinter.CTkLabel(hr, text = "Your password hash (SHA 256) is:", font = ("Times New Roman", 20), fg_color = "transparent")
-hash256_passw.place(x = 20, y = 445)
+hash256_passw.grid(row = 9, column = 0, columnspan = 3, sticky = 's')
 
 hash256_passw_label = customtkinter.CTkLabel(hr, text = '', font = ("Times New Roman", 13), fg_color = "black")
 hash256_passw_label.configure(width = 450, corner_radius = 5)
-hash256_passw_label.place(x = 20, y = 480)
+hash256_passw_label.grid(row = 10, column = 0, columnspan = 4, padx = (10,0), sticky = 'sw')
 
 hash256passw_copy_btt = customtkinter.CTkButton(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
 hash256passw_copy_btt.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 15))
-hash256passw_copy_btt.place(x = 480, y = 480)
+hash256passw_copy_btt.grid(row = 10, column = 3, sticky = 'se', padx = (140,0))
 
 close_machine_from_login = customtkinter.CTkButton(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
 close_machine_from_login.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 30))
-close_machine_from_login.place(x = 650, y = 475)
+close_machine_from_login.grid(row = 10, column = 4, padx = (20,10), sticky = 's')
 
 bc_logo_login = customtkinter.CTkButton(hr, image = bc_logo_loginImage, text = '', command = lambda:login_user())
 bc_logo_login.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
-bc_logo_login.place(x = 430, y = 30)
+bc_logo_login.grid(row = 0, column = 3, rowspan = 9, columnspan = 2, padx = (80,0), pady = (20,0), sticky = 's')
 
 english = customtkinter.CTkButton(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
 english.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
-english.place(x = 50, y = 380)
+english.grid(row = 8, column = 0)
 
 spanish = customtkinter.CTkButton(hr, text = 'Español', command = lambda:[change_spanish_mode(), translator()])
 spanish.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
-spanish.place(x = 140, y = 380)
+spanish.grid(row = 8, column = 1, sticky = 'w')
 
 chinese = customtkinter.CTkButton(hr, text = '中文', command = lambda:[change_chinese_mode(), translator()])
 chinese.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Kaiti", 24), width = 40)
-chinese.place(x = 240, y = 380)
+chinese.grid(row = 8, column = 2, sticky = 'e')
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
