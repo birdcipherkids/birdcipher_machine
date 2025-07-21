@@ -1751,7 +1751,7 @@ def check_password():
 		result_check.configure(text_color = '#7ed2ef')
 		time_breached.delete('0.0', 'end')
 		time_breached.insert('0.0', resp)
-		time_breached.configure(font = ('Times New Roman', 80), padx = 50)
+		time_breached.configure(font = ('Times New Roman', 60), padx = 60)
 		playsound('Audios/bambu_click.mp3')
 		playsound('Audios/ContrasenaSegura.mp3')
 		time.sleep(2)
@@ -1862,22 +1862,22 @@ password_user_entry = tk.StringVar()
 
 password_checking_button = customtkinter.CTkButton(passcheck, image = password_checking_logo, text = '', command = lambda:[check_password(), evaluate_password()])
 password_checking_button.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 10)
-password_checking_button.grid(row = 0, column = 2, rowspan = 5, columnspan = 2, padx = (70,0), pady = (30,0), sticky = 'n')
+password_checking_button.grid(row = 0, column = 2, rowspan = 5, columnspan = 2, padx = (50,0), pady = (30,0), sticky = 'n')
 
 hibp_logo = customtkinter.CTkButton(passcheck, image = hibp1_logo, text = '', command = lambda:hibp_breaches_info())
 hibp_logo.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5)
-hibp_logo.grid(row = 5, column = 2, rowspan = 2, sticky = 'n', padx = (70,10))
+hibp_logo.grid(row = 5, column = 2, rowspan = 2, sticky = 'n', padx = (50,10))
 
 hibp_info = customtkinter.CTkButton(passcheck, image = hibp_info_logo, text = '', command = lambda:passchecking_explanation())
 hibp_info.configure(fg_color = '#067297', hover_color = '#044257', corner_radius = 5, width = 30)
 hibp_info.grid(row = 5, column = 3)
 
 enter_password_label = customtkinter.CTkLabel(passcheck, text = 'Enter your password or e-mail', font = ("Times New Roman", 20), fg_color = "transparent")
-enter_password_label.grid(row = 0, column = 0, padx = (30,20), pady = (20,0))
+enter_password_label.grid(row = 0, column = 0, padx = (30,20), pady = (40,0),sticky = 's')
 
 enter_password_entry = customtkinter.CTkEntry(passcheck, textvariable = password_user_entry, font = ("Times New Roman", 20), justify = 'center')
 enter_password_entry.configure(width = 300)
-enter_password_entry.grid(row = 1, column = 0, padx = (20,20), sticky = 'n')
+enter_password_entry.grid(row = 1, column = 0, padx = (30,20), pady = (10,0), sticky = 'n')
 
 result_check_label = customtkinter.CTkLabel(passcheck, text = 'Results report', font = ("Times New Roman", 20), fg_color = "transparent")
 result_check_label.grid(row = 2, column = 0, pady = (0,10), sticky = 's')
