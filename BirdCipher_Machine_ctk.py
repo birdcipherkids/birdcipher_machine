@@ -244,7 +244,7 @@ def selectDirectoryHash():
 	global directoryHash
 
 	directoryHash = filedialog.askopenfilename(title = 'Open file')
-	archiveURLShow.config(text = archive_url.set(directoryHash))
+	archive_url.set(directoryHash)
 
 def selectDirectoryDigitalSignature():
 
@@ -266,10 +266,6 @@ def selectDirectoryOpenFindKeysDS():
 	directoryFindKeysDS = filedialog.askdirectory(title = 'Open directory')
 	directory_label_DS.config(text = directoryFindKeysDS)
 	#playsound('Audios/bambu_click.mp3')
-
-
-
-
 
 
 def selectDirectoryVirusTotal():
@@ -1320,7 +1316,7 @@ person4c_activated = False
 
 encrypt_buttonImg = tk.PhotoImage(file = "Images/Encrypt-logo1.png")
 decrypt_buttonImg = tk.PhotoImage(file = "Images/Decrypt-logo1.png")
-directory_browser = tk.PhotoImage(file = 'Images/Browse directories.png')
+directory_browser = tk.PhotoImage(file = 'Images/Browse directories1.png')
 directory_browser1 = tk.PhotoImage(file = 'Images/Browse-logo1.png')
 busqueda_directorio = tk.PhotoImage(file = 'Images/Buscar directorio.png')
 busqueda_directorio_vt = tk.PhotoImage(file = 'Images/Buscar.png')
@@ -1509,11 +1505,11 @@ def red_team_function():
 
 	ideas_red_button = customtkinter.CTkButton(red_team_window, image = ideas_red_logo, text = '', command = lambda:OpenDWVideo())
 	ideas_red_button.configure(fg_color = 'white', hover_color = '#efc9cc', corner_radius = 10)
-	ideas_red_button.place(x = 30, y = 30)
+	ideas_red_button.grid(row = 0, column = 0, padx = (30,10), pady = (30,20))
 
 	presentation_red_button = customtkinter.CTkButton(red_team_window, image = presentation_red_logo, text = '')
 	presentation_red_button.configure(fg_color = 'white', hover_color = '#efc9cc', corner_radius = 10)
-	presentation_red_button.place(x = 190, y = 30)
+	presentation_red_button.grid(row = 0, column = 1, padx = (10,10), pady = (30,20))
 
 	if Spanish_mode == True:
 
@@ -1547,19 +1543,13 @@ def blue_team_function():
 
 	ideas_blue_button = customtkinter.CTkButton(blue_team_window, image = ideas_blue_logo, text = '', command = lambda:OpenHackingBrainVideo())
 	ideas_blue_button.configure(fg_color = 'white', hover_color = '#c9d0ef', corner_radius = 10)
-	ideas_blue_button.place(x = 30, y = 30)
-
-	# ideas_blue_button = tk.Button(blue_team_window, image = ideas_blue_logo, command = lambda:OpenHackingBrainVideo())
-	# ideas_blue_button.place(x = 30, y = 30)
+	ideas_blue_button.grid(row = 0, column = 0, padx = (30,10), pady = (30,20))
 
 	presentation_blue_button = customtkinter.CTkButton(blue_team_window, image = presentation_blue_logo, text = '', command = lambda:OpenHackingBrainVideo())
 	presentation_blue_button.configure(fg_color = 'white', hover_color = '#c9d0ef', corner_radius = 10)
-	presentation_blue_button.place(x = 190, y = 30)
+	presentation_blue_button.grid(row = 0, column = 1, padx = (10,10), pady = (30,20))
 
-
-	# presentation_blue_button = tk.Button(blue_team_window, image = presentation_blue_logo)
-	# presentation_blue_button.place(x = 190, y = 30)
-
+	
 	if Spanish_mode == True:
 
 		blue_team_window.title('Equipo Azul del Firewall Humano')
@@ -1581,7 +1571,7 @@ varOption = tk.IntVar()
 
 img_social_eng_label = customtkinter.CTkButton(fr0, image = cyberaware, text = '', command = lambda:play_video_social_eng())
 img_social_eng_label.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
-img_social_eng_label.grid(row = 0, column = 0, columnspan = 5, rowspan = 7, pady = (10,15), padx = (10,30))
+img_social_eng_label.grid(row = 0, column = 0, columnspan = 5, rowspan = 7, pady = (10,15), padx = (30,30))
 
 rad_button1 = customtkinter.CTkCheckBox(fr0, text = tests_ing_social[index_social_eng_choose][0], 
 	 variable = varOption, onvalue = 1, offvalue = 5)
@@ -1824,6 +1814,7 @@ def hibp_breaches_info():
 		pyhibp.set_user_agent(ua = 'Awesome application/0.0.1 (An awesome description)')
 		resp = pyhibp.get_all_breaches()
 
+		playsound('Audios/bambu_click.mp3')
 		hibp_breaches_text.delete(1.0, tk.END)
 		hibp_breaches_text.insert(tk.END, 'Service name: {} \n'.format(resp[count_breach_list]['Name']))
 		hibp_breaches_text.insert(tk.END, 'Domain: {} \n'.format(resp[count_breach_list]['Domain']))
@@ -1927,13 +1918,13 @@ def hashingExecution():
 		hd = hashlib.new(algorithm_hashing[hashOption.get()], wbdatos)
 		hash200 = HASH.generaHash(hd)
 		playsound('Audios/bambu_click.mp3')
-		labelHashResult.config(text = hash200)
+		labelHashResult.configure(text = hash200)
 
 	elif archive_url_funct != '' and login_check == True:
 
 		hashForFile = hash_file_birdcipher(archive_url_funct, algorithm_hashing[hashOption.get()])
 		playsound('Audios/bambu_click.mp3')
-		labelHashResult.config(text = hashForFile)
+		labelHashResult.configure(text = hashForFile)
 
 	elif login_check == False:
 
@@ -1948,76 +1939,74 @@ algorithm_hashing = ['md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'sha
 
 hashing_logo = customtkinter.CTkButton(hashing, image = hashingImage, text = '', command = lambda:hashingExecution())
 hashing_logo.configure(fg_color = '#48044d', hover_color = '#300234', corner_radius = 10)
-hashing_logo.place(x = 40, y = 15)
+hashing_logo.grid(row = 0, column = 0, rowspan = 7, padx = (20,30), pady = (20,20))
 
 labelPlayerLoginHashing = customtkinter.CTkLabel(hashing, text = 'Welcome, ', font = ("Times New Roman", 20), fg_color = "black")
 labelPlayerLoginHashing.configure(corner_radius = 5, width = 40)
-labelPlayerLoginHashing.place(x = 540, y = 20)
+labelPlayerLoginHashing.grid(row = 0, column = 1, columnspan = 3, sticky = 'w')
 
 labelTextHashing = customtkinter.CTkLabel(hashing, text = 'Enter the text to hash', font = ("Times New Roman", 20))
-labelTextHashing.place(x = 540, y = 85)
+labelTextHashing.grid(row = 1, column = 1, columnspan = 2, padx = (10,0), sticky = 'sw')
 
-textToHashing = customtkinter.CTkTextbox(hashing, width = 500, height = 130, padx = 15)
+textToHashing = customtkinter.CTkTextbox(hashing, width = 530, height = 130, padx = 15)
 textToHashing.configure(font = ("Times New Roman", 18), wrap = 'word', corner_radius = 5)
-textToHashing.place(x = 530, y = 120)
+textToHashing.grid(row = 2, column = 1, columnspan = 7, padx = (0,40))
 
-# textToHashing = tk.Text(hashing, font = ('Comic Sans MS', 14))
-# textToHashing.config(bg = '#050005', fg = '#eba5f1', width = 34, height = 5, padx = 30)
-# textToHashing.place(x = 530, y = 120)
+labelHashEntry = customtkinter.CTkLabel(hashing, text = 'The hash of your message/file is:', font = ("Times New Roman", 25))
+labelHashEntry.grid(row = 7, column = 0, sticky = 'nw', padx = (20,0))
 
-labelHashEntry = tk.Label(hashing, text = 'The hash of your message/file is:', font = ("Comic Sans MS", 14))
-labelHashEntry.config(fg = '#7a0684')
-labelHashEntry.place(x = 40, y = 440)
+labelHashResult = customtkinter.CTkLabel(hashing, text = '', font = ("Times New Roman", 15))
+labelHashResult.configure(width = 930, fg_color = 'black', corner_radius = 5)
+labelHashResult.grid(row = 8, column = 0, columnspan = 6, sticky = 'w', padx = (20,0))
 
-labelHashResult = tk.Label(hashing, font = ('Comic Sans MS', 9), width = 130)
-labelHashResult.config(bg = '#050005', fg = '#f7a6f1')
-labelHashResult.place(x = 40, y = 480)
+logoBrowseDirectoriesHash = customtkinter.CTkButton(hashing, image = directory_browser, text = '', command = lambda:selectDirectoryHash())
+logoBrowseDirectoriesHash.configure(fg_color = 'white', hover_color = '#ecace7', corner_radius = 6, width = 5)
+logoBrowseDirectoriesHash.grid(row = 5, column = 5, rowspan = 2, sticky = 's', pady = (0,10))
 
-logoBrowseDirectoriesHash = tk.Button(hashing, image = directory_browser, command = lambda:selectDirectoryHash())
-logoBrowseDirectoriesHash.place(x = 925, y = 365)
+labelArchive = customtkinter.CTkLabel(hashing, text = 'The URL of your file is:', font = ("Times New Roman", 20))
+labelArchive.configure(fg_color = 'transparent')
+labelArchive.grid(row = 5, column = 1, columnspan = 2, sticky = 'sw')
 
-labelArchive = tk.Label(hashing, text = 'The URL of your file is:', font = ("Comic Sans MS", 14))
-labelArchive.config(fg = '#7a0684')
-labelArchive.place(x = 540, y = 360)
+archiveURLShow = customtkinter.CTkEntry(hashing, textvariable = archive_url, font = ("Times New Roman", 13), justify = 'center')
+archiveURLShow.configure(width = 440)
+archiveURLShow.grid(row = 6, column = 1, columnspan = 5, sticky = 'nw')
 
-archiveURLShow = tk.Entry(hashing, textvariable = archive_url, font = ('Comic Sans MS', 7), width = 62)
-archiveURLShow.config(bg = '#050005', fg = '#f7a6f1', justify = 'center')
-archiveURLShow.place(x = 530, y = 400)
+algorithmHash = customtkinter.CTkLabel(hashing, text = 'Available algorithms', font = ("Times New Roman", 20))
+algorithmHash.configure(fg_color = 'transparent')
+algorithmHash.grid(row = 3, column = 1, columnspan = 2, sticky = 'sw')
 
-rad_button_md5 = tk.Radiobutton(hashing, text = 'md5', variable = hashOption, value = 0)
-rad_button_md5.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_md5.place(x = 540, y = 270)
+rad_button_md5 = customtkinter.CTkRadioButton(hashing, text = "md5", variable = hashOption, value = 0)
+rad_button_md5.configure(font = ('Times New Roman', 18), fg_color = '#e889e1', border_width_unchecked = 2, border_width_checked = 3,
+	radiobutton_width = 15, radiobutton_height = 15)
+rad_button_md5.grid(row = 4, column = 1, sticky = 'e')
 
-rad_button_sha1 = tk.Radiobutton(hashing, text = 'sha1', variable = hashOption, value = 1)
-rad_button_sha1.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha1.place(x = 610, y = 270)
+rad_button_sha224 = customtkinter.CTkRadioButton(hashing, text = "sha224", variable = hashOption, value = 2)
+rad_button_sha224.configure(font = ('Times New Roman', 18), fg_color = '#e889e1', radiobutton_width = 15, radiobutton_height = 15,
+	border_width_checked = 3, border_width_unchecked = 2)
+rad_button_sha224.grid(row = 4, column = 2)
 
-rad_button_sha224 = tk.Radiobutton(hashing, text = 'sha224', variable = hashOption, value = 2)
-rad_button_sha224.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha224.place(x = 680, y = 270)
+rad_button_sha256 = customtkinter.CTkRadioButton(hashing, text = "sha256", variable = hashOption, value = 3)
+rad_button_sha256.configure(font = ('Times New Roman', 18), fg_color = '#e889e1', radiobutton_width = 15, radiobutton_height = 15,
+	border_width_checked = 3, border_width_unchecked = 2)
+rad_button_sha256.grid(row = 4, column = 3)
 
-rad_button_sha256 = tk.Radiobutton(hashing, text = 'sha256', variable = hashOption, value = 3)
-rad_button_sha256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha256.place(x = 770, y = 270)
+rad_button_sha384 = customtkinter.CTkRadioButton(hashing, text = "sha384", variable = hashOption, value = 4)
+rad_button_sha384.configure(font = ('Times New Roman', 18), fg_color = '#e889e1', radiobutton_width = 15, radiobutton_height = 15,
+	border_width_checked = 3, border_width_unchecked = 2)
+rad_button_sha384.grid(row = 4, column = 4)
 
-rad_button_sha384 = tk.Radiobutton(hashing, text = 'sha384', variable = hashOption, value = 4)
-rad_button_sha384.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha384.place(x = 540, y = 320)
+rad_button_sha512 = customtkinter.CTkRadioButton(hashing, text = "sha512", variable = hashOption, value = 5)
+rad_button_sha512.configure(font = ('Times New Roman', 18), fg_color = '#e889e1', radiobutton_width = 15, radiobutton_height = 15,
+	border_width_checked = 3, border_width_unchecked = 2)
+rad_button_sha512.grid(row = 4, column = 5)
 
-rad_button_sha512 = tk.Radiobutton(hashing, text = 'sha512', variable = hashOption, value = 5)
-rad_button_sha512.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_sha512.place(x = 620, y = 320)
+copy_hash = customtkinter.CTkButton(hashing, text = 'Copy hash', command = lambda:closeMachine())
+copy_hash.configure(fg_color = '#48044d', hover_color = '#300234', corner_radius = 5, width = 5, font = ("Times New Roman", 13))
+copy_hash.place(x = 980, y = 490)
 
-rad_button_shake_128 = tk.Radiobutton(hashing, text = 'shake_128', variable = hashOption, value = 6)
-rad_button_shake_128.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_shake_128.place(x = 690, y = 320)
-
-rad_button_shake_256 = tk.Radiobutton(hashing, text = 'shake_256', variable = hashOption, value = 7)
-rad_button_shake_256.config(font = ('Comic Sans MS', 10), justify = 'left', fg = '#7a0684')
-rad_button_shake_256.place(x = 780, y = 320)
-
-closeBCM_hashing = tk.Button(hashing, image = closeLog, command = lambda:closeMachine())
-closeBCM_hashing.place(x = 950 , y = 10)
+closeBCM_hashing = customtkinter.CTkButton(hashing, image = closeLog, text = '', command = lambda:closeMachine())
+closeBCM_hashing.configure(fg_color = 'white', hover_color = '#e4aee9', corner_radius = 10, width = 10)
+closeBCM_hashing.grid(row = 0, column = 5, columnspan = 2)
 
 # -------------------------------------------------------------------------------------------------------------------------
 
