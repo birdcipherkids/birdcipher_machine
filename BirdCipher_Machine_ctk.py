@@ -65,6 +65,7 @@ option_verify_choose = False
 count_breach_list = -1
 arrow_breaches_asc = True
 arrow_breaches_desc = False
+eye_password_active = True
 
 # ----------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -1371,6 +1372,7 @@ presentation_red_logo = tk.PhotoImage(file = 'Images/Presentation-red.png')
 presentacion_red_logo = tk.PhotoImage(file = 'Images/Presentacion-red.png')
 birdcipher_ssh_logo = tk.PhotoImage(file = 'Images/BirdCipher SSH_log.png')
 cryptanalysis_logo = tk.PhotoImage(file = 'Images/Cryptanalysis.png')
+eye_password_logo = tk.PhotoImage(file = 'Images/eye1.png')
 
 notebk = customtkinter.CTkTabview(master=decrypt)
 notebk.configure(width = 1150, height = 580, segmented_button_selected_color = '#260223')
@@ -1400,6 +1402,26 @@ notebk.set('Login')
 
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
+def eye_password():
+
+	global eye_password_active
+
+	if eye_password_active:
+
+		eye_password_active = False
+		password_entry.configure(show = '')
+		print(eye_password_active)
+
+	elif eye_password_active == False:
+
+		eye_password_active = True
+		password_entry.configure(show = '*')
+		print(eye_password_active)
+
+
+
+
+
 login_label = customtkinter.CTkLabel(hr, text = "Log in to BirdCipher Machine", font = ("Times New Roman", 26), fg_color = "transparent")
 login_label.grid(row = 0, column = 0, columnspan = 3, padx = (30,0), pady = (10,0))
 
@@ -1413,9 +1435,13 @@ username_entry.grid(row = 2, column = 0, columnspan = 3, padx = (10,0))
 password_label = customtkinter.CTkLabel(hr, text = "Password", font = ("Times New Roman", 20), fg_color = "transparent")
 password_label.grid(row = 3, column = 0, columnspan = 1, padx = (50,0), sticky = 's')
 
-password_entry = customtkinter.CTkEntry(hr, textvariable = password_dbc, font = ("Times New Roman", 20), justify = 'center')
+password_entry = customtkinter.CTkEntry(hr, textvariable = password_dbc, font = ("Times New Roman", 18), justify = 'center')
 password_entry.configure(width = 260, show = '*')
 password_entry.grid(row = 4, column = 0, columnspan = 3, padx = (10,0))
+
+password_mask_button = customtkinter.CTkButton(hr, image = eye_password_logo, text = '', command = lambda:eye_password())
+password_mask_button.configure(width = 20, fg_color = 'transparent', hover_color = '#2D2D38')
+password_mask_button.grid(row = 4, column = 2, padx = (120,0))
 
 position_label = customtkinter.CTkLabel(hr, text = "Position", font = ("Times New Roman", 20), fg_color = "transparent")
 position_label.grid(row = 5, column = 0, columnspan = 1, padx = (50,0), sticky = 's')
@@ -1437,7 +1463,7 @@ hash256_passw_label.grid(row = 10, column = 0, columnspan = 4, padx = (10,0), st
 
 hash256passw_copy_btt = customtkinter.CTkButton(hr, text = 'Copy hash to clipboard', command = lambda:copyHashLogin())
 hash256passw_copy_btt.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 15))
-hash256passw_copy_btt.grid(row = 10, column = 3, sticky = 'se', padx = (140,0))
+hash256passw_copy_btt.grid(row = 10, column = 3, sticky = 'se', padx = (80,0))
 
 close_machine_from_login = customtkinter.CTkButton(hr, text = '  Close the BirdCipher Machine  ', command = lambda:closeMachine())
 close_machine_from_login.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 30))
@@ -1445,7 +1471,7 @@ close_machine_from_login.grid(row = 10, column = 4, padx = (20,10), sticky = 's'
 
 bc_logo_login = customtkinter.CTkButton(hr, image = bc_logo_loginImage, text = '', command = lambda:login_user())
 bc_logo_login.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 10)
-bc_logo_login.grid(row = 0, column = 3, rowspan = 9, columnspan = 2, padx = (80,0), pady = (20,0), sticky = 's')
+bc_logo_login.grid(row = 0, column = 3, rowspan = 9, columnspan = 2, padx = (40,0), pady = (20,0), sticky = 's')
 
 english = customtkinter.CTkButton(hr, text = 'English', command = lambda:[change_english_mode(), translator()])
 english.configure(fg_color = '#3e043a', hover_color = '#260223', corner_radius = 5, font = ("Times New Roman", 22), width = 40)
