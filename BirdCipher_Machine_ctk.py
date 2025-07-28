@@ -1378,8 +1378,8 @@ notebk.pack(padx=10, pady=10)
 #notebk.config(font = ("Comic Sans MS", 14))
 
 hr = notebk.add("Login")
-fr0 = notebk.add("Human Firewall")
-passcheck = notebk.add("Password Checking")
+fr0 = notebk.add("Education")
+passcheck = notebk.add("Password Test")
 hashing = notebk.add("Hashing")
 fr = notebk.add("Cryptography")
 fr2 = notebk.add("Encryption")
@@ -1387,9 +1387,11 @@ fr3 = notebk.add("Decryption")
 digital_signature = notebk.add("Digital Signature")
 pki = notebk.add("PKI")
 fr0a = notebk.add("RamsonBird")
+scan_tab = notebk.add('Scan')
 url_test_ntk = notebk.add("URL Test")
+web_scrapping_tab = notebk.add('Scrapping')
 virusTotal = notebk.add("Virus Total")
-capa_tab = notebk.add("CAPA")
+#capa_tab = notebk.add("CAPA")
 cape_sandbox_tab = notebk.add("CAPE")
 zenbox_tab = notebk.add("Zenbox")
 notebk.set('Login')
@@ -3288,7 +3290,7 @@ upload_button.place(x = 60, y = 200)
 examine_button = tk.Button(virusTotal, image = examine_file_image, command = lambda:examine_vt())
 examine_button.place(x = 200, y = 200)
 
-mitre_button = tk.Button(virusTotal, image = mitre_image, command = lambda:[capaExecution(), capeSandboxExecution(), zenboxExecution()])
+mitre_button = tk.Button(virusTotal, image = mitre_image, command = lambda:[capeSandboxExecution(), zenboxExecution()])
 mitre_button.place(x = 350, y = 200)
 
 results_vt = tk.Label(virusTotal, text = 'LAST ANALYSIS STATS')
@@ -3446,156 +3448,156 @@ Avira_result.place(x = 880, y = 480)
 ### -------------------------------------------------- CAPA Section -----------------------------------------------------------
 
 
-def capaExecution():
+# def capaExecution():
 
-	url = 'https://www.virustotal.com/api/v3/files/' + hash_file_label_vt.get() + '/behaviour_mitre_trees'
+# 	url = 'https://www.virustotal.com/api/v3/files/' + hash_file_label_vt.get() + '/behaviour_mitre_trees'
 
-	headers = {
-    	"accept": "application/json",
-    	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
-	}
+# 	headers = {
+#     	"accept": "application/json",
+#     	"x-apikey": "9aa1e017d10d318069b654469cd2826d4111eff92d2479f660a60318d8f2b10c"
+# 	}
 
-	response = requests.get(url, headers=headers)
-	data = json.loads(response.text)
+# 	response = requests.get(url, headers=headers)
+# 	data = json.loads(response.text)
 
 	
-	labels_capa_tactics = [tactic1_capa, tactic2_capa, tactic3_capa, tactic4_capa, tactic5_capa, tactic6_capa, tactic7_capa]
-	capa_tactics_descriptions = [tactic1_capa_explan, tactic2_capa_explan, tactic3_capa_explan, tactic4_capa_explan,
-	tactic5_capa_explan, tactic6_capa_explan, tactic7_capa_explan]
+# 	labels_capa_tactics = [tactic1_capa, tactic2_capa, tactic3_capa, tactic4_capa, tactic5_capa, tactic6_capa, tactic7_capa]
+# 	capa_tactics_descriptions = [tactic1_capa_explan, tactic2_capa_explan, tactic3_capa_explan, tactic4_capa_explan,
+# 	tactic5_capa_explan, tactic6_capa_explan, tactic7_capa_explan]
 
-	x = 0
-	y = 0
+# 	x = 0
+# 	y = 0
 
-	tactic1_capa.config(text = '')
-	tactic2_capa.config(text = '')
-	tactic3_capa.config(text = '')
-	tactic4_capa.config(text = '')
-	tactic5_capa.config(text = '')
-	tactic6_capa.config(text = '')
-	tactic7_capa.config(text = '')
-	tactic1_capa_explan.delete(1.0, tk.END)
-	tactic2_capa_explan.delete(1.0, tk.END)
-	tactic3_capa_explan.delete(1.0, tk.END)
-	tactic4_capa_explan.delete(1.0, tk.END)
-	tactic5_capa_explan.delete(1.0, tk.END)
-	tactic6_capa_explan.delete(1.0, tk.END)
-	tactic7_capa_explan.delete(1.0, tk.END)
-	techniques_capa.delete(1.0, tk.END)
+# 	tactic1_capa.config(text = '')
+# 	tactic2_capa.config(text = '')
+# 	tactic3_capa.config(text = '')
+# 	tactic4_capa.config(text = '')
+# 	tactic5_capa.config(text = '')
+# 	tactic6_capa.config(text = '')
+# 	tactic7_capa.config(text = '')
+# 	tactic1_capa_explan.delete(1.0, tk.END)
+# 	tactic2_capa_explan.delete(1.0, tk.END)
+# 	tactic3_capa_explan.delete(1.0, tk.END)
+# 	tactic4_capa_explan.delete(1.0, tk.END)
+# 	tactic5_capa_explan.delete(1.0, tk.END)
+# 	tactic6_capa_explan.delete(1.0, tk.END)
+# 	tactic7_capa_explan.delete(1.0, tk.END)
+# 	techniques_capa.delete(1.0, tk.END)
 
-	try:
+# 	try:
 
-		while x < len(data['data']['CAPA']['tactics']):
+# 		while x < len(data['data']['CAPA']['tactics']):
 
-			labels_capa_tactics[x].config(text = data['data']['CAPA']['tactics'][x]['name'])
-			capa_tactics_descriptions[x].delete(1.0, tk.END)
-			capa_tactics_descriptions[x].insert(tk.END, data['data']['CAPA']['tactics'][x]['id'] + ':  ' + 
-				data['data']['CAPA']['tactics'][x]['description'])
-			y = 0
+# 			labels_capa_tactics[x].config(text = data['data']['CAPA']['tactics'][x]['name'])
+# 			capa_tactics_descriptions[x].delete(1.0, tk.END)
+# 			capa_tactics_descriptions[x].insert(tk.END, data['data']['CAPA']['tactics'][x]['id'] + ':  ' + 
+# 				data['data']['CAPA']['tactics'][x]['description'])
+# 			y = 0
 
-			while y < len(data['data']['CAPA']['tactics'][x]['techniques']):
+# 			while y < len(data['data']['CAPA']['tactics'][x]['techniques']):
 
-				techniques_capa.insert(tk.END, '[' + data['data']['CAPA']['tactics'][x]['id'] + ']  [' + 
-				data['data']['CAPA']['tactics'][x]['techniques'][y]['id'] + ']:   ' +
-				 data['data']['CAPA']['tactics'][x]['techniques'][y]['name'] + ' \n')
-				y = y + 1
+# 				techniques_capa.insert(tk.END, '[' + data['data']['CAPA']['tactics'][x]['id'] + ']  [' + 
+# 				data['data']['CAPA']['tactics'][x]['techniques'][y]['id'] + ']:   ' +
+# 				 data['data']['CAPA']['tactics'][x]['techniques'][y]['name'] + ' \n')
+# 				y = y + 1
 
-			x = x + 1
+# 			x = x + 1
 		
 
-	except KeyError:
+# 	except KeyError:
 
-		print('No report')
+# 		print('No report')
 
 
 	
-tactics_label_capa = tk.Label(capa_tab, text = 'TACTICS DETECTED BY CAPA')
-tactics_label_capa.config(font = ('Comic Sans MS', 17), fg = '#067297')
-tactics_label_capa.place(x = 380, y = 5)
+# tactics_label_capa = tk.Label(capa_tab, text = 'TACTICS DETECTED BY CAPA')
+# tactics_label_capa.config(font = ('Comic Sans MS', 17), fg = '#067297')
+# tactics_label_capa.place(x = 380, y = 5)
 
-tactics_label_capa1 = tk.Label(capa_tab, text = 'Tactic')
-tactics_label_capa1.config(font = ('Comic Sans MS', 14), fg = '#067297')
-tactics_label_capa1.place(x = 100, y = 40)
+# tactics_label_capa1 = tk.Label(capa_tab, text = 'Tactic')
+# tactics_label_capa1.config(font = ('Comic Sans MS', 14), fg = '#067297')
+# tactics_label_capa1.place(x = 100, y = 40)
 
-tactics_label_capa2 = tk.Label(capa_tab, text = 'Tactic')
-tactics_label_capa2.config(font = ('Comic Sans MS', 14), fg = '#067297')
-tactics_label_capa2.place(x = 600, y = 40)
+# tactics_label_capa2 = tk.Label(capa_tab, text = 'Tactic')
+# tactics_label_capa2.config(font = ('Comic Sans MS', 14), fg = '#067297')
+# tactics_label_capa2.place(x = 600, y = 40)
 
-descriptions_label_capa1 = tk.Label(capa_tab, text = 'Description')
-descriptions_label_capa1.config(font = ('Comic Sans MS', 14), fg = '#067297')
-descriptions_label_capa1.place(x = 300, y = 40)
+# descriptions_label_capa1 = tk.Label(capa_tab, text = 'Description')
+# descriptions_label_capa1.config(font = ('Comic Sans MS', 14), fg = '#067297')
+# descriptions_label_capa1.place(x = 300, y = 40)
 
-descriptions_label_capa2 = tk.Label(capa_tab, text = 'Description')
-descriptions_label_capa2.config(font = ('Comic Sans MS', 14), fg = '#067297')
-descriptions_label_capa2.place(x = 820, y = 40)
+# descriptions_label_capa2 = tk.Label(capa_tab, text = 'Description')
+# descriptions_label_capa2.config(font = ('Comic Sans MS', 14), fg = '#067297')
+# descriptions_label_capa2.place(x = 820, y = 40)
 
 
-tactic1_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic1_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic1_capa.place(x = 40, y = 80)
+# tactic1_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic1_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic1_capa.place(x = 40, y = 80)
 
-tactic1_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic1_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic1_capa_explan.place(x = 255, y = 80)
+# tactic1_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic1_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic1_capa_explan.place(x = 255, y = 80)
 
-tactic2_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic2_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic2_capa.place(x = 40, y = 160)
+# tactic2_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic2_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic2_capa.place(x = 40, y = 160)
 
-tactic2_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic2_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic2_capa_explan.place(x = 255, y = 160)
+# tactic2_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic2_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic2_capa_explan.place(x = 255, y = 160)
 
-tactic3_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic3_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic3_capa.place(x = 40, y = 240)
+# tactic3_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic3_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic3_capa.place(x = 40, y = 240)
 
-tactic3_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic3_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic3_capa_explan.place(x = 255, y = 240)
+# tactic3_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic3_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic3_capa_explan.place(x = 255, y = 240)
 
-tactic4_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic4_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic4_capa.place(x = 40, y = 320)
+# tactic4_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic4_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic4_capa.place(x = 40, y = 320)
 
-tactic4_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic4_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic4_capa_explan.place(x = 255, y = 320)
+# tactic4_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic4_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic4_capa_explan.place(x = 255, y = 320)
 
-tactic5_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic5_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic5_capa.place(x = 40, y = 400)
+# tactic5_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic5_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic5_capa.place(x = 40, y = 400)
 
-tactic5_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic5_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic5_capa_explan.place(x = 255, y = 400)
+# tactic5_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic5_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic5_capa_explan.place(x = 255, y = 400)
 
-tactic6_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic6_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic6_capa.place(x = 550, y = 80)
+# tactic6_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic6_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic6_capa.place(x = 550, y = 80)
 
-tactic6_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic6_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic6_capa_explan.place(x = 765, y = 80)
+# tactic6_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic6_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic6_capa_explan.place(x = 765, y = 80)
 
-tactic7_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
-tactic7_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
-tactic7_capa.place(x = 550, y = 160)
+# tactic7_capa = tk.Label(capa_tab, font = ('Comic Sans MS', 10), width = 24)
+# tactic7_capa.config(bg = '#050005', fg = '#b6c7f9', justify = 'center')
+# tactic7_capa.place(x = 550, y = 160)
 
-tactic7_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
-tactic7_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-tactic7_capa_explan.place(x = 765, y = 160)
+# tactic7_capa_explan = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 26, height = 3)
+# tactic7_capa_explan.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# tactic7_capa_explan.place(x = 765, y = 160)
 
-techniques_capa_label = tk.Label(capa_tab, text = 'Techniques', font = ('Comic Sans MS', 14))
-techniques_capa_label.config(fg = '#067297')
-techniques_capa_label.place(x = 700, y = 230)
+# techniques_capa_label = tk.Label(capa_tab, text = 'Techniques', font = ('Comic Sans MS', 14))
+# techniques_capa_label.config(fg = '#067297')
+# techniques_capa_label.place(x = 700, y = 230)
 
-techniques_capa = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 50, height = 12)
-techniques_capa.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
-techniques_capa.place(x = 550, y = 270)
+# techniques_capa = tk.Text(capa_tab, font = ('Comic Sans MS', 10), width = 50, height = 12)
+# techniques_capa.config(bg = '#050005', fg = '#b6c7f9', padx = 10)
+# techniques_capa.place(x = 550, y = 270)
 
-scrollVetrn40 = ttk.Scrollbar(capa_tab, command = techniques_capa.yview)
-#cipher_text2['yscrollcommand'] = scrollVetrn.set()
-scrollVetrn40.place(x = 960, y = 270, height = 220)
+# scrollVetrn40 = ttk.Scrollbar(capa_tab, command = techniques_capa.yview)
+# #cipher_text2['yscrollcommand'] = scrollVetrn.set()
+# scrollVetrn40.place(x = 960, y = 270, height = 220)
 
 
 # --------------------------------------------------- CAPE Sandbox section -----------------------------------------------------
