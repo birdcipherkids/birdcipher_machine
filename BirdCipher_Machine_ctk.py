@@ -1255,12 +1255,27 @@ def translator():
 
 
 
+def eye_password():
+
+	global eye_password_active
+
+	if eye_password_active:
+
+		eye_password_active = False
+		password_entry.configure(show = '')
+		print(eye_password_active)
+
+	elif eye_password_active == False:
+
+		eye_password_active = True
+		password_entry.configure(show = '*')
+		print(eye_password_active)
 
 
 
 # ---------------------------------------------------------------------------------------------------------------------------
 
-## ------------------------------------------------ Graphical Interface -----------------------------------------------------
+## --------------------------------------------- Graphical User Interface ---------------------------------------------------
 
 ### ----------------------------------------------------- Basic -------------------------------------------------------------
 
@@ -1402,22 +1417,6 @@ notebk.set('Login')
 
 ### -------------------------------------------- Login Section ---------------------------------------------------------------
 
-def eye_password():
-
-	global eye_password_active
-
-	if eye_password_active:
-
-		eye_password_active = False
-		password_entry.configure(show = '')
-		print(eye_password_active)
-
-	elif eye_password_active == False:
-
-		eye_password_active = True
-		password_entry.configure(show = '*')
-		print(eye_password_active)
-
 
 login_label = customtkinter.CTkLabel(hr, text = "Log in to BirdCipher Machine", font = ("Times New Roman", 26), fg_color = "transparent")
 login_label.grid(row = 0, column = 0, columnspan = 3, padx = (30,0), pady = (10,0))
@@ -1437,7 +1436,7 @@ password_entry.configure(width = 260, show = '*')
 password_entry.grid(row = 4, column = 0, columnspan = 3, padx = (0,25))
 
 password_mask_button = customtkinter.CTkButton(hr, image = eye_password_logo, text = '', command = lambda:eye_password())
-password_mask_button.configure(width = 20, fg_color = 'transparent', hover_color = '#2D2D38')
+password_mask_button.configure(width = 5, fg_color = 'transparent', hover_color = '#2D2D38')
 password_mask_button.grid(row = 4, column = 2, padx = (100,0))
 
 position_label = customtkinter.CTkLabel(hr, text = "Position", font = ("Times New Roman", 20), fg_color = "transparent")
@@ -1920,7 +1919,7 @@ time_breached.grid(row = 4, column = 1, sticky = 'n')
 time_breached.configure(width = 180, height = 150, corner_radius = 5, wrap = 'word', padx = 10, pady = 50)
 
 padlock = customtkinter.CTkButton(passcheck, image = padlock_image, text = '')
-padlock.configure(fg_color = 'transparent', hover_color = '#2D2D38')
+padlock.configure(fg_color = 'transparent', hover_color = '#242222', corner_radius = 10)
 padlock.grid(row = 0, column = 1, rowspan = 3, sticky = 'n', pady = (10,0))
 
 closeBCM_checkpass = customtkinter.CTkButton(passcheck, text = 'Close the BirdCipher Cryptographic Machine', command = lambda:closeMachine())
