@@ -22,6 +22,8 @@ from pyhibp import pwnedpasswords as pw
 import requests
 import json
 import webbrowser
+import string
+import random
 
 from imagenes_ing_social import *
 from tests_ing_social import *
@@ -1886,7 +1888,37 @@ def password_vault():
 
 		slider_label.configure(text = int(value))
 		value_slider = slider.get()
-		print(int(value_slider))
+		
+	def create_password():
+
+		length = int(slider.get())
+		characters = ''
+
+		if uppercase_chkbx.get() == 1:
+
+			characters = characters + string.ascii_uppercase
+
+		if lowercase_chkbx.get() == 1:
+
+			characters = characters + string.ascii_lowercase
+
+		if numerical_chkbx.get() == 1:
+
+			characters = characters + string.digits
+
+		if specials_chkbx.get() == 1:
+
+			characters = characters + string.punctuation
+
+		try:
+
+			password_creation = ''.join(random.choice(characters) for i in range(length))
+			password_gen_field.configure(text = password_creation)
+
+		except IndexError:
+
+			print('You must choose at least one type of character')
+
 
 	passvault_window = customtkinter.CTkToplevel(decrypt)
 	passvault_window.title('BirdCipher Password Vault')
@@ -1894,25 +1926,25 @@ def password_vault():
 	passvault_window.focus_set()
 	passvault_window.grab_set()
 
-	password_gen_title = customtkinter.CTkLabel(passvault_window, text = 'Your password is: ', font = ('Times New Roman', 22))
+	password_gen_title = customtkinter.CTkLabel(passvault_window, text = 'PASSWORD GENERATOR', font = ('Times New Roman', 22))
 	password_gen_title.grid(row = 0, column = 0, columnspan = 5, pady = (20,10))
 
-	password_gen_field = customtkinter.CTkLabel(passvault_window, text = '', font = ('Times New Roman', 16))
-	password_gen_field.configure(fg_color = 'black', width = 380, corner_radius = 7)
+	password_gen_field = customtkinter.CTkLabel(passvault_window, text = '', font = ('Times New Roman', 14))
+	password_gen_field.configure(fg_color = 'black', width = 390, corner_radius = 7)
 	password_gen_field.grid(row = 1, column = 0, columnspan = 5, pady = (10,20))
 
-	arrow_vault = customtkinter.CTkButton(passvault_window, image = arrow_vault_logo, text = '')
+	arrow_vault = customtkinter.CTkButton(passvault_window, image = arrow_vault_logo, text = '', command = lambda:create_password())
 	arrow_vault.configure(fg_color = 'transparent', width = 5)
 	arrow_vault.grid(row = 1, column = 4, sticky = 'nw', padx = (0,0))
 
 	slider_title = customtkinter.CTkLabel(passvault_window, text = 'Define the length of your password ', font = ('Times New Roman', 18))
 	slider_title.grid(row = 2, column = 0, columnspan = 4, padx = (20,0), pady = (10,0), sticky = 's')
 
-	slider = customtkinter.CTkSlider(passvault_window, from_ = 10, to = 30, command = length_label)
+	slider = customtkinter.CTkSlider(passvault_window, from_ = 10, to = 40, command = length_label)
 	slider.configure(number_of_steps=30, width = 380, height = 20)
 	slider.grid(row = 3, column = 0, columnspan = 4, padx = (20,0), pady = (10,20))
 
-	slider_label = customtkinter.CTkLabel(passvault_window, text = '20', font = ('Times New Roman', 30))
+	slider_label = customtkinter.CTkLabel(passvault_window, text = '25', font = ('Times New Roman', 30))
 	slider_label.grid(row = 3, column = 4, padx = (0,10), pady = (10,20), sticky = 'w')
 
 	uppercase_chkbx = customtkinter.CTkCheckBox(passvault_window, text = 'Upper case', font = ('Times New Roman', 14))
