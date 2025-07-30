@@ -1878,6 +1878,48 @@ def hibp_breaches_info():
 	data_breaches_image = customtkinter.CTkLabel(hibp_breaches_window, image = data_breaches_logo, text = '', fg_color = "transparent")
 	data_breaches_image.grid(row = 2, column = 2)
 
+
+def password_vault():
+
+	def length_label(value):
+
+		slider_label.configure(text = int(value))
+		value_slider = slider.get()
+		print(int(value_slider))
+
+	passvault_window = customtkinter.CTkToplevel(decrypt)
+	passvault_window.title('BirdCipher Password Vault')
+	passvault_window.geometry('450x550')
+	passvault_window.focus_set()
+	passvault_window.grab_set()
+
+	password_gen_title = customtkinter.CTkLabel(passvault_window, text = 'Your password is: ', font = ('Times New Roman', 22))
+	password_gen_title.grid(row = 0, column = 0, columnspan = 3, pady = (20,10))
+
+	password_gen_field = customtkinter.CTkLabel(passvault_window, text = '', font = ('Times New Roman', 16))
+	password_gen_field.configure(fg_color = 'black', width = 350, corner_radius = 7)
+	password_gen_field.grid(row = 1, column = 0, columnspan = 3, padx = (20,0), pady = (10,20))
+
+	slider_title = customtkinter.CTkLabel(passvault_window, text = 'Define the length of your password ', font = ('Times New Roman', 18))
+	slider_title.grid(row = 2, column = 0, padx = (30,0), pady = (10,10))
+
+	slider = customtkinter.CTkSlider(passvault_window, from_ = 10, to = 30, command = length_label)
+	slider.configure(number_of_steps=30, width = 350, height = 20)
+	slider.grid(row = 3, column = 0, columnspan = 2, padx = (20,10), pady = (10,20))
+
+	slider_label = customtkinter.CTkLabel(passvault_window, text = '20', font = ('Times New Roman', 30))
+	slider_label.grid(row = 3, column = 2, pady = (10,20))
+
+	uppercase_chkbx = customtkinter.CTkCheckBox(passvault_window, text = 'Upper case', font = ('Times New Roman', 14))
+	uppercase_chkbx.configure(checkbox_width = 20, checkbox_height = 20)
+	uppercase_chkbx.grid(row = 4, column = 0, padx = (10,0))
+
+	lowercase_chkbx = customtkinter.CTkCheckBox(passvault_window, text = 'Lower case', font = ('Times New Roman', 14))
+	lowercase_chkbx.configure(checkbox_width = 20, checkbox_height = 20)
+	lowercase_chkbx.grid(row = 4, column = 1, padx = (10,0))
+
+
+
 	
 password_checking_logo = tk.PhotoImage(file = 'Images/Password checking-logo-white1.png')
 hibp1_logo = tk.PhotoImage(file = 'Images/hibp1.png')
@@ -1918,7 +1960,7 @@ time_breached = customtkinter.CTkTextbox(passcheck, font = ("Times New Roman", 5
 time_breached.grid(row = 4, column = 1, sticky = 'n')
 time_breached.configure(width = 180, height = 150, corner_radius = 5, wrap = 'word', padx = 10, pady = 50)
 
-padlock = customtkinter.CTkButton(passcheck, image = padlock_image, text = '')
+padlock = customtkinter.CTkButton(passcheck, image = padlock_image, text = '', command = lambda:password_vault())
 padlock.configure(fg_color = 'transparent', hover_color = '#242222', corner_radius = 10)
 padlock.grid(row = 0, column = 1, rowspan = 3, sticky = 'n', pady = (10,0))
 
